@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPlayerStatus
+namespace GameLogic.Player
 {
-    public int Energy { get; set; }
-    public int Hunger { get; set; }
+    public interface IPlayerStatus
+    {
+        public int Energy { get; set; }
+        public int Hunger { get; set; }
+    }
+
 }

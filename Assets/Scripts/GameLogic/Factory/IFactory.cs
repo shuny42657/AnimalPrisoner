@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameLogic.Player;
 
 namespace GameLogic.Map
 {
-    public interface IMapBuilder
+    public interface IFactory<T>
     {
-        public void BuildWorkSpaces(IJobStatus jobStatus);
+        public T GenerateWorkSpace(Vector3 position); 
     }
 }
