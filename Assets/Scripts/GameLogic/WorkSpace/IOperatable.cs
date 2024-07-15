@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public interface IOperatable
+namespace GameLogic.WorkSpace
 {
-    public void Put(IGrabbable grabbable);
-    public IGrabbable Take();
-    public void Work();
-    public void Start();
-    public Action OnComplete { get; set; }
+    public interface IOperatable
+    {
+        public void Put(IGrabbable grabbable);
+        public IGrabbable Take();
+        public void Work();
+        public void Start();
+    }
 }
