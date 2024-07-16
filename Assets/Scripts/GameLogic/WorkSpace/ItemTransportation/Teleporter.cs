@@ -14,10 +14,16 @@ namespace GameLogic.WorkSpace
             throw new System.NotImplementedException();
         }
 
-        public bool Put(IGrabbable grabbable)
+        public bool Put(IResource resource)
         {
             throw new System.NotImplementedException();
         }
+
+        public bool Put(IGrabbable grabbable)
+        {
+            return false;
+        }
+
 
         public void SetReceiver(Player player)
         {

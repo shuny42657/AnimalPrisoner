@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameLogic.WorkSpace;
 
 namespace GameLogic.WorkSpace
 {
-    public class Receiver : MonoBehaviour, IOperatable
+    public class SubmissionSpace : MonoBehaviour, IOperatable
     {
         public void InitiateOperation()
         {

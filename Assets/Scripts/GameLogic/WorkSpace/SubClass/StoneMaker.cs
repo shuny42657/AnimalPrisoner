@@ -26,5 +26,10 @@ namespace GameLogic.WorkSpace
         {
             throw new NotImplementedException();
         }
+
+        public bool Put(IResource recource)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
