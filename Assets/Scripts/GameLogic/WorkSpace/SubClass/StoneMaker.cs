@@ -7,12 +7,12 @@ namespace GameLogic.WorkSpace
 {
     public class StoneMaker : MonoBehaviour, IOperatable
     {
-        public void Put(IGrabbable grabbable)
+        public bool Put(IGrabbable grabbable)
         {
             throw new NotImplementedException();
         }
 
-        public void Start()
+        public void InitiateOperation()
         {
             throw new NotImplementedException();
         }
