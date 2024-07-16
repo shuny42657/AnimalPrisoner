@@ -1,3 +1,17 @@
 {
-	"name": "Factory"
+    "name": "Factory",
+    "rootNamespace": "",
+    "references": [
+        "MapItem",
+        "Player"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
