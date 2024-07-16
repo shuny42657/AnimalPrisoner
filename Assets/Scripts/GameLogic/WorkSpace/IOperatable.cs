@@ -8,6 +8,7 @@ namespace GameLogic.WorkSpace
     public interface IOperatable
     {
         public bool Put(IGrabbable grabbable);
+        public bool Put(IResource recource);
         public IGrabbable Take();
         public void Work();
         public void InitiateOperation();

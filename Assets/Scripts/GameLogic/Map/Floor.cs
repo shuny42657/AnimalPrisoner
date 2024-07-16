@@ -52,4 +52,9 @@ public class Floor : MonoBehaviour, IOperatable
                 handler.Operatable = null;
         }
     }
+
+    public bool Put(IResource recource)
+    {
+        throw new System.NotImplementedException();
+    }
 }
