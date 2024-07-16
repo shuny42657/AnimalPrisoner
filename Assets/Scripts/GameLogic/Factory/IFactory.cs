@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameLogic.Map
+namespace GameLogic.Factory
 {
     public interface IFactory<T>
     {
