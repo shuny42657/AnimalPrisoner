@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "MapItem",
-        "Player"
+        "Player",
+        "Util"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
