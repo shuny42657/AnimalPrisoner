@@ -8,5 +8,6 @@ namespace Sync
     public interface IMatchinCallback
     {
         public UnityEvent OnRoomJoined { get; }
+        public UnityEvent OnMatchingComplete { get; }
     }
 }
