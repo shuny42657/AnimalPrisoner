@@ -9,7 +9,7 @@ namespace GameLogic.WorkSpace
     {
         public bool Put(IGrabbable grabbable);
         public bool Put(IResource recource);
-        public IGrabbable Take();
+        public IResource Take();
         public void Work();
         public void InitiateOperation();
     }

@@ -19,6 +19,10 @@ namespace Sync
         second_job,
         third_job,
         fourth_job,
+        from_player_1,
+        from_player_2,
+        from_player_3,
+        from_player_4,
     }
 
     public static class RoomCustomProperties
@@ -42,7 +46,7 @@ namespace Sync
         private static Hashtable propsToSet = new();
         public static string jobDeterminedKey = "jd";
         public static string[] jobKeys = new string[4] { PlayerPropertyKey.first_job.ToString(), PlayerPropertyKey.second_job.ToString(), PlayerPropertyKey.third_job.ToString(), PlayerPropertyKey.fourth_job.ToString() };
-
+        public static string[] sendItemKeys = new string[4] { PlayerPropertyKey.from_player_1.ToString(), PlayerPropertyKey.from_player_2.ToString(), PlayerPropertyKey.from_player_3.ToString(), PlayerPropertyKey.from_player_4.ToString() };
         public static int GetJob(this Player player,int index)
         {
             return (player.CustomProperties[jobKeys[index]] is int job) ? job : 1 ;
@@ -63,6 +67,18 @@ namespace Sync
         public static void SetJobDetermined(this Player player, bool yes)
         {
             propsToSet[PlayerPropertyKey.jd.ToString()] = yes;
+            player.SetCustomProperties(propsToSet);
+            propsToSet.Clear();
+        }
+
+        public static int GetSentItem(this Player player,int index)
+        {
+            return (player.CustomProperties[sendItemKeys[index - 1]] is int itemId) ? itemId : -1;
+        }
+
+        public static void SetSendItem(this Player player,int index, int item)
+        {
+            propsToSet[sendItemKeys[index]] = item;
             player.SetCustomProperties(propsToSet);
             propsToSet.Clear();
         }

@@ -18,6 +18,7 @@ namespace Sync
 
         public override void OnJoinedRoom()
         {
+            Debug.Log(PhotonNetwork.LocalPlayer.ActorNumber);
             onRoomJoined.Invoke();
             if(PhotonNetwork.CurrentRoom.MaxPlayers == PhotonNetwork.CurrentRoom.PlayerCount)
             {

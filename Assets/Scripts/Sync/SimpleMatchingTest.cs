@@ -9,5 +9,6 @@ public class SimpleMatchingTest : MonoBehaviour
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+//        Debug.Log(PhotonNetwork.LocalPlayer.ActorNumber);
     }
 }

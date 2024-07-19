@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameLogic.WorkSpace;
+using UnityEngine.Events;
 
-public class Floor : MonoBehaviour, IOperatable
+public class Floor : MonoBehaviour, IOperatable,IInteractable
 {
-    IGrabbable onFloor;
+    IResource onFloor;
+
+    public UnityEvent onEnter = new();
+    public UnityEvent onExit = new();
+    public UnityEvent OnEnter { get { return onEnter; } }
+    public UnityEvent OnExit { get { return onExit; } }
+
     public bool Put(IGrabbable grabbable)
     {
-        if (onFloor == null)
-        {
-            onFloor = grabbable;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     public void InitiateOperation()
@@ -24,7 +23,7 @@ public class Floor : MonoBehaviour, IOperatable
         return;
     }
 
-    public IGrabbable Take()
+    public IResource Take()
     {
         var grabbable = onFloor;
         onFloor = null;
@@ -40,7 +39,11 @@ public class Floor : MonoBehaviour, IOperatable
     {
         if (other.TryGetComponent(out IOperatableHandler handler))
         {
+            if(handler.Interactable != null)
+                handler.Interactable.OnExit.Invoke();
             handler.Operatable = this;
+            handler.Interactable = this;
+            onEnter.Invoke();
         }
     }
 
@@ -49,12 +52,24 @@ public class Floor : MonoBehaviour, IOperatable
         if (other.TryGetComponent(out IOperatableHandler handler))
         {
             if(this == (Object)handler.Operatable)
+            {
                 handler.Operatable = null;
+                handler.Interactable = null;
+            }
+            onExit.Invoke();
         }
     }
 
     public bool Put(IResource recource)
     {
-        throw new System.NotImplementedException();
+        if (onFloor == null)
+        {
+            onFloor = recource;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
