@@ -6,7 +6,7 @@ namespace GameLogic.Player
 {
     public interface IItemHolder 
     {
-        public void Grab(IGrabbable grabbable);
-        public IGrabbable Release();
+        public void Grab(IResource grabbable);
+        public IResource Release();
     }
 }

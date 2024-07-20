@@ -17,7 +17,7 @@ namespace GameLogic.WorkSpace
             throw new NotImplementedException();
         }
 
-        public IGrabbable Take()
+        public IResource Take()
         {
             throw new NotImplementedException();
         }
