@@ -7,14 +7,38 @@ namespace GameLogic.Factory
     public class MotherItemFactory : MonoBehaviour, IMotherFactory<ItemName, IGrabbable>
     {
         [SerializeField] StoneItemFactory stoneItemFactory;
-        [SerializeField] IGrabbable stone;
-        public IGrabbable Generate(ItemName name)
+        [SerializeField] WoodItemFactory woodItemFactory;
+        [SerializeField] IronItemFactory ironItemFactory;
+        [SerializeField] OilItemFactory oilItemFactory;
+        [SerializeField] WaterItemFactory waterItemFactory;
+        [SerializeField] RiceItemFactory riceItemFactory;
+        public IGrabbable Generate(ItemName name, Vector3 position)
         {
-            if (name == ItemName.Stone)
+            IGrabbable grabbable = null;
+            switch (name)
             {
-                stoneItemFactory.GenerateWorkSpace(new Vector3(0f, 1f, 0f));
+                case ItemName.Stone:
+                    grabbable = stoneItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Wood:
+                    grabbable = woodItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Iron:
+                    grabbable = ironItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Oil:
+                    grabbable = oilItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Water:
+                    grabbable = waterItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Rice:
+                    grabbable = riceItemFactory.GenerateItem(position);
+                    break;
+                default:
+                    break;
             }
-            return stone;
+            return grabbable;
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLogic.Factory
 {
-    public class StoneItemFactory : MonoBehaviour, IFactory<IGrabbable>
+    public class IronItemFactory : MonoBehaviour, IFactory<IGrabbable>
     {
         [SerializeField] GameObject item;
         public IGrabbable GenerateItem(Vector3 position)
