@@ -12,17 +12,33 @@ namespace GameLogic.Factory
         [SerializeField] OilItemFactory oilItemFactory;
         [SerializeField] WaterItemFactory waterItemFactory;
         [SerializeField] RiceItemFactory riceItemFactory;
-        [SerializeField] SerializeInterface<IGrabbable> stone;
-        public IGrabbable Generate(ItemName name)
+        public IGrabbable Generate(ItemName name, Vector3 position)
         {
+            IGrabbable grabbable = null;
             switch (name)
             {
                 case ItemName.Stone:
-                    stoneItemFactory.GenerateWorkSpace(new Vector3(0f, 1f, 0f));
-                    return stone.Value;
+                    grabbable = stoneItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Wood:
+                    grabbable = woodItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Iron:
+                    grabbable = ironItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Oil:
+                    grabbable = oilItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Water:
+                    grabbable = waterItemFactory.GenerateItem(position);
+                    break;
+                case ItemName.Rice:
+                    grabbable = riceItemFactory.GenerateItem(position);
+                    break;
                 default:
-                    return null;
+                    break;
             }
+            return grabbable;
         }
     }
 }

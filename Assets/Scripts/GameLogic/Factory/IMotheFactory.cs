@@ -6,6 +6,6 @@ namespace GameLogic.Factory
 {
     public interface IMotherFactory<T,S> where T : System.Enum
     {
-        public S Generate(T name);
+        public S Generate(T name, Vector3 position);
     }
 }

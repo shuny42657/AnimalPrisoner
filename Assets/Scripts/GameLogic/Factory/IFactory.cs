@@ -6,6 +6,6 @@ namespace GameLogic.Factory
 {
     public interface IFactory<T>
     {
-        public T GenerateWorkSpace(Vector3 position); 
+        public T GenerateItem(Vector3 position); 
     }
 }

@@ -6,12 +6,12 @@ namespace GameLogic.Factory
 {
     public class StoneItemFactory : MonoBehaviour, IFactory<IGrabbable>
     {
-        [SerializeField] SerializeInterface<IGrabbable> stone;
-        [SerializeField] GameObject stoneWorkSpace;
-        public IGrabbable GenerateWorkSpace(Vector3 position)
+        [SerializeField] GameObject item;
+        public IGrabbable GenerateItem(Vector3 position)
         {
-            Instantiate(stoneWorkSpace, position, Quaternion.identity);
-            return stone.Value;
+            GameObject prefab = Instantiate(item, position, Quaternion.identity);
+            IGrabbable grabbable = item.GetComponent<IGrabbable>();
+            return grabbable;
         }
     }
 }

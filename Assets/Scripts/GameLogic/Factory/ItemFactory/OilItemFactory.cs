@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OilItemFactory : MonoBehaviour
+namespace GameLogic.Factory
 {
-    // Start is called before the first frame update
-    void Start()
+    public class OilItemFactory : MonoBehaviour, IFactory<IGrabbable>
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField] GameObject item;
+        public IGrabbable GenerateItem(Vector3 position)
+        {
+            GameObject prefab = Instantiate(item, position, Quaternion.identity);
+            IGrabbable grabbable = item.GetComponent<IGrabbable>();
+            return grabbable;
+        }
     }
 }
