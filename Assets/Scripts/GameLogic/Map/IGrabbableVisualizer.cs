@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IGrabbableVisualizer
 {
-    public void Show(ItemName itemName);
+    public void Show(ItemName itemName,Transform parent);
     public void Delete();
 }

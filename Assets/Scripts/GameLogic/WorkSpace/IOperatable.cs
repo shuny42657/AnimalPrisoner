@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 namespace GameLogic.WorkSpace
 {
@@ -12,5 +13,11 @@ namespace GameLogic.WorkSpace
         public IResource Take();
         public void Work();
         public void InitiateOperation();
+    }
+
+    public interface IOperatableCallback
+    {
+        public UnityEvent<IResource> OnPut { get; }
+        public UnityEvent<IResource> OnTake { get; }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLogic.Factory
 {
-    public class MotherItemFactory : MonoBehaviour, IMotherFactory<ItemName, IGrabbable>
+    public class MotherItemFactory : MonoBehaviour, IMotherFactory<ItemName, IResource>
     {
         [SerializeField] StoneItemFactory stoneItemFactory;
         [SerializeField] WoodItemFactory woodItemFactory;
@@ -12,9 +12,9 @@ namespace GameLogic.Factory
         [SerializeField] OilItemFactory oilItemFactory;
         [SerializeField] WaterItemFactory waterItemFactory;
         [SerializeField] RiceItemFactory riceItemFactory;
-        public IGrabbable Generate(ItemName name, Vector3 position)
+        public IResource Generate(ItemName name, Vector3 position)
         {
-            IGrabbable grabbable = null;
+            IResource grabbable = null;
             switch (name)
             {
                 case ItemName.Stone:

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 namespace GameLogic.WorkSpace
 {
+    //OnTriggerEnter/Exitでの処理を登録しておくコールバック。（プレイヤーが接触した床の色が変わるなど）
     public interface IInteractable
     {
         public UnityEvent OnEnter { get;}

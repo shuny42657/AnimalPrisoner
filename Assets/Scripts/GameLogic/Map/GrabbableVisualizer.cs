@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GrabbableVisualizer : MonoBehaviour,IGrabbableVisualizer
 {
-    IGrabbable grabbableOnDisplay;
+    IResource grabbableOnDisplay;
     public void Delete()
     {
     }
 
-    public void Show(ItemName itemName)
+    public void Show(ItemName itemName,Transform parent)
     {
     }
 }

@@ -3,26 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameLogic.WorkSpace;
 using UnityEngine.Events;
+using Util;
 
-public class Floor : MonoBehaviour, IOperatable,IInteractable
+public class Floor : MonoBehaviour, IOperatable,IInteractable,IOperatableCallback
 {
     IResource onFloor;
 
     public UnityEvent onEnter = new();
     public UnityEvent onExit = new();
+    public UnityEvent<IResource> onPut = new(); public UnityEvent<IResource> OnPut { get { return onPut; } }
+    public UnityEvent<IResource> onTake = new(); public UnityEvent<IResource> OnTake { get { return onTake; } }
+
     public UnityEvent OnEnter { get { return onEnter; } }
     public UnityEvent OnExit { get { return onExit; } }
 
-    public bool Put(IGrabbable grabbable)
-    {
-        return false;
-    }
-
+    
     public void InitiateOperation()
     {
         return;
     }
 
+    public bool Put(IResource recource)
+    {
+        if (onFloor == null)
+        {
+            onFloor = recource;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     public IResource Take()
     {
         var grabbable = onFloor;
@@ -60,16 +72,9 @@ public class Floor : MonoBehaviour, IOperatable,IInteractable
         }
     }
 
-    public bool Put(IResource recource)
+    public bool Put(IGrabbable grabbable)
     {
-        if (onFloor == null)
-        {
-            onFloor = recource;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
+
 }

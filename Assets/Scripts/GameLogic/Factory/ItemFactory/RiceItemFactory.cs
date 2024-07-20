@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace GameLogic.Factory
 {
-    public class RiceItemFactory : MonoBehaviour, IFactory<IGrabbable>
+    public class RiceItemFactory : MonoBehaviour, IFactory<IResource>
     {
         [SerializeField] GameObject item;
-        public IGrabbable GenerateItem(Vector3 position)
+        public IResource GenerateItem(Vector3 position)
         {
             GameObject prefab = Instantiate(item, position, Quaternion.identity);
-            IGrabbable grabbable = item.GetComponent<IGrabbable>();
+            IResource grabbable = item.GetComponent<IResource>();
             return grabbable;
         }
     }
