@@ -8,6 +8,7 @@ public class CharacterInputController : MonoBehaviour, IKeyInputController
     UnityEvent<float> onHAxis = new(); public UnityEvent<float> OnHAxis { get { return onHAxis; } }
 
     UnityEvent<float> onVAxis = new(); public UnityEvent<float> OnVAxis { get { return onVAxis; } }
+    UnityEvent onEPressed = new(); public UnityEvent OnEPressed { get { return onEPressed; } }
 
     // Update is called once per frame
     void Update()
@@ -20,6 +21,11 @@ public class CharacterInputController : MonoBehaviour, IKeyInputController
         if(Input.GetAxisRaw("Vertical") != 0f)
         {
             onVAxis.Invoke(Input.GetAxisRaw("Vertical"));
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            onEPressed.Invoke();
         }
     }
 }

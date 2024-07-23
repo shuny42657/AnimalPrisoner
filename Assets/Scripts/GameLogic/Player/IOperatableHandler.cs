@@ -7,8 +7,7 @@ public interface IOperatableHandler
 {
     public IOperatable Operatable { get; set; }
     public IInteractable Interactable { get; set; }
-    public void Put();
-    public void Take();
+    public void PutOrTake();
     public void Work();
     public void InitiateWork();
 }

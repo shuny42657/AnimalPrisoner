@@ -3,17 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SerializeInterface<T>
+public class SerializeInterface<T> where T : class
 {
     [SerializeField] GameObject obj;
     T value;
+    bool notAssinged = false;
 
     public T Value
     {
         get
         {
-            value ??= obj.GetComponent<T>();
-            return value;
+            if (notAssinged || obj == null)
+            {
+                return null;
+            }
+            else
+            {
+                if (obj.TryGetComponent(out value))
+                {
+                    return value;
+                }
+                else
+                {
+                    notAssinged = true;
+                    return null;
+                }
+            }
         }
     }
 }

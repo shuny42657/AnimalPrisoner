@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &838139949529515732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4181336754292334715}
+  m_Layer: 0
+  m_Name: PutItemOnFloor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4181336754292334715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838139949529515732}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7066094556741073656}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &937593229585117581
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,6 +369,8 @@ GameObject:
   - component: {fileID: 5700299081020986455}
   - component: {fileID: 6629438022395629146}
   - component: {fileID: 1618707098185659751}
+  - component: {fileID: 115204531426871336}
+  - component: {fileID: 765461024697406928}
   m_Layer: 0
   m_Name: SimpleFloor
   m_TagString: Untagged
@@ -361,6 +394,7 @@ Transform:
   - {fileID: 6256871760730417388}
   - {fileID: 5944273347928984505}
   - {fileID: 689261165822959393}
+  - {fileID: 4181336754292334715}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7080747059691457341
@@ -446,12 +480,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c79018ca453649b9b8b170585b3db22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onTake: {fileID: 5528171821698329083}
-  onPut: {fileID: 3775397592135630798}
   onEnter:
     m_PersistentCalls:
       m_Calls: []
   onExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onPut:
+    m_PersistentCalls:
+      m_Calls: []
+  onTake:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &6629438022395629146
@@ -484,3 +522,31 @@ MonoBehaviour:
     obj: {fileID: 8550913946788498265}
   hilighter:
     obj: {fileID: 8550913946788498265}
+--- !u!114 &115204531426871336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550913946788498265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2c442bfd5654e7e8c9b923e77367c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  operatableCallback:
+    obj: {fileID: 8550913946788498265}
+  visualizer: {fileID: 765461024697406928}
+--- !u!114 &765461024697406928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550913946788498265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d21ed6614ad4a15bdbfbb069f1f8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentTransform: {fileID: 4181336754292334715}

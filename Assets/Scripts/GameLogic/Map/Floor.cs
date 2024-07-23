@@ -28,6 +28,7 @@ public class Floor : MonoBehaviour, IOperatable,IInteractable,IOperatableCallbac
         if (onFloor == null)
         {
             onFloor = recource;
+            onPut.Invoke(onFloor);
             return true;
         }
         else
@@ -39,6 +40,7 @@ public class Floor : MonoBehaviour, IOperatable,IInteractable,IOperatableCallbac
     {
         var grabbable = onFloor;
         onFloor = null;
+        onTake.Invoke(null);
         return grabbable;
     }
 

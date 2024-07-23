@@ -7,4 +7,5 @@ public interface IKeyInputController
 {
     public UnityEvent<float> OnHAxis { get; }
     public UnityEvent<float> OnVAxis { get; }
+    public UnityEvent OnEPressed { get; }
 }
