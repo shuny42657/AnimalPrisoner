@@ -12,7 +12,7 @@ public class P_PutAndTake_Visualizer: MonoBehaviour
 
     private void Awake()
     {
-        putAndTake.Value.OnPut.AddListener((resource) => visualizer.Value.Show(resource.ItemName));
+        putAndTake.Value.OnPut.AddListener((item) => visualizer.Value.Show(item));
         putAndTake.Value.OnTake.AddListener(() => visualizer.Value.Delete());
     }
 }

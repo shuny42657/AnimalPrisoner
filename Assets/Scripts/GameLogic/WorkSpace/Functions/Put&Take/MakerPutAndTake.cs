@@ -7,20 +7,20 @@ namespace GameLogic.WorkSpace
 {
     public class MakerPutAndTake : MonoBehaviour,IPutAndTake
     {
-        IResource resource;
-        public IResource Resource { get { return resource; } }
+        ItemName item = ItemName.None;
+        public ItemName Item { get { return item; } }
 
-        UnityEvent<IResource> onPut = new(); public UnityEvent<IResource> OnPut { get { Debug.Log("set"); return onPut; } }
+        UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { Debug.Log("set"); return onPut; } }
 
         UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
 
-        public bool Put(IResource resource)
+        public bool Put(ItemName item)
         {
-            if(this.resource == null)
+            if(this.item == ItemName.None)
             {
-                Debug.Log("Item Put");
-                this.resource = resource;
-                onPut.Invoke(resource);
+                //Debug.Log("Item Put");
+                this.item = item;
+                onPut.Invoke(item);
                 return true;
             }
             else
@@ -30,12 +30,12 @@ namespace GameLogic.WorkSpace
             }
         }
 
-        public IResource Take()
+        public ItemName Take()
         {
-            var item = resource;
-            resource = null;
+            var temp = item;
+            item = ItemName.None;
             onTake.Invoke();
-            return item;
+            return temp;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace GameLogic.GamePlayer
 
         public void Work()
         {
-
+            opertableHandler.Value.Work(playerStatus.Value);
         }
     }
 }

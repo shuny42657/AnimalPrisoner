@@ -13,7 +13,7 @@ public class P_Player_OperatableCallback : MonoBehaviour
 
     private void Awake()
     {
-        operatableCallback.Value.OnPut.AddListener((resource) => visualizer.Value.Delete());
-        operatableCallback.Value.OnTake.AddListener((resource) => visualizer.Value.Show(resource.ItemName));
+        operatableCallback.Value.OnPut.AddListener((itemName) => visualizer.Value.Delete());
+        operatableCallback.Value.OnTake.AddListener((itemName) => visualizer.Value.Show(itemName));
     }
 }

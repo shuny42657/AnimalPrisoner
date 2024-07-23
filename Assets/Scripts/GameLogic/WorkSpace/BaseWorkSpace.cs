@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Util;
+using GameLogic.GamePlayer;
 
 namespace GameLogic.WorkSpace
 {
     public class BaseWorkSpace : MonoBehaviour,IOperatable
     {
         [SerializeField] SerializeInterface<IPutAndTake> putAndTake;
-        [SerializeField] SerializeInterface<IWork> work;
         [SerializeField] SerializeInterface<IAutomatable> automatable;
+        [SerializeField] SerializeInterface<IWork> work;
         [SerializeField] SerializeInterface<IPlayerTriggerable> playerTrigger; public IPlayerTriggerable PlayerTrigger { get { return playerTrigger.Value; } }
 
         public void InitiateOperation()
@@ -23,17 +24,12 @@ namespace GameLogic.WorkSpace
             }
         }
 
-        public bool Put(IGrabbable grabbable)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Put(IResource resource)
+        public bool Put(ItemName itemName)
         {
             if(putAndTake.Value != null)
             {
                 Debug.Log("Item Put");
-                return putAndTake.Value.Put(resource);
+                return putAndTake.Value.Put(itemName);
             }
             else
             {
@@ -42,7 +38,7 @@ namespace GameLogic.WorkSpace
             }
         }
 
-        public IResource Take()
+        public ItemName Take()
         {
             if(putAndTake.Value != null)
             {
@@ -50,13 +46,16 @@ namespace GameLogic.WorkSpace
             }
             else
             {
-                return null;
+                return ItemName.None;
             }
         }
 
-        public void Work()
+        public void Work(IPlayerStatus playerStatus)
         {
-            work.Value.Work();
+            if(work.Value != null)
+            {
+                work.Value.Work(playerStatus);
+            }
         }
     }
 }

@@ -7,10 +7,10 @@ namespace GameLogic.GamePlayer
 {
     public interface IPlayerStatus
     {
-        public UnityEvent<int> OnEnergyModified { get; }
-        public UnityEvent<int> OnHungerModified { get; }
-        public int Energy { get; set; }
-        public int Hunger { get; set; }
+        public UnityEvent<float> OnEnergyModified { get; }
+        public UnityEvent<float> OnHungerModified { get; }
+        public float Energy { get; set; }
+        public float Hunger { get; set; }
     }
 
 }

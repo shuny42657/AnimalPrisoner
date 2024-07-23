@@ -12,7 +12,7 @@ public class P_Floor_OperatableCallback : MonoBehaviour
 
     private void Awake()
     {
-        operatableCallback.Value.OnPut.AddListener((resource) => visualizer.Show(resource.ItemName));
-        operatableCallback.Value.OnTake.AddListener((resource) => visualizer.Delete());
+        operatableCallback.Value.OnPut.AddListener((itemName) => visualizer.Show(itemName));
+        operatableCallback.Value.OnTake.AddListener((itemName) => visualizer.Delete());
     }
 }

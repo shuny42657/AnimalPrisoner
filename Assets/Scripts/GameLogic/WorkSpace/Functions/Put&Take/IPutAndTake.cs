@@ -2,23 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using GameLogic.GamePlayer;
 
 namespace GameLogic.WorkSpace
 {
     public interface IPutAndTake
     {
-        public bool Put(IResource resource);
-        public IResource Take();
+        public bool Put(ItemName itemName);
+        public ItemName Take();
 
-        public IResource Resource { get; }
+        public ItemName Item { get; }
 
-        public UnityEvent<IResource> OnPut { get; }
+        public UnityEvent<ItemName> OnPut { get; }
         public UnityEvent OnTake { get; }
+    }
+
+    public interface ISet
+    {
+        public void Set(ItemName itemName);
     }
 
     public interface IWork
     {
-        public void Work();
+        public void Work(IPlayerStatus playerStatus);
     }
 
     public interface IAutomatable

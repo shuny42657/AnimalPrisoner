@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum ItemName
 {
+    None,
     Stone,
     Wood,
     Iron,

@@ -5,10 +5,11 @@ using UnityEngine.Events;
 
 public class CharacterInputController : MonoBehaviour, IKeyInputController
 {
-    UnityEvent<float> onHAxis = new(); public UnityEvent<float> OnHAxis { get { return onHAxis; } }
+    [SerializeField] UnityEvent<float> onHAxis = new(); public UnityEvent<float> OnHAxis { get { return onHAxis; } }
 
-    UnityEvent<float> onVAxis = new(); public UnityEvent<float> OnVAxis { get { return onVAxis; } }
-    UnityEvent onEPressed = new(); public UnityEvent OnEPressed { get { return onEPressed; } }
+    [SerializeField] UnityEvent<float> onVAxis = new(); public UnityEvent<float> OnVAxis { get { return onVAxis; } }
+    [SerializeField] UnityEvent onEPressed = new(); public UnityEvent OnEPressed { get { return onEPressed; } }
+    [SerializeField] UnityEvent onQ = new(); public UnityEvent OnQ { get { return onQ; } }
 
     // Update is called once per frame
     void Update()
@@ -26,6 +27,11 @@ public class CharacterInputController : MonoBehaviour, IKeyInputController
         if (Input.GetKeyDown(KeyCode.E))
         {
             onEPressed.Invoke();
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            onQ.Invoke();
         }
     }
 }
