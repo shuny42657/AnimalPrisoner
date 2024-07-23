@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1384452189789918004}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -396,9 +396,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   putAndTake:
     obj: {fileID: 7060725868057235643}
-  work:
-    obj: {fileID: 0}
   automatable:
+    obj: {fileID: 0}
+  work:
     obj: {fileID: 0}
   playerTrigger:
     obj: {fileID: 8550913946788498265}
