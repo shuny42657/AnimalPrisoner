@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameLogic.Player
+namespace GameLogic.GamePlayer
 {
     public interface IItemHolder 
     {

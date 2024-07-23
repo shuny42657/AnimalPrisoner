@@ -254,7 +254,6 @@ GameObject:
   - component: {fileID: 7611859268204130010}
   - component: {fileID: 3261307217865580500}
   - component: {fileID: 6629438022395629146}
-  - component: {fileID: 1618707098185659751}
   - component: {fileID: 765461024697406928}
   - component: {fileID: 6645786557225847716}
   - component: {fileID: 4250192252411122097}
@@ -370,22 +369,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseObject: {fileID: 6382912949237156479}
   hilightObject: {fileID: 3703379243061731544}
---- !u!114 &1618707098185659751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8550913946788498265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5993fda534ae2473d81420023eaf9aa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTrigger:
-    obj: {fileID: 8550913946788498265}
-  hilighter:
-    obj: {fileID: 8550913946788498265}
 --- !u!114 &765461024697406928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,7 +432,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6629438022395629146}
+        m_TargetAssemblyTypeName: Util.HighlightVisualizer, Util
+        m_MethodName: Hilight
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onPlayerExit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6629438022395629146}
+        m_TargetAssemblyTypeName: Util.HighlightVisualizer, Util
+        m_MethodName: Hilight
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

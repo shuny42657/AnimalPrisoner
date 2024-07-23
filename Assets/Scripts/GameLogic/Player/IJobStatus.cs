@@ -15,7 +15,7 @@ namespace GameLogic
     }
 }
 
-namespace GameLogic.Player
+namespace GameLogic.GamePlayer
 {
     public interface IJobStatus
     {
