@@ -35,6 +35,7 @@ namespace GameLogic.GamePlayer
                 Debug.Log("Put or Take");
                 if (item == ItemName.None)
                 {
+                    Debug.Log("Take called");
                     item = operatable.Take();
                     if (item != ItemName.None)
                     {
@@ -44,6 +45,7 @@ namespace GameLogic.GamePlayer
                 }
                 else
                 {
+                    Debug.Log("Put Called");
                     var isPut = operatable.Put(item);
                     if (isPut)
                     {

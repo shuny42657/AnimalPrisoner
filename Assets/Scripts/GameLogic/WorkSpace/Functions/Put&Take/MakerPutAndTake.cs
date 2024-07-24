@@ -10,7 +10,7 @@ namespace GameLogic.WorkSpace
         ItemName item = ItemName.None;
         public ItemName Item { get { return item; } }
 
-        UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { Debug.Log("set"); return onPut; } }
+        UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 
         UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
 

@@ -73,12 +73,12 @@ namespace Sync
 
         public static int GetSentItem(this Player player,int index)
         {
-            return (player.CustomProperties[sendItemKeys[index - 1]] is int itemId) ? itemId : -1;
+            return (player.CustomProperties[sendItemKeys[index - 1]] is int itemId) ? itemId : 0;
         }
 
         public static void SetSendItem(this Player player,int index, int item)
         {
-            propsToSet[sendItemKeys[index]] = item;
+            propsToSet[sendItemKeys[index-1]] = item;
             player.SetCustomProperties(propsToSet);
             propsToSet.Clear();
         }

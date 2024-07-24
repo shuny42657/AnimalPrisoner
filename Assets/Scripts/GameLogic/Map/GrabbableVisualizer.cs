@@ -27,8 +27,11 @@ namespace GameLogic.Map
         {
             Debug.Log("Show");
             var newItem = motherItemFactory.Generate(itemName,parentTransform);
-            newItem.transform.localPosition = Vector3.zero;
-            itemOnDisplay = newItem;
+            if(newItem != null)
+            {
+                newItem.transform.localPosition = Vector3.zero;
+                itemOnDisplay = newItem;
+            }
         }
     }
 }

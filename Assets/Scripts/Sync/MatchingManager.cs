@@ -9,6 +9,7 @@ namespace Sync
 {
     public class MatchingManager : MonoBehaviourPunCallbacks,IMatchinCallback
     {
+        [SerializeField] int playerCount;
         UnityEvent onRoomJoined = new();
         UnityEvent onMatchingComplete = new(); public UnityEvent OnMatchingComplete { get { return onMatchingComplete; } }
         public UnityEvent OnRoomJoined
@@ -37,7 +38,7 @@ namespace Sync
         {
             // ルームの参加人数を2人に設定する
             var roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = 1;
+            roomOptions.MaxPlayers = playerCount;
 
             PhotonNetwork.CreateRoom(null, roomOptions);
         }

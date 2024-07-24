@@ -19,7 +19,7 @@ namespace GameLogic.WorkSpace
             {
                 progress += Time.deltaTime;
                 playerStatus.Energy -= Time.deltaTime;
-                Debug.Log($"Energy {progress}");
+                //Debug.Log($"Energy {progress}");
 
                 if(progress > maxProgress)
                 {
