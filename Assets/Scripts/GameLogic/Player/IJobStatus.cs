@@ -12,6 +12,8 @@ namespace GameLogic
         OilMaker,
         WaterMaker,
         RiceMaker,
+        StoneWoodCrafter,
+        StoneIronCrafter,
     }
 }
 
@@ -21,5 +23,6 @@ namespace GameLogic.GamePlayer
     {
         public List<JobName> GetAllJobs();
         public void SetJob(JobName job);
+        public void ClearJob();
     }
 }

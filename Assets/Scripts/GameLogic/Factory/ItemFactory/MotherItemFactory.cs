@@ -13,6 +13,7 @@ namespace GameLogic.Factory
         [SerializeField] ItemFactory oilItemFactory;
         [SerializeField] ItemFactory waterItemFactory;
         [SerializeField] ItemFactory riceItemFactory;
+
         public GameObject Generate(ItemName name, Vector3 position)
         {
             GameObject grabbable = null;

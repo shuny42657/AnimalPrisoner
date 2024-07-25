@@ -1,19 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Sync;
+using UnityEngine.Events;
 
 namespace GameLogic.GamePlayer
 {
     public class JobStatus : MonoBehaviour,IJobStatus
     {
+        List<JobName> jobs  = new();
+
+        public UnityEvent<IJobStatus> OnJobSet = new();
         public List<JobName> GetAllJobs()
         {
-            throw new System.NotImplementedException();
+            return jobs;
         }
 
         public void SetJob(JobName job)
         {
-            throw new System.NotImplementedException();
+            jobs.Add(job);
+        }
+
+        public void ClearJob()
+        {
+            jobs.Clear();
+        }
+
+        public void SetJobs()
+        {
+            Debug.Log("4 Jobs Set");
+            var localPlayer = PhotonNetwork.LocalPlayer;
+            if (localPlayer.GetJobDetermined())
+            {
+                for(int i = 0;i < 4;i++)
+                {
+                    jobs.Add((JobName)localPlayer.GetJob(i));
+                }
+                OnJobSet.Invoke(this);
+            }
         }
     }
 }
