@@ -30,17 +30,22 @@ namespace Sync
         public override void OnConnectedToMaster()
         {
             // ランダムなルームに参加する
-            PhotonNetwork.JoinRandomRoom();
+            PhotonNetwork.JoinRoom("Room");
         }
 
         // ランダムで参加できるルームが存在しないなら、新規でルームを作成する
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
+            
+        }
+
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
             // ルームの参加人数を2人に設定する
             var roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = playerCount;
 
-            PhotonNetwork.CreateRoom(null, roomOptions);
+            PhotonNetwork.CreateRoom("Room", roomOptions);
         }
     }
 }

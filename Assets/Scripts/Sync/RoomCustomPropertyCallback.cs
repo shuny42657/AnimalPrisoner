@@ -20,7 +20,7 @@ namespace Sync
                 onComplete.Invoke();
                 if (PhotonNetwork.IsMasterClient)
                 {
-                    Debug.Log("Matching Complete");
+                    //Debug.Log("Matching Complete");
                     onCompleteWithMasterClient.Invoke();
                 }
             }

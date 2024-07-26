@@ -29,7 +29,6 @@ namespace GameLogic.GamePlayer
 
         public void SetJobs()
         {
-            Debug.Log("4 Jobs Set");
             var localPlayer = PhotonNetwork.LocalPlayer;
             if (localPlayer.GetJobDetermined())
             {
@@ -37,6 +36,7 @@ namespace GameLogic.GamePlayer
                 {
                     jobs.Add((JobName)localPlayer.GetJob(i));
                 }
+                Debug.Log($" {jobs.Count} Jobs Set");
                 OnJobSet.Invoke(this);
             }
         }

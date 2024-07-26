@@ -16,12 +16,14 @@ namespace GameLogic.Map
             Debug.Log($"Job Count{jobStatus.GetAllJobs().Count}");
             foreach(var j in jobStatus.GetAllJobs())
             {
+                Debug.Log($"Job : {j}");
                 for(int i = 0;i < 100; i++)
                 {
                     var rand = Random.Range(0, positionCandidates.Count);
                     if (!occupiedPositions.Contains(rand))
                     {
                         motherWorkSpaceFactory.Generate(j, positionCandidates[rand]);
+                        occupiedPositions.Add(rand);
                         break;
                     }
                     else

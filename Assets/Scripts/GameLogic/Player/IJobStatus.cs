@@ -6,14 +6,14 @@ namespace GameLogic
 {
     public enum JobName
     {
-        StoneMaker,
-        WoodMaker,
-        IronMaker,
-        OilMaker,
-        WaterMaker,
-        RiceMaker,
-        StoneWoodCrafter,
-        StoneIronCrafter,
+        StoneMaker = 0,
+        WoodMaker = 1,
+        IronMaker = 2,
+        OilMaker = 3,
+        WaterMaker = 4,
+        RiceMaker = 5,
+        StoneWoodCrafter = 6,
+        StoneIronCrafter = 7,
     }
 }
 
