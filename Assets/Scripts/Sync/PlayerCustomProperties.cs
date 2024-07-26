@@ -10,10 +10,12 @@ namespace Sync
     public enum RoomPropertyKey
     {
         mcplt,
+        score,
     }
 
     public enum PlayerPropertyKey
     {
+        none,
         jd,
         first_job,
         second_job,
@@ -36,6 +38,20 @@ namespace Sync
         public static void SetMatchComplete(this Room room, bool yes)
         {
             propsToSet[RoomPropertyKey.mcplt.ToString()] = yes;
+            room.SetCustomProperties(propsToSet);
+            propsToSet.Clear();
+        }
+
+        public static int GetScore(this Room room)
+        {
+            return (room.CustomProperties[RoomPropertyKey.score.ToString()] is int score) ? score : 0;
+        }
+
+        public static void AddScore(this Room room,int score)
+        {
+            var currentScore = room.GetScore();
+            currentScore += score;
+            propsToSet[RoomPropertyKey.score.ToString()] = currentScore;
             room.SetCustomProperties(propsToSet);
             propsToSet.Clear();
         }

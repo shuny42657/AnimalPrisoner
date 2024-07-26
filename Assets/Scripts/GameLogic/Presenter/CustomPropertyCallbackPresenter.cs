@@ -11,6 +11,6 @@ public class CustomPropertyCallbackPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        callBack.onCompleteWithMasterClient.AddListener(() => jobAllocator.AllocateJob());
+        callBack.onModifiedWithMasterCleient.AddListener(() => jobAllocator.AllocateJob());
     }
 }
