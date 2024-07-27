@@ -25,6 +25,8 @@ namespace GameLogic.WorkSpace
     public interface IWork
     {
         public void Work(IPlayerStatus playerStatus);
+        public UnityEvent<float> OnProgressMade { get; }
+        public UnityEvent<ItemName> OnWorkFinish { get; }
     }
 
     public interface IAutomatable

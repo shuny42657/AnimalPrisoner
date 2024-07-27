@@ -11,6 +11,9 @@ namespace GameLogic.WorkSpace
         float progress;
         [SerializeField] float maxProgress;
         [SerializeField] UnityEvent<ItemName> onWorkFinish; public UnityEvent<ItemName> OnWorkFinish { get { return onWorkFinish; } }
+
+        [SerializeField] UnityEvent<float> onProgressMade; public UnityEvent<float> OnProgressMade { get { return onProgressMade; } }
+
         [SerializeField] ItemName itemName;
 
         public void Work(IPlayerStatus playerStatus)
@@ -19,6 +22,7 @@ namespace GameLogic.WorkSpace
             {
                 progress += Time.deltaTime;
                 playerStatus.Energy -= Time.deltaTime;
+                onProgressMade.Invoke(progress / maxProgress);
                 //Debug.Log($"Energy {progress}");
 
                 if(progress > maxProgress)

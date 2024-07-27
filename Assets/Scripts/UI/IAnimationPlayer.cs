@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace UI
 {
-    public interface IGaugeView
+    public interface IAnimationPlayer 
     {
-        public void ModifyGauge(float rate);
+        public void PlayAnimation();
     }
+
 }
