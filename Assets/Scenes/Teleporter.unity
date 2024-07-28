@@ -3052,7 +3052,7 @@ MonoBehaviour:
   onScoreModified:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1421368935}
         m_TargetAssemblyTypeName: UI.IntTextView, UI
         m_MethodName: ShowText
         m_Mode: 0
