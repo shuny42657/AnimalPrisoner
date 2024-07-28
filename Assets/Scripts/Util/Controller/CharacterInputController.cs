@@ -10,6 +10,7 @@ public class CharacterInputController : MonoBehaviour, IKeyInputController
     [SerializeField] UnityEvent<float> onVAxis = new(); public UnityEvent<float> OnVAxis { get { return onVAxis; } }
     [SerializeField] UnityEvent onEPressed = new(); public UnityEvent OnEPressed { get { return onEPressed; } }
     [SerializeField] UnityEvent onQ = new(); public UnityEvent OnQ { get { return onQ; } }
+    [SerializeField] UnityEvent onFPressed = new();public UnityEvent OnFPressed { get { return onFPressed; } }
 
     // Update is called once per frame
     void Update()
@@ -32,6 +33,12 @@ public class CharacterInputController : MonoBehaviour, IKeyInputController
         if (Input.GetKey(KeyCode.Q))
         {
             onQ.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("F pressed");
+            onFPressed.Invoke();
         }
     }
 }

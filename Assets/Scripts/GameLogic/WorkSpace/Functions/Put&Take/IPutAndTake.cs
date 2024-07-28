@@ -20,6 +20,7 @@ namespace GameLogic.WorkSpace
     public interface ISet
     {
         public void Set(ItemName itemName);
+        public UnityEvent<ItemName> OnSet { get; }
     }
 
     public interface IWork

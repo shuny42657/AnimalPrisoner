@@ -17,9 +17,13 @@ namespace GameLogic.WorkSpace
         public void InitiateOperation()
         {
             if(automatable.Value != null)
+            {
+                Debug.Log("workspace automatable called");
                 automatable.Value.InitateOperation();
+            }
             else
             {
+                Debug.Log("no automatable");
                 return;
             }
         }

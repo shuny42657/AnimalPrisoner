@@ -1,28 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameLogic.WorkSpace
 {
     public class CrafterAutomatable : MonoBehaviour,IAutomatable
     {
+        bool working;
+        ItemName itemToCraft;
+
+        public void SetItemToCraft(ItemName itemName)
+        {
+            Debug.Log($"Set Item : {itemName}");
+            itemToCraft = itemName;
+        }
+
         public void InitateOperation()
         {
-            //Start
-            throw new System.NotImplementedException();
+            if (!working && itemToCraft != ItemName.None)
+            {
+                working = true;
+            }
+            else
+            {
+                Debug.Log("Cannot Start Operation");
+            }
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        float progress;
+        [SerializeField] float maxProgress;
 
+        public UnityEvent<ItemName> OnOperationFinish = new();
+        public UnityEvent<float> OnProgressMade = new();
         // Update is called once per frame
         void Update()
         {
-            // increase some value (probably float) to represent progress.
-            // call the callback when the process is done (you can just define a callback directly inside this script).
+            if (working)
+            {
+                progress += Time.deltaTime;
+                OnProgressMade.Invoke(progress / maxProgress);
+                if(progress > maxProgress)
+                {
+                    progress = 0;
+                    working = false;
+                    OnOperationFinish.Invoke(itemToCraft);
+                }
+            }
         }
     }
 }

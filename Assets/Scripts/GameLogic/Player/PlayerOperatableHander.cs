@@ -23,7 +23,16 @@ namespace GameLogic.GamePlayer
 
         public void InitiateWork()
         {
-            throw new System.NotImplementedException();
+            if (operatable == null)
+            {
+                Debug.Log("no operatable");
+                return;
+            }
+            else
+            {
+                Debug.Log("operator handler passed");
+                operatable.InitiateOperation();
+            }
         }
 
         public void PutOrTake()

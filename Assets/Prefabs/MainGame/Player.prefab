@@ -236,6 +236,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onFPressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8026600533290468281}
+        m_TargetAssemblyTypeName: GameLogic.GamePlayer.PlayerOperatableHander, GameLogic
+        m_MethodName: InitiateWork
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1072461307409182594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,6 +327,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0f107949f3e44e989d974b65b0d4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnJobSet:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1281054151876981277
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +380,8 @@ MonoBehaviour:
   onHungerModified:
     m_PersistentCalls:
       m_Calls: []
+  maxEnergy: 100
+  maxHunger: 100
 --- !u!1 &2545810842804910917
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +426,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0f107949f3e44e989d974b65b0d4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnJobSet:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3821991834720728836
 GameObject:
   m_ObjectHideFlags: 0

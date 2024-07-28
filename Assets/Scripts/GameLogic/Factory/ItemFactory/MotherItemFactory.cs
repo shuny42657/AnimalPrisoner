@@ -13,6 +13,8 @@ namespace GameLogic.Factory
         [SerializeField] ItemFactory oilItemFactory;
         [SerializeField] ItemFactory waterItemFactory;
         [SerializeField] ItemFactory riceItemFactory;
+        [SerializeField] ItemFactory stone1Wood1Factory;
+        [SerializeField] ItemFactory stone1Iron1Factory;
 
         public GameObject Generate(ItemName name, Vector3 position)
         {
@@ -37,6 +39,12 @@ namespace GameLogic.Factory
                 case ItemName.Rice:
                     grabbable = riceItemFactory.GenerateItem(position);
                     break;
+                case ItemName.Stone1Wood1:
+                    grabbable = stone1Wood1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone1Iron1:
+                    grabbable = stone1Iron1Factory.GenerateItem(position);
+                    break;
                 default:
                     break;
             }
@@ -59,6 +67,10 @@ namespace GameLogic.Factory
                     return waterItemFactory.GenerateItem(transform);
                 case ItemName.Rice:
                     return riceItemFactory.GenerateItem(transform);
+                case ItemName.Stone1Wood1:
+                    return stone1Wood1Factory.GenerateItem(transform);
+                case ItemName.Stone1Iron1:
+                    return stone1Iron1Factory.GenerateItem(transform);
                 default:
                     return null;
             }

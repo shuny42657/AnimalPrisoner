@@ -15,6 +15,8 @@ namespace GameLogic.WorkSpace
 
         [SerializeField] UnityEvent onTake; public UnityEvent OnTake { get { return onTake; } }
 
+        UnityEvent<ItemName> onSet = new(); public UnityEvent<ItemName> OnSet { get { return onSet; } }
+
         public bool Put(ItemName itemName)
         {
             return false;

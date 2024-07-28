@@ -2,38 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using GameLogic.Data;
 
 namespace GameLogic.WorkSpace
 {
     public class CrafterPutAndTake : MonoBehaviour,IPutAndTake,ISet
     {
-        public ItemName Item => throw new System.NotImplementedException();
+        ItemName  item = ItemName.None;
+        public ItemName Item { get { return item; } }
 
-        public UnityEvent<ItemName> OnPut => throw new System.NotImplementedException();
+        ItemName itemToCraft;
+        [SerializeField] ItemName firstItem;
+        [SerializeField] ItemName secondItem;
+        int firstItemCount = 0;
+        int secondItemCount = 0;
 
-        public UnityEvent OnTake => throw new System.NotImplementedException();
+        [SerializeField]UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 
-        //Todo : Reference something like "CraftItemDatabase" ?? 
+        [SerializeField]UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
+        [SerializeField] UnityEvent<ItemName> onSet = new(); public UnityEvent<ItemName> OnSet { get { return onSet; } }
+
+        //Todo : Reference something like "CraftItemDatabase" ??
+        ICraftRecipe craftRecipe;
 
         public bool Put(ItemName itemName)
         {
-            //Only accecpt valid items (2 kinds for each crafter).
-            throw new System.NotImplementedException();
+            if(craftRecipe == null)
+            {
+                craftRecipe = CraftRecipeClassifier.GetCraftRecipe(firstItem, secondItem);
+            }
+            if(firstItem == itemName)
+            {
+                firstItemCount++;
+                itemToCraft = craftRecipe.GetCraftItem(firstItemCount, secondItemCount);
+                onPut.Invoke(itemToCraft);
+                return true;
+            }
+            else if(secondItem == itemName)
+            {
+                secondItemCount++;
+                itemToCraft = craftRecipe.GetCraftItem(firstItemCount, secondItemCount);
+                onPut.Invoke(itemToCraft);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public ItemName Take()
         {
-            //Give the crafted item to player only when there is one.
-            //You can just copy the implementation from OnlyTakeWithSetter.cs
-            throw new System.NotImplementedException();
+            var temp = item;
+            item = ItemName.None;
+            Debug.Log($"Taken Item : {temp}");
+            onTake.Invoke();
+            return temp;
         }
 
         //Only this method is from ISet
         public void Set(ItemName itemName)
         {
-            //Set the itemName of an item that is crafted.
-            //Can just copy the implementation from OnlyTakeWithSetter.cs 
-            throw new System.NotImplementedException();
+            if (item == ItemName.None)
+            {
+                item = itemName;
+                Debug.Log($"Set Item : {itemName}");
+                onSet.Invoke(item);
+            }
         }
     }
 }
