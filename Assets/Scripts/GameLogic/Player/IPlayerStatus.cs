@@ -12,5 +12,4 @@ namespace GameLogic.GamePlayer
         public float Energy { get; set; }
         public float Hunger { get; set; }
     }
-
 }

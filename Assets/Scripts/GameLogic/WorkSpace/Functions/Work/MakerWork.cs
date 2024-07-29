@@ -14,14 +14,17 @@ namespace GameLogic.WorkSpace
 
         [SerializeField] UnityEvent<float> onProgressMade; public UnityEvent<float> OnProgressMade { get { return onProgressMade; } }
 
+        float workSpeed = 1f;
+        public float WorkSpeed { get { return workSpeed; } set { workSpeed = value; } }
+
         [SerializeField] ItemName itemName;
 
         public void Work(IPlayerStatus playerStatus)
         {
             if(playerStatus.Energy > 0)
             {
-                progress += Time.deltaTime;
-                playerStatus.Energy -= Time.deltaTime;
+                progress += Time.deltaTime * workSpeed;
+                playerStatus.Energy -= Time.deltaTime * workSpeed;
                 onProgressMade.Invoke(progress / maxProgress);
                 //Debug.Log($"Energy {progress}");
 

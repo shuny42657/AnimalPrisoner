@@ -33,12 +33,16 @@ namespace GameLogic.WorkSpace
 
         public UnityEvent<ItemName> OnOperationFinish = new();
         public UnityEvent<float> OnProgressMade = new();
+
+        float operationSpeed = 1;
+        public float OperationSpeed { get { return operationSpeed; } set { operationSpeed = value; } }
+
         // Update is called once per frame
         void Update()
         {
             if (working)
             {
-                progress += Time.deltaTime;
+                progress += Time.deltaTime * operationSpeed;
                 OnProgressMade.Invoke(progress / maxProgress);
                 if(progress > maxProgress)
                 {
