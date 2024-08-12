@@ -30,4 +30,12 @@ namespace Util
             throw new Exception("Invalid cumulative distribution");
         }
     }
+
+    public class FrozenDistribution : IDitribution<int>
+    {
+        public int Sample(Random random)
+        {
+            return 0;
+        }
+    }
 }

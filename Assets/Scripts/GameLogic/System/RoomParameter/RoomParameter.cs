@@ -13,11 +13,12 @@ namespace GameLogic.GameSystem
 
         [SerializeField] UnityEvent<float> onElectricityModified = new(); public UnityEvent<float> OnElectricityModified { get { return onElectricityModified; } }
 
-        float fuel; public float Fuel { get { return fuel; } }
+        float fuel; public float Fuel { get { return fuel; } set { fuel = value; onFuelModiied.Invoke(fuel); } }
 
-        float durability; public float Durability { get { return durability; } }
+        float durability; public float Durability { get { return durability; } set { durability = value; onDurabilityModified.Invoke(durability); } }
 
-        float electricity; public float Electricity { get { return electricity; } }
+        float electricity; public float Electricity { get { return electricity; } set { electricity = value; onElectricityModified.Invoke(electricity); } }
+
         [SerializeField] float maxFuel;
         [SerializeField] float maxDurability;
         [SerializeField] float maxElecticity;
@@ -48,4 +49,11 @@ namespace GameLogic.GameSystem
             }
         }
     }
+}
+
+public enum RoomParameterName
+{
+    Fuel,
+    Durability,
+    Electricity,
 }

@@ -17,4 +17,4 @@ MonoBehaviour:
   qty1: 1
   source2: 2
   qty2: 2
-  sourceImage: {fileID: 0}
+  sourceImage: {fileID: 21300000, guid: f9a47a0a4bfcf4a9c9d337b57e87a0a7, type: 3}

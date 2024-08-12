@@ -13,5 +13,7 @@ namespace GameLogic.Data
         [SerializeField] ItemName source2; public ItemName Source2 { get { return source2; } }
         [SerializeField] int qty2; public int Qty2 { get { return qty2; } }
         [SerializeField] Sprite sourceImage; public Sprite SourceImage { get { return sourceImage; } }
+        [SerializeField] RoomParameterName roomParamToModify; public RoomParameterName RoomParamToModify { get { return roomParamToModify; } }
+        [SerializeField] float roomParamModifyValue; public float RoomParamModifyValue { get { return roomParamModifyValue; } }
     }
 }

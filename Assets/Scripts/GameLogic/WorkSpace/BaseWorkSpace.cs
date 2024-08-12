@@ -9,6 +9,7 @@ namespace GameLogic.WorkSpace
 {
     public class BaseWorkSpace : MonoBehaviour, IOperatable
     {
+        [SerializeField] JobName jobName; public JobName JobName { get { return jobName; } }
         [SerializeField] SerializeInterface<IPutAndTake> putAndTake;
         [SerializeField] SerializeInterface<IAutomatable> automatable;
         [SerializeField] SerializeInterface<IWork> work;

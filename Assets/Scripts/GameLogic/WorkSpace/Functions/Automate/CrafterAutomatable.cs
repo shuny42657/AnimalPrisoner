@@ -20,6 +20,7 @@ namespace GameLogic.WorkSpace
         {
             if (!working && itemToCraft != ItemName.None)
             {
+                onOperationInitiated.Invoke();
                 working = true;
             }
             else
@@ -36,6 +37,8 @@ namespace GameLogic.WorkSpace
 
         float operationSpeed = 1;
         public float OperationSpeed { get { return operationSpeed; } set { operationSpeed = value; } }
+
+        [SerializeField] UnityEvent onOperationInitiated = new(); public UnityEvent OnOperationInitiated { get { return onOperationInitiated; } }
 
         // Update is called once per frame
         void Update()

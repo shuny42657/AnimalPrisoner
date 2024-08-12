@@ -17,4 +17,6 @@ MonoBehaviour:
   qty1: 0
   source2: 0
   qty2: 0
-  sourceImage: {fileID: 0}
+  sourceImage: {fileID: 21300000, guid: bbce861dbe37e42dd9eb9c117b2441c2, type: 3}
+  roomParamToModify: 1
+  roomParamModifyValue: 20

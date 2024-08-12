@@ -16,9 +16,12 @@ namespace GameLogic.GameSystem
 
         public void AddNewObjective()
         {
-            var newObjective = objectiveCreator.Value.CreateObjective();
-            objectives.Add(newObjective);
-            OnNewObjectiveGenerated.Invoke(newObjective);
+            if(objectives.Count < 2)
+            {
+                var newObjective = objectiveCreator.Value.CreateObjective();
+                objectives.Add(newObjective);
+                OnNewObjectiveGenerated.Invoke(newObjective);
+            }
         }
 
         public bool ObjectiveAchieved(ItemName receivedItem)

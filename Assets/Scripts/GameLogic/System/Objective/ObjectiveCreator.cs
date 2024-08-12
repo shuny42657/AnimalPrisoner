@@ -16,11 +16,11 @@ namespace GameLogic.GameSystem
     public class ObjectiveCreator : MonoBehaviour, IObjectiveCreator
     {
         [SerializeField] List<ItemName> objectiveItems;
-        List<IUpGradable> upgradables = new();
+        List<BaseWorkSpace> upgradables = new();
 
-        IDitribution<int> distribution;
+        IDitribution<int> distribution = new FrozenDistribution();
 
-        public void AddUpGradable(IUpGradable upgradable)
+        public void AddUpGradable(BaseWorkSpace upgradable)
         {
             upgradables.Add(upgradable);
         }
