@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class MatchingTest : MonoBehaviourPunCallbacks
+public class MatchingCallback : MonoBehaviourPunCallbacks
 {
     public override void OnConnectedToMaster()
     {
@@ -22,30 +22,14 @@ public class MatchingTest : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room");
-        //////// 1人でも接続したら遷移するかのテスト　2人以上のときはコメントアウト
         if (PhotonNetwork.IsMasterClient)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             {
                 PhotonNetwork.CurrentRoom.IsOpen = false;
                 Debug.Log("Moving on to match");
-                PhotonNetwork.LoadLevel("Teleporter(Copy)");
+                PhotonNetwork.LoadLevel("GameStarter");
             }
         }
-        ///////
-    }
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        /* 2人以上のときはコメントアウトを外す
-        if (PhotonNetwork.IsMasterClient)
-        {
-            if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
-            {
-                PhotonNetwork.CurrentRoom.IsOpen = false;
-                Debug.Log("Moving on to match");
-                PhotonNetwork.LoadLevel("Teleporter(Copy)");
-            }
-        }
-        */
     }
 }
