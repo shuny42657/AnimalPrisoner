@@ -11,10 +11,16 @@ namespace GameLogic.GamePlayer
         [SerializeField] SerializeInterface<IOperatableHandler> opertableHandler;
         [SerializeField] SerializeInterface<IPlayerStatus> playerStatus;
         [SerializeField] SerializeInterface<IJobStatus> jobStatus;
+        [SerializeField] SerializeInterface<IMovable> characterMove;
 
         public void Work()
         {
             opertableHandler.Value.Work(playerStatus.Value);
+        }
+
+        public void SetCanMove(bool isActive)
+        {
+            characterMove.Value.CanMove = isActive;
         }
     }
 }

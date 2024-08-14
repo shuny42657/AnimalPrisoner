@@ -60,6 +60,12 @@ namespace GameLogic.WorkSpace
             return temp;
         }
 
+        public void ResetSetQuantity()
+        {
+            firstItemCount = 0;
+            secondItemCount = 0;
+        }
+
         //Only this method is from ISet
         public void Set(ItemName itemName)
         {

@@ -33,6 +33,7 @@ namespace GameLogic.WorkSpace
 
     public interface IAutomatable
     {
+        public UnityEvent OnOperationInitiated { get; }
         public void InitateOperation();
         public float OperationSpeed { get; set; }
     }
