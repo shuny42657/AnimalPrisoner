@@ -13,11 +13,38 @@ namespace GameLogic.GameSystem
 
         [SerializeField] UnityEvent<float> onElectricityModified = new(); public UnityEvent<float> OnElectricityModified { get { return onElectricityModified; } }
 
-        float fuel; public float Fuel { get { return fuel; } set { fuel = value; onFuelModiied.Invoke(fuel); } }
+        float fuel; public float Fuel
+        {
+            get { return fuel; }
+            set
+            {
+                fuel = value; onFuelModiied.Invoke(fuel);
+                if(fuel == 0) { OnParamDead.Invoke(); }
+            }
+        }
 
-        float durability; public float Durability { get { return durability; } set { durability = value; onDurabilityModified.Invoke(durability); } }
+        float durability; public float Durability
+        {
+            get { return durability; }
+            set
+            {
+                durability = value; onDurabilityModified.Invoke(durability);
+                if(durability == 0)
+                {
+                    OnParamDead.Invoke();
+                }
+            }
+        }
 
-        float electricity; public float Electricity { get { return electricity; } set { electricity = value; onElectricityModified.Invoke(electricity); } }
+        float electricity; public float Electricity
+        {
+            get { return electricity; }
+            set
+            {
+                electricity = value; onElectricityModified.Invoke(electricity);
+                if(electricity == 0) { OnParamDead.Invoke(); }
+            }
+        }
 
         [SerializeField] float maxFuel;
         [SerializeField] float maxDurability;
@@ -29,6 +56,7 @@ namespace GameLogic.GameSystem
 
         [SerializeField] bool working; public bool Working { get { return working; } set { working = value; } }
 
+        [SerializeField] UnityEvent OnParamDead;
         private void Awake()
         {
             fuel = maxFuel;
