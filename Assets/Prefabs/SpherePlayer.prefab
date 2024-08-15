@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05811a704350f4c319a2620ccb8fa198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
 --- !u!114 &8430098422412460143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +236,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onFPressed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1072461307409182594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +303,8 @@ MonoBehaviour:
     obj: {fileID: 1281054151876981277}
   jobStatus:
     obj: {fileID: 2545810842804910917}
+  characterMove:
+    obj: {fileID: 0}
 --- !u!1 &1281054151876981277
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +355,8 @@ MonoBehaviour:
   onHungerModified:
     m_PersistentCalls:
       m_Calls: []
+  maxEnergy: 100
+  maxHunger: 100
 --- !u!1 &2545810842804910917
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0f107949f3e44e989d974b65b0d4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnJobSet:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3821991834720728836
 GameObject:
   m_ObjectHideFlags: 0

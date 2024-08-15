@@ -19,7 +19,7 @@ namespace GameLogic.GameSystem
             set
             {
                 fuel = value; onFuelModiied.Invoke(fuel);
-                if(fuel == 0) { OnParamDead.Invoke(); }
+                if(fuel < 0) { OnParamDead.Invoke(); }
             }
         }
 
@@ -29,7 +29,7 @@ namespace GameLogic.GameSystem
             set
             {
                 durability = value; onDurabilityModified.Invoke(durability);
-                if(durability == 0)
+                if(durability < 0)
                 {
                     OnParamDead.Invoke();
                 }
@@ -42,7 +42,7 @@ namespace GameLogic.GameSystem
             set
             {
                 electricity = value; onElectricityModified.Invoke(electricity);
-                if(electricity == 0) { OnParamDead.Invoke(); }
+                if(electricity < 0) { OnParamDead.Invoke(); }
             }
         }
 

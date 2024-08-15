@@ -11,6 +11,7 @@ namespace Sync
     {
         mcplt,
         score,
+        decaylevelup,
     }
 
     public enum PlayerPropertyKey
@@ -54,6 +55,18 @@ namespace Sync
             propsToSet[RoomPropertyKey.score.ToString()] = currentScore;
             room.SetCustomProperties(propsToSet);
             propsToSet.Clear();
+        }
+
+        public static void SetDecayLevelUp(this Room room, bool yes)
+        {
+            propsToSet[RoomPropertyKey.decaylevelup.ToString()] = yes;
+            room.SetCustomProperties(propsToSet);
+            propsToSet.Clear();
+        }
+
+        public static bool GetDecayLevelUp(this Room room)
+        {
+            return (room.CustomProperties[RoomPropertyKey.decaylevelup.ToString()] is bool decaylevelup) && decaylevelup;
         }
     }
 
