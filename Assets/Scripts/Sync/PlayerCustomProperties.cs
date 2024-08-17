@@ -57,16 +57,16 @@ namespace Sync
             propsToSet.Clear();
         }
 
-        public static void SetDecayLevelUp(this Room room, bool yes)
+        public static void SetDecayLevelUp(this Room room, int val)
         {
-            propsToSet[RoomPropertyKey.decaylevelup.ToString()] = yes;
+            propsToSet[RoomPropertyKey.decaylevelup.ToString()] = val;
             room.SetCustomProperties(propsToSet);
             propsToSet.Clear();
         }
 
-        public static bool GetDecayLevelUp(this Room room)
+        public static int GetDecayLevelUp(this Room room)
         {
-            return (room.CustomProperties[RoomPropertyKey.decaylevelup.ToString()] is bool decaylevelup) && decaylevelup;
+            return (room.CustomProperties[RoomPropertyKey.decaylevelup.ToString()] is int decaylevelup) ? decaylevelup : 0 ;
         }
     }
 

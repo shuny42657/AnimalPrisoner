@@ -2206,7 +2206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveCreator:
-    obj: {fileID: 765777348}
+    obj: {fileID: 1082221214}
   OnNewObjectiveGenerated:
     m_PersistentCalls:
       m_Calls:
@@ -2789,6 +2789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveItems: 070000000a000000
+  upgradables: []
 --- !u!1 &769515166
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,9 +3608,56 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1082221215}
   - {fileID: 2067434486}
   m_Father: {fileID: 1134713218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1082221214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1082221215}
+  - component: {fileID: 1082221216}
+  m_Layer: 0
+  m_Name: LeveledObjectiveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1082221215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082221214}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1063684900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1082221216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082221214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1556a633a024d67a97c6b9119b7add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveItems: 070000000a0000000d000000100000001300000016000000090000000c0000000f000000120000001500000018000000080000000b0000000e000000110000001400000017000000
+  upgradables: []
 --- !u!1 &1105988057
 GameObject:
   m_ObjectHideFlags: 0
@@ -7135,6 +7183,21 @@ MonoBehaviour:
   - {x: 2, y: 0, z: 2}
   - {x: 3, y: 0, z: 2}
   - {x: -4, y: 0, z: 1}
+  onWorkSpaceGenerated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1082221216}
+        m_TargetAssemblyTypeName: GameLogic.GameSystem.ObjectiveCreator, GameLogic
+        m_MethodName: AddUpGradable
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1982464142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7663,6 +7726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c823c94ea88425390eb990661209ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
 --- !u!1 &2067434485
 GameObject:
   m_ObjectHideFlags: 0
@@ -7674,6 +7738,7 @@ GameObject:
   - component: {fileID: 2067434486}
   - component: {fileID: 2067434487}
   - component: {fileID: 2067434488}
+  - component: {fileID: 2067434489}
   m_Layer: 0
   m_Name: RoomParameterLevelDesign
   m_TagString: Untagged
@@ -7740,7 +7805,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067434485}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0bf744962fd54239af2ae01d3bb5e84, type: 3}
   m_Name: 
@@ -7763,6 +7828,38 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onModifiedWithMasterCleient:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2067434489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067434485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841baec50121d4ab994b4af0791ec83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: 2
+  onModified:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2067434487}
+        m_TargetAssemblyTypeName: GameLogic.GameSystem.RoomParameterLevelDesigner,
+          GameLogic
+        m_MethodName: UpGrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onModifiedWithMasterClieent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &2084346093
@@ -7942,18 +8039,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData:
+  - {fileID: 11400000, guid: c1d23ee431e584e2cb19df6e8a8c21e9, type: 2}
+  - {fileID: 11400000, guid: 8a7fd0510969c447bb381054ce616973, type: 2}
   - {fileID: 11400000, guid: e297118f708ad47f584a32a9146afcf4, type: 2}
   - {fileID: 11400000, guid: 6e3a329c11ba14c79958fd592f15e129, type: 2}
   - {fileID: 11400000, guid: a1464903a0e5a4ba2895d072b08b414c, type: 2}
-  - {fileID: 11400000, guid: c1d23ee431e584e2cb19df6e8a8c21e9, type: 2}
-  - {fileID: 11400000, guid: 83aba308e880d4c4da3fe9b7424cb33d, type: 2}
-  - {fileID: 11400000, guid: 348a94032012a49e3aa7208078d01269, type: 2}
+  - {fileID: 11400000, guid: e9e765d28868641e4994c83b4941f5fb, type: 2}
   - {fileID: 11400000, guid: 58d77220f85dd4186bf45820cd679625, type: 2}
   - {fileID: 11400000, guid: 4f1e0cc57402745cb81b2df59448d616, type: 2}
-  - {fileID: 11400000, guid: 63d7f1fad62264359a04741c9e3a7669, type: 2}
   - {fileID: 11400000, guid: bde21bf757f224d798fe21e17b499c3e, type: 2}
-  - {fileID: 11400000, guid: e9e765d28868641e4994c83b4941f5fb, type: 2}
-  - {fileID: 11400000, guid: 8a7fd0510969c447bb381054ce616973, type: 2}
+  - {fileID: 11400000, guid: 83aba308e880d4c4da3fe9b7424cb33d, type: 2}
+  - {fileID: 11400000, guid: 348a94032012a49e3aa7208078d01269, type: 2}
+  - {fileID: 11400000, guid: 63d7f1fad62264359a04741c9e3a7669, type: 2}
+  - {fileID: 11400000, guid: da0bc4fe90676433a8ee0d85ae17be9b, type: 2}
+  - {fileID: 11400000, guid: 04b8491eee25148388e8f287be5711af, type: 2}
+  - {fileID: 11400000, guid: 1f824fb749b9049d8a03ea8a9b8a462e, type: 2}
+  - {fileID: 11400000, guid: 61bede6d47be34d3891960c802278a87, type: 2}
+  - {fileID: 11400000, guid: 631a48fe9cecf4a9d8437f4596684745, type: 2}
+  - {fileID: 11400000, guid: cc79ebc28f9994eeb826a6d8f835f45f, type: 2}
+  - {fileID: 11400000, guid: 8105a52ded900489ab901f99e23e95e4, type: 2}
+  - {fileID: 11400000, guid: b320c5a935ee1405bba6c4a29edcc4e8, type: 2}
+  - {fileID: 11400000, guid: 8cb630eba1f5749ba952db81e3bbcc86, type: 2}
+  - {fileID: 11400000, guid: dc7de68572e5c4d7bbb1a125d31941d0, type: 2}
+  - {fileID: 11400000, guid: 12d71b7d05c964dfc84bb4c337ec67b0, type: 2}
+  - {fileID: 11400000, guid: e110759286a9b4eed80a22e74df28a5e, type: 2}
 --- !u!114 &322368399707991574
 MonoBehaviour:
   m_ObjectHideFlags: 0

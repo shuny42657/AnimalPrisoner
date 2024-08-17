@@ -317,7 +317,7 @@ MonoBehaviour:
   jobStatus:
     obj: {fileID: 2545810842804910917}
   characterMove:
-    obj: {fileID: 0}
+    obj: {fileID: 827715138803065033}
 --- !u!114 &7379836151642222022
 MonoBehaviour:
   m_ObjectHideFlags: 0

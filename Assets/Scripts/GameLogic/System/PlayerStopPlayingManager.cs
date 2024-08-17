@@ -7,7 +7,7 @@ namespace GameLogic.GameSystem
 {
     public class PlayerStopPlayingManager : MonoBehaviour
     {
-        PlayerManager playerManager; public void SetPlayerManager(PlayerManager playerManager) { this.playerManager = playerManager; }
+        [SerializeField]PlayerManager playerManager; public void SetPlayerManager(PlayerManager playerManager) { this.playerManager = playerManager; }
 
         public void StopPlaying()
         {

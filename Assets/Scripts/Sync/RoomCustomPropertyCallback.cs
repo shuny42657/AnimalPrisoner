@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace Sync
 {
-    public class RoomCustomPropertyCallback : MonoBehaviourPunCallbacks
+    public class RoomPredicatePropertyCallback : MonoBehaviourPunCallbacks
     {
         [SerializeField] RoomPropertyKey key;
         public UnityEvent onModified = new();

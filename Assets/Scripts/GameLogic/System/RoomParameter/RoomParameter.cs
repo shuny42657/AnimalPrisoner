@@ -19,7 +19,7 @@ namespace GameLogic.GameSystem
             set
             {
                 fuel = value; onFuelModiied.Invoke(fuel);
-                if(fuel < 0) { OnParamDead.Invoke(); }
+                if(fuel < 0 && !dead) { OnParamDead.Invoke(); dead = true; }
             }
         }
 
@@ -29,9 +29,10 @@ namespace GameLogic.GameSystem
             set
             {
                 durability = value; onDurabilityModified.Invoke(durability);
-                if(durability < 0)
+                if(durability < 0 && !dead)
                 {
                     OnParamDead.Invoke();
+                    dead = true;
                 }
             }
         }
@@ -42,7 +43,7 @@ namespace GameLogic.GameSystem
             set
             {
                 electricity = value; onElectricityModified.Invoke(electricity);
-                if(electricity < 0) { OnParamDead.Invoke(); }
+                if(electricity < 0 && !dead) { OnParamDead.Invoke(); dead = true; }
             }
         }
 
@@ -56,6 +57,7 @@ namespace GameLogic.GameSystem
 
         [SerializeField] bool working; public bool Working { get { return working; } set { working = value; } }
 
+        bool dead;
         [SerializeField] UnityEvent OnParamDead;
         private void Awake()
         {
@@ -68,9 +70,9 @@ namespace GameLogic.GameSystem
             if (working)
             {
                 //Debug.Log($"working {fuel}");
-                fuel -= FuelComsumeSpeed * Time.deltaTime;
-                durability -= DuranilityCosumeSpeed * Time.deltaTime;
-                electricity -= ElectricityConsumeSpeed * Time.deltaTime;
+                Fuel -= FuelComsumeSpeed * Time.deltaTime;
+                Durability -= DuranilityCosumeSpeed * Time.deltaTime;
+                Electricity -= ElectricityConsumeSpeed * Time.deltaTime;
                 onFuelModiied.Invoke(fuel / maxFuel);
                 onDurabilityModified.Invoke(durability / maxDurability);
                 onElectricityModified.Invoke(electricity / maxElecticity);

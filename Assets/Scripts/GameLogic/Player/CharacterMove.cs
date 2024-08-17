@@ -15,11 +15,17 @@ public class CharacterMove : MonoBehaviour, IMovable
 
     public void MoveHorizontal(float speed)
     {
-        transform.Translate(Time.deltaTime * this.speed * speed, 0f, 0f);
+        if (CanMove)
+        {
+            transform.Translate(Time.deltaTime * this.speed * speed, 0f, 0f);
+        }
     }
 
     public void MoveVertical(float speed)
     {
-        transform.Translate(0f, 0f, Time.deltaTime * this.speed * speed);
+        if (CanMove)
+        {
+            transform.Translate(0f, 0f, Time.deltaTime * this.speed * speed);
+        }
     }
 }

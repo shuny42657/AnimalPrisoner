@@ -15,8 +15,8 @@ namespace GameLogic.GameSystem
 
     public class ObjectiveCreator : MonoBehaviour, IObjectiveCreator
     {
-        [SerializeField] List<ItemName> objectiveItems;
-        List<BaseWorkSpace> upgradables = new();
+        [SerializeField] protected List<ItemName> objectiveItems;
+        [SerializeField] protected List<BaseWorkSpace> upgradables = new();
 
         IDitribution<int> distribution = new FrozenDistribution();
 
@@ -25,7 +25,7 @@ namespace GameLogic.GameSystem
             upgradables.Add(upgradable);
         }
 
-        public ObjectiveData CreateObjective()
+        public virtual ObjectiveData CreateObjective()
         {
             //upgradable
             System.Random random = new();

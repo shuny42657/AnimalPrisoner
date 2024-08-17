@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Sync;
+using GameLogic.WorkSpace;
 
 namespace GameLogic.GameSystem
 {
-    public class RoomParameterLevelDesigner : MonoBehaviourPunCallbacks,ISwitchable
+    public class RoomParameterLevelDesigner : MonoBehaviourPunCallbacks,ISwitchable,IUpGradable
     {
         [SerializeField] List<float> fuelDecaySpeeds;
         [SerializeField] List<float> durabilityDecaySpeeds;
@@ -14,7 +15,7 @@ namespace GameLogic.GameSystem
         [SerializeField] RoomParameter roomParam;
 
         [SerializeField] List<float> phaseDuration;
-        int level = 0;
+        int level = 0; public int Level { get { return level; } }
         float currentTime;
         [SerializeField] bool isActive;
         public bool IsActive { get { return isActive; } set { isActive = value; } }
@@ -29,14 +30,22 @@ namespace GameLogic.GameSystem
                 {
                     currentTime = 0;
                     level++;
-                    PhotonNetwork.CurrentRoom.SetDecayLevelUp(true);
+                    PhotonNetwork.CurrentRoom.SetDecayLevelUp(level);
                 }
             }
         }
 
+        public void UpGrade()
+        {
+            level = PhotonNetwork.CurrentRoom.GetDecayLevelUp();
+            roomParam.FuelComsumeSpeed = fuelDecaySpeeds[level];
+            roomParam.DuranilityCosumeSpeed = durabilityDecaySpeeds[level];
+            roomParam.ElectricityConsumeSpeed = electricityDecaySpeeds[level];
+        }
+
         public void SetDecayLevelAtStart()
         {
-            PhotonNetwork.CurrentRoom.SetDecayLevelUp(true);
+            PhotonNetwork.CurrentRoom.SetDecayLevelUp(level);
         }
 
         public void IncrementDecayLevel()
@@ -45,10 +54,7 @@ namespace GameLogic.GameSystem
             roomParam.FuelComsumeSpeed = fuelDecaySpeeds[level];
             roomParam.DuranilityCosumeSpeed = durabilityDecaySpeeds[level];
             roomParam.ElectricityConsumeSpeed = electricityDecaySpeeds[level];
-            if (PhotonNetwork.IsMasterClient)
-            {
-                PhotonNetwork.CurrentRoom.SetDecayLevelUp(false);
-            }
+            
         }
     }
 }
