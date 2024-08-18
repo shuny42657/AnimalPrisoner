@@ -32,4 +32,17 @@ public class MatchingCallback : MonoBehaviourPunCallbacks
             }
         }
     }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                Debug.Log("Moving on to match");
+                PhotonNetwork.LoadLevel("GameStarter");
+            }
+        }
+    }
 }

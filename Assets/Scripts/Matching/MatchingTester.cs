@@ -5,25 +5,18 @@ using UnityEngine.UI;
 using Photon.Realtime;
 using Photon.Pun;
 
-public class MatchingTester : MonoBehaviour
+namespace Matching
 {
-    [SerializeField] Button matchingButton;
-    [SerializeField] string roomName = "Room";
-    [SerializeField] int playerCount = 2;
-    private void Awake()
+    public class MatchingTester : MonoBehaviour
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.ConnectUsingSettings();
-    }
-    void Start()
-    {
-        matchingButton.onClick.AddListener(() => OnMatchingButtonClick(roomName));
-    }
-
-    public void OnMatchingButtonClick(string roomName)
-    {
-        var roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = playerCount;
-        PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
+        [SerializeField] Button startButton;
+        [SerializeField] MatchingStarter matchingStarter;
+        private void Awake()
+        {
+        }
+        void Start()
+        {
+            startButton.onClick.AddListener(matchingStarter.OnStartButtonClick);
+        }
     }
 }
