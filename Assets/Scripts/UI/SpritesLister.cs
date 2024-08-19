@@ -6,28 +6,19 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class JobShower : MonoBehaviour
+    //Set a series of sprites to images with a single call of a method.
+    public class SpritesLister : MonoBehaviour
     {
         [SerializeField] SerializeInterface<IShowHide> showHide;
         [SerializeField] SerializeInterface<IAnimationPlayer> animationPlayer;
         [SerializeField] Image[] images;
 
-        public void ShowJob(List<Sprite> sprites)
+        public void SetSprites(List<Sprite> sprites)
         {
-            showHide.Value.Show(true);
             for(int i = 0;i < images.Length; i++)
             {
                 images[i].sprite = sprites[i];
             }
-
-            StartCoroutine(ShowJobProcess());
-        }
-
-        IEnumerator ShowJobProcess()
-        {
-            animationPlayer.Value.PlayAnimation();
-            yield return new WaitForSeconds(5f);
-            showHide.Value.Show(false);
         }
     }
 }

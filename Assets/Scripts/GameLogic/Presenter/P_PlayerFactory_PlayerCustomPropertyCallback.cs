@@ -10,13 +10,13 @@ public class P_PlayerFactory_MatchingManager : MonoBehaviour
 {
     [SerializeField] PlayerCustomPropertyCallback callBack;
     [SerializeField] MapBuilder mapBuilder;
-    [SerializeField] JobDataExtractor jobDataExtractor;
+    [SerializeField] JobDisplay jobDisplay;
 
     public void SetJobToCallBack(GameObject player)
     {
         var jobStatus = player.GetComponent<JobStatus>();
         callBack.onComplete.AddListener(() => jobStatus.SetJobs());
         jobStatus.OnJobSet.AddListener((i_jobStatus) => mapBuilder.BuildWorkSpaces(i_jobStatus));
-        jobStatus.OnJobSet.AddListener((i_jobStatus) => jobDataExtractor.ExtractJobSprites(i_jobStatus));
+        jobStatus.OnJobSet.AddListener((i_jobStatus) => jobDisplay.DisplayJob(i_jobStatus));
     }
 }
