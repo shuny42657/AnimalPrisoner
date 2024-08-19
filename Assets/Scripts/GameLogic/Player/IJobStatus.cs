@@ -14,6 +14,10 @@ namespace GameLogic
         RiceMaker = 5,
         StoneWoodCrafter = 6,
         StoneIronCrafter = 7,
+        StoneOilCrafter = 8,
+        WoodIronCrafter = 9,
+        WoodOilCrafter = 10,
+        OilIronCrafter = 11,
     }
 }
 

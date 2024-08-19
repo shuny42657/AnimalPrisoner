@@ -40,5 +40,37 @@ namespace GameLogic.GameSystem
             Debug.Log("Job Set");
         }
     }
+
+    public class MainJobAllocator : IJobAllocator
+    {
+        public void AllocateJob()
+        {
+            var players = PhotonNetwork.CurrentRoom.Players;
+            var jobCount = System.Enum.GetValues(typeof(JobName)).Length;
+            List<JobName> jobNamePool = new();
+            for(int i = 0;i < 12; i++)
+            {
+                jobNamePool.Add((JobName)i);
+            }
+
+            foreach(var p in players.Values)
+            {
+                List<int> jobs = new();
+                while(jobs.Count < 4)
+                {
+                    var newJobIndex = Random.Range(0, jobNamePool.Count);
+                    var newJob = jobNamePool[newJobIndex];
+                    jobs.Add((int)newJob);
+                    p.SetJob(jobs.Count - 1, (int)newJob);
+                    jobNamePool.RemoveAt(newJobIndex);
+                }
+            }
+            foreach(var p in players.Values)
+            {
+                p.SetJobDetermined(true);
+            }
+            Debug.Log("Job Set");
+        }
+    }
 }
 

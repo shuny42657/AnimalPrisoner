@@ -323,6 +323,51 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &41962200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 41962201}
+  - component: {fileID: 41962202}
+  m_Layer: 0
+  m_Name: Stone_OilCrafterFact
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &41962201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41962200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649048715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &41962202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41962200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab28a585e77e4a5599b59c2c87c2818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workSpace: {fileID: 4813019257735162968, guid: 687324dbed1ce4943b640842b241db86, type: 3}
 --- !u!1 &53553360
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,6 +745,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gauge: {fileID: 1434457067}
+--- !u!1 &172603541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172603542}
+  - component: {fileID: 172603543}
+  m_Layer: 0
+  m_Name: Iron_OilCrafterFact
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &172603542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172603541}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649048715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &172603543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172603541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab28a585e77e4a5599b59c2c87c2818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workSpace: {fileID: 4813019257735162968, guid: 0cb87b7c885fa44d29c9b6e50933a970, type: 3}
 --- !u!1 &185242646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2727,6 +2817,10 @@ MonoBehaviour:
   riceMakerFactory: {fileID: 80667141}
   stoneWoodCrafter: {fileID: 1662446792}
   stoneIronCrafter: {fileID: 1943784988}
+  stonOilCrafter: {fileID: 41962202}
+  woodIronCrafter: {fileID: 1233703102}
+  woodOilCrafter: {fileID: 813048312}
+  ironOilCrafter: {fileID: 172603543}
 --- !u!4 &649048715
 Transform:
   m_ObjectHideFlags: 0
@@ -2746,8 +2840,12 @@ Transform:
   - {fileID: 53553361}
   - {fileID: 1596859370}
   - {fileID: 80667140}
-  - {fileID: 1943784987}
   - {fileID: 1662446791}
+  - {fileID: 1943784987}
+  - {fileID: 41962201}
+  - {fileID: 1233703101}
+  - {fileID: 813048311}
+  - {fileID: 172603542}
   m_Father: {fileID: 114904147}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &671425154
@@ -3164,6 +3262,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7066094556741073656, guid: 098033a38acfd4a339866a0e95b6b8f8, type: 3}
   m_PrefabInstance: {fileID: 804863738}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &813048310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 813048311}
+  - component: {fileID: 813048312}
+  m_Layer: 0
+  m_Name: Wood_OilCrafterFact
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &813048311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813048310}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649048715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &813048312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813048310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab28a585e77e4a5599b59c2c87c2818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workSpace: {fileID: 4813019257735162968, guid: 9576de419a346465d92ab20e2ddeb476, type: 3}
 --- !u!1001 &924463128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4600,6 +4743,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7066094556741073656, guid: 098033a38acfd4a339866a0e95b6b8f8, type: 3}
   m_PrefabInstance: {fileID: 1205135802}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1233703100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1233703101}
+  - component: {fileID: 1233703102}
+  m_Layer: 0
+  m_Name: Wood_IronCrafterFact
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1233703101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233703100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649048715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1233703102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233703100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab28a585e77e4a5599b59c2c87c2818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workSpace: {fileID: 4813019257735162968, guid: dd94f98d4fa14486baed8cadd6c548cc, type: 3}
 --- !u!1001 &1251060583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8426,6 +8614,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a45b77e4438ac458ebc21aab970778ee, type: 2}
   - {fileID: 11400000, guid: 7d99d0a1ba5b24c41935c1d52459ac98, type: 2}
   - {fileID: 11400000, guid: f92a2985c92ad4a53ba6dff6248e6277, type: 2}
+  - {fileID: 11400000, guid: 274f92ea5e90345b7a551716ba3014ff, type: 2}
+  - {fileID: 11400000, guid: cc764242c53cc425583c7e9ce4e40431, type: 2}
+  - {fileID: 11400000, guid: 2d0c4c19465c24bb8984f88d9372d7d2, type: 2}
+  - {fileID: 11400000, guid: 3d86b014d994447b89b207860ccd679c, type: 2}
 --- !u!4 &2118669106
 Transform:
   m_ObjectHideFlags: 0

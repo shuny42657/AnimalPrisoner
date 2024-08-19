@@ -15,6 +15,10 @@ namespace GameLogic.Factory
         [SerializeField] WorkSpaceFactory riceMakerFactory;
         [SerializeField] WorkSpaceFactory stoneWoodCrafter;
         [SerializeField] WorkSpaceFactory stoneIronCrafter;
+        [SerializeField] WorkSpaceFactory stonOilCrafter;
+        [SerializeField] WorkSpaceFactory woodIronCrafter;
+        [SerializeField] WorkSpaceFactory woodOilCrafter;
+        [SerializeField] WorkSpaceFactory ironOilCrafter;
 
         public GameObject Generate(JobName name, Vector3 position)
         {
@@ -36,6 +40,14 @@ namespace GameLogic.Factory
                     return stoneIronCrafter.GenerateItem(position);
                 case JobName.StoneWoodCrafter:
                     return stoneWoodCrafter.GenerateItem(position);
+                case JobName.StoneOilCrafter:
+                    return stonOilCrafter.GenerateItem(position);
+                case JobName.WoodIronCrafter:
+                    return woodIronCrafter.GenerateItem(position);
+                case JobName.WoodOilCrafter:
+                    return woodOilCrafter.GenerateItem(position);
+                case JobName.OilIronCrafter:
+                    return ironOilCrafter.GenerateItem(position);
                 default:
                     return null;
             }
