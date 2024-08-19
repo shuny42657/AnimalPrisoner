@@ -42,11 +42,11 @@ namespace GameLogic.GameSystem
                         {
                             if(i < 6) { weights.Add(1); }
                             else if(i < 12) { weights.Add(2); }
-                            else if(i < 18) { weights.Add(3); }
+                            else { weights.Add(3); }
                         }
                         return weights;
                     default:
-                        return null;
+                        return weights;
                 }
             }
         }
