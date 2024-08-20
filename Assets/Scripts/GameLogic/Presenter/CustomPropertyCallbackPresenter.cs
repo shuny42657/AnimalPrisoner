@@ -7,7 +7,7 @@ using GameLogic.GameSystem;
 public class CustomPropertyCallbackPresenter : MonoBehaviour
 {
     [SerializeField] RoomPredicatePropertyCallback callBack;
-    IJobAllocator jobAllocator = new SimpleJobAllocator();
+    IJobAllocator jobAllocator = new MainJobAllocator();
     // Start is called before the first frame update
     void Start()
     {
