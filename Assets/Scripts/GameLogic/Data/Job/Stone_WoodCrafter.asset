@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Stone_WoodCrafter
   m_EditorClassIdentifier: 
   jobName: 6
-  sourceImage: {fileID: 21300000, guid: c5bdd7e2bd9fb4c628e1e0d5bdd26d84, type: 3}
+  sourceImage: {fileID: 21300000, guid: d82db2aeeb1a9446ead19cc76feaa1ef, type: 3}

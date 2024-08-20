@@ -10,10 +10,10 @@ public class ObjetiveTest : MonoBehaviour
     [SerializeField] ObjectiveCreator objCreator;
     private void Awake()
     {
-        foreach(var u in upgradables)
+        /*foreach(var u in upgradables)
         {
             objCreator.AddUpGradable(u);
-        }
+        }*/
     }
     // Start is called before the first frame update
     void Start()

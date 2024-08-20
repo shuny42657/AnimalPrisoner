@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Wood_IronCrafter
   m_EditorClassIdentifier: 
   jobName: 9
-  sourceImage: {fileID: 21300000, guid: c5bdd7e2bd9fb4c628e1e0d5bdd26d84, type: 3}
+  sourceImage: {fileID: 21300000, guid: daeb8cc4384244eeda785d84028915b2, type: 3}

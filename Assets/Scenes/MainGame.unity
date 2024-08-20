@@ -2597,6 +2597,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 612493964}
+        m_TargetAssemblyTypeName: GameLogic.GameSystem.ObjectiveManager, GameLogic
+        m_MethodName: AddNewObjective
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &612493965
 Transform:
   m_ObjectHideFlags: 0
@@ -2606,7 +2618,7 @@ Transform:
   m_GameObject: {fileID: 612493961}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -787.3285, y: -684.25494, z: -3.0976741}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3164,7 +3176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6bb13348a5754ac787b20a125ea5a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveItems: 070000000a000000
+  objectiveItems: 07000000
   upgradables: []
 --- !u!1 &769515166
 GameObject:
@@ -7653,6 +7665,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1082221216}
+        m_TargetAssemblyTypeName: GameLogic.GameSystem.ObjectiveCreator, GameLogic
+        m_MethodName: AddUpGradable
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 765777350}
         m_TargetAssemblyTypeName: GameLogic.GameSystem.ObjectiveCreator, GameLogic
         m_MethodName: AddUpGradable
         m_Mode: 0

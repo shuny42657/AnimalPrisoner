@@ -8,7 +8,7 @@ namespace GameLogic.GameSystem
 {
     public class LeveledObjectiveCreator : ObjectiveCreator,IUpGradable
     {
-        List<int> weights = new() { 1,1,1,1,1,1};
+        List<int> weights = new() { 1,1,1,1,1,1 };
 
         int prev_level = 1;
         int level = 1;

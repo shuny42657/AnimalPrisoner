@@ -16,6 +16,7 @@ namespace GameLogic.GameSystem
 
         public void AddNewObjective()
         {
+            Debug.Log("objective added");
             if(objectives.Count < 2)
             {
                 var newObjective = objectiveCreator.Value.CreateObjective();
@@ -30,13 +31,14 @@ namespace GameLogic.GameSystem
             {
                 if(o.CraftItem == receivedItem)
                 {
-                    OnObjectiveAchieved.Invoke(o);
                     o.UpGradable.UpGrade();
                     objectives.Remove(o);
+                    OnObjectiveAchieved.Invoke(o);
                     return true;
                 }
             }
             return false;
+
         }
     }
 }
