@@ -29,4 +29,10 @@ public enum ItemName
     Iron1Oil1,
     Iron1Oil2,
     Iron2Oil1,
+    Stone2Wood2,
+    Stone2Iron2,
+    Stone2Oil2,
+    Wood2Iron2,
+    Wood2Oil2,
+    Iron2Oil2,
 }

@@ -15,6 +15,29 @@ namespace GameLogic.Factory
         [SerializeField] ItemFactory riceItemFactory;
         [SerializeField] ItemFactory stone1Wood1Factory;
         [SerializeField] ItemFactory stone1Iron1Factory;
+        [SerializeField] ItemFactory stone1Oil1Factory;
+        [SerializeField] ItemFactory wood1Iron1Factory;
+        [SerializeField] ItemFactory wood1Oil1Factory;
+        [SerializeField] ItemFactory iron1Oil1Factory;
+        [SerializeField] ItemFactory stone1Wood2Factory;
+        [SerializeField] ItemFactory stone1Iron2Factory;
+        [SerializeField] ItemFactory stone1Oil2Factory;
+        [SerializeField] ItemFactory wood1Iron2Factory;
+        [SerializeField] ItemFactory wood1Oil2Factory;
+        [SerializeField] ItemFactory iron1Oil2Factory;
+        [SerializeField] ItemFactory stone2Wood1Factory;
+        [SerializeField] ItemFactory stone2Iron1Factory;
+        [SerializeField] ItemFactory stone2Oil1Factory;
+        [SerializeField] ItemFactory wood2Iron1Factory;
+        [SerializeField] ItemFactory wood2Oil1Factory;
+        [SerializeField] ItemFactory iron2Oil1Factory;
+        [SerializeField] ItemFactory stone2Wood2Factory;
+        [SerializeField] ItemFactory stone2Iron2Factory;
+        [SerializeField] ItemFactory stone2Oil2Factory;
+        [SerializeField] ItemFactory wood2Iron2Factory;
+        [SerializeField] ItemFactory wood2Oil2Factory;
+        [SerializeField] ItemFactory iron2Oil2Factory;
+
 
         public GameObject Generate(ItemName name, Vector3 position)
         {
@@ -45,6 +68,72 @@ namespace GameLogic.Factory
                 case ItemName.Stone1Iron1:
                     grabbable = stone1Iron1Factory.GenerateItem(position);
                     break;
+                case ItemName.Stone1Oil1:
+                    grabbable = stone1Oil1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Wood1Iron1:
+                    grabbable = wood1Iron1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Wood1Oil1:
+                    grabbable = wood1Oil1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Iron1Oil1:
+                    grabbable = iron1Oil1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone1Wood2:
+                    grabbable = stone1Wood2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone2Wood1:
+                    grabbable = stone2Wood1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone2Wood2:
+                    grabbable = stone2Wood2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone1Iron2:
+                    grabbable = stone1Wood2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone2Iron1:
+                    grabbable = stone2Iron1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone2Iron2:
+                    grabbable = stone2Iron2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone1Oil2:
+                    grabbable = stone1Oil2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone2Oil1:
+                    grabbable = stone2Oil1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Stone2Oil2:
+                    grabbable = stone2Oil2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Wood1Iron2:
+                    grabbable = wood1Iron2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Wood2Iron1:
+                    grabbable = wood2Iron1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Wood2Iron2:
+                    grabbable = wood2Iron2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Wood1Oil2:
+                    grabbable = wood1Oil2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Wood2Oil1:
+                    grabbable = wood2Oil1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Wood2Oil2:
+                    grabbable = wood2Oil2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Iron1Oil2:
+                    grabbable = iron1Oil2Factory.GenerateItem(position);
+                    break;
+                case ItemName.Iron2Oil1:
+                    grabbable = iron2Oil1Factory.GenerateItem(position);
+                    break;
+                case ItemName.Iron2Oil2:
+                    grabbable = iron2Oil2Factory.GenerateItem(position);
+                    break;
                 default:
                     break;
             }
@@ -71,6 +160,72 @@ namespace GameLogic.Factory
                     return stone1Wood1Factory.GenerateItem(transform);
                 case ItemName.Stone1Iron1:
                     return stone1Iron1Factory.GenerateItem(transform);
+                case ItemName.Stone1Oil1:
+                    return stone1Oil1Factory.GenerateItem(transform);
+                
+                case ItemName.Wood1Iron1:
+                    return wood1Iron1Factory.GenerateItem(transform);
+                    
+                case ItemName.Wood1Oil1:
+                    return  wood1Oil1Factory.GenerateItem(transform);
+                    
+                case ItemName.Iron1Oil1:
+                    return iron1Oil1Factory.GenerateItem(transform);
+                    
+                case ItemName.Stone1Wood2:
+                    return stone1Wood2Factory.GenerateItem(transform);
+                    
+                case ItemName.Stone2Wood1:
+                    return stone2Wood1Factory.GenerateItem(transform);
+                    
+                case ItemName.Stone2Wood2:
+                    return stone2Wood2Factory.GenerateItem(transform);
+                    
+                case ItemName.Stone1Iron2:
+                    return  stone1Wood2Factory.GenerateItem(transform);
+                    
+                case ItemName.Stone2Iron1:
+                    return stone2Iron1Factory.GenerateItem(transform);
+                    
+                case ItemName.Stone2Iron2:
+                    return stone2Iron2Factory.GenerateItem(transform);
+                    
+                case ItemName.Stone1Oil2:
+                    return stone1Oil2Factory.GenerateItem(transform);
+                    
+                case ItemName.Stone2Oil1:
+                    return stone2Oil1Factory.GenerateItem(transform);
+                    
+                case ItemName.Stone2Oil2:
+                    return  stone2Oil2Factory.GenerateItem(transform);
+                    
+                case ItemName.Wood1Iron2:
+                    return wood1Iron2Factory.GenerateItem(transform);
+                    
+                case ItemName.Wood2Iron1:
+                    return  wood2Iron1Factory.GenerateItem(transform);
+                    
+                case ItemName.Wood2Iron2:
+                    return wood2Iron2Factory.GenerateItem(transform);
+                    
+                case ItemName.Wood1Oil2:
+                    return wood1Oil2Factory.GenerateItem(transform);
+                    
+                case ItemName.Wood2Oil1:
+                    return wood2Oil1Factory.GenerateItem(transform);
+                    
+                case ItemName.Wood2Oil2:
+                    return wood2Oil2Factory.GenerateItem(transform);
+                    
+                case ItemName.Iron1Oil2:
+                    return iron1Oil2Factory.GenerateItem(transform);
+                    
+                case ItemName.Iron2Oil1:
+                    return iron2Oil1Factory.GenerateItem(transform);
+                    
+                case ItemName.Iron2Oil2:
+                    return iron2Oil2Factory.GenerateItem(transform);
+                    
                 default:
                     return null;
             }
