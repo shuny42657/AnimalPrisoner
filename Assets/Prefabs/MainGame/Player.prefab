@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05811a704350f4c319a2620ccb8fa198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
 --- !u!114 &8430098422412460143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +316,8 @@ MonoBehaviour:
     obj: {fileID: 1281054151876981277}
   jobStatus:
     obj: {fileID: 2545810842804910917}
+  characterMove:
+    obj: {fileID: 827715138803065033}
 --- !u!114 &7379836151642222022
 MonoBehaviour:
   m_ObjectHideFlags: 0

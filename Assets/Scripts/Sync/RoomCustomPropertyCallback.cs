@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace Sync
 {
-    public class RoomCustomPropertyCallback : MonoBehaviourPunCallbacks
+    public class RoomPredicatePropertyCallback : MonoBehaviourPunCallbacks
     {
         [SerializeField] RoomPropertyKey key;
         public UnityEvent onModified = new();
@@ -17,11 +17,15 @@ namespace Sync
         {
             if (propertiesThatChanged.ContainsKey(key.ToString()))
             {
-                onModified.Invoke();
-                if (PhotonNetwork.IsMasterClient)
+                var yes = (bool)(PhotonNetwork.CurrentRoom.CustomProperties[key.ToString()]);
+                if (yes)
                 {
-                    //Debug.Log("Matching Complete");
-                    onModifiedWithMasterCleient.Invoke();
+                    onModified.Invoke();
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        //Debug.Log("Matching Complete");
+                        onModifiedWithMasterCleient.Invoke();
+                    }
                 }
             }
         }

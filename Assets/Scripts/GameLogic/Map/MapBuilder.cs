@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using GameLogic.GamePlayer;
 using UnityEngine;
 using GameLogic.Factory;
+using GameLogic.WorkSpace;
+using UnityEngine.Events;
+
 
 namespace GameLogic.Map
 {
@@ -11,8 +14,10 @@ namespace GameLogic.Map
         [SerializeField] MotherWorkSpaceFactory motherWorkSpaceFactory;
         [SerializeField] List<Vector3> positionCandidates;
         HashSet<int> occupiedPositions = new();
-        public void BuildWorkSpaces(IJobStatus jobStatus)
+        [SerializeField]UnityEvent<BaseWorkSpace> onWorkSpaceGenerated;
+        public List<BaseWorkSpace> BuildWorkSpaces(IJobStatus jobStatus)
         {
+            List<BaseWorkSpace> workSpaces = new();
             Debug.Log($"Job Count{jobStatus.GetAllJobs().Count}");
             foreach(var j in jobStatus.GetAllJobs())
             {
@@ -22,7 +27,9 @@ namespace GameLogic.Map
                     var rand = Random.Range(0, positionCandidates.Count);
                     if (!occupiedPositions.Contains(rand))
                     {
-                        motherWorkSpaceFactory.Generate(j, positionCandidates[rand]);
+                        var workSpace = motherWorkSpaceFactory.Generate(j, positionCandidates[rand]);
+                        onWorkSpaceGenerated.Invoke(workSpace.GetComponent<BaseWorkSpace>());
+                        workSpaces.Add(workSpace.GetComponent<BaseWorkSpace>());
                         occupiedPositions.Add(rand);
                         break;
                     }
@@ -32,6 +39,7 @@ namespace GameLogic.Map
                     }
                 }
             }
+            return workSpaces;
         }
     }
 }

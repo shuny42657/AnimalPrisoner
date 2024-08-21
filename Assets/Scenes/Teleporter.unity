@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab28a585e77e4a5599b59c2c87c2818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  workSpace: {fileID: 5697736621422588242, guid: 7cb4de47d9f6e4f26bcc4fde02fa1c7c, type: 3}
+  workSpace: {fileID: 5697736621422588242, guid: c025d3b3cd65d430eb832cb9f24af781, type: 3}
 --- !u!1001 &66417721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab28a585e77e4a5599b59c2c87c2818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  workSpace: {fileID: 5697736621422588242, guid: 9f03e7f9ce20b4daba1b209e23ae4799, type: 3}
+  workSpace: {fileID: 5697736621422588242, guid: f0b01d864995b4d6699b4bcce1af5e2e, type: 3}
 --- !u!1001 &82017389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef006b022af8c4f04bf4c59cbbfd4f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 2
+  playerCount: 1
 --- !u!4 &340825912
 Transform:
   m_ObjectHideFlags: 0
@@ -1170,7 +1170,20 @@ MonoBehaviour:
   key: 0
   onModified:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2067434487}
+        m_TargetAssemblyTypeName: GameLogic.GameSystem.RoomParameterLevelDesigner,
+          GameLogic
+        m_MethodName: SetDecayLevelAtStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onModifiedWithMasterCleient:
     m_PersistentCalls:
       m_Calls: []
@@ -1410,6 +1423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDataBase: {fileID: 2118669107}
   roomParameter: {fileID: 502147687}
+  isActive: 0
 --- !u!1 &420837480
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,6 +3589,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1024306163}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1063684899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1063684900}
+  m_Layer: 0
+  m_Name: LevelDesign
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1063684900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063684899}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2067434486}
+  m_Father: {fileID: 1134713218}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1105988057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3939,6 +3985,7 @@ Transform:
   - {fileID: 2062412974}
   - {fileID: 502147688}
   - {fileID: 612493965}
+  - {fileID: 1063684900}
   m_Father: {fileID: 166820264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153419116
@@ -5823,7 +5870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab28a585e77e4a5599b59c2c87c2818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  workSpace: {fileID: 5697736621422588242, guid: f077bc916bfbb4dd5909a6ef1247fc19, type: 3}
+  workSpace: {fileID: 5697736621422588242, guid: 51cd2b42b0fcb40cba313e351df0f53a, type: 3}
 --- !u!1 &1605471377
 GameObject:
   m_ObjectHideFlags: 0
@@ -6186,7 +6233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab28a585e77e4a5599b59c2c87c2818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  workSpace: {fileID: 5697736621422588242, guid: b0c955b5dc7d14ebd961fda9be825cb1, type: 3}
+  workSpace: {fileID: 4813019257735162968, guid: dfc7845c815534214a6e78ab235ea155, type: 3}
 --- !u!1 &1699267178
 GameObject:
   m_ObjectHideFlags: 0
@@ -7039,7 +7086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab28a585e77e4a5599b59c2c87c2818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  workSpace: {fileID: 5697736621422588242, guid: 058d7369e873748929595e9e99b1160d, type: 3}
+  workSpace: {fileID: 4813019257735162968, guid: 96dfff4ea9b22494f8e337b1d9d32247, type: 3}
 --- !u!1001 &1945626979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7694,6 +7741,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c823c94ea88425390eb990661209ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2067434485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2067434486}
+  - component: {fileID: 2067434487}
+  - component: {fileID: 2067434488}
+  m_Layer: 0
+  m_Name: RoomParameterLevelDesign
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2067434486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067434485}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1063684900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2067434487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067434485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baf1d2acbf702406b80561e85e2ec171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelDecaySpeeds:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  durabilityDecaySpeeds:
+  - 0.75
+  - 1.5
+  - 2.25
+  - 3
+  - 3.75
+  electricityDecaySpeeds:
+  - 0.5
+  - 1
+  - 1.5
+  - 2
+  - 2.5
+  roomParam: {fileID: 502147687}
+  phaseDuration:
+  - 120
+  - 120
+  - 120
+  - 120
+  isActive: 1
+--- !u!114 &2067434488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067434485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0bf744962fd54239af2ae01d3bb5e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: 2
+  onModified:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2067434487}
+        m_TargetAssemblyTypeName: GameLogic.GameSystem.RoomParameterLevelDesigner,
+          GameLogic
+        m_MethodName: IncrementDecayLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onModifiedWithMasterCleient:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &2084346093
 PrefabInstance:
   m_ObjectHideFlags: 0
