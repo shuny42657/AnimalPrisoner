@@ -14,7 +14,7 @@ namespace GameLogic.WorkSpace
         [SerializeField] SerializeInterface<IAutomatable> automatable;
         [SerializeField] SerializeInterface<IWork> work;
         [SerializeField] SerializeInterface<IPlayerTriggerable> playerTrigger; public IPlayerTriggerable PlayerTrigger { get { return playerTrigger.Value; } }
-        [SerializeField] SerializeInterface<IUpGradable> upGradable;
+        [SerializeField] SerializeInterface<IUpGradable> upGradable; public IUpGradable UpGradable { get { return upGradable.Value; } }
 
         public void InitiateOperation()
         {

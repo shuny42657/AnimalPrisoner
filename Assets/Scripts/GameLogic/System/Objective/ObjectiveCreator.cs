@@ -11,18 +11,20 @@ namespace GameLogic.GameSystem
     public interface IObjectiveCreator
     {
         public ObjectiveData CreateObjective();
+        public void AddUpGradable(IUpGradable upgradable);
     }
 
     public class ObjectiveCreator : MonoBehaviour, IObjectiveCreator
     {
         [SerializeField] protected List<ItemName> objectiveItems;
-        [SerializeField] protected List<BaseWorkSpace> upgradables = new();
+        [SerializeField] protected List<IUpGradable> upgradables = new();
 
         IDitribution<int> distribution = new FrozenDistribution();
 
-        public void AddUpGradable(BaseWorkSpace upgradable)
+        public void AddUpGradable(IUpGradable upgradable)
         {
             upgradables.Add(upgradable);
+            Debug.Log($"upgradable count : {upgradables.Count}");
         }
 
         public virtual ObjectiveData CreateObjective()

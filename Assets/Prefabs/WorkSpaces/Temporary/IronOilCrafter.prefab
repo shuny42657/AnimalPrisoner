@@ -1132,6 +1132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   work:
     obj: {fileID: 8895947435698124797}
+  upGraderName: 11
 --- !u!1 &8906625491310279256
 GameObject:
   m_ObjectHideFlags: 0

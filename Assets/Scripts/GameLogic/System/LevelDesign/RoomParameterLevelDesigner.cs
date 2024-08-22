@@ -7,7 +7,7 @@ using GameLogic.WorkSpace;
 
 namespace GameLogic.GameSystem
 {
-    public class RoomParameterLevelDesigner : MonoBehaviourPunCallbacks,ISwitchable,IUpGradable
+    public class RoomParameterLevelDesigner : MonoBehaviourPunCallbacks,ISwitchable
     {
         [SerializeField] List<float> fuelDecaySpeeds;
         [SerializeField] List<float> durabilityDecaySpeeds;

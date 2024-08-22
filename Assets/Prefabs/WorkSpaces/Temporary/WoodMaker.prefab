@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 2671770179677216859}
   - component: {fileID: 5305172995019738400}
   - component: {fileID: 2698293269289687331}
-  - component: {fileID: -429088899009404818}
   m_Layer: 0
   m_Name: WoodMaker
   m_TagString: Untagged
@@ -240,20 +239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 2912840475304053172}
---- !u!114 &-429088899009404818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457781683024142895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45af9a44700434a589b547d661386619, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  work:
-    obj: {fileID: 0}
 --- !u!1 &2579928069404855169
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   work:
     obj: {fileID: 4649677164716573111}
+  upGraderName: 1
 --- !u!1 &4667697746856213215
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
-
+using GameLogic.WorkSpace;
 
 namespace GameLogic.GamePlayer
 {
@@ -12,6 +12,7 @@ namespace GameLogic.GamePlayer
         [SerializeField] SerializeInterface<IPlayerStatus> playerStatus;
         [SerializeField] SerializeInterface<IJobStatus> jobStatus;
         [SerializeField] SerializeInterface<IMovable> characterMove;
+        [SerializeField] SerializeInterface<IUpGradable> upGradable; public IUpGradable UpGradable { get { return upGradable.Value; } }
 
         public void Work()
         {

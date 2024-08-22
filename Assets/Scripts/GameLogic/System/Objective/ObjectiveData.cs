@@ -8,9 +8,9 @@ namespace GameLogic.GameSystem
     public class ObjectiveData
     {
         ItemName craftItem; public ItemName CraftItem { get { return craftItem; } }
-        BaseWorkSpace upgradable; public BaseWorkSpace UpGradable { get { return upgradable; } }
+        IUpGradable upgradable; public IUpGradable UpGradable { get { return upgradable; } }
 
-        public ObjectiveData(ItemName craftItem,BaseWorkSpace upgradable)
+        public ObjectiveData(ItemName craftItem,IUpGradable upgradable)
         {
             this.craftItem = craftItem;
             this.upgradable = upgradable;

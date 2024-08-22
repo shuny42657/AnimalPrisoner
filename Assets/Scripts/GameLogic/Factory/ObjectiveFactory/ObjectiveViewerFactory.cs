@@ -14,6 +14,7 @@ namespace GameLogic.Factory
         [SerializeField] ItemDataBase itemDataBase;
         [SerializeField] JobDataBase jobDataBase;
         [SerializeField] Transform parentTransform;
+        [SerializeField] UpGraderDataBase upgraderDataBase;
 
         Dictionary<ObjectiveData, ObjectiveViewer> objectiveViewerDict = new();
 
@@ -28,13 +29,7 @@ namespace GameLogic.Factory
             newObjective.Item1Image.SetImage(itemDataBase.GetData(source1).SourceImage);
             newObjective.Item2Image.SetImage(itemDataBase.GetData(source2).SourceImage);
             newObjective.CraftItemImage.SetImage(itemDataBase.GetData(craftItem).SourceImage);
-            Debug.Log($"newObjective : {newObjective != null}");
-            Debug.Log($"jobDataBase : {jobDataBase != null}");
-            Debug.Log($"objectiveData : {objectiveData != null}");
-            Debug.Log($"objectiveData.UpGradable : {objectiveData.UpGradable != null}");
-            Debug.Log($"objectiveData.UpGradable.JobName : {objectiveData.UpGradable.JobName}");
-            Debug.Log($"jobDataBase.GetData(objectiveData.UpGradable.JobName).SourceImage : {jobDataBase.GetData(objectiveData.UpGradable.JobName).SourceImage != null}");
-            newObjective.EffectImage.SetImage(jobDataBase.GetData(objectiveData.UpGradable.JobName).SourceImage);
+            newObjective.EffectImage.SetImage(upgraderDataBase.GetData(objectiveData.UpGradable.UpGraderName).SourceImage);
             newObjective.Item1Qty.SetText(qty1.ToString());
             newObjective.Item2Qty.SetText(qty2.ToString());
 

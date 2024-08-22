@@ -1350,6 +1350,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7066094556741073656, guid: 098033a38acfd4a339866a0e95b6b8f8, type: 3}
   m_PrefabInstance: {fileID: 340030275}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &340514656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 340514657}
+  - component: {fileID: 340514658}
+  m_Layer: 0
+  m_Name: LeveldObjCreatorPacer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &340514657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340514656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1082221215}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &340514658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340514656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 441e858989a904f06976953a6762b82a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phaseDuration:
+  - 10
+  - 10
+  - 10
+  - 10
+  isActive: 0
+  OnPhaseRenewed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1082221216}
+        m_TargetAssemblyTypeName: GameLogic.GameSystem.LeveledObjectiveCreator, GameLogic
+        m_MethodName: UpGrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &340825910
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,7 +1448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef006b022af8c4f04bf4c59cbbfd4f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 2
+  playerCount: 1
 --- !u!4 &340825912
 Transform:
   m_ObjectHideFlags: 0
@@ -1431,10 +1496,9 @@ MonoBehaviour:
   onModified:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2067434487}
-        m_TargetAssemblyTypeName: GameLogic.GameSystem.RoomParameterLevelDesigner,
-          GameLogic
-        m_MethodName: SetDecayLevelAtStart
+      - m_Target: {fileID: 1774081997}
+        m_TargetAssemblyTypeName: GameLogic.GameSystem.GameStartManager, GameLogic
+        m_MethodName: InitializeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1460,6 +1524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   callBack: {fileID: 340825914}
+  allocatorID: 1
 --- !u!114 &340825916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2274,6 +2339,7 @@ GameObject:
   - component: {fileID: 507539983}
   - component: {fileID: 507539984}
   - component: {fileID: 507539985}
+  - component: {fileID: 507539986}
   m_Layer: 0
   m_Name: PlayerFactory
   m_TagString: Untagged
@@ -2348,6 +2414,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 507539986}
+        m_TargetAssemblyTypeName: P_PlayerManager_ObjectiveCreator, GameLogic
+        m_MethodName: SetPlayerUpgradable
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &507539983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2389,6 +2467,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pspManager: {fileID: 2062412975}
+--- !u!114 &507539986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507539980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8f0528f8a004519aa75aca75413faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveCreator:
+    obj: {fileID: 765777348}
 --- !u!1 &508666728
 GameObject:
   m_ObjectHideFlags: 0
@@ -3492,7 +3584,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveItems: 07000000
-  upgradables: []
 --- !u!1 &769515166
 GameObject:
   m_ObjectHideFlags: 0
@@ -4122,6 +4213,7 @@ MonoBehaviour:
   itemDataBase: {fileID: 2118669107}
   jobDataBase: {fileID: 2118669105}
   parentTransform: {fileID: 37313274}
+  upgraderDataBase: {fileID: 2118669108}
 --- !u!1 &1011410302
 GameObject:
   m_ObjectHideFlags: 0
@@ -4642,7 +4734,7 @@ GameObject:
   - component: {fileID: 1082221215}
   - component: {fileID: 1082221216}
   m_Layer: 0
-  m_Name: LeveledObjectiveManager
+  m_Name: LeveledObjectiveCreator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4660,7 +4752,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 340514657}
   m_Father: {fileID: 1063684900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1082221216
@@ -4676,7 +4769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveItems: 070000000a0000000d000000100000001300000016000000090000000c0000000f000000120000001500000018000000080000000b0000000e000000110000001400000017000000190000001a0000001b0000001c0000001d0000001e000000
-  upgradables: []
+  upgraderName: 0
 --- !u!1 &1105988057
 GameObject:
   m_ObjectHideFlags: 0
@@ -4938,6 +5031,7 @@ Transform:
   - {fileID: 502147688}
   - {fileID: 612493965}
   - {fileID: 1063684900}
+  - {fileID: 1774081996}
   m_Father: {fileID: 166820264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153419116
@@ -5475,6 +5569,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   workSpace: {fileID: 4813019257735162968, guid: dd94f98d4fa14486baed8cadd6c548cc, type: 3}
+--- !u!1 &1240113793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1240113794}
+  - component: {fileID: 1240113795}
+  m_Layer: 0
+  m_Name: RoomParamPacer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1240113794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240113793}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2067434486}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1240113795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240113793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 441e858989a904f06976953a6762b82a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phaseDuration:
+  - 10
+  - 10
+  - 10
+  - 10
+  isActive: 0
+  OnPhaseRenewed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2067434491}
+        m_TargetAssemblyTypeName: RoomParameterUpgrader, GameLogic
+        m_MethodName: IncrementLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1251060583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8035,6 +8194,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765786848}
   m_CullTransparentMesh: 1
+--- !u!1 &1774081995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1774081996}
+  - component: {fileID: 1774081998}
+  - component: {fileID: 1774081997}
+  m_Layer: 0
+  m_Name: GameStartManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1774081996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774081995}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1134713218}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1774081997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774081995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad41fa37cb024847af2150920a58a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameInitializer:
+    obj: {fileID: 1774081995}
+--- !u!114 &1774081998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774081995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a435fe6087ba405ab81b3e36bca6895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomParameter: {fileID: 502147687}
+  roomParamPacer: {fileID: 1240113795}
+  leveledObjCreatorPacer: {fileID: 340514658}
 --- !u!1001 &1798910738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9175,8 +9396,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2067434486}
   - component: {fileID: 2067434487}
-  - component: {fileID: 2067434488}
   - component: {fileID: 2067434489}
+  - component: {fileID: 2067434491}
   m_Layer: 0
   m_Name: RoomParameterLevelDesign
   m_TagString: Untagged
@@ -9196,7 +9417,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1240113794}
   m_Father: {fileID: 1063684900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2067434487
@@ -9206,69 +9428,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067434485}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baf1d2acbf702406b80561e85e2ec171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
   fuelDecaySpeeds:
-  - 1
   - 2
+  - 2.5
   - 3
+  - 3.5
   - 4
-  - 5
   durabilityDecaySpeeds:
-  - 0.75
   - 1.5
-  - 2.25
+  - 2
+  - 2.5
   - 3
-  - 3.75
+  - 3.5
   electricityDecaySpeeds:
-  - 0.5
   - 1
   - 1.5
   - 2
   - 2.5
+  - 3
   roomParam: {fileID: 502147687}
   phaseDuration:
-  - 120
-  - 120
-  - 120
-  - 120
-  isActive: 1
---- !u!114 &2067434488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2067434485}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0bf744962fd54239af2ae01d3bb5e84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: 2
-  onModified:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2067434487}
-        m_TargetAssemblyTypeName: GameLogic.GameSystem.RoomParameterLevelDesigner,
-          GameLogic
-        m_MethodName: IncrementDecayLevel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onModifiedWithMasterCleient:
-    m_PersistentCalls:
-      m_Calls: []
+  - 5
+  - 5
+  - 5
+  - 5
+  isActive: 0
 --- !u!114 &2067434489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9281,15 +9470,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841baec50121d4ab994b4af0791ec83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
   key: 2
   onModified:
     m_PersistentCalls:
       m_Calls:
-
-      - m_Target: {fileID: 2067434487}
-        m_TargetAssemblyTypeName: GameLogic.GameSystem.RoomParameterLevelDesigner,
-          GameLogic
+      - m_Target: {fileID: 2067434491}
+        m_TargetAssemblyTypeName: RoomParameterUpgrader, GameLogic
         m_MethodName: UpGrade
         m_Mode: 1
         m_Arguments:
@@ -9303,6 +9489,38 @@ MonoBehaviour:
   onModifiedWithMasterClieent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2067434491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067434485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6649d7ebb5ec04f09b9863f2ee688b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomParam: {fileID: 502147687}
+  upgraderName: 0
+  fuelDecaySpeeds:
+  - 2
+  - 2.5
+  - 3
+  - 3.5
+  - 4
+  durabilityDecaySpeeds:
+  - 1.5
+  - 2
+  - 2.5
+  - 3
+  - 3.5
+  electricityDecaySpeeds:
+  - 1
+  - 1.5
+  - 2
+  - 2.5
+  - 3
 --- !u!1001 &2084346093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9558,6 +9776,7 @@ GameObject:
   - component: {fileID: 2118669106}
   - component: {fileID: 2118669105}
   - component: {fileID: 2118669107}
+  - component: {fileID: 2118669108}
   m_Layer: 0
   m_Name: DataBase
   m_TagString: Untagged
@@ -9648,6 +9867,32 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 606549d63d18d4ef0810ba6c71335f7d, type: 2}
   - {fileID: 11400000, guid: 44e96661e80134136898d317853a83b6, type: 2}
   - {fileID: 11400000, guid: 62f92106986ff4e8a96d9a52f1983617, type: 2}
+--- !u!114 &2118669108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118669104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4880baefa6740f295575ef3bc2ecad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgraderData:
+  - {fileID: 11400000, guid: 0456b1e53afe94079b92cdefed0ec016, type: 2}
+  - {fileID: 11400000, guid: 6f3bb78aab41c48edb5d15fca44046c3, type: 2}
+  - {fileID: 11400000, guid: 1589dcca2352d49d6a8666532bdd8795, type: 2}
+  - {fileID: 11400000, guid: 1795916faea7d4867a0401f82f966cb1, type: 2}
+  - {fileID: 11400000, guid: be055a6dac09c4e208138efaa1d41020, type: 2}
+  - {fileID: 11400000, guid: 17b39f77e13414db18a915acee242e06, type: 2}
+  - {fileID: 11400000, guid: 0453e8f4e2e6b41a287736af8f811161, type: 2}
+  - {fileID: 11400000, guid: 85831c589c57048beb966b092a5e415e, type: 2}
+  - {fileID: 11400000, guid: bb57f16c243344bba963ecd3739cf5f3, type: 2}
+  - {fileID: 11400000, guid: 8842e2b6aa91d4daeab9eb45237664e2, type: 2}
+  - {fileID: 11400000, guid: 17f2ff577320142c39c7286ef57de4a6, type: 2}
+  - {fileID: 11400000, guid: bbca7b0c5800c4101b50741d1c47b835, type: 2}
+  - {fileID: 11400000, guid: 96ee1eb08f6da43cab86b2fdee111145, type: 2}
 --- !u!1 &2126818174
 GameObject:
   m_ObjectHideFlags: 0
@@ -10085,3 +10330,4 @@ SceneRoots:
   - {fileID: 1105988059}
   - {fileID: 2038416676}
   - {fileID: 270800765}
+  - {fileID: 166820264}

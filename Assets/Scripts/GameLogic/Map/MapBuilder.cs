@@ -14,7 +14,7 @@ namespace GameLogic.Map
         [SerializeField] MotherWorkSpaceFactory motherWorkSpaceFactory;
         [SerializeField] List<Vector3> positionCandidates;
         HashSet<int> occupiedPositions = new();
-        [SerializeField]UnityEvent<BaseWorkSpace> onWorkSpaceGenerated;
+        [SerializeField]UnityEvent<IUpGradable> onWorkSpaceGenerated;
         public List<BaseWorkSpace> BuildWorkSpaces(IJobStatus jobStatus)
         {
             List<BaseWorkSpace> workSpaces = new();
@@ -28,7 +28,7 @@ namespace GameLogic.Map
                     if (!occupiedPositions.Contains(rand))
                     {
                         var workSpace = motherWorkSpaceFactory.Generate(j, positionCandidates[rand]);
-                        onWorkSpaceGenerated.Invoke(workSpace.GetComponent<BaseWorkSpace>());
+                        onWorkSpaceGenerated.Invoke(workSpace.GetComponent<BaseWorkSpace>().UpGradable);
                         workSpaces.Add(workSpace.GetComponent<BaseWorkSpace>());
                         occupiedPositions.Add(rand);
                         break;

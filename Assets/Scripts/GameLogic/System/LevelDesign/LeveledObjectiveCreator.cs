@@ -6,13 +6,16 @@ using Util;
 
 namespace GameLogic.GameSystem
 {
-    public class LeveledObjectiveCreator : ObjectiveCreator,IUpGradable
+    public class LeveledObjectiveCreator : ObjectiveCreator, IUpGradable
     {
-        List<int> weights = new() { 1,1,1,1,1,1 };
+        List<int> weights = new() { 1, 1, 1, 1, 1, 1 };
 
         int prev_level = 1;
         int level = 1;
         public int Level { get { return level; } }
+
+        [SerializeField] UpGraderName upgraderName;
+        public UpGraderName UpGraderName { get{ return upgraderName; } }
 
         List<int> LoadCategorical()
         {
@@ -59,6 +62,7 @@ namespace GameLogic.GameSystem
             var craftItem = objectiveItems[dist];
 
             var up_id = Random.Range(0, upgradables.Count);
+            Debug.Log($"{up_id} out of {upgradables.Count}");
             var upgradable = upgradables[up_id];
 
             ObjectiveData newObjective = new(craftItem, upgradable);
@@ -67,6 +71,7 @@ namespace GameLogic.GameSystem
 
         public void UpGrade()
         {
+            Debug.Log("Objective Level Up");
             level++;
         }
     }
