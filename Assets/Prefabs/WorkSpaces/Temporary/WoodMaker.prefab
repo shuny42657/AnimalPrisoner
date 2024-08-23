@@ -313,6 +313,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6041156886069728026}
+        m_TargetAssemblyTypeName: GameLogic.WorkSpace.MakerWork, GameLogic
+        m_MethodName: ClearSpace
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &3126992152131798330
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxProgress: 3
-  onWorkFinish:
+  OnWorkStart:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2763870277313052215}
@@ -705,9 +717,48 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnWorkFinish:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6151598485271209107}
+        m_TargetAssemblyTypeName: GameLogic.WorkSpace.OnlyTakeWithSettable, GameLogic
+        m_MethodName: Set
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onProgressMade:
+      - m_Target: {fileID: 2763870277313052215}
+        m_TargetAssemblyTypeName: UI.WorkSpaceProgressView, UI
+        m_MethodName: Show
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6041156886069728026}
+        m_TargetAssemblyTypeName: GameLogic.WorkSpace.MakerWork, GameLogic
+        m_MethodName: ClearSpace
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnProgressMade:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2763870277313052215}
@@ -722,7 +773,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  itemName: 2
+  item: 2
 --- !u!114 &1521841189353344382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,6 +926,7 @@ GameObject:
   - component: {fileID: 4049055644453001985}
   - component: {fileID: 2763870277313052215}
   - component: {fileID: 1554889874267235578}
+  - component: {fileID: 5053606833699895528}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -990,8 +1042,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d123d8c6934a476ebc7d9495c5d8ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gauge: {fileID: 4882632009213507896}
-  gaugeView: {fileID: 4049055644453001985}
   offsetter: {fileID: 1554889874267235578}
 --- !u!114 &1554889874267235578
 MonoBehaviour:
@@ -1008,3 +1058,16 @@ MonoBehaviour:
   rect: {fileID: 6565830601217020040}
   targetTransform: {fileID: 7547248139310357225}
   offset: {x: 0, y: 100}
+--- !u!114 &5053606833699895528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666624372760635473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc410b7c0f6e40c9ad09c6f67dd7546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 4882632009213507896}

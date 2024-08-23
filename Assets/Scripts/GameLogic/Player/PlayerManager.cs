@@ -9,7 +9,7 @@ namespace GameLogic.GamePlayer
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] SerializeInterface<IOperatableHandler> opertableHandler;
-        [SerializeField] SerializeInterface<IPlayerStatus> playerStatus;
+        [SerializeField] SerializeInterface<IPlayerStatus> playerStatus; public IPlayerStatus PlayerStatus { get { return playerStatus.Value; } }
         [SerializeField] SerializeInterface<IJobStatus> jobStatus;
         [SerializeField] SerializeInterface<IMovable> characterMove;
         [SerializeField] SerializeInterface<IUpGradable> upGradable; public IUpGradable UpGradable { get { return upGradable.Value; } }

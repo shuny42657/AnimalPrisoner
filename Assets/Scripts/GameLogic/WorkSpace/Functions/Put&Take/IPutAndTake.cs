@@ -26,14 +26,13 @@ namespace GameLogic.WorkSpace
     public interface IWork
     {
         public void Work(IPlayerStatus playerStatus);
-        public UnityEvent<float> OnProgressMade { get; }
-        public UnityEvent<ItemName> OnWorkFinish { get; }
+        //public UnityEvent<float> OnProgressMade { get; }
+        //public UnityEvent<ItemName> OnWorkFinish { get; }
         public float WorkSpeed { get; set; }
     }
 
     public interface IAutomatable
     {
-        public UnityEvent OnOperationInitiated { get; }
         public void InitateOperation();
         public float OperationSpeed { get; set; }
     }

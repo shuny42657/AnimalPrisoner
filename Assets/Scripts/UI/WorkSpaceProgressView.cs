@@ -4,22 +4,37 @@ using UnityEngine;
 
 namespace UI
 {
-    public class WorkSpaceProgressView : MonoBehaviour
+    [RequireComponent(typeof(IGaugeView))]
+    [RequireComponent(typeof(IShowHide))]
+    public class WorkSpaceProgressView : MonoBehaviour,IShowHide,IGaugeView
     {
-        [SerializeField] GameObject gauge;
-        [SerializeField] GaugeView gaugeView;
+        IGaugeView gaugeView;
+        IShowHide showHide;
         [SerializeField] OverlayOffsetterWithCamera offsetter;
         bool offset;
-        public void Show(bool isActive) { gauge.SetActive(isActive); }
+
+        private void Awake()
+        {
+            gaugeView = GetComponent<GaugeView>();
+            showHide = GetComponent<ShowHide>();
+        }
+
+        //public void Show(bool isActive) { gauge.SetActive(isActive); }
         public void ModifyGauge(float rate)
         {
-            Show(true);
+            //Debug.Log($"gauge view : {gaugeView != null}");
+            Debug.Log($" rate : {rate}");
             if (!offset)
             {
                 offset = true;
                 offsetter.SetUIPositionWithOffset();
             }
             gaugeView.ModifyGauge(rate);
+        }
+
+        public void Show(bool isActive)
+        {
+            showHide.Show(isActive);
         }
     }
 }

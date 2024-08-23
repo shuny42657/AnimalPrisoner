@@ -20,4 +20,6 @@ public class PlayerStatus : MonoBehaviour,IPlayerStatus
         set { energy = value; onEnergyModified.Invoke(energy / maxEnergy); }
     }
     public float Hunger { get { return hunger; } set { hunger = value; onHungerModified.Invoke(hunger / maxHunger); } }
+
+    public float MaxEnergy { get { return maxEnergy; } }
 }

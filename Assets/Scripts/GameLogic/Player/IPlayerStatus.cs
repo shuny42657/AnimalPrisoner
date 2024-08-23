@@ -11,5 +11,6 @@ namespace GameLogic.GamePlayer
         public UnityEvent<float> OnHungerModified { get; }
         public float Energy { get; set; }
         public float Hunger { get; set; }
+        public float MaxEnergy { get; }
     }
 }
