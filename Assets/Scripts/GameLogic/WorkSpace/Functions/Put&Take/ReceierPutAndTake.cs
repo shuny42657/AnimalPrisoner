@@ -10,7 +10,8 @@ namespace GameLogic.WorkSpace
 {
     public class ReceierPutAndTake : MonoBehaviourPunCallbacks,IPutAndTake,ISet
     {
-        [SerializeField] int senderId; public int SenderId { get { return senderId; } set { senderId = value; } }
+        public UnityEvent<int> OnSenderIdSet;
+        [SerializeField] int senderId; public int SenderId { get { return senderId; } set { senderId = value;OnSenderIdSet.Invoke(senderId); } }
         ItemName itemName;
         public ItemName Item => throw new System.NotImplementedException();
 

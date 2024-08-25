@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace GameLogic.GameSystem
 {
-    public class RoomParameter : MonoBehaviour,IRoomStatus
+    public class RoomParameter : MonoBehaviour,IRoomStatus,ISwitchable
     {
         [SerializeField] UnityEvent<float> onFuelModiied = new(); public UnityEvent<float> OnFuelModified { get { return onFuelModiied; } }
 
@@ -55,7 +55,14 @@ namespace GameLogic.GameSystem
         [SerializeField] float durabilityComsumeSpeed; public float DuranilityCosumeSpeed { get { return durabilityComsumeSpeed; } set { durabilityComsumeSpeed = value; } }
         [SerializeField] float electriticyComsumeSpeed; public float ElectricityConsumeSpeed { get { return electriticyComsumeSpeed; } set { electriticyComsumeSpeed = value; } }
 
-        [SerializeField] bool working; public bool Working { get { return working; } set { working = value; } }
+        //[SerializeField] bool working; public bool Working { get { return working; } set { working = value; } }
+
+        bool isActive = false;
+        public bool IsActive
+        {
+            get { return isActive;}
+            set { isActive = value; }
+        }
 
         bool dead;
         [SerializeField] UnityEvent OnParamDead;
@@ -67,7 +74,7 @@ namespace GameLogic.GameSystem
         }
         private void Update()
         {
-            if (working)
+            if (IsActive)
             {
                 //Debug.Log($"working {fuel}");
                 Fuel -= FuelComsumeSpeed * Time.deltaTime;

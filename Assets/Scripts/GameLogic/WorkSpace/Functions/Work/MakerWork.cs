@@ -31,7 +31,7 @@ namespace GameLogic.WorkSpace
         {
             if (isSpaceCleared)
             {
-                if (playerStatus.Energy > 0)
+                /*if (playerStatus.Energy > 0)
                 {
                     progress += Time.deltaTime * workSpeed;
                     playerStatus.Energy -= Time.deltaTime * workSpeed;
@@ -47,7 +47,8 @@ namespace GameLogic.WorkSpace
                 else
                 {
                     Debug.Log("no work");
-                }
+                }*/
+                base.Work(playerStatus);
             }
         }
     }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: OilMaker
   m_EditorClassIdentifier: 
   jobName: 3
-  sourceImage: {fileID: 21300000, guid: 8f283c42109a94f45bf17e6febeca202, type: 3}
+  sourceImage: {fileID: 21300000, guid: 551f2e50caf4445b39c0887010bfeef5, type: 3}

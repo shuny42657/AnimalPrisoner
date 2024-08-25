@@ -14,20 +14,35 @@ namespace GameLogic.GameSystem
 
         [SerializeField] bool isActive;
         public bool IsActive { get { return isActive; } set { isActive = value; } }
-        public UnityEvent<int> OnPhaseRenewed = new();
+        public UnityEvent<int> OnCheckpointReached = new();
 
-
+        [SerializeField] bool isSync;
+        [SerializeField] bool looping;
         // Update is called once per frame
         void Update()
         {
-            if(IsActive && PhotonNetwork.IsMasterClient)
+            if(IsActive)
             {
-                currentTime += Time.deltaTime;
-                if(phase < phaseDuration.Count && currentTime > phaseDuration[phase])
+                if(!isSync || PhotonNetwork.IsMasterClient)
                 {
-                    currentTime = 0;
-                    phase++;
-                    OnPhaseRenewed.Invoke(phase);
+                    currentTime += Time.deltaTime;
+                    if (looping)
+                    {
+                        if(currentTime > phaseDuration[0])
+                        {
+                            currentTime = 0;
+                            OnCheckpointReached.Invoke(0);
+                        }
+                    }
+                    else
+                    {
+                        if (phase < phaseDuration.Count && currentTime > phaseDuration[phase])
+                        {
+                            currentTime = 0;
+                            phase++;
+                            OnCheckpointReached.Invoke(phase);
+                        }
+                    }
                 }
             }
         }

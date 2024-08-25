@@ -22,6 +22,7 @@ public class RoomParameterUpgrader : MonoBehaviourPunCallbacks,IUpGradable
     public void UpGrade()
     {
         level = PhotonNetwork.CurrentRoom.GetDecayLevelUp();
+        Debug.Log($"Decay Level {level}");
         roomParam.FuelComsumeSpeed = fuelDecaySpeeds[level];
         roomParam.DuranilityCosumeSpeed = durabilityDecaySpeeds[level];
         roomParam.ElectricityConsumeSpeed = electricityDecaySpeeds[level];

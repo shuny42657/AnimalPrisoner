@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WoodMaker
   m_EditorClassIdentifier: 
   jobName: 1
-  sourceImage: {fileID: 21300000, guid: e8350542c461e4528a83d3069e62dc56, type: 3}
+  sourceImage: {fileID: 21300000, guid: 2adef06daebd2407a89087a02d2f83f0, type: 3}

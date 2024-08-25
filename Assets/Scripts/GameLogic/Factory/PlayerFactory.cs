@@ -14,8 +14,10 @@ namespace GameLogic.Factory
         public GameObject GeneratePlayer(Vector3 position)
         {
             var newPlayer = Instantiate(player,position,Quaternion.identity);
-            newPlayer.GetComponent<IMovable>().CanMove = true;
             OnPlayerGenerate.Invoke(newPlayer);
+            var playerManager = newPlayer.GetComponent<PlayerManager>();
+            playerManager.PlayerStatus.Energy = playerManager.PlayerStatus.MaxEnergy;
+            newPlayer.GetComponent<IMovable>().CanMove = true;
             return player;
         }
     }

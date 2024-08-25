@@ -12,6 +12,7 @@ namespace GameLogic.WorkSpace
     public class TeleporterPutAndTake : MonoBehaviour,IPutAndTake
     {
         Player receiver;
+        int receiverID;
         ItemName itemName = ItemName.None;
         public ItemName Item { get { return itemName; } }
 
@@ -19,7 +20,14 @@ namespace GameLogic.WorkSpace
 
         public UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
 
-        public void SetReceiver(Player player) { receiver = player; }
+        public void SetReceiver(Player player)
+        {
+            receiver = player;
+            receiverID = player.ActorNumber;
+            OnReceiverIDSet.Invoke(receiverID);
+        }
+        public UnityEvent<int> OnReceiverIDSet;
+        
         public bool Put(ItemName itemName)
         {
             Debug.Log(receiver.GetSentItem(PhotonNetwork.LocalPlayer.ActorNumber));

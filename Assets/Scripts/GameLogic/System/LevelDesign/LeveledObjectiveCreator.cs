@@ -26,30 +26,32 @@ namespace GameLogic.GameSystem
             else
             {
                 weights.Clear();
-                switch (level)
+                prev_level = level;
+                if(level == 1)
                 {
-                    case 1:
-                        for(int i = 0;i < 6; i++)
-                        {
-                            weights.Add(1);
-                        }
-                        return weights;
-                    case 2:
-                        for(int i = 0;i < 18; i++)
-                        {
-                            weights.Add(i < 6 ? 1 : 2);
-                        }
-                        return weights;
-                    case 3:
-                        for(int i = 0; i < 24;i++)
-                        {
-                            if(i < 6) { weights.Add(1); }
-                            else if(i < 18) { weights.Add(2); }
-                            else { weights.Add(4); }
-                        }
-                        return weights;
-                    default:
-                        return weights;
+                    for (int i = 0; i < 6; i++)
+                    {
+                        weights.Add(1);
+                    }
+                    return weights;
+                }
+                else if(level == 2)
+                {
+                    for (int i = 0; i < 18; i++)
+                    {
+                        weights.Add(i < 6 ? 1 : 2);
+                    }
+                    return weights;
+                }
+                else
+                {
+                    for (int i = 0; i < 24; i++)
+                    {
+                        if (i < 6) { weights.Add(1); }
+                        else if (i < 18) { weights.Add(2); }
+                        else { weights.Add(4); }
+                    }
+                    return weights;
                 }
             }
         }

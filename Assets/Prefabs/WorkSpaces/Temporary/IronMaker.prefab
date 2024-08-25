@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 565881490837588635}
   - component: {fileID: 8835049321623803501}
   - component: {fileID: 1165877078305604746}
+  - component: {fileID: 1112701295223657479}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -427,6 +428,19 @@ MonoBehaviour:
   rect: {fileID: 2875122468271891844}
   targetTransform: {fileID: 7986822461277445450}
   offset: {x: 0, y: 100}
+--- !u!114 &1112701295223657479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658672586170152855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc410b7c0f6e40c9ad09c6f67dd7546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 656601980643329397}
 --- !u!1 &1819010570169325958
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,7 +953,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.6, y: 1, z: 0.6}
+  m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1036465869577912188
 MonoBehaviour:

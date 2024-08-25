@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StoneMaker
   m_EditorClassIdentifier: 
   jobName: 0
-  sourceImage: {fileID: 21300000, guid: 2c63918b32dd24d828bfc52b3e5f9b24, type: 3}
+  sourceImage: {fileID: 21300000, guid: 8a70f40c512d24977a8babaf48050d72, type: 3}
