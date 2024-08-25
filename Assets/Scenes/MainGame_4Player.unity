@@ -426,10 +426,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2038416676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 218.64001, y: 389.83792}
-  m_SizeDelta: {x: -1237.3, y: -779.6758}
+  m_AnchoredPosition: {x: -741.36, y: -150.16208}
+  m_SizeDelta: {x: 682.69995, y: 300.32422}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &37313275
 MonoBehaviour:
@@ -1341,9 +1341,9 @@ RectTransform:
   - {fileID: 1130170001}
   m_Father: {fileID: 2038416676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -560.6, y: -65}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -75}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &201682536
@@ -2297,10 +2297,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseDuration:
-  - 10
-  - 10
-  - 10
-  - 10
+  - 240
+  - 180
+  - 120
+  - 120
   isActive: 0
   OnCheckpointReached:
     m_PersistentCalls:
@@ -2770,9 +2770,9 @@ RectTransform:
   - {fileID: 2052714401}
   m_Father: {fileID: 2038416676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -560.6, y: -105}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -125}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420837482
@@ -7926,10 +7926,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseDuration:
-  - 10
-  - 10
-  - 10
-  - 10
+  - 120
+  - 120
+  - 120
+  - 120
   isActive: 0
   OnCheckpointReached:
     m_PersistentCalls:
@@ -10102,9 +10102,9 @@ RectTransform:
   - {fileID: 2022653499}
   m_Father: {fileID: 2038416676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -560.6, y: -25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -25}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1559576985
@@ -12199,7 +12199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1942026936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12612,7 +12612,6 @@ MonoBehaviour:
   positionCandidates:
   - {x: -4, y: 0, z: -1.77}
   - {x: -4, y: 0, z: 0.5}
-  - {x: -4, y: 0, z: 0.8}
   - {x: -4, y: 0, z: 2}
   - {x: -1, y: 0, z: 2}
   - {x: 0.5, y: 0, z: 2}
@@ -13664,23 +13663,23 @@ MonoBehaviour:
   roomParam: {fileID: 502147687}
   upgraderName: 0
   fuelDecaySpeeds:
-  - 2
-  - 10
-  - 3
-  - 3.5
-  - 4
-  durabilityDecaySpeeds:
-  - 1.5
-  - 2
-  - 2.5
-  - 3
-  - 3.5
-  electricityDecaySpeeds:
   - 1
   - 1.5
   - 2
   - 2.5
   - 3
+  durabilityDecaySpeeds:
+  - 0.8
+  - 1.2
+  - 1.6
+  - 2
+  - 2.4
+  electricityDecaySpeeds:
+  - 0.6
+  - 0.9
+  - 1.2
+  - 1.5
+  - 1.8
 --- !u!1 &2070241468
 GameObject:
   m_ObjectHideFlags: 0
@@ -14231,7 +14230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseDuration:
-  - 20
+  - 30
   isActive: 0
   OnCheckpointReached:
     m_PersistentCalls:
