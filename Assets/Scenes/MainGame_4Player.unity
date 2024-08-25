@@ -2352,7 +2352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef006b022af8c4f04bf4c59cbbfd4f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 1
+  playerCount: 4
 --- !u!4 &340825912
 Transform:
   m_ObjectHideFlags: 0
@@ -11091,10 +11091,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleporterPutAndTakes:
   - {fileID: 1359203697}
+  - {fileID: 1255251308}
+  - {fileID: 1948969039}
   receiverPutAndTakes:
   - {fileID: 1607149837}
+  - {fileID: 1504372058}
+  - {fileID: 1345790264}
   customPropCallbacks:
   - {fileID: 1607149836}
+  - {fileID: 1504372057}
+  - {fileID: 1345790263}
   sendItemKeys: 06000000070000000800000009000000
 --- !u!4 &1699267180
 Transform:
