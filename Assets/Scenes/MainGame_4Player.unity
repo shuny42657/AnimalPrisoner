@@ -13664,22 +13664,22 @@ MonoBehaviour:
   upgraderName: 0
   fuelDecaySpeeds:
   - 0.1
-  - 0.12
-  - 0.14
-  - 0.16
+  - 0.15
   - 0.18
+  - 0.21
+  - 0.25
   durabilityDecaySpeeds:
   - 0.1
-  - 0.12
-  - 0.14
-  - 0.16
+  - 0.15
   - 0.18
+  - 0.21
+  - 0.25
   electricityDecaySpeeds:
   - 0.1
-  - 0.12
-  - 0.14
-  - 0.16
+  - 0.15
   - 0.18
+  - 0.21
+  - 0.25
 --- !u!1 &2070241468
 GameObject:
   m_ObjectHideFlags: 0

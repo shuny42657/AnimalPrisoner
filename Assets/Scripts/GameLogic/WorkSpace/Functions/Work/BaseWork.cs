@@ -19,7 +19,7 @@ namespace GameLogic.WorkSpace
         protected float workSpeed = 1f;
         public float WorkSpeed { get { return workSpeed; } set { workSpeed = value; } }
 
-        [SerializeField]protected T item;
+        [SerializeField] protected T item;
 
         public virtual void Work(IPlayerStatus playerStatus)
         {

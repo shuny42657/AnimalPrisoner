@@ -1142,7 +1142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3793943362252447878}
   - component: {fileID: 6351172309083986934}
-  - component: {fileID: 4072854156386078015}
+  - component: {fileID: 1523926164022158098}
   m_Layer: 0
   m_Name: Work
   m_TagString: Untagged
@@ -1247,7 +1247,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   maxProgress: 3
---- !u!114 &4072854156386078015
+--- !u!114 &1523926164022158098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1256,9 +1256,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8895947435698124797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45af9a44700434a589b547d661386619, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ae0f2e2d0f1a47488e225ede868cd62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  work:
+  automatable:
     obj: {fileID: 8895947435698124797}
   upGraderName: 6
