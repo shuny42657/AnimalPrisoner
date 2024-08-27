@@ -426,10 +426,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2038416676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 218.64001, y: 389.83792}
-  m_SizeDelta: {x: -1237.3, y: -779.6758}
+  m_AnchoredPosition: {x: -741.36, y: -150.16208}
+  m_SizeDelta: {x: 682.69995, y: 300.32422}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &37313275
 MonoBehaviour:
@@ -1341,9 +1341,9 @@ RectTransform:
   - {fileID: 1130170001}
   m_Father: {fileID: 2038416676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -560.6, y: -65}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -75}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &201682536
@@ -2297,10 +2297,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseDuration:
-  - 10
-  - 10
-  - 10
-  - 10
+  - 240
+  - 180
+  - 120
+  - 120
   isActive: 0
   OnCheckpointReached:
     m_PersistentCalls:
@@ -2352,7 +2352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef006b022af8c4f04bf4c59cbbfd4f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 1
+  playerCount: 3
 --- !u!4 &340825912
 Transform:
   m_ObjectHideFlags: 0
@@ -2428,7 +2428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   callBack: {fileID: 340825914}
-  allocatorID: 0
+  allocatorID: 1
 --- !u!114 &340825916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2770,9 +2770,9 @@ RectTransform:
   - {fileID: 2052714401}
   m_Father: {fileID: 2038416676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -560.6, y: -105}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -125}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420837482
@@ -3630,7 +3630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &508181006
 Transform:
   m_ObjectHideFlags: 0
@@ -4271,7 +4271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveCreator:
-    obj: {fileID: 765777348}
+    obj: {fileID: 1082221214}
   OnNewObjectiveGenerated:
     m_PersistentCalls:
       m_Calls:
@@ -4946,7 +4946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &759709231
 Transform:
   m_ObjectHideFlags: 0
@@ -7926,10 +7926,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseDuration:
-  - 10
-  - 10
-  - 10
-  - 10
+  - 120
+  - 120
+  - 120
+  - 120
   isActive: 0
   OnCheckpointReached:
     m_PersistentCalls:
@@ -8246,7 +8246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1323114995
 Transform:
   m_ObjectHideFlags: 0
@@ -10102,9 +10102,9 @@ RectTransform:
   - {fileID: 2022653499}
   m_Father: {fileID: 2038416676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -560.6, y: -25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -25}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1559576985
@@ -11091,10 +11091,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleporterPutAndTakes:
   - {fileID: 1359203697}
+  - {fileID: 1255251308}
   receiverPutAndTakes:
   - {fileID: 1607149837}
+  - {fileID: 1504372058}
   customPropCallbacks:
   - {fileID: 1607149836}
+  - {fileID: 1504372057}
   sendItemKeys: 06000000070000000800000009000000
 --- !u!4 &1699267180
 Transform:
@@ -12193,7 +12196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1942026936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12606,7 +12609,6 @@ MonoBehaviour:
   positionCandidates:
   - {x: -4, y: 0, z: -1.77}
   - {x: -4, y: 0, z: 0.5}
-  - {x: -4, y: 0, z: 0.8}
   - {x: -4, y: 0, z: 2}
   - {x: -1, y: 0, z: 2}
   - {x: 0.5, y: 0, z: 2}
@@ -13399,7 +13401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2057579028
 Transform:
   m_ObjectHideFlags: 0
@@ -13658,23 +13660,23 @@ MonoBehaviour:
   roomParam: {fileID: 502147687}
   upgraderName: 0
   fuelDecaySpeeds:
-  - 1
-  - 1
-  - 3
-  - 3.5
-  - 4
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.4
   durabilityDecaySpeeds:
-  - 1.5
-  - 2
-  - 2.5
-  - 3
-  - 3.5
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.4
   electricityDecaySpeeds:
-  - 1
-  - 1.5
-  - 2
-  - 2.5
-  - 3
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.4
 --- !u!1 &2070241468
 GameObject:
   m_ObjectHideFlags: 0
@@ -14225,7 +14227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseDuration:
-  - 20
+  - 30
   isActive: 0
   OnCheckpointReached:
     m_PersistentCalls:
