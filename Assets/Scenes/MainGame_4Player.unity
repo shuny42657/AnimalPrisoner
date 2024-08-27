@@ -13663,23 +13663,23 @@ MonoBehaviour:
   roomParam: {fileID: 502147687}
   upgraderName: 0
   fuelDecaySpeeds:
-  - 1
-  - 1.5
-  - 2
-  - 2.5
-  - 3
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.4
   durabilityDecaySpeeds:
-  - 0.8
-  - 1.2
-  - 1.6
-  - 2
-  - 2.4
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.4
   electricityDecaySpeeds:
-  - 0.6
-  - 0.9
-  - 1.2
-  - 1.5
-  - 1.8
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.4
 --- !u!1 &2070241468
 GameObject:
   m_ObjectHideFlags: 0
