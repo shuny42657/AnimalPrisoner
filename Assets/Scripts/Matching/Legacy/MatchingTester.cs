@@ -16,7 +16,7 @@ namespace Matching
         }
         void Start()
         {
-            startButton.onClick.AddListener(matchingStarter.OnStartButtonClick);
+            startButton.onClick.AddListener(matchingStarter.OnButtonClick);
         }
     }
 }

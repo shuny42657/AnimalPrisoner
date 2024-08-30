@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace UI
 {
-    public interface IButtonCallback
+    public interface IScene
     {
-        public void OnButtonClick();
+        public void LoadScene();
     }
 }

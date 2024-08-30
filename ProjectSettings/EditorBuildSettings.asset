@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Teleporter.unity
-    guid: 5ff82b672e82f4559809bf3f0df37ef2
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 5fb74416a870e9049a2e5d5fd32a67b7

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UI
+namespace Matching
 {
-    public interface IButtonCallback
+    public interface IMatching
     {
-        public void OnButtonClick();
+        public void StartMatching();
     }
 }

@@ -4,44 +4,45 @@ using UnityEngine;
 using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Realtime;
+using UI;
 
-public class MatchingCallback : MonoBehaviourPunCallbacks
+namespace Matching
 {
-    public override void OnConnectedToMaster()
+    public class MatchingCallback : MonoBehaviourPunCallbacks
     {
-        Debug.Log("Connected to master server");
-    }
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.Log($"Disconnected: {cause.ToString()}");
-    }
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Room created");
-    }
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("Joined room");
-        if (PhotonNetwork.IsMasterClient)
+        [SerializeField] SerializeInterface<IScene> matchingScene;
+        public override void OnConnectedToMaster()
         {
-            if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+            Debug.Log("Connected to master server");
+        }
+        public override void OnDisconnected(DisconnectCause cause)
+        {
+            Debug.Log($"Disconnected: {cause.ToString()}");
+        }
+        public override void OnCreatedRoom()
+        {
+            Debug.Log("Room created");
+        }
+        public override void OnJoinedRoom()
+        {
+            Debug.Log("Joined room");
+            if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.CurrentRoom.IsOpen = false;
-                Debug.Log("Moving on to match");
-                PhotonNetwork.LoadLevel("GameStarter");
+                if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+                {
+                    matchingScene.Value.LoadScene();
+                }
             }
         }
-    }
-
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        if (PhotonNetwork.IsMasterClient)
+        public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+            Debug.Log("Joined room");
+            if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.CurrentRoom.IsOpen = false;
-                Debug.Log("Moving on to match");
-                PhotonNetwork.LoadLevel("GameStarter");
+                if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+                {
+                    matchingScene.Value.LoadScene();
+                }
             }
         }
     }

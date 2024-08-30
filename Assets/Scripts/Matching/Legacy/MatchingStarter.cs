@@ -4,16 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
 using Photon.Pun;
+using UI;
 
 namespace Matching
 {
-    public class MatchingStarter : MonoBehaviour
+    public class MatchingStarter : MonoBehaviour, IButtonCallback
     {
         [SerializeField] List<SerializeInterface<IMatchingView>> matchingViews;
         [SerializeField] GameObject startView;
         [SerializeField] GameObject matchingView;
         [SerializeField] CanvasGroup canvasGroup;
-        public void OnStartButtonClick()
+        public void OnButtonClick()
         {
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.ConnectUsingSettings();

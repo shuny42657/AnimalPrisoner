@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using Photon.Realtime;
 using Photon.Pun;
+using UI;
 
 namespace Matching
 {
-    public class RondomMatchingView : MonoBehaviourPunCallbacks, IMatchingView
+    public class RondomMatchingView : MonoBehaviourPunCallbacks
     {
         [SerializeField] private Button matchingButton;
         [SerializeField] string roomName = "Room";
@@ -16,9 +17,9 @@ namespace Matching
         public void Setup()
         {
             matchingButton.interactable = true;
-            matchingButton.onClick.AddListener(() => OnMatchingButtonClick(roomName, playerCount));
+            matchingButton.onClick.AddListener(() => OnButtonClick());
         }
-        public void OnMatchingButtonClick(string roomName, int playerCount)
+        public void OnButtonClick()
         {
             var roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = playerCount;
