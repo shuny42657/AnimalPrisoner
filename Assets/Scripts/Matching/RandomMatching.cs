@@ -6,12 +6,17 @@ using Photon.Pun;
 
 namespace Matching
 {
+    /// <summary>
+    /// Written by Shinnosuke
+    /// </summary>
     public class RandomMatching : MonoBehaviourPunCallbacks, IMatching
     {
         [SerializeField] string roomName = "Room";
         [SerializeField] int playerCount = 2;
         public void StartMatching()
         {
+            PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.ConnectUsingSettings();
             var roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = playerCount;
             roomOptions.IsVisible = true;

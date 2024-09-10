@@ -6,13 +6,18 @@ using UI;
 
 namespace Matching
 {
-    public class PasswordInputFieldPresenter : MonoBehaviour
+    /// <summary>
+    /// Written by Shinnosuke
+    /// </summary>
+    public class PasswordInputFieldView : MonoBehaviour
     {
         [SerializeField] TMP_InputField inputField;
         [SerializeField] ButtonInteract buttonInteract;
+        [SerializeField] CustomMatching customMatching; 
         private void Awake()
         {
             inputField.onValueChanged.AddListener(value => buttonInteract.Show(value.Length == 6));
+            inputField.onValueChanged.AddListener(value => customMatching.SetPassword(value));
         }
     }
 }

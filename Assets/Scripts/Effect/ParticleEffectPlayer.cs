@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Particle : MonoBehaviour
+/// <summary>
+/// Written by Shinnosuke
+/// </summary>
+public class ParticleEffectPlayer : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
     public void Play(bool isActive)

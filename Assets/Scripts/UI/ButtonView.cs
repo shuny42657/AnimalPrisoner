@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class ButtonPresenter : MonoBehaviour
+    /// <summary>
+    /// Written by Shinnosuke
+    /// </summary>
+    public class ButtonView : MonoBehaviour
     {
         [SerializeField] Button button;
-        [SerializeField] List<UnityEvent> unityEvents;
+        [SerializeField] UnityEvent unityEvent;
         private void Awake()
         {
-            button.onClick.AddListener(() => { foreach (var unityEvent in unityEvents) unityEvent.Invoke(); });
+            button.onClick.AddListener(() => unityEvent.Invoke());
         }
     }
 }

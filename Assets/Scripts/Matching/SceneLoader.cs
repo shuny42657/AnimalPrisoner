@@ -7,7 +7,10 @@ using Photon.Realtime;
 
 namespace Matching
 {
-    public class MatchingScene : MonoBehaviour, IScene
+    /// <summary>
+    /// Written by Shinnosuke
+    /// </summary>
+    public class SceneLoader : MonoBehaviour, IScene
     {
         [SerializeField] string sceneName = "GameStarter";
         public void LoadScene()

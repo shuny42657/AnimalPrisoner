@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    /// <summary>
+    /// Written by Shinnosuke
+    /// </summary>
     public class ButtonInteract: MonoBehaviour, IShowHide
     {
         [SerializeField] Button button;

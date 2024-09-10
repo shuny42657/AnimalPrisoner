@@ -8,20 +8,30 @@ using UI;
 
 namespace Matching
 {
+    /// <summary>
+    /// Written by Shinnosuke
+    /// </summary>
     public class MatchingCallback : MonoBehaviourPunCallbacks
     {
-        [SerializeField] SerializeInterface<IScene> matchingScene;
+        [SerializeField] UnityEvent onConnectedToMaster;
+        [SerializeField] UnityEvent onDisconnected;
+        [SerializeField] UnityEvent onCreatedRoom;
+        [SerializeField] UnityEvent onJoinedRoom;
+        [SerializeField] UnityEvent onPlayerEnteredRoom;
         public override void OnConnectedToMaster()
         {
             Debug.Log("Connected to master server");
+            onConnectedToMaster.Invoke();
         }
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.Log($"Disconnected: {cause.ToString()}");
+            onDisconnected.Invoke();
         }
         public override void OnCreatedRoom()
         {
             Debug.Log("Room created");
+            onCreatedRoom.Invoke();
         }
         public override void OnJoinedRoom()
         {
@@ -30,7 +40,7 @@ namespace Matching
             {
                 if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
                 {
-                    matchingScene.Value.LoadScene();
+                    onJoinedRoom.Invoke();
                 }
             }
         }
@@ -41,7 +51,7 @@ namespace Matching
             {
                 if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
                 {
-                    matchingScene.Value.LoadScene();
+                    onPlayerEnteredRoom.Invoke();
                 }
             }
         }

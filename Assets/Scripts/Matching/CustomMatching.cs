@@ -7,16 +7,25 @@ using TMPro;
 
 namespace Matching
 {
+    /// <summary>
+    /// Written by Shinnosuke
+    /// </summary>
     public class CustomMatching : MonoBehaviourPunCallbacks, IMatching
     {
         [SerializeField] int playerCount = 2;
-        [SerializeField] TMP_InputField passwordInputField;
+        private string password;
         public void StartMatching()
         {
+            PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.ConnectUsingSettings();
             var roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = playerCount;
             roomOptions.IsVisible = false;
-            PhotonNetwork.JoinOrCreateRoom(passwordInputField.text, roomOptions, TypedLobby.Default);
+            PhotonNetwork.JoinOrCreateRoom(password, roomOptions, TypedLobby.Default);
+        }
+        public void SetPassword(string password)
+        {
+            this.password = password;
         }
     }
 }
