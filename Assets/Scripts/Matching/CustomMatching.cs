@@ -8,16 +8,24 @@ using TMPro;
 namespace Matching
 {
     /// <summary>
-    /// Written by Shinnosuke
+    /// Written by Shinnosuke (2024/09/11)
     /// </summary>
     public class CustomMatching : MonoBehaviourPunCallbacks, IMatching
     {
         [SerializeField] int playerCount = 2;
         private string password;
-        public void StartMatching()
+        [SerializeField] MatchingCallback matchingCallback;
+        public void ConnectToMasterServer()
         {
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.ConnectUsingSettings();
+        }
+        public void RegisterCallback()
+        {
+            matchingCallback.onConnectedToMaster.AddListener(() => StartMatching());
+        }
+        public void StartMatching()
+        {
             var roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = playerCount;
             roomOptions.IsVisible = false;

@@ -13,11 +13,11 @@ namespace Matching
     /// </summary>
     public class MatchingCallback : MonoBehaviourPunCallbacks
     {
-        [SerializeField] UnityEvent onConnectedToMaster;
-        [SerializeField] UnityEvent onDisconnected;
-        [SerializeField] UnityEvent onCreatedRoom;
-        [SerializeField] UnityEvent onJoinedRoom;
-        [SerializeField] UnityEvent onPlayerEnteredRoom;
+        [SerializeField] public UnityEvent onConnectedToMaster;
+        [SerializeField] public UnityEvent onDisconnected;
+        [SerializeField] public UnityEvent onCreatedRoom;
+        [SerializeField] public UnityEvent onJoinedRoom;
+        [SerializeField] public UnityEvent onPlayerEnteredRoom;
         public override void OnConnectedToMaster()
         {
             Debug.Log("Connected to master server");

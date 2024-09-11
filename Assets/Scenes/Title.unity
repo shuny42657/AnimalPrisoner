@@ -1446,7 +1446,19 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1868951317}
         m_TargetAssemblyTypeName: Matching.RandomMatching, Assembly-CSharp
-        m_MethodName: StartMatching
+        m_MethodName: ConnectToMasterServer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1868951317}
+        m_TargetAssemblyTypeName: Matching.RandomMatching, Assembly-CSharp
+        m_MethodName: RegisterCallback
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1764,6 +1776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCount: 2
+  matchingCallback: {fileID: 251030726}
 --- !u!114 &1198362313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2068,7 +2081,19 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1198362311}
         m_TargetAssemblyTypeName: Matching.CustomMatching, Assembly-CSharp
-        m_MethodName: StartMatching
+        m_MethodName: ConnectToMasterServer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1198362311}
+        m_TargetAssemblyTypeName: Matching.CustomMatching, Assembly-CSharp
+        m_MethodName: RegisterCallback
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2233,6 +2258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Room
   playerCount: 2
+  matchingCallback: {fileID: 251030726}
 --- !u!114 &1868951319
 MonoBehaviour:
   m_ObjectHideFlags: 0

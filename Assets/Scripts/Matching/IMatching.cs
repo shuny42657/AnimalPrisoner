@@ -9,6 +9,8 @@ namespace Matching
     /// </summary>
     public interface IMatching
     {
+        public void ConnectToMasterServer();
+        public void RegisterCallback();
         public void StartMatching();
     }
 }
