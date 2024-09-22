@@ -9,7 +9,7 @@ namespace UI
     /// <summary>
     /// Written by Shinnosuke
     /// </summary>
-    public class ButtonView : MonoBehaviour
+    public class ButtonCallback : MonoBehaviour
     {
         [SerializeField] Button button;
         [SerializeField] UnityEvent unityEvent;
