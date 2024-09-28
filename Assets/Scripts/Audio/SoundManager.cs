@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using com.llamagod;
 
 public class SoundManager : MonoBehaviour
 {
@@ -37,8 +38,8 @@ public class SoundManager : MonoBehaviour
     public SESoundData[] seSoundDatas;
     private Dictionary<BGMSoundData.BGM, BGMSoundData> bgmSoundDictionary = new Dictionary<BGMSoundData.BGM, BGMSoundData>();
     private Dictionary<SESoundData.SE, SESoundData> seSoundDictionary = new Dictionary<SESoundData.SE, SESoundData>();
-    public AudioSource[] seAudioSources; // Multiple SEs are played simultaneously.
-    public AudioSource bgmAudioSource; // One BGM is played at a time.
+    private AudioSource[] seAudioSources = new AudioSource[10]; // Multiple SEs are played simultaneously.
+    private AudioSource bgmAudioSource; // One BGM is played at a time.
     public static SoundManager Instance { private set; get; }
     private void Awake()
     {
@@ -56,20 +57,11 @@ public class SoundManager : MonoBehaviour
         foreach (var bgmSoundData in bgmSoundDatas) bgmSoundDictionary.Add(bgmSoundData.bgm, bgmSoundData);
         foreach (var seSoundData in seSoundDatas) seSoundDictionary.Add(seSoundData.se, seSoundData);
     }
-    /*
-    public void Play(AudioClip audioClip, float volume)
+    [EnumAction(typeof(BGMSoundData.BGM))]
+    public void PlayBGM(int bgm)
     {
-        var audioSource = GetSEAudioSource();
-        if (audioSource == null) return;
-        audioSource.clip = audioClip;
-        audioSource.volume = volume;
-        audioSource.Play();
-
-    }
-    */
-    public void Play(BGMSoundData.BGM bgm)
-    {
-        if (bgmSoundDictionary.TryGetValue(bgm, out var soundData))
+        BGMSoundData.BGM enumBGM = (BGMSoundData.BGM)bgm;
+        if (bgmSoundDictionary.TryGetValue(enumBGM, out var soundData))
         {
             if (bgmAudioSource.isPlaying)
             {
@@ -84,9 +76,11 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("Audio clip not found");
         }
     }
-    public void Play(SESoundData.SE se)
+    [EnumAction(typeof(SESoundData.SE))]
+    public void PlaySE(int se)
     {
-        if (seSoundDictionary.TryGetValue(se, out var soundData))
+        SESoundData.SE enumSE = (SESoundData.SE)se;
+        if (seSoundDictionary.TryGetValue(enumSE, out var soundData))
         {
             var seAudioSource = GetSEAudioSource();
             if (seAudioSource == null) return;
@@ -109,5 +103,9 @@ public class SoundManager : MonoBehaviour
             }
         }
         return null;
+    }
+    public void AAAAAAAA()
+    {
+        Debug.Log("AAAAAAAA");
     }
 }
