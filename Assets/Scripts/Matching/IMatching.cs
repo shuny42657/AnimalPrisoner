@@ -12,5 +12,6 @@ namespace Matching
         public void ConnectToMasterServer();
         public void RegisterCallback();
         public void StartMatching();
+        public void DisconnectMatching();
     }
 }

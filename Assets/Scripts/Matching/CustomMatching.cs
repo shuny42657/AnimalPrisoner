@@ -35,5 +35,9 @@ namespace Matching
         {
             this.password = password;
         }
+        public void DisconnectMatching()
+        {
+            PhotonNetwork.Disconnect();
+        }
     }
 }

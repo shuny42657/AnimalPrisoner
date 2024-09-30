@@ -11,6 +11,6 @@ public class SoundTest : MonoBehaviour
     public void Start()
     {
         soundManager = SoundManager.Instance;
-        soundManager.PlayBGM(0);
+        soundManager.PlayBGM((int)(SoundManager.BGMSoundData.BGM.Title));
     }
 }

@@ -30,5 +30,9 @@ namespace Matching
             roomOptions.IsVisible = true;
             PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
         }
+        public void DisconnectMatching()
+        {
+            PhotonNetwork.Disconnect();
+        }
     }
 }
