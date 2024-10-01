@@ -10,12 +10,12 @@ using Sync;
 public class GameStarter : MonoBehaviour
 {
     [SerializeField] SerializeInterface<IPlayerFactory> factory;
-    //[SerializeField] RoomCustomPropertyCallback callback;
+    [SerializeField] RoomCustomPropertyCallback callback;
     JobAllocator jobAllocator = new JobAllocator();
     private void Start()
     {
         factory.Value.GeneratePlayer(new Vector3(0, 0, 0));
         PhotonNetwork.CurrentRoom.SetMatchComplete(true);
-        //callback.onModifiedWithMasterCleient.AddListener(() => jobAllocator.AllocateJob());
+        callback.onModifiedWithMasterCleient.AddListener(() => jobAllocator.AllocateJob());
     }
 }
