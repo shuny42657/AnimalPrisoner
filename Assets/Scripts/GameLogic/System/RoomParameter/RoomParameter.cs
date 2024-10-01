@@ -66,6 +66,7 @@ namespace GameLogic.GameSystem
 
         bool dead;
         [SerializeField] UnityEvent OnParamDead;
+
         private void Awake()
         {
             fuel = maxFuel;

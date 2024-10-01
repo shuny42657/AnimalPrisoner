@@ -13,7 +13,6 @@ namespace GameLogic.GameSystem
             
         public void InitializeGame()
         {
-
             roomParameter.FuelComsumeSpeed = 0.1f;
             roomParameter.DuranilityCosumeSpeed = 0.1f;
             roomParameter.ElectricityConsumeSpeed = 0.1f;

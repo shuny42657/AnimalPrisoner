@@ -15,5 +15,16 @@ namespace GameLogic.WorkSpace
             IsActive = true;
             OnOperationInitiated.Invoke();
         }
+
+        public void InitiateOperation(PlayerManager playerManager)
+        {
+            playerManager.SetCanMove(false);
+        }
+
+        public void FinishOperation(PlayerManager playerManager)
+        {
+            playerManager.SetCanMove(true);
+            playerManager.PlayerStatus.Energy = playerManager.PlayerStatus.MaxEnergy;
+        }
     }
 }
