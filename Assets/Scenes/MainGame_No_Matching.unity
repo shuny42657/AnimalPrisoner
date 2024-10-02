@@ -975,6 +975,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc7e6c07f52b40d69d88fbabefce3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerFactory: {fileID: 507539982}
+  roomParam: {fileID: 502147687}
+  roomParamPacer: {fileID: 1240113795}
+  leveledObjCreatorPacer: {fileID: 340514658}
+  objectiveCreatorPacer: {fileID: 2143462752}
 --- !u!1 &171515654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,22 +2995,6 @@ MonoBehaviour:
   fuelComsumeSpeed: 5
   durabilityComsumeSpeed: 5
   electriticyComsumeSpeed: 5
-  OnParamDead:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2062412975}
-        m_TargetAssemblyTypeName: GameLogic.GameSystem.PlayerStopPlayingManager,
-          GameLogic
-        m_MethodName: StopPlaying
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &502147688
 Transform:
   m_ObjectHideFlags: 0
@@ -3034,9 +3023,9 @@ GameObject:
   - component: {fileID: 507539982}
   - component: {fileID: 507539983}
   - component: {fileID: 507539984}
-  - component: {fileID: 507539985}
   - component: {fileID: 507539986}
   - component: {fileID: 507539987}
+  - component: {fileID: 507539988}
   m_Layer: 0
   m_Name: PlayerFactory
   m_TagString: Untagged
@@ -3099,18 +3088,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 507539985}
-        m_TargetAssemblyTypeName: P_PlayerStopPlayingManager, GameLogic
-        m_MethodName: SetPlayerManager
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 507539986}
         m_TargetAssemblyTypeName: P_PlayerManager_ObjectiveCreator, GameLogic
         m_MethodName: SetPlayerUpgradable
@@ -3125,6 +3102,18 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 507539987}
         m_TargetAssemblyTypeName: P_PlayerManager_BedAutomatable, GameLogic
+        m_MethodName: Set
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 507539988}
+        m_TargetAssemblyTypeName: P_PlayStopperManager, GameLogic
         m_MethodName: Set
         m_Mode: 0
         m_Arguments:
@@ -3163,19 +3152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gaugeView: {fileID: 171515656}
---- !u!114 &507539985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 507539980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c333270a3af1942169781385514907ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pspManager: {fileID: 2062412975}
 --- !u!114 &507539986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3203,6 +3179,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bedAutomatable: {fileID: 6203291695569549482}
+--- !u!114 &507539988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507539980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1077d020ffc704a319962d53db63beff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomParam: {fileID: 502147687}
 --- !u!1 &508181005
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,7 +4143,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696114411}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efd47188a5d1649eb9a4a84ff874fd9a, type: 3}
   m_Name: 

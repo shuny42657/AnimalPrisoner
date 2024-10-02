@@ -65,7 +65,7 @@ namespace GameLogic.GameSystem
         }
 
         bool dead;
-        [SerializeField] UnityEvent OnParamDead;
+        public NoArgUnitaskDelegate OnParamDead;
 
         private void Awake()
         {
