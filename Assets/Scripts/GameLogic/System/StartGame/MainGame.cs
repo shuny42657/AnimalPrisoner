@@ -23,7 +23,7 @@ namespace GameLogic.GameSystem
         void Start()
         {
             //プレイヤーの数が揃っていなかった場合は例外処理を飛ばしてマッチングシーンに戻る
-
+            Debug.Log($"Player Count : {PhotonNetwork.PlayerList.Length}");
             //メインの処理
             gameInitializer = new(
                 playerFactory,
