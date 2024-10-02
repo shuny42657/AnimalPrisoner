@@ -9,10 +9,10 @@ namespace GameLogic.GameSystem
 {
     public interface IPlayStopper
     {
-        public UniTask StopPlaying();
+        public void StopPlaying();
     }
 
-    public class PlayerStopPlayingManager : MonoBehaviour
+    public class PlayerStopPlayingManager : MonoBehaviour,IPlayStopper
     {
         [SerializeField]PlayerManager playerManager; public void SetPlayerManager(PlayerManager playerManager) { this.playerManager = playerManager; }
 
@@ -30,7 +30,7 @@ namespace GameLogic.GameSystem
         {
             _playerManager = playerManager;
         }
-        public async UniTask StopPlaying()
+        public async void StopPlaying()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             _playerManager.SetCanMove(false);
