@@ -39,9 +39,9 @@ namespace GameLogic.GameSystem
 
             _jobAllocator.AllocateJob();
 
-            _roomParam.FuelComsumeSpeed = 0.1f;
-            _roomParam.DuranilityCosumeSpeed = 0.1f;
-            _roomParam.ElectricityConsumeSpeed = 0.1f;
+            _roomParam.FuelComsumeSpeed = 40f;
+            _roomParam.DuranilityCosumeSpeed = 5f;
+            _roomParam.ElectricityConsumeSpeed = 5f;
             _roomParam.IsActive = true;
 
             _roomParamPacer.IsActive = true;
@@ -49,5 +49,4 @@ namespace GameLogic.GameSystem
             _objectiveCreatorPacer.IsActive = true;
         }
     }
-
 }

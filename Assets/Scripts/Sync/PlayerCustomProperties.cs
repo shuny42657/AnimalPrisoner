@@ -12,6 +12,7 @@ namespace Sync
         mcplt,
         score,
         decaylevelup,
+        gameover,
     }
 
     public enum PlayerPropertyKey
@@ -67,6 +68,19 @@ namespace Sync
         public static int GetDecayLevelUp(this Room room)
         {
             return (room.CustomProperties[RoomPropertyKey.decaylevelup.ToString()] is int decaylevelup) ? decaylevelup : 0 ;
+        }
+
+        public static bool GetGameOver(this Room room)
+        {
+            return (room.CustomProperties[RoomPropertyKey.gameover.ToString()] is bool gameover) && gameover;
+        }
+
+        public static void SetGameOver(this Room room, bool gameover)
+        {
+            propsToSet[RoomPropertyKey.gameover.ToString()] = gameover;
+            Debug.Log("Game Over Set");
+            room.SetCustomProperties(propsToSet);
+            propsToSet.Clear();
         }
     }
 

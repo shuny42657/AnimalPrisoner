@@ -10439,10 +10439,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleporterPutAndTakes:
   - {fileID: 1359203697}
+  - {fileID: 1255251308}
+  - {fileID: 1948969039}
   receiverPutAndTakes:
   - {fileID: 1607149837}
+  - {fileID: 1504372058}
+  - {fileID: 1345790264}
   customPropCallbacks:
   - {fileID: 1607149836}
+  - {fileID: 1504372057}
+  - {fileID: 1345790263}
   sendItemKeys: 06000000070000000800000009000000
 --- !u!4 &1699267180
 Transform:

@@ -20,6 +20,7 @@ namespace Sync
                 var yes = (bool)(PhotonNetwork.CurrentRoom.CustomProperties[key.ToString()]);
                 if (yes)
                 {
+                    Debug.Log("Predicate Callback Invoked");
                     onModified.Invoke();
                     if (PhotonNetwork.IsMasterClient)
                     {
