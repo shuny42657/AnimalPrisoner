@@ -8,20 +8,55 @@ namespace GameLogic.GamePlayer
 {
     public class PlayerManager : MonoBehaviour
     {
-        [SerializeField] SerializeInterface<IOperatableHandler> opertableHandler;
-        [SerializeField] SerializeInterface<IPlayerStatus> playerStatus; public IPlayerStatus PlayerStatus { get { return playerStatus.Value; } }
-        [SerializeField] SerializeInterface<IJobStatus> jobStatus;
-        [SerializeField] SerializeInterface<IMovable> characterMove;
-        [SerializeField] SerializeInterface<IUpGradable> upGradable; public IUpGradable UpGradable { get { return upGradable.Value; } }
+        public PlayerManager(
+            IOperatableHandler operatableHandler,
+            IPlayerStatus playerStatus,
+            IJobStatus jobStatus,
+            IMovable movable,
+            IUpGradable upgradable
+            )
+        {
+            _operatableHandler = operatableHandler;
+            _playerStatus = playerStatus;
+            _jobStatus = jobStatus;
+            _movable = movable;
+            _upgradable = upgradable;
+        }
+        IOperatableHandler _operatableHandler;
+        IPlayerStatus _playerStatus; public IPlayerStatus PlayerStatus { get { return _playerStatus; } }
+        IJobStatus _jobStatus;
+        IMovable _movable;
+        IUpGradable _upgradable; public IUpGradable UpGradable { get { return _upgradable; } }
 
         public void Work()
         {
-            opertableHandler.Value.Work(playerStatus.Value);
+            _operatableHandler.Work(_playerStatus);
         }
 
         public void SetCanMove(bool isActive)
         {
-            characterMove.Value.CanMove = isActive;
+            _movable.CanMove = isActive;
+        }
+
+        //Move
+        public void MoveRight()
+        {
+            _movable.MoveHorizontal(_movable.Speed);
+        }
+
+        public void MoveLeft()
+        {
+            _movable.MoveHorizontal(_movable.Speed * -1f);
+        }
+
+        public void MoveUp()
+        {
+            _movable.MoveVertical(_movable.Speed);
+        }
+
+        public void MoveDown()
+        {
+            _movable.MoveVertical(_movable.Speed * -1);
         }
     }
 }
