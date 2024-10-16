@@ -726,7 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c688ce765c1974049b9b6165445cd7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MainGame_No_Matching
+  sceneName: GameStarter
 --- !u!114 &251030730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3068,7 +3068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: Room
-  playerCount: 1
+  playerCount: 2
   matchingCallback: {fileID: 251030726}
 --- !u!114 &1868951319
 MonoBehaviour:
