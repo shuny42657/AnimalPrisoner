@@ -16,6 +16,7 @@ namespace GameLogic.GamePlayer
         public void MoveLeft();
         public void MoveUp();
         public void MoveDown();
+        public void PutOrTake();
     }
 }
 namespace GameLogic.Factory

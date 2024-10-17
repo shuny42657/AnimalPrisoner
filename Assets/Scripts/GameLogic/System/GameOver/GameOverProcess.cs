@@ -17,7 +17,7 @@ namespace GameLogic.GameSystem
         [SerializeField] Pacer _objectiveCreatorPacer;
         [SerializeField] RoomParameterModifier _roomParamModifier;
 
-        public async UniTask RunGameOverProcess(PlayerManager playerManager)
+        public async UniTask RunGameOverProcess(IPlayer playerManager)
         {
             Debug.Log("Game Over Processs");
              playerManager.SetCanMove(false);

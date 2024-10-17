@@ -34,6 +34,7 @@ namespace GameLogic.GameSystem
         void Start()
         {
             _playerManager = playerFactory.GeneratePlayer(Vector3.zero);
+            _playerManager.SetCanMove(true);
             //プレイヤーの数が揃っていなかった場合は例外処理を飛ばしてマッチングシーンに戻る
             Debug.Log($"Player Count : {PhotonNetwork.PlayerList.Length}");
             //メインの処理
@@ -50,6 +51,7 @@ namespace GameLogic.GameSystem
             //ゲームオーバーの関数の登録
             roomParam.OnParamDead += () => SetGameOver();
             //_roomPredicatePropertyCallback.onModified.AddListener(() => Debug.Log("Predicate Callback"));
+            _roomPredicatePropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess(_playerManager));
 
             //GameOverViewのボタンコールバック
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
