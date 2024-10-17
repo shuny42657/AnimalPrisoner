@@ -6,7 +6,7 @@ using GameLogic.WorkSpace;
 
 namespace GameLogic.GamePlayer
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : IPlayer
     {
         public PlayerManager(
             IOperatableHandler operatableHandler,

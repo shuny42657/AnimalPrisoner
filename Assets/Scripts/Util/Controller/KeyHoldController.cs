@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class KeyHoldController : MonoBehaviour
 {
     [SerializeField] KeyCode key;
-    [SerializeField] UnityEvent OnKeyHold;
+    public UnityEvent OnKeyHold;
 
     private void Update()
     {

@@ -16,7 +16,7 @@ namespace GameLogic.GameSystem
     /// </summary>
     public class MainGame : MonoBehaviourPunCallbacks
     {
-        PlayerManager _playerManager;
+        IPlayer _playerManager;
         public void SetPlayerManager(GameObject obj)
         {
             _playerManager = obj.GetComponent<PlayerManager>();
@@ -24,7 +24,7 @@ namespace GameLogic.GameSystem
         }
         MainGameInitializer gameInitializer;
         
-        [SerializeField] PlayerFactory playerFactory;
+        [SerializeField] MainPlayer playerFactory;
         [SerializeField] IJobAllocator jobAllocator = new MainJobAllocator();
         [SerializeField] RoomParameter roomParam;
         [SerializeField] Pacer roomParamPacer;
@@ -38,11 +38,11 @@ namespace GameLogic.GameSystem
         // Start is called before the first frame update
         void Start()
         {
+            _playerManager = playerFactory.GeneratePlayer(Vector3.zero);
             //プレイヤーの数が揃っていなかった場合は例外処理を飛ばしてマッチングシーンに戻る
             Debug.Log($"Player Count : {PhotonNetwork.PlayerList.Length}");
             //メインの処理
             gameInitializer = new(
-                playerFactory,
                 jobAllocator,
                 roomParam,
                 roomParamPacer,

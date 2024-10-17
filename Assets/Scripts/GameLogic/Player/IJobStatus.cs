@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameLogic
 {
@@ -25,8 +26,10 @@ namespace GameLogic.GamePlayer
 {
     public interface IJobStatus
     {
+        public UnityEvent<IJobStatus> OnJobSet { get; }
         public List<JobName> GetAllJobs();
         public void SetJob(JobName job);
+        public void SetJobs();
         public void ClearJob();
     }
 }

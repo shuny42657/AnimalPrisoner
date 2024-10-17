@@ -1,32 +1,94 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameLogic.WorkSpace;
+using GameLogic.GamePlayer;
+using GameLogic.GameSystem;
+using GameLogic.Map;
+using UI;
+using Sync;
 
-namespace GameLogic.GamePlayer
+namespace GameLogic.Factory
 {
     /// <summary>
     /// PlayerPrefabにつけて、ゲームで動くPlayerを生成する
     /// </summary>
-    public class MainPlayer : MonoBehaviour
+    public class MainPlayer : MonoBehaviour,IPlayerFactory
     {
-        [SerializeField] PlayerStatus _playerStatus;
-        [SerializeField] JobStatus _jobStatus;
-        [SerializeField] PlayerOperatableHander _playerOperatableHandler;
+        [SerializeField] GameObject _playerPrefab;
+        [SerializeField] IPlayerStatus _playerStatus;
+        [SerializeField] IJobStatus _jobStatus;
+        [SerializeField] IOperatableHandler _playerOperatableHandler;
+        [SerializeField] IUpGradable _playerSpeedUpGradable;
+        [SerializeField] IMovable _move;
 
         [SerializeField] KeyHoldController _rightKeyHoldController;
         [SerializeField] KeyHoldController _leftKeyHoldController;
         [SerializeField] KeyHoldController _upKeyHoldController;
         [SerializeField] KeyHoldController _downKeyHoldController;
 
+        [SerializeField] PlayerCustomPropertyCallback _playerCustomPropertyCallback;
+        [SerializeField] MapBuilder _mapBuilder;
+        [SerializeField] JobDisplay _jobDisplay;
+
+        [SerializeField] GaugeView _playerStatusGaugeView;
+
+        [SerializeField] ObjectiveCreator _objectiveCreator;
+
+        [SerializeField] BedAutomatable _bedAutomatable;
+
+        PlayerManager _playerManager; public PlayerManager PlayerManager { get { return _playerManager; } }
+
         // Start is called before the first frame update
         void Start()
         {
+            
         }
 
-        // Update is called once per frame
-        void Update()
+        public void InitiateOperation(PlayerManager playerManager)
         {
-        
+            playerManager.SetCanMove(false);
+        }
+
+        public void FinishOperation(PlayerManager playerManager)
+        {
+            playerManager.SetCanMove(true);
+            playerManager.PlayerStatus.Energy = playerManager.PlayerStatus.MaxEnergy;
+        }
+
+        public IPlayer GeneratePlayer(Vector3 position)
+        {
+            GameObject newPlayer = Instantiate(_playerPrefab, position, Quaternion.identity);
+
+            _playerStatus = newPlayer.GetComponent<IPlayerStatus>();
+            _jobStatus = newPlayer.GetComponent<IJobStatus>();
+            _playerOperatableHandler = newPlayer.GetComponent<IOperatableHandler>();
+            _playerSpeedUpGradable = newPlayer.GetComponent<IUpGradable>();
+            _move = newPlayer.GetComponent<IMovable>();
+
+            var playerManager = new PlayerManager(
+                _playerOperatableHandler,
+                _playerStatus,
+                _jobStatus,
+                _move,
+                _playerSpeedUpGradable
+                );
+
+            _rightKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveRight());
+            _leftKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveLeft());
+            _downKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveDown());
+            _upKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveUp());
+
+            _playerCustomPropertyCallback.onComplete.AddListener(() => _jobStatus.SetJobs());
+            _jobStatus.OnJobSet.AddListener((i_jobStatus) => _mapBuilder.BuildWorkSpaces(i_jobStatus));
+            _jobStatus.OnJobSet.AddListener((i_jobStatus) => _jobDisplay.DisplayJob(i_jobStatus));
+
+            _playerStatus.OnEnergyModified.AddListener((rate) => _playerStatusGaugeView.ModifyGauge(rate));
+
+            _bedAutomatable.onOperationFinish.AddListener((val) => FinishOperation(playerManager));
+            _bedAutomatable.OnOperationInitiated.AddListener(() => InitiateOperation(playerManager));
+
+            return playerManager;
         }
     }
 

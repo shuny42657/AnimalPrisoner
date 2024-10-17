@@ -10,14 +10,12 @@ namespace GameLogic.GameSystem
     /// </summary>
     public class MainGameInitializer : IGameInitializer
     {
-        IPlayerFactory _playerFactory;
         IJobAllocator _jobAllocator;
         RoomParameter _roomParam;
         Pacer _roomParamPacer;
         Pacer _leveledObjCreatorPacer;
         Pacer _objectiveCreatorPacer;
         public MainGameInitializer(
-            IPlayerFactory playerFactory,
             IJobAllocator jobAllocator,
             RoomParameter roomParam,
             Pacer roomParamPacer,
@@ -25,7 +23,6 @@ namespace GameLogic.GameSystem
             Pacer objectiveCreatorPacer
             )
         {
-            _playerFactory = playerFactory;
             _jobAllocator = jobAllocator;
             _roomParam = roomParam;
             _roomParamPacer = roomParamPacer;
@@ -35,7 +32,6 @@ namespace GameLogic.GameSystem
         }
         public void InitializeGame()
         {
-            _playerFactory.GeneratePlayer(new Vector3(0, 0, 0));
 
             _jobAllocator.AllocateJob();
 
