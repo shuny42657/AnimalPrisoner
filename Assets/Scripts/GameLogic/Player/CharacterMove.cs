@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour, IMovable
 {
+    [SerializeField] Transform _transform;
     public bool CanMove { get; set; }
     [SerializeField] float speed;
     public float Speed
@@ -17,7 +18,7 @@ public class CharacterMove : MonoBehaviour, IMovable
     {
         if (CanMove)
         {
-            transform.Translate(Time.deltaTime * this.speed * speed, 0f, 0f);
+            _transform.Translate(Time.deltaTime * this.speed * speed, 0f, 0f);
         }
     }
 
@@ -25,7 +26,7 @@ public class CharacterMove : MonoBehaviour, IMovable
     {
         if (CanMove)
         {
-            transform.Translate(0f, 0f, Time.deltaTime * this.speed * speed);
+            _transform.Translate(0f, 0f, Time.deltaTime * this.speed * speed);
         }
     }
 }

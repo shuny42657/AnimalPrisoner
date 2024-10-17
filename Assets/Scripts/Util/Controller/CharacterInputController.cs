@@ -17,21 +17,25 @@ public class CharacterInputController : MonoBehaviour, IKeyInputController
     {
         if(Input.GetAxisRaw("Horizontal") != 0f)
         {
+            Debug.Log("Hori");
             onHAxis.Invoke(Input.GetAxisRaw("Horizontal"));
         }
 
         if(Input.GetAxisRaw("Vertical") != 0f)
         {
+            Debug.Log("Verti");
             onVAxis.Invoke(Input.GetAxisRaw("Vertical"));
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("E");
             onEPressed.Invoke();
         }
 
         if (Input.GetKey(KeyCode.Q))
         {
+            Debug.Log("Q");
             onQ.Invoke();
         }
 
