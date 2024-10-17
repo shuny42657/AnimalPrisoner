@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc7e6c07f52b40d69d88fbabefce3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFactory: {fileID: 507539982}
+  playerFactory: {fileID: 507539989}
   roomParam: {fileID: 502147687}
   roomParamPacer: {fileID: 1240113795}
   leveledObjCreatorPacer: {fileID: 340514658}
@@ -3024,12 +3024,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 507539981}
-  - component: {fileID: 507539982}
   - component: {fileID: 507539983}
   - component: {fileID: 507539984}
   - component: {fileID: 507539986}
   - component: {fileID: 507539987}
   - component: {fileID: 507539988}
+  - component: {fileID: 507539989}
   m_Layer: 0
   m_Name: PlayerFactory
   m_TagString: Untagged
@@ -3052,94 +3052,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 114904147}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &507539982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 507539980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6406cb0208354b739457f1b3af636f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 827715138803065033, guid: a52ea7c39df9049d7a060863258c817d, type: 3}
-  OnPlayerGenerate:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 507539983}
-        m_TargetAssemblyTypeName: P_PlayerFactory_MatchingManager, GameLogic
-        m_MethodName: SetJobToCallBack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 507539984}
-        m_TargetAssemblyTypeName: P_PlayerStatus_View, GameLogic
-        m_MethodName: SetPlayerStatusCallback
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 507539986}
-        m_TargetAssemblyTypeName: P_PlayerManager_ObjectiveCreator, GameLogic
-        m_MethodName: SetPlayerUpgradable
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 507539987}
-        m_TargetAssemblyTypeName: P_PlayerManager_BedAutomatable, GameLogic
-        m_MethodName: Set
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 507539988}
-        m_TargetAssemblyTypeName: P_PlayStopperManager, GameLogic
-        m_MethodName: Set
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 166820265}
-        m_TargetAssemblyTypeName: GameLogic.GameSystem.MainGame, GameLogic
-        m_MethodName: SetPlayerManager
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &507539983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3211,6 +3123,25 @@ MonoBehaviour:
   _roomParamPacer: {fileID: 0}
   _leveledObjCreatorPacer: {fileID: 0}
   _objectiveCreatorPacer: {fileID: 0}
+--- !u!114 &507539989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507539980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 385f3d50a63fb47ceb7a378750054405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerPrefab: {fileID: 827715138803065033, guid: b449d4d18fa57405b82bb3f9b7e6da96, type: 3}
+  _playerCustomPropertyCallback: {fileID: 340825916}
+  _mapBuilder: {fileID: 1966106950}
+  _jobDisplay: {fileID: 740780232}
+  _playerStatusGaugeView: {fileID: 171515656}
+  _objectiveCreator: {fileID: 765777350}
+  _bedAutomatable: {fileID: 6203291695569549482}
 --- !u!1 &508181005
 GameObject:
   m_ObjectHideFlags: 0
@@ -12841,7 +12772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c823c94ea88425390eb990661209ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
 --- !u!1 &2067434485
 GameObject:
   m_ObjectHideFlags: 0

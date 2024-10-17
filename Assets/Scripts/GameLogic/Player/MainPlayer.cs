@@ -19,13 +19,15 @@ namespace GameLogic.Factory
         [SerializeField] IPlayerStatus _playerStatus;
         [SerializeField] IJobStatus _jobStatus;
         [SerializeField] IOperatableHandler _playerOperatableHandler;
+        [SerializeField] IOperatableCallback _operatableCallback;
         [SerializeField] IUpGradable _playerSpeedUpGradable;
         [SerializeField] IMovable _move;
+        [SerializeField] IGrabbableVisualizer _visualizer;
 
-        [SerializeField] KeyHoldController _rightKeyHoldController;
-        [SerializeField] KeyHoldController _leftKeyHoldController;
-        [SerializeField] KeyHoldController _upKeyHoldController;
-        [SerializeField] KeyHoldController _downKeyHoldController;
+        KeyHoldController _rightKeyHoldController;
+        KeyHoldController _leftKeyHoldController;
+        KeyHoldController _upKeyHoldController;
+        KeyHoldController _downKeyHoldController;
 
         [SerializeField] PlayerCustomPropertyCallback _playerCustomPropertyCallback;
         [SerializeField] MapBuilder _mapBuilder;
@@ -38,12 +40,6 @@ namespace GameLogic.Factory
         [SerializeField] BedAutomatable _bedAutomatable;
 
         PlayerManager _playerManager; public PlayerManager PlayerManager { get { return _playerManager; } }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
 
         public void InitiateOperation(PlayerManager playerManager)
         {
@@ -63,8 +59,14 @@ namespace GameLogic.Factory
             _playerStatus = newPlayer.GetComponent<IPlayerStatus>();
             _jobStatus = newPlayer.GetComponent<IJobStatus>();
             _playerOperatableHandler = newPlayer.GetComponent<IOperatableHandler>();
+            _operatableCallback = newPlayer.GetComponent<IOperatableCallback>();
             _playerSpeedUpGradable = newPlayer.GetComponent<IUpGradable>();
             _move = newPlayer.GetComponent<IMovable>();
+
+            _rightKeyHoldController = transform.GetChild(4).GetComponent<KeyHoldController>();
+            _leftKeyHoldController = transform.GetChild(2).GetComponent<KeyHoldController>();
+            _upKeyHoldController = transform.GetChild(1).GetComponent<KeyHoldController>();
+            _downKeyHoldController = transform.GetChild(3).GetComponent<KeyHoldController>();
 
             var playerManager = new PlayerManager(
                 _playerOperatableHandler,
@@ -88,6 +90,8 @@ namespace GameLogic.Factory
             _bedAutomatable.onOperationFinish.AddListener((val) => FinishOperation(playerManager));
             _bedAutomatable.OnOperationInitiated.AddListener(() => InitiateOperation(playerManager));
 
+            _operatableCallback.OnPut.AddListener((itemName) => _visualizer.Delete());
+            _operatableCallback.OnTake.AddListener((itemName) => _visualizer.Show(itemName));
             return playerManager;
         }
     }

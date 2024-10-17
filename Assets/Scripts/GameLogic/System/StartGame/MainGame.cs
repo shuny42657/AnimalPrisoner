@@ -17,11 +17,6 @@ namespace GameLogic.GameSystem
     public class MainGame : MonoBehaviourPunCallbacks
     {
         IPlayer _playerManager;
-        public void SetPlayerManager(GameObject obj)
-        {
-            _playerManager = obj.GetComponent<PlayerManager>();
-            _roomPredicatePropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess(_playerManager));
-        }
         MainGameInitializer gameInitializer;
         
         [SerializeField] MainPlayer playerFactory;
