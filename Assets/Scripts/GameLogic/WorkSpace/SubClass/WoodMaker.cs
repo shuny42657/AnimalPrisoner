@@ -19,8 +19,6 @@ namespace GameLogic.WorkSpace
             makerWork.OnWorkFinish.AddListener((item) => makerWork.ClearSpace(false));
             makerWork.OnProgressMade.AddListener((rate) => _progressView.ModifyGauge(rate));
 
-            _putAndTake.OnPut.AddListener((item) => _grabbableVisualizer.Show(item));
-            _putAndTake.OnTake.AddListener(() => _grabbableVisualizer.Delete());
             _putAndTake.OnTake.AddListener(() => makerWork.ClearSpace(true));
         }
     }

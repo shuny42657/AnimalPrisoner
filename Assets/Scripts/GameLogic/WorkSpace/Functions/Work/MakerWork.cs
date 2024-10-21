@@ -31,23 +31,6 @@ namespace GameLogic.WorkSpace
         {
             if (isSpaceCleared)
             {
-                /*if (playerStatus.Energy > 0)
-                {
-                    progress += Time.deltaTime * workSpeed;
-                    playerStatus.Energy -= Time.deltaTime * workSpeed;
-                    OnProgressMade.Invoke(progress / maxProgress);
-                    //Debug.Log($"Energy {progress}");
-
-                    if (progress > maxProgress)
-                    {
-                        progress = 0;
-                        OnWorkFinish.Invoke(item);
-                    }
-                }
-                else
-                {
-                    Debug.Log("no work");
-                }*/
                 base.Work(playerStatus);
             }
         }

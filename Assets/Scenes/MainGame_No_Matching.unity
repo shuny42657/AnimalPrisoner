@@ -3945,7 +3945,12 @@ MonoBehaviour:
   woodIronCrafter: {fileID: 1233703102}
   woodOilCrafter: {fileID: 813048312}
   ironOilCrafter: {fileID: 172603543}
+  _stoneMaker: {fileID: 639957214292030875, guid: a43955d41a54f4017ada2dbfebd250b1, type: 3}
   _woodMaker: {fileID: 3981085171586101442, guid: 548bd0f7abfbf45b7a513ec3c746706e, type: 3}
+  _ironMaker: {fileID: 1834977620356424361, guid: 94d95dc0afe184770a56c3d87a7d6e61, type: 3}
+  _oilMaker: {fileID: 9086430002039522420, guid: 51cd2b42b0fcb40cba313e351df0f53a, type: 3}
+  _waterMaker: {fileID: 3479186547950844518, guid: c025d3b3cd65d430eb832cb9f24af781, type: 3}
+  _riceMaker: {fileID: 6978412855260187364, guid: f0b01d864995b4d6699b4bcce1af5e2e, type: 3}
 --- !u!4 &649048715
 Transform:
   m_ObjectHideFlags: 0
