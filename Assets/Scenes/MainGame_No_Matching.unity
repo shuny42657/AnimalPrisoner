@@ -3208,17 +3208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobName: 0
-  putAndTake:
-    obj: {fileID: 1345790261}
-  automatable:
-    obj: {fileID: 0}
-  work:
-    obj: {fileID: 0}
-  playerTrigger:
-    obj: {fileID: 508181005}
-  upGradable:
-    obj: {fileID: 0}
+  _progressView: {fileID: 0}
 --- !u!114 &508181009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3560,17 +3550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobName: 0
-  putAndTake:
-    obj: {fileID: 143282635}
-  automatable:
-    obj: {fileID: 0}
-  work:
-    obj: {fileID: 0}
-  playerTrigger:
-    obj: {fileID: 608415208}
-  upGradable:
-    obj: {fileID: 0}
+  _progressView: {fileID: 0}
 --- !u!114 &608415211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3965,6 +3945,7 @@ MonoBehaviour:
   woodIronCrafter: {fileID: 1233703102}
   woodOilCrafter: {fileID: 813048312}
   ironOilCrafter: {fileID: 172603543}
+  _woodMaker: {fileID: 3981085171586101442, guid: 548bd0f7abfbf45b7a513ec3c746706e, type: 3}
 --- !u!4 &649048715
 Transform:
   m_ObjectHideFlags: 0
@@ -4405,17 +4386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobName: 0
-  putAndTake:
-    obj: {fileID: 1255251306}
-  automatable:
-    obj: {fileID: 0}
-  work:
-    obj: {fileID: 0}
-  playerTrigger:
-    obj: {fileID: 759709230}
-  upGradable:
-    obj: {fileID: 0}
+  _progressView: {fileID: 0}
 --- !u!65 &759709233
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5714,17 +5685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobName: 0
-  putAndTake:
-    obj: {fileID: 1607149834}
-  automatable:
-    obj: {fileID: 0}
-  work:
-    obj: {fileID: 0}
-  playerTrigger:
-    obj: {fileID: 1011410302}
-  upGradable:
-    obj: {fileID: 0}
+  _progressView: {fileID: 0}
 --- !u!114 &1011410308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6836,17 +6797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobName: 0
-  putAndTake:
-    obj: {fileID: 1359203695}
-  automatable:
-    obj: {fileID: 0}
-  work:
-    obj: {fileID: 0}
-  playerTrigger:
-    obj: {fileID: 1153419116}
-  upGradable:
-    obj: {fileID: 0}
+  _progressView: {fileID: 0}
 --- !u!1 &1160541966
 GameObject:
   m_ObjectHideFlags: 0
@@ -7757,17 +7708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobName: 0
-  putAndTake:
-    obj: {fileID: 1948969037}
-  automatable:
-    obj: {fileID: 0}
-  work:
-    obj: {fileID: 0}
-  playerTrigger:
-    obj: {fileID: 1323114994}
-  upGradable:
-    obj: {fileID: 0}
+  _progressView: {fileID: 0}
 --- !u!65 &1323114997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12640,17 +12581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobName: 0
-  putAndTake:
-    obj: {fileID: 1504372055}
-  automatable:
-    obj: {fileID: 0}
-  work:
-    obj: {fileID: 0}
-  playerTrigger:
-    obj: {fileID: 2057579027}
-  upGradable:
-    obj: {fileID: 0}
+  _progressView: {fileID: 0}
 --- !u!114 &2057579031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13819,17 +13750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobName: 0
-  putAndTake:
-    obj: {fileID: 2505227610744514985}
-  automatable:
-    obj: {fileID: 271852054598238752}
-  work:
-    obj: {fileID: 0}
-  playerTrigger:
-    obj: {fileID: 6538938204551761328}
-  upGradable:
-    obj: {fileID: 271852054598238752}
+  _progressView: {fileID: 0}
 --- !u!114 &3565149882428896248
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WoodMaker : MonoBehaviour
+namespace GameLogic.WorkSpace
 {
-    // Start is called before the first frame update
-    void Start()
+    public class WoodMaker : BaseWorkSpace
     {
-        
-    }
+        public override void InitializeWorkSpace()
+        {
+            base.InitializeWorkSpace();
+            _putAndTake.OnPut.AddListener((item) => _grabbableVisualizer.Show(item));
+            _putAndTake.OnTake.AddListener(() => _grabbableVisualizer.Delete());
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            var makerWork = (MakerWork)_work;
+            makerWork.OnWorkStart.AddListener(() => _progressView.Show(true));
+            makerWork.OnWorkFinish.AddListener((item) => _set.Set(item));
+            makerWork.OnWorkFinish.AddListener((item) => _progressView.Show(false));
+            makerWork.OnWorkFinish.AddListener((item) => makerWork.ClearSpace(false));
+            makerWork.OnProgressMade.AddListener((rate) => _progressView.ModifyGauge(rate));
+
+            _putAndTake.OnPut.AddListener((item) => _grabbableVisualizer.Show(item));
+            _putAndTake.OnTake.AddListener(() => _grabbableVisualizer.Delete());
+            _putAndTake.OnTake.AddListener(() => makerWork.ClearSpace(true));
+        }
     }
 }

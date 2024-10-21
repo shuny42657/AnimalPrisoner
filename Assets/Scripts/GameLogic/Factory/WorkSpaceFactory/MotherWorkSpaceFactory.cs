@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using GameLogic.WorkSpace;
 
 namespace GameLogic.Factory
 {
@@ -20,6 +21,8 @@ namespace GameLogic.Factory
         [SerializeField] WorkSpaceFactory woodOilCrafter;
         [SerializeField] WorkSpaceFactory ironOilCrafter;
 
+        [SerializeField] BaseWorkSpace _woodMaker;
+
         public GameObject Generate(JobName name, Vector3 position)
         {
             switch (name)
@@ -27,7 +30,10 @@ namespace GameLogic.Factory
                 case JobName.StoneMaker:
                     return stoneMakerFactory.GenerateItem(position);
                 case JobName.WoodMaker:
-                    return woodMakerFactory.GenerateItem(position);
+                    //return woodMakerFactory.GenerateItem(position);
+                    var newStoneMaker = Instantiate(_woodMaker, position, Quaternion.identity);
+                    newStoneMaker.InitializeWorkSpace();
+                    return newStoneMaker.gameObject;
                 case JobName.IronMaker:
                     return ironMakerFactory.GenerateItem(position);
                 case JobName.OilMaker:
