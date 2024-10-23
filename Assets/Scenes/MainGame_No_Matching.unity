@@ -3952,6 +3952,11 @@ MonoBehaviour:
   _waterMaker: {fileID: 3479186547950844518, guid: c025d3b3cd65d430eb832cb9f24af781, type: 3}
   _riceMaker: {fileID: 6978412855260187364, guid: f0b01d864995b4d6699b4bcce1af5e2e, type: 3}
   _stoneWoodWorkCrafter: {fileID: 4499415131491478356, guid: dfc7845c815534214a6e78ab235ea155, type: 3}
+  _stoneIronCrafter: {fileID: 1780063546651886692, guid: 96dfff4ea9b22494f8e337b1d9d32247, type: 3}
+  _stoneOilCrafter: {fileID: 2066851992875294924, guid: 687324dbed1ce4943b640842b241db86, type: 3}
+  _woodIronCrafter: {fileID: 4736021599298278994, guid: dd94f98d4fa14486baed8cadd6c548cc, type: 3}
+  _woodOilCrafter: {fileID: 6018770272979494350, guid: 9576de419a346465d92ab20e2ddeb476, type: 3}
+  _ironOilCrafter: {fileID: 2352373648510846553, guid: 0cb87b7c885fa44d29c9b6e50933a970, type: 3}
 --- !u!4 &649048715
 Transform:
   m_ObjectHideFlags: 0
@@ -11933,11 +11938,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7066094556741073656, guid: 098033a38acfd4a339866a0e95b6b8f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 7066094556741073656, guid: 098033a38acfd4a339866a0e95b6b8f8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 7066094556741073656, guid: 098033a38acfd4a339866a0e95b6b8f8, type: 3}
       propertyPath: m_LocalRotation.w

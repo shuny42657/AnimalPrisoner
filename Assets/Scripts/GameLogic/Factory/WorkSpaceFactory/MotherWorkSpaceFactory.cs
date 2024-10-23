@@ -29,6 +29,12 @@ namespace GameLogic.Factory
         [SerializeField] BaseWorkSpace _riceMaker;
 
         [SerializeField] BaseWorkSpace _stoneWoodWorkCrafter;
+        [SerializeField] BaseWorkSpace _stoneIronCrafter;
+        [SerializeField] BaseWorkSpace _stoneOilCrafter;
+        [SerializeField] BaseWorkSpace _woodIronCrafter;
+        [SerializeField] BaseWorkSpace _woodOilCrafter;
+        [SerializeField] BaseWorkSpace _ironOilCrafter;
+
 
         public GameObject Generate(JobName name, Vector3 position)
         {
@@ -65,20 +71,35 @@ namespace GameLogic.Factory
                     newRiceMaker.InitializeWorkSpace();
                     return newRiceMaker.gameObject;
                 case JobName.StoneIronCrafter:
-                    return stoneIronCrafter.GenerateItem(position);
+                    var newStoneIronCrafter = Instantiate(_stoneIronCrafter, position, Quaternion.identity);
+                    newStoneIronCrafter.InitializeWorkSpace();
+                    return newStoneIronCrafter.gameObject;
+                    //return stoneIronCrafter.GenerateItem(position);
                 case JobName.StoneWoodCrafter:
                     var newStoneWoodCrafter = Instantiate(_stoneWoodWorkCrafter, position, Quaternion.identity);
                     newStoneWoodCrafter.InitializeWorkSpace();
                     return newStoneWoodCrafter.gameObject;
                     //return stoneWoodCrafter.GenerateItem(position);
                 case JobName.StoneOilCrafter:
-                    return stonOilCrafter.GenerateItem(position);
+                    var newStoneOilCrafter = Instantiate(_stoneOilCrafter, position, Quaternion.identity);
+                    newStoneOilCrafter.InitializeWorkSpace();
+                    return newStoneOilCrafter.gameObject;
+                    //return stonOilCrafter.GenerateItem(position);
                 case JobName.WoodIronCrafter:
-                    return woodIronCrafter.GenerateItem(position);
+                    var newWoodIronCrafter = Instantiate(_woodIronCrafter, position, Quaternion.identity);
+                    newWoodIronCrafter.InitializeWorkSpace();
+                    return newWoodIronCrafter.gameObject;
+                    //return woodIronCrafter.GenerateItem(position);
                 case JobName.WoodOilCrafter:
-                    return woodOilCrafter.GenerateItem(position);
+                    var newWoodOilCrafter = Instantiate(_woodOilCrafter, position, Quaternion.identity);
+                    newWoodOilCrafter.InitializeWorkSpace();
+                    return newWoodOilCrafter.gameObject;
+                    //return woodOilCrafter.GenerateItem(position);
                 case JobName.OilIronCrafter:
-                    return ironOilCrafter.GenerateItem(position);
+                    var newOilIronCrafter = Instantiate(_ironOilCrafter, position, Quaternion.identity);
+                    newOilIronCrafter.InitializeWorkSpace();
+                    return newOilIronCrafter.gameObject;
+                    //return ironOilCrafter.GenerateItem(position);
                 default:
                     return null;
             }

@@ -385,97 +385,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 4
---- !u!1 &3163876275213263693
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4945199592853651122}
-  - component: {fileID: 6500494820900937881}
-  m_Layer: 0
-  m_Name: PutAndTake
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4945199592853651122
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3163876275213263693}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3275356739680363054}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6500494820900937881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3163876275213263693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5364f97ad0c154b958b74223160a414e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstItem: 3
-  secondItem: 4
-  onPut:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6351172309083986934}
-        m_TargetAssemblyTypeName: GameLogic.WorkSpace.CrafterAutomatable, GameLogic
-        m_MethodName: SetItemToCraft
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onTake:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4006817871512547055}
-        m_TargetAssemblyTypeName: GameLogic.Map.GrabbableVisualizer, GameLogic
-        m_MethodName: Delete
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onSet:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4006817871512547055}
-        m_TargetAssemblyTypeName: GameLogic.Map.GrabbableVisualizer, GameLogic
-        m_MethodName: Show
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &3188725013034480543
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,10 +509,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3275356739680363054}
   - component: {fileID: 9060070749206293595}
-  - component: {fileID: 1738329697568988569}
   - component: {fileID: 9022549625207408925}
   - component: {fileID: 4928897429407554392}
   - component: {fileID: 4006817871512547055}
+  - component: {fileID: 8884165161692091931}
+  - component: {fileID: 655470003684448403}
+  - component: {fileID: 8558709713425042414}
+  - component: {fileID: 2352373648510846553}
   m_Layer: 0
   m_Name: IronOilCrafter
   m_TagString: Untagged
@@ -628,8 +540,6 @@ Transform:
   - {fileID: 7792227300174893348}
   - {fileID: 1654739022730232089}
   - {fileID: 3938953031339296467}
-  - {fileID: 4945199592853651122}
-  - {fileID: 3793943362252447878}
   - {fileID: 9158877296875543134}
   - {fileID: 64831622644614316}
   m_Father: {fileID: 0}
@@ -655,29 +565,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1738329697568988569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4813019257735162968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jobName: 0
-  putAndTake:
-    obj: {fileID: 3163876275213263693}
-  automatable:
-    obj: {fileID: 8895947435698124797}
-  work:
-    obj: {fileID: 0}
-  playerTrigger:
-    obj: {fileID: 4813019257735162968}
-  upGradable:
-    obj: {fileID: 8895947435698124797}
 --- !u!114 &9022549625207408925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,34 +593,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9022549625207408925}
-        m_TargetAssemblyTypeName: Util.HighlightVisualizer, Util
-        m_MethodName: Hilight
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   onPlayerExit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9022549625207408925}
-        m_TargetAssemblyTypeName: Util.HighlightVisualizer, Util
-        m_MethodName: Hilight
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &4006817871512547055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +610,79 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 9158877296875543134}
+--- !u!114 &8884165161692091931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813019257735162968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5364f97ad0c154b958b74223160a414e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstItem: 3
+  secondItem: 4
+  onPut:
+    m_PersistentCalls:
+      m_Calls: []
+  onTake:
+    m_PersistentCalls:
+      m_Calls: []
+  onSet:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &655470003684448403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813019257735162968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8badc0f4ac941f68869eb12e07ae71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onOperationFinish:
+    m_PersistentCalls:
+      m_Calls: []
+  OnProgressMade:
+    m_PersistentCalls:
+      m_Calls: []
+  OnOperationInitiated:
+    m_PersistentCalls:
+      m_Calls: []
+  maxProgress: 3
+--- !u!114 &8558709713425042414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813019257735162968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae0f2e2d0f1a47488e225ede868cd62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  automatable:
+    obj: {fileID: 4813019257735162968}
+  upGraderName: 11
+--- !u!114 &2352373648510846553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813019257735162968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cff0b0c999cf48af8265b46479c1df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _progressView: {fileID: 3567822876155917663}
 --- !u!1 &6638837713017014313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,136 +961,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &8895947435698124797
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3793943362252447878}
-  - component: {fileID: 6351172309083986934}
-  - component: {fileID: 2338691394575768753}
-  m_Layer: 0
-  m_Name: Work
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3793943362252447878
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8895947435698124797}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3275356739680363054}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6351172309083986934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8895947435698124797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b8badc0f4ac941f68869eb12e07ae71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onOperationFinish:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3567822876155917663}
-        m_TargetAssemblyTypeName: UI.WorkSpaceProgressView, UI
-        m_MethodName: Show
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6500494820900937881}
-        m_TargetAssemblyTypeName: GameLogic.WorkSpace.CrafterPutAndTake, GameLogic
-        m_MethodName: Set
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnProgressMade:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3567822876155917663}
-        m_TargetAssemblyTypeName: UI.WorkSpaceProgressView, UI
-        m_MethodName: ModifyGauge
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnOperationInitiated:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3567822876155917663}
-        m_TargetAssemblyTypeName: UI.WorkSpaceProgressView, UI
-        m_MethodName: Show
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 6500494820900937881}
-        m_TargetAssemblyTypeName: GameLogic.WorkSpace.CrafterPutAndTake, GameLogic
-        m_MethodName: ResetSetQuantity
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  maxProgress: 3
---- !u!114 &2338691394575768753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8895947435698124797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae0f2e2d0f1a47488e225ede868cd62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  automatable:
-    obj: {fileID: 8895947435698124797}
-  upGraderName: 11
 --- !u!1 &8906625491310279256
 GameObject:
   m_ObjectHideFlags: 0
