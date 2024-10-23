@@ -28,6 +28,8 @@ namespace GameLogic.Factory
         [SerializeField] BaseWorkSpace _waterMaker;
         [SerializeField] BaseWorkSpace _riceMaker;
 
+        [SerializeField] BaseWorkSpace _stoneWoodWorkCrafter;
+
         public GameObject Generate(JobName name, Vector3 position)
         {
             switch (name)
@@ -65,7 +67,10 @@ namespace GameLogic.Factory
                 case JobName.StoneIronCrafter:
                     return stoneIronCrafter.GenerateItem(position);
                 case JobName.StoneWoodCrafter:
-                    return stoneWoodCrafter.GenerateItem(position);
+                    var newStoneWoodCrafter = Instantiate(_stoneWoodWorkCrafter, position, Quaternion.identity);
+                    newStoneWoodCrafter.InitializeWorkSpace();
+                    return newStoneWoodCrafter.gameObject;
+                    //return stoneWoodCrafter.GenerateItem(position);
                 case JobName.StoneOilCrafter:
                     return stonOilCrafter.GenerateItem(position);
                 case JobName.WoodIronCrafter:

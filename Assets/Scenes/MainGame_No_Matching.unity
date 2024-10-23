@@ -3951,6 +3951,7 @@ MonoBehaviour:
   _oilMaker: {fileID: 9086430002039522420, guid: 51cd2b42b0fcb40cba313e351df0f53a, type: 3}
   _waterMaker: {fileID: 3479186547950844518, guid: c025d3b3cd65d430eb832cb9f24af781, type: 3}
   _riceMaker: {fileID: 6978412855260187364, guid: f0b01d864995b4d6699b4bcce1af5e2e, type: 3}
+  _stoneWoodWorkCrafter: {fileID: 4499415131491478356, guid: dfc7845c815534214a6e78ab235ea155, type: 3}
 --- !u!4 &649048715
 Transform:
   m_ObjectHideFlags: 0

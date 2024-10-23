@@ -35,5 +35,6 @@ namespace GameLogic.WorkSpace
     {
         public void InitateOperation();
         public float OperationSpeed { get; set; }
+
     }
 }

@@ -41,6 +41,27 @@ namespace GameLogic.GameSystem
         }
     }
 
+    public class FixedJobAllocater : IJobAllocator
+    {
+        public void AllocateJob()
+        {
+            var players = PhotonNetwork.CurrentRoom.Players;
+
+            foreach(var p in players.Values)
+            {
+                p.SetJob(0, (int)JobName.StoneMaker);
+                p.SetJob(1, (int)JobName.WoodMaker);
+                p.SetJob(2, (int)JobName.StoneWoodCrafter);
+                p.SetJob(3, (int)JobName.StoneIronCrafter);
+            }
+
+            foreach (var p in players.Values)
+            {
+                p.SetJobDetermined(true);
+            }
+        }
+    }
+
     public class MainJobAllocator : IJobAllocator
     {
         public void AllocateJob()

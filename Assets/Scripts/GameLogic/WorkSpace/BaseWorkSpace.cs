@@ -12,7 +12,7 @@ namespace GameLogic.WorkSpace
     {
         protected JobName jobName; public JobName JobName { get { return jobName; } }
         protected IPutAndTake _putAndTake;
-        protected IAutomatable automatable;
+        protected IAutomatable _automatable;
         protected IWork _work;
         protected ISet _set;
         protected IPlayerTriggerable _playerTrigger; public IPlayerTriggerable PlayerTrigger { get { return _playerTrigger; } }
@@ -24,7 +24,7 @@ namespace GameLogic.WorkSpace
         public virtual void InitializeWorkSpace()
         {
             TryGetComponent(out _putAndTake);
-            TryGetComponent(out automatable);
+            TryGetComponent(out _automatable);
             TryGetComponent(out _work);
             TryGetComponent(out _playerTrigger);
             TryGetComponent(out upGradable);
@@ -37,10 +37,10 @@ namespace GameLogic.WorkSpace
         }
         public void InitiateOperation()
         {
-            if (automatable != null)
+            if (_automatable != null)
             {
                 Debug.Log("workspace automatable called");
-                automatable.InitateOperation();
+                _automatable.InitateOperation();
             }
             else
             {

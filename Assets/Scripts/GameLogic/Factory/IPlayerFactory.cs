@@ -11,6 +11,7 @@ namespace GameLogic.GamePlayer
     public interface IPlayer
     {
         public void Work();
+        public void StartOperation();
         public void SetCanMove(bool isActive);
         public void MoveRight();
         public void MoveLeft();

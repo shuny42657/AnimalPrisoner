@@ -31,6 +31,7 @@ namespace GameLogic.Factory
         KeyHoldController _downKeyHoldController;
         KeyHoldController _qKeyHoldController;
         KeyDownController _eKeyDownController;
+        KeyDownController _fKeyDownController;
 
         [SerializeField] PlayerCustomPropertyCallback _playerCustomPropertyCallback;
         [SerializeField] MapBuilder _mapBuilder;
@@ -73,6 +74,7 @@ namespace GameLogic.Factory
             _rightKeyHoldController = newPlayer.transform.GetChild(4).GetComponent<KeyHoldController>();
             _qKeyHoldController = newPlayer.transform.GetChild(5).GetComponent<KeyHoldController>();
             _eKeyDownController = newPlayer.transform.GetChild(6).GetComponent<KeyDownController>();
+            _fKeyDownController = newPlayer.transform.GetChild(7).GetComponent<KeyDownController>();
 
             var playerManager = new PlayerManager(
                 _playerOperatableHandler,
@@ -88,6 +90,7 @@ namespace GameLogic.Factory
             _upKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveUp());
             _qKeyHoldController.OnKeyHold.AddListener(() => playerManager.Work());
             _eKeyDownController.OnKeyPressed.AddListener(() => playerManager.PutOrTake());
+            _fKeyDownController.OnKeyPressed.AddListener(() => playerManager.StartOperation());
 
             _playerCustomPropertyCallback.onComplete.AddListener(() => _jobStatus.SetJobs());
             _jobStatus.OnJobSet.AddListener((i_jobStatus) => _mapBuilder.BuildWorkSpaces(i_jobStatus));

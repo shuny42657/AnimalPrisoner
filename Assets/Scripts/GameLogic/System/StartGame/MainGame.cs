@@ -20,7 +20,7 @@ namespace GameLogic.GameSystem
         MainGameInitializer gameInitializer;
         
         [SerializeField] MainPlayer playerFactory;
-        [SerializeField] IJobAllocator jobAllocator = new MainJobAllocator();
+        [SerializeField] IJobAllocator jobAllocator = new FixedJobAllocater();
         [SerializeField] RoomParameter roomParam;
         [SerializeField] Pacer roomParamPacer;
         [SerializeField] Pacer leveledObjCreatorPacer;

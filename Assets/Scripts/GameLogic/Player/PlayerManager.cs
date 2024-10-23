@@ -43,6 +43,11 @@ namespace GameLogic.GamePlayer
             _operatableHandler.PutOrTake();
         }
 
+        public void StartOperation()
+        {
+            _operatableHandler.InitiateWork();
+        }
+
         //Move
         public void MoveRight()
         {
