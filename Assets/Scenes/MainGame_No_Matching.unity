@@ -923,53 +923,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116651959}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &143282635
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 143282637}
-  - component: {fileID: 143282638}
-  m_Layer: 0
-  m_Name: PutAndTake
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &143282637
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143282635}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 608415214}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &143282638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143282635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad852bf0d0d384cb6858e6bd543ba61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectiveManager: {fileID: 612493964}
-  roomParamModifier:
-    obj: {fileID: 406332744}
 --- !u!1 &166820263
 GameObject:
   m_ObjectHideFlags: 0
@@ -3516,8 +3469,9 @@ GameObject:
   - component: {fileID: 608415213}
   - component: {fileID: 608415212}
   - component: {fileID: 608415211}
-  - component: {fileID: 608415210}
   - component: {fileID: 608415209}
+  - component: {fileID: 608415216}
+  - component: {fileID: 608415215}
   m_Layer: 0
   m_Name: SubmissionSpace
   m_TagString: Untagged
@@ -3538,19 +3492,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 1724685229}
---- !u!114 &608415210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608415208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0ccf905528142d59527b1bf855df24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _progressView: {fileID: 0}
 --- !u!114 &608415211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3565,34 +3506,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 608415212}
-        m_TargetAssemblyTypeName: Util.HighlightVisualizer, Util
-        m_MethodName: Hilight
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   onPlayerExit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 608415212}
-        m_TargetAssemblyTypeName: Util.HighlightVisualizer, Util
-        m_MethodName: Hilight
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &608415212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3643,10 +3560,37 @@ Transform:
   m_Children:
   - {fileID: 1589254777}
   - {fileID: 1731184537}
-  - {fileID: 143282637}
   - {fileID: 1724685229}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &608415215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608415208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e14fe240668a4408b796880db21fe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _progressView: {fileID: 0}
+--- !u!114 &608415216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608415208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad852bf0d0d384cb6858e6bd543ba61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveManager: {fileID: 612493964}
+  roomParamModifier:
+    obj: {fileID: 406332744}
 --- !u!1 &612493961
 GameObject:
   m_ObjectHideFlags: 0
