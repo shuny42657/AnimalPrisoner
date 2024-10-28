@@ -24,6 +24,19 @@ namespace GameLogic.WorkSpace
             receiverPutAndTake.OnSenderIdSet.AddListener((index) => _receiverTextView.ShowText(index));
 
             _playerCustomPropertyCallback.onComplete.AddListener(receiverPutAndTake.SetReceivedItem);
+            /*if(PlayerTrigger == null)
+            {
+                Debug.Log("player trigger null");
+            }
+            else
+            {
+                Debug.Log("player trigger not null");
+            }*/
+        }
+
+        private void Start()
+        {
+            InitializeWorkSpace();
         }
     }
 }

@@ -22,15 +22,16 @@ namespace GameLogic.GameSystem
         [SerializeField] MainPlayer playerFactory;
         [SerializeField] IJobAllocator jobAllocator = new MainJobAllocator();
 
-        ObjectiveManager _objectiveManager;
-        [SerializeField] RoomParameterUpgrader _roomParamUpGrader;
+        [SerializeField] ObjectiveManager _objectiveManager;
+        RoomParameterUpgrader _roomParamUpGrader;
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
+        [SerializeField] RoomIntegerPropertyCallback _decayLevelUpCallback;
 
         [SerializeField] UpdateClock _clock;
-        [SerializeField] RoomParameter _roomParam;
-        [SerializeField] Pacer _roomParamPacer;
-        [SerializeField] Pacer _leveledObjCreatorPacer;
-        [SerializeField] Pacer _objectiveCreatorPacer;
+        RoomParameter _roomParam;
+        Pacer _roomParamPacer;
+        Pacer _leveledObjCreatorPacer;
+        Pacer _objectiveCreatorPacer;
 
         //View
         [SerializeField] GameOverProcess _gameOverProcess;
@@ -55,6 +56,14 @@ namespace GameLogic.GameSystem
                 200f,
                 5f, 5f, 5f
                 );
+            //RoomParameterUpgraderの初期化
+            _roomParamUpGrader = new(
+                _roomParam,
+                new() { 1f, 2f, 3f, 4f, 5f },
+                new() { 1f, 2f, 3f, 4f, 5f },
+                new() { 1f, 2f, 3f, 4f, 5f });
+            _decayLevelUpCallback.onModified.AddListener((val) => _roomParamUpGrader.UpGrade());
+
             _roomParam.OnFuelModified.AddListener((rate) => _fuelGauge.ModifyGauge(rate));
             _roomParam.OnDurabilityModified.AddListener((rate) => _durabilityGauge.ModifyGauge(rate));
             _roomParam.OnElectricityModified.AddListener((rate) => _electricityGauge.ModifyGauge(rate));

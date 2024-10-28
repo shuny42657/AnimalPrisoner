@@ -974,12 +974,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerFactory: {fileID: 507539989}
-  roomParam: {fileID: 502147687}
-  roomParamPacer: {fileID: 1240113795}
-  leveledObjCreatorPacer: {fileID: 340514658}
-  objectiveCreatorPacer: {fileID: 2143462752}
+  _objectiveManager: {fileID: 612493964}
+  _leveledObjectiveCreator: {fileID: 1082221216}
+  _decayLevelUpCallback: {fileID: 2067434489}
+  _clock: {fileID: 1239947917}
   _gameOverProcess: {fileID: 1964781117}
   _gameOverView: {fileID: 1131063768}
+  _fuelGauge: {fileID: 1559576987}
+  _durabilityGauge: {fileID: 201682538}
+  _electricityGauge: {fileID: 420837484}
   _roomPredicatePropertyCallback: {fileID: 340825917}
 --- !u!1 &171515654
 GameObject:
@@ -1860,7 +1863,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 340514657}
-  - component: {fileID: 340514658}
   m_Layer: 0
   m_Name: LeveldObjCreatorPacer
   m_TagString: Untagged
@@ -1883,41 +1885,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1082221215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &340514658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340514656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441e858989a904f06976953a6762b82a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  phaseDuration:
-  - 10
-  - 10
-  - 10
-  - 10
-  isActive: 0
-  OnCheckpointReached:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1082221216}
-        m_TargetAssemblyTypeName: GameLogic.GameSystem.LeveledObjectiveCreator, GameLogic
-        m_MethodName: UpGrade
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  isSync: 0
-  looping: 0
 --- !u!1 &340825910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,7 +2256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDataBase: {fileID: 2118669107}
-  roomParameter: {fileID: 502147687}
   isActive: 0
 --- !u!1 &420837480
 GameObject:
@@ -2881,7 +2847,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502147688}
-  - component: {fileID: 502147687}
   m_Layer: 0
   m_Name: RoomParameter
   m_TagString: Untagged
@@ -2889,69 +2854,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &502147687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502147686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: decb8d302c4184932bee2c7cf77324b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onFuelModiied:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1559576987}
-        m_TargetAssemblyTypeName: UI.GaugeView, UI
-        m_MethodName: ModifyGauge
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDurabilityModified:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 201682538}
-        m_TargetAssemblyTypeName: UI.GaugeView, UI
-        m_MethodName: ModifyGauge
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onElectricityModified:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 420837484}
-        m_TargetAssemblyTypeName: UI.GaugeView, UI
-        m_MethodName: ModifyGauge
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  maxFuel: 200
-  maxDurability: 200
-  maxElecticity: 200
-  fuelComsumeSpeed: 5
-  durabilityComsumeSpeed: 5
-  electriticyComsumeSpeed: 5
 --- !u!4 &502147688
 Transform:
   m_ObjectHideFlags: 0
@@ -3072,10 +2974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1077d020ffc704a319962d53db63beff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomParam: {fileID: 502147687}
-  _roomParamPacer: {fileID: 0}
-  _leveledObjCreatorPacer: {fileID: 0}
-  _objectiveCreatorPacer: {fileID: 0}
 --- !u!114 &507539989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7356,7 +7254,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1240113794}
-  - component: {fileID: 1240113795}
   m_Layer: 0
   m_Name: RoomParamPacer
   m_TagString: Untagged
@@ -7379,41 +7276,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2067434486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1240113795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1240113793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441e858989a904f06976953a6762b82a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  phaseDuration:
-  - 10
-  - 10
-  - 10
-  - 10
-  isActive: 0
-  OnCheckpointReached:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2067434491}
-        m_TargetAssemblyTypeName: RoomParameterUpgrader, GameLogic
-        m_MethodName: IncrementLevel
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  isSync: 1
-  looping: 0
 --- !u!1001 &1251060583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10479,10 +10341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a435fe6087ba405ab81b3e36bca6895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomParameter: {fileID: 502147687}
-  roomParamPacer: {fileID: 1240113795}
-  leveledObjCreatorPacer: {fileID: 340514658}
-  objectiveCreatorPacer: {fileID: 2143462752}
 --- !u!1 &1795617818
 GameObject:
   m_ObjectHideFlags: 0
@@ -11218,10 +11076,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameOverView:
     obj: {fileID: 1131063766}
-  _roomParam: {fileID: 502147687}
-  _roomParamPacer: {fileID: 1240113795}
-  _leveledObjCreatorPacer: {fileID: 340514658}
-  _objectiveCreatorPacer: {fileID: 2143462752}
   _roomParamModifier: {fileID: 406332746}
 --- !u!1 &1965203458
 GameObject:
@@ -12203,7 +12057,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2067434486}
   - component: {fileID: 2067434489}
-  - component: {fileID: 2067434491}
   m_Layer: 0
   m_Name: RoomParameterLevelDesign
   m_TagString: Untagged
@@ -12242,54 +12095,10 @@ MonoBehaviour:
   key: 2
   onModified:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2067434491}
-        m_TargetAssemblyTypeName: RoomParameterUpgrader, GameLogic
-        m_MethodName: UpGrade
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onModifiedWithMasterClieent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2067434491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2067434485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6649d7ebb5ec04f09b9863f2ee688b17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomParam: {fileID: 502147687}
-  upgraderName: 0
-  fuelDecaySpeeds:
-  - 1
-  - 1
-  - 3
-  - 3.5
-  - 4
-  durabilityDecaySpeeds:
-  - 1.5
-  - 2
-  - 2.5
-  - 3
-  - 3.5
-  electricityDecaySpeeds:
-  - 1
-  - 1.5
-  - 2
-  - 2.5
-  - 3
 --- !u!1001 &2084346093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12699,7 +12508,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2143462751}
-  - component: {fileID: 2143462752}
   m_Layer: 0
   m_Name: ObjectiveCreatorPacer
   m_TagString: Untagged
@@ -12722,38 +12530,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 612493965}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2143462752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143462750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441e858989a904f06976953a6762b82a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  phaseDuration:
-  - 20
-  isActive: 0
-  OnCheckpointReached:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 612493964}
-        m_TargetAssemblyTypeName: GameLogic.GameSystem.ObjectiveManager, GameLogic
-        m_MethodName: AddNewObjective
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  isSync: 0
-  looping: 1
 --- !u!114 &196768064022194988
 MonoBehaviour:
   m_ObjectHideFlags: 0

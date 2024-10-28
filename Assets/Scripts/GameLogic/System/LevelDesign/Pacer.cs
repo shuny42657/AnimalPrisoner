@@ -11,7 +11,7 @@ namespace GameLogic.GameSystem
         public void Tick();
     }
 
-    public class Pacer : MonoBehaviourPunCallbacks, ISwitchable,ITick
+    public class Pacer : ISwitchable,ITick
     {
         [SerializeField] List<float> _phaseDuration;
         float currentTime;

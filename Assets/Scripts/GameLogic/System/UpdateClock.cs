@@ -6,7 +6,7 @@ namespace GameLogic.GameSystem
 {
     public class UpdateClock : MonoBehaviour,ISwitchable
     {
-        List<ITick> ticks;
+        List<ITick> ticks = new();
 
         public bool IsActive { get; set; }
 
@@ -14,6 +14,7 @@ namespace GameLogic.GameSystem
         {
             ticks.Add(tick);
         }
+
         // Update is called once per frame
         void Update()
         {
