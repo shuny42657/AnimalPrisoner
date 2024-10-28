@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace GameLogic.GameSystem
 {
-    public class RoomParameter : MonoBehaviour,IRoomStatus,ISwitchable
+    public class RoomParameter : MonoBehaviour,IRoomStatus,ISwitchable,ITick
     {
         [SerializeField] UnityEvent<float> onFuelModiied = new(); public UnityEvent<float> OnFuelModified { get { return onFuelModiied; } }
 
@@ -74,7 +74,8 @@ namespace GameLogic.GameSystem
             durability = maxDurability;
             electricity = maxElecticity;
         }
-        private void Update()
+
+        public void Tick()
         {
             if (IsActive)
             {

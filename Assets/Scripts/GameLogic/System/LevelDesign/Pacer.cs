@@ -6,9 +6,14 @@ using UnityEngine.Events;
 
 namespace GameLogic.GameSystem
 {
-    public class Pacer : MonoBehaviourPunCallbacks, ISwitchable
+    public interface ITick
     {
-        [SerializeField] List<float> phaseDuration;
+        public void Tick();
+    }
+
+    public class Pacer : MonoBehaviourPunCallbacks, ISwitchable,ITick
+    {
+        [SerializeField] List<float> _phaseDuration;
         float currentTime;
         int phase = 0;
 
@@ -16,19 +21,28 @@ namespace GameLogic.GameSystem
         public bool IsActive { get { return isActive; } set { isActive = value; } }
         public UnityEvent<int> OnCheckpointReached = new();
 
-        [SerializeField] bool isSync;
-        [SerializeField] bool looping;
-        // Update is called once per frame
-        void Update()
+        [SerializeField] bool _isSync;
+        [SerializeField] bool _looping;
+
+        public Pacer(List<float> phaseDuration,bool isSync,bool looping)
         {
-            if(IsActive)
+            _phaseDuration = phaseDuration;
+            isActive = false;
+            _isSync = isSync;
+            _looping = looping;
+        }
+
+
+        public void Tick()
+        {
+            if (IsActive)
             {
-                if(!isSync || PhotonNetwork.IsMasterClient)
+                if (!_isSync || PhotonNetwork.IsMasterClient)
                 {
                     currentTime += Time.deltaTime;
-                    if (looping)
+                    if (_looping)
                     {
-                        if(currentTime > phaseDuration[0])
+                        if (currentTime > _phaseDuration[0])
                         {
                             currentTime = 0;
                             OnCheckpointReached.Invoke(0);
@@ -36,7 +50,7 @@ namespace GameLogic.GameSystem
                     }
                     else
                     {
-                        if (phase < phaseDuration.Count && currentTime > phaseDuration[phase])
+                        if (phase < _phaseDuration.Count && currentTime > _phaseDuration[phase])
                         {
                             currentTime = 0;
                             phase++;
