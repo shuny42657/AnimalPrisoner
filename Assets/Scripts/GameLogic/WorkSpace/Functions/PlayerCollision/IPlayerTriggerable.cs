@@ -10,4 +10,10 @@ namespace GameLogic.WorkSpace
         public UnityEvent OnPlayerEnter { get; }
         public UnityEvent OnPlayerExit { get; }
     }
+
+    public interface IPlayerTrigger
+    {
+        public void OnPlayerEnter();
+        public void OnPlayerExit();
+    }
 }
