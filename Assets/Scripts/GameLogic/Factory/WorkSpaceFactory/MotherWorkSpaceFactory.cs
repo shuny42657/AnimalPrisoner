@@ -35,6 +35,7 @@ namespace GameLogic.Factory
         [SerializeField] BaseWorkSpace _woodOilCrafter;
         [SerializeField] BaseWorkSpace _ironOilCrafter;
 
+        [SerializeField] WorkSpace.WorkSpace _submissionWorkSpace;
 
         public GameObject Generate(JobName name, Vector3 position)
         {
@@ -99,7 +100,7 @@ namespace GameLogic.Factory
                     var newOilIronCrafter = Instantiate(_ironOilCrafter, position, Quaternion.identity);
                     newOilIronCrafter.InitializeWorkSpace();
                     return newOilIronCrafter.gameObject;
-                    //return ironOilCrafter.GenerateItem(position);
+                //return ironOilCrafter.GenerateItem(position);
                 default:
                     return null;
             }

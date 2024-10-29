@@ -93,24 +93,33 @@ namespace GameLogic.GamePlayer
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
+            /*if (other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
             {
                 if(_workSpace != null)
                     _workSpace.PlayerTrigger.OnPlayerExit.Invoke();
                 _workSpace = baseWorkSpace;
                 baseWorkSpace.PlayerTrigger.OnPlayerEnter.Invoke();
+            }*/
+            if(other.TryGetComponent(out IPlayerTrigger playerTrigger))
+            {
+                playerTrigger.OnPlayerEnter();
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if(other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
+            /*if(other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
             {
                 if(_workSpace == baseWorkSpace)
                 {
                     _workSpace = null;
                     baseWorkSpace.PlayerTrigger.OnPlayerExit.Invoke();
                 }
+            }*/
+
+            if(other.TryGetComponent(out IPlayerTrigger playerTrigger))
+            {
+                playerTrigger.OnPlayerExit();
             }
         }
     }

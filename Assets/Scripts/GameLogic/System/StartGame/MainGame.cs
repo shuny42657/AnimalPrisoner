@@ -10,6 +10,7 @@ using UI;
 using Photon.Realtime;
 using GameLogic.Data;
 using GameLogic.WorkSpace;
+using Util;
 
 namespace GameLogic.GameSystem
 {
@@ -37,6 +38,8 @@ namespace GameLogic.GameSystem
         Pacer _leveledObjCreatorPacer;
         Pacer _objectiveCreatorPacer;
 
+        SubmissionWorkSpaceControllerFactory _submissionWorkSpaceControllerFactory;
+
         //View
         [SerializeField] GameOverProcess _gameOverProcess;
         [SerializeField] GameOverView _gameOverView;
@@ -48,8 +51,11 @@ namespace GameLogic.GameSystem
 
         [SerializeField] List<BaseWorkSpace> _teleporters;
         [SerializeField] List<BaseWorkSpace> _receivers;
-        [SerializeField] BaseWorkSpace _submissionSpace;
+        [SerializeField] WorkSpace.WorkSpace _submissionSpace;
         [SerializeField] BaseWorkSpace _bed;
+
+        //Controller
+        [SerializeField] KeyDownController e_KeyDownController;
 
         // Start is called before the first frame update
         void Start()
@@ -93,6 +99,7 @@ namespace GameLogic.GameSystem
             _objectiveCreatorPacer = new(new() { 20f},false, true);
             _objectiveCreatorPacer.OnCheckpointReached.AddListener((val) => _objectiveManager.AddNewObjective());
 
+
             //メインの処理
             gameInitializer = new(
                 jobAllocator,
@@ -126,7 +133,10 @@ namespace GameLogic.GameSystem
                 _teleporters[i].InitializeWorkSpace();
                 _receivers[i].InitializeWorkSpace();
             }
-            _submissionSpace.InitializeWorkSpace();
+
+            //SubmissionWorkSpace
+            _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,e_KeyDownController);
+            _submissionSpace.SetWorkSpaceController(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceController());
             _bed.InitializeWorkSpace();
             
         }

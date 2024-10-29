@@ -19,6 +19,10 @@ namespace GameLogic
         WoodIronCrafter = 9,
         WoodOilCrafter = 10,
         OilIronCrafter = 11,
+        SubmissionWorkSpace = 101,
+        Teleporter = 102,
+        Receiver = 103,
+        Bed = 104,
     }
 }
 

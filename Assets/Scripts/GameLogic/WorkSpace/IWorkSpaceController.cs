@@ -18,8 +18,9 @@ namespace GameLogic.WorkSpace
         IPutAndTake _putAndTake; //ObjectiveMangerPutAndTake
         KeyDownController _keyDownController;
 
-        public SubmissionWorkSpaceController(IPutAndTake putAndTake,KeyDownController keyDownController)
+        public SubmissionWorkSpaceController(IPlayer player,IPutAndTake putAndTake,KeyDownController keyDownController)
         {
+            _player = player;
             _putAndTake = putAndTake;
             _keyDownController = keyDownController;
         }
