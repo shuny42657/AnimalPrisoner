@@ -35,4 +35,40 @@ namespace GameLogic.WorkSpace
             _keyDownController.OnKeyPressed.RemoveListener(() => _player.PutOrTake(_putAndTake));
         }
     }
+
+    public class MakerWorkSpaceController : IWorkSpaceController
+    {
+        IPlayer _player;
+        IPutAndTake _putAndTake;
+        IWork _work;
+        KeyDownController _e_keyDownController;
+        KeyHoldController _q_keyHoldController;
+
+        public MakerWorkSpaceController(
+            IPlayer player,
+            IPutAndTake putAndTake,
+            IWork work,
+            KeyDownController e_keyDownController,
+            KeyHoldController q_keyHoldController
+            )
+        {
+            _player = player;
+            _putAndTake = putAndTake;
+            _work = work;
+            _e_keyDownController = e_keyDownController;
+            _q_keyHoldController = q_keyHoldController;
+        }
+
+        public void Subscribe()
+        {
+            _e_keyDownController.OnKeyPressed.AddListener(() => _player.PutOrTake(_putAndTake));
+            _q_keyHoldController.OnKeyHold.AddListener(() => _player.Work(_work));
+        }
+
+        public void UnSubscribe()
+        {
+            _e_keyDownController.OnKeyPressed.RemoveListener(() => _player.PutOrTake(_putAndTake));
+            _q_keyHoldController.OnKeyHold.RemoveListener(() => _player.Work(_work));
+        }
+    }
 }

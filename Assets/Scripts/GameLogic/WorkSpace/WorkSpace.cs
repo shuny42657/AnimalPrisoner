@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
+using UI;
+using GameLogic.Map;
 
 namespace GameLogic.WorkSpace
 {
@@ -12,6 +14,9 @@ namespace GameLogic.WorkSpace
     {
         IWorkSpaceController _workSpaceControler;
         [SerializeField] HighlightVisualizer _highlightVisualizer;
+        [SerializeField] WorkSpaceProgressView _workSpaceProgressView; public WorkSpaceProgressView WorkSapceProgressView { get { return _workSpaceProgressView; } }
+        [SerializeField] GrabbableVisualizer _grabbableVisualizer; public GrabbableVisualizer GrabbableVisualizer { get { return _grabbableVisualizer; } }
+
         public void SetWorkSpaceController(IWorkSpaceController workSpaceController)
         {
             _workSpaceControler = workSpaceController;

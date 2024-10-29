@@ -8,15 +8,21 @@ namespace GameLogic.WorkSpace
 {
     public class OnlyTakeWithSettable : MonoBehaviour, IPutAndTake,ISet
     {
-        ItemName item;
-        public ItemName Item { get { return item; } }
+        ItemName _item;
+        ItemName _itemToSet;
+        public ItemName Item { get { return _item; } }
 
-        [SerializeField] UnityEvent<ItemName> onPut; public UnityEvent<ItemName> OnPut { get { return onPut; } }
+        UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 
-        [SerializeField] UnityEvent onTake; public UnityEvent OnTake { get { return onTake; } }
+        UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
 
         UnityEvent<ItemName> onSet = new(); public UnityEvent<ItemName> OnSet { get { return onSet; } }
 
+        public OnlyTakeWithSettable(ItemName itemToSet)
+        {
+            _itemToSet = itemToSet;
+        }
+        
         public bool Put(ItemName itemName)
         {
             return false;
@@ -24,19 +30,19 @@ namespace GameLogic.WorkSpace
 
         public ItemName Take()
         {
-            var temp = item;
-            item = ItemName.None;
+            var temp = _item;
+            _item = ItemName.None;
             onTake.Invoke();
             Debug.Log("Taken");
             return temp;
         }
 
-        public void Set(ItemName itemName)
+        public void Set()
         {
-            if(item == ItemName.None)
+            if(_item == ItemName.None)
             {
-                item = itemName;
-                onPut.Invoke(item);
+                _item = _itemToSet;
+                onSet.Invoke(_item);
             }
         }
     }

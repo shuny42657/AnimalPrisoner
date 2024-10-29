@@ -28,9 +28,9 @@ namespace GameLogic.GamePlayer
         IMovable _movable;
         IUpGradable _upgradable; public IUpGradable UpGradable { get { return _upgradable; } }
 
-        public void Work()
+        public void Work(IWork work)
         {
-            _operatableHandler.Work(_playerStatus);
+            _operatableHandler.Work(work,_playerStatus);
         }
 
         public void SetCanMove(bool isActive)

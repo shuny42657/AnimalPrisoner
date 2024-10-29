@@ -5,7 +5,7 @@ using GameLogic.WorkSpace;
 using GameLogic.GameSystem;
 using UnityEngine.Events;
 
-public class ObjectiveMangerPutAndTake : MonoBehaviour,IPutAndTake
+public class ObjectiveMangerPutAndTake : IPutAndTake
 {
     public ItemName Item => throw new System.NotImplementedException();
 

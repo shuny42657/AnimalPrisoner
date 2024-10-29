@@ -51,6 +51,8 @@ namespace GameLogic.WorkSpace
             }
         }
 
+        public void Set() { }
+
         public ItemName Take()
         {
             var temp = item;

@@ -14,9 +14,9 @@ namespace GameLogic.WorkSpace
 
             var makerWork = (MakerWork)_work;
             makerWork.OnWorkStart.AddListener(() => _progressView.Show(true));
-            makerWork.OnWorkFinish.AddListener((item) => _set.Set(item));
-            makerWork.OnWorkFinish.AddListener((item) => _progressView.Show(false));
-            makerWork.OnWorkFinish.AddListener((item) => makerWork.ClearSpace(false));
+            //makerWork.OnWorkFinish.AddListener((item) => _set.Set(item));
+            //makerWork.OnWorkFinish.AddListener((item) => _progressView.Show(false));
+            //makerWork.OnWorkFinish.AddListener((item) => makerWork.ClearSpace(false));
             makerWork.OnProgressMade.AddListener((rate) => _progressView.ModifyGauge(rate));
 
             _putAndTake.OnTake.AddListener(() => makerWork.ClearSpace(true));

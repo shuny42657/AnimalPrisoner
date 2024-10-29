@@ -86,9 +86,10 @@ namespace GameLogic.GamePlayer
             }
         }
 
-        public void Work(IPlayerStatus playerStatus)
+        public void Work(IWork work,IPlayerStatus playerStatus)
         {
-            _workSpace.Work(playerStatus);
+            work.Work(playerStatus);
+            //_workSpace.Work(playerStatus);
         }
 
         private void OnTriggerEnter(Collider other)

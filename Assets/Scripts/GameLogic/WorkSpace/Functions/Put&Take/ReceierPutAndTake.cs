@@ -25,7 +25,7 @@ namespace GameLogic.WorkSpace
         {
             return false;
         }
-
+        public void Set() { }
         public void Set(ItemName itemName)
         {
             if(this.itemName == ItemName.None)

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using GameLogic.WorkSpace;
+using Util;
+using GameLogic.GamePlayer;
 
 namespace GameLogic.Factory
 {
@@ -21,7 +23,8 @@ namespace GameLogic.Factory
         [SerializeField] WorkSpaceFactory woodOilCrafter;
         [SerializeField] WorkSpaceFactory ironOilCrafter;
 
-        [SerializeField] BaseWorkSpace _stoneMaker;
+        [SerializeField] WorkSpace.WorkSpace _stoneMaker;
+        //[SerializeField] BaseWorkSpace _stoneMaker;
         [SerializeField] BaseWorkSpace _woodMaker;
         [SerializeField] BaseWorkSpace _ironMaker;
         [SerializeField] BaseWorkSpace _oilMaker;
@@ -37,6 +40,12 @@ namespace GameLogic.Factory
 
         [SerializeField] WorkSpace.WorkSpace _submissionWorkSpace;
 
+        [SerializeField] KeyDownController _e_keyDownController;
+        [SerializeField] KeyHoldController _q_keyHoldController;
+        IPlayer _player;
+
+        public void SetPlayer(IPlayer player) { _player = player; }
+
         public GameObject Generate(JobName name, Vector3 position)
         {
             switch (name)
@@ -44,7 +53,7 @@ namespace GameLogic.Factory
                 case JobName.StoneMaker:
                     //return stoneMakerFactory.GenerateItem(position);
                     var newStoneMaker = Instantiate(_stoneMaker, position, Quaternion.identity);
-                    newStoneMaker.InitializeWorkSpace();
+                    newStoneMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Stone, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newStoneMaker));
                     return newStoneMaker.gameObject;
                 case JobName.WoodMaker:
                     //return woodMakerFactory.GenerateItem(position);

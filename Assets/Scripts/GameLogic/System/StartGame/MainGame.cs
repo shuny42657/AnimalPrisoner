@@ -23,7 +23,7 @@ namespace GameLogic.GameSystem
         MainGameInitializer gameInitializer;
         
         [SerializeField] MainPlayer playerFactory;
-        [SerializeField] IJobAllocator jobAllocator = new MainJobAllocator();
+        [SerializeField] IJobAllocator jobAllocator = new FixedJobAllocater();
 
         [SerializeField] ObjectiveManager _objectiveManager;
         [SerializeField] ItemDataBase _itemDataBase;
@@ -38,6 +38,7 @@ namespace GameLogic.GameSystem
         Pacer _leveledObjCreatorPacer;
         Pacer _objectiveCreatorPacer;
 
+        [SerializeField] MotherWorkSpaceFactory _motherWorkSpaceFactory;
         SubmissionWorkSpaceControllerFactory _submissionWorkSpaceControllerFactory;
 
         //View
@@ -62,6 +63,7 @@ namespace GameLogic.GameSystem
         {
             _playerManager = playerFactory.GeneratePlayer(Vector3.zero);
             _playerManager.SetCanMove(true);
+            _motherWorkSpaceFactory.SetPlayer(_playerManager);
             //プレイヤーの数が揃っていなかった場合は例外処理を飛ばしてマッチングシーンに戻る
             Debug.Log($"Player Count : {PhotonNetwork.PlayerList.Length}");
 
@@ -136,7 +138,7 @@ namespace GameLogic.GameSystem
 
             //SubmissionWorkSpace
             _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,e_KeyDownController);
-            _submissionSpace.SetWorkSpaceController(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceController());
+            _submissionSpace.SetWorkSpaceController(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceController(_submissionSpace));
             _bed.InitializeWorkSpace();
             
         }

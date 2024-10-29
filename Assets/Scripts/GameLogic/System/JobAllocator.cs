@@ -50,9 +50,9 @@ namespace GameLogic.GameSystem
             foreach(var p in players.Values)
             {
                 p.SetJob(0, (int)JobName.StoneMaker);
-                p.SetJob(1, (int)JobName.WoodMaker);
-                p.SetJob(2, (int)JobName.StoneWoodCrafter);
-                p.SetJob(3, (int)JobName.StoneIronCrafter);
+                p.SetJob(1, (int)JobName.StoneMaker);
+                p.SetJob(2, (int)JobName.StoneMaker);
+                p.SetJob(3, (int)JobName.StoneMaker);
             }
 
             foreach (var p in players.Values)

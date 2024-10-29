@@ -88,7 +88,7 @@ namespace GameLogic.Factory
             _leftKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveLeft());
             _downKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveDown());
             _upKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveUp());
-            _qKeyHoldController.OnKeyHold.AddListener(() => playerManager.Work());
+            //_qKeyHoldController.OnKeyHold.AddListener(() => playerManager.Work());
             //_eKeyDownController.OnKeyPressed.AddListener(() => playerManager.PutOrTake());
             _fKeyDownController.OnKeyPressed.AddListener(() => playerManager.StartOperation());
 
