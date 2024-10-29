@@ -67,8 +67,10 @@ namespace GameLogic.WorkSpace
 
         public void UnSubscribe()
         {
-            _e_keyDownController.OnKeyPressed.RemoveListener(() => _player.PutOrTake(_putAndTake));
-            _q_keyHoldController.OnKeyHold.RemoveListener(() => _player.Work(_work));
+            //_e_keyDownController.OnKeyPressed.RemoveListener(() => _player.PutOrTake(_putAndTake));
+            //_q_keyHoldController.OnKeyHold.RemoveListener(() => _player.Work(_work));
+            _e_keyDownController.OnKeyPressed.RemoveAllListeners();
+            _q_keyHoldController.OnKeyHold.RemoveAllListeners();
         }
     }
 }

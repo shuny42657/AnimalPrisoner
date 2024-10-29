@@ -23,7 +23,7 @@ namespace GameLogic.GameSystem
         MainGameInitializer gameInitializer;
         
         [SerializeField] MainPlayer playerFactory;
-        [SerializeField] IJobAllocator jobAllocator = new FixedJobAllocater();
+        [SerializeField] IJobAllocator jobAllocator = new FixedJobAllocater(JobName.StoneMaker,JobName.WoodMaker,JobName.IronMaker,JobName.RiceMaker);
 
         [SerializeField] ObjectiveManager _objectiveManager;
         [SerializeField] ItemDataBase _itemDataBase;

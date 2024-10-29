@@ -24,12 +24,17 @@ namespace GameLogic.Factory
         [SerializeField] WorkSpaceFactory ironOilCrafter;
 
         [SerializeField] WorkSpace.WorkSpace _stoneMaker;
+        [SerializeField] WorkSpace.WorkSpace _woodMaker;
+        [SerializeField] WorkSpace.WorkSpace _ironMaker;
+        [SerializeField] WorkSpace.WorkSpace _oilMaker;
+        [SerializeField] WorkSpace.WorkSpace _waterMaker;
+        [SerializeField] WorkSpace.WorkSpace _riceMaker;
         //[SerializeField] BaseWorkSpace _stoneMaker;
-        [SerializeField] BaseWorkSpace _woodMaker;
-        [SerializeField] BaseWorkSpace _ironMaker;
-        [SerializeField] BaseWorkSpace _oilMaker;
-        [SerializeField] BaseWorkSpace _waterMaker;
-        [SerializeField] BaseWorkSpace _riceMaker;
+        //[SerializeField] BaseWorkSpace _woodMaker;
+        //[SerializeField] BaseWorkSpace _ironMaker;
+        //[SerializeField] BaseWorkSpace _oilMaker;
+        //[SerializeField] BaseWorkSpace _waterMaker;
+        //[SerializeField] BaseWorkSpace _riceMaker;
 
         [SerializeField] BaseWorkSpace _stoneWoodWorkCrafter;
         [SerializeField] BaseWorkSpace _stoneIronCrafter;
@@ -58,27 +63,32 @@ namespace GameLogic.Factory
                 case JobName.WoodMaker:
                     //return woodMakerFactory.GenerateItem(position);
                     var newWoodMaker = Instantiate(_woodMaker, position, Quaternion.identity);
-                    newWoodMaker.InitializeWorkSpace();
+                    newWoodMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Wood, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newWoodMaker));
+                    //newWoodMaker.InitializeWorkSpace();
                     return newWoodMaker.gameObject;
                 case JobName.IronMaker:
                     //return ironMakerFactory.GenerateItem(position);
                     var newIronMaker = Instantiate(_ironMaker, position, Quaternion.identity);
-                    newIronMaker.InitializeWorkSpace();
+                    newIronMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Iron, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newIronMaker));
+                    //newIronMaker.InitializeWorkSpace();
                     return newIronMaker.gameObject;
                 case JobName.OilMaker:
                     //return oilMakerFactory.GenerateItem(position);
                     var newOilMaker = Instantiate(_oilMaker, position, Quaternion.identity);
-                    newOilMaker.InitializeWorkSpace();
+                    newOilMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Oil, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newOilMaker));
+                    //newOilMaker.InitializeWorkSpace();
                     return newOilMaker.gameObject;
                 case JobName.WaterMaker:
                     //return waterMakerFactory.GenerateItem(position);
                     var newWaterMaker = Instantiate(_waterMaker, position, Quaternion.identity);
-                    newWaterMaker.InitializeWorkSpace();
+                    newWaterMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Water, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newWaterMaker));
+                    //newWaterMaker.InitializeWorkSpace();
                     return newWaterMaker.gameObject;
                 case JobName.RiceMaker:
                     //return riceMakerFactory.GenerateItem(position);
                     var newRiceMaker = Instantiate(_riceMaker, position, Quaternion.identity);
-                    newRiceMaker.InitializeWorkSpace();
+                    newRiceMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Rice, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newRiceMaker));
+                    //newRiceMaker.InitializeWorkSpace();
                     return newRiceMaker.gameObject;
                 case JobName.StoneIronCrafter:
                     var newStoneIronCrafter = Instantiate(_stoneIronCrafter, position, Quaternion.identity);

@@ -4018,11 +4018,11 @@ MonoBehaviour:
   woodOilCrafter: {fileID: 813048312}
   ironOilCrafter: {fileID: 172603543}
   _stoneMaker: {fileID: 1185689843866070869, guid: fa6e12075fbd24bb9846dc5600f1d2b9, type: 3}
-  _woodMaker: {fileID: 3981085171586101442, guid: 548bd0f7abfbf45b7a513ec3c746706e, type: 3}
-  _ironMaker: {fileID: 1834977620356424361, guid: 94d95dc0afe184770a56c3d87a7d6e61, type: 3}
-  _oilMaker: {fileID: 9086430002039522420, guid: 51cd2b42b0fcb40cba313e351df0f53a, type: 3}
-  _waterMaker: {fileID: 3479186547950844518, guid: c025d3b3cd65d430eb832cb9f24af781, type: 3}
-  _riceMaker: {fileID: 6978412855260187364, guid: f0b01d864995b4d6699b4bcce1af5e2e, type: 3}
+  _woodMaker: {fileID: 361909532695765072, guid: 80c72e369828045ca8f564cc87ac4e9c, type: 3}
+  _ironMaker: {fileID: 5896672143986134935, guid: 197ad8250762e4b39996e8dea2a232c4, type: 3}
+  _oilMaker: {fileID: 6147781925415154470, guid: e5a51db0a05de42bcbc247c0e87c277b, type: 3}
+  _waterMaker: {fileID: 3770418677429245320, guid: 72bece93c9faf49489651a595de7ef4b, type: 3}
+  _riceMaker: {fileID: 796391102255430237, guid: 3ca0332447a864b24aaf7cb65e13ebcf, type: 3}
   _stoneWoodWorkCrafter: {fileID: 4499415131491478356, guid: dfc7845c815534214a6e78ab235ea155, type: 3}
   _stoneIronCrafter: {fileID: 1780063546651886692, guid: 96dfff4ea9b22494f8e337b1d9d32247, type: 3}
   _stoneOilCrafter: {fileID: 2066851992875294924, guid: 687324dbed1ce4943b640842b241db86, type: 3}
