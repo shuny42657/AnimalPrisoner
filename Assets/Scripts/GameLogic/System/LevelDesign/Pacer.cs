@@ -6,6 +6,11 @@ using UnityEngine.Events;
 
 namespace GameLogic.GameSystem
 {
+    public interface IClock
+    {
+        public void AddTick(ITick tick);
+    }
+
     public interface ITick
     {
         public void Tick();

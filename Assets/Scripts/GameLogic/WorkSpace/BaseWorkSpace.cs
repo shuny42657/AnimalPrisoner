@@ -41,7 +41,7 @@ namespace GameLogic.WorkSpace
             if (_automatable != null)
             {
                 Debug.Log("workspace automatable called");
-                _automatable.InitateOperation();
+                //_automatable.InitateOperation();
             }
             else
             {

@@ -23,7 +23,7 @@ namespace GameLogic.GameSystem
         MainGameInitializer gameInitializer;
         
         [SerializeField] MainPlayer playerFactory;
-        [SerializeField] IJobAllocator jobAllocator = new FixedJobAllocater(JobName.StoneMaker,JobName.WoodMaker,JobName.IronMaker,JobName.RiceMaker);
+        [SerializeField] IJobAllocator jobAllocator = new FixedJobAllocater(JobName.StoneMaker,JobName.WoodMaker,JobName.IronMaker,JobName.StoneIronCrafter);
 
         [SerializeField] ObjectiveManager _objectiveManager;
         [SerializeField] ItemDataBase _itemDataBase;
@@ -139,7 +139,7 @@ namespace GameLogic.GameSystem
             //SubmissionWorkSpace
             _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,e_KeyDownController);
             _submissionSpace.SetWorkSpaceController(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceController(_submissionSpace));
-            _bed.InitializeWorkSpace();
+            //_bed.InitializeWorkSpace();
             
         }
 

@@ -12,13 +12,14 @@ namespace GameLogic.WorkSpace
         public void UnSubscribe(); //処理の登録を解除する。
     }
 
-    public class SubmissionWorkSpaceController : IWorkSpaceController
+    //Put&Take
+    public class PutTakeWorkSpaceController : IWorkSpaceController
     {
         IPlayer _player;
         IPutAndTake _putAndTake; //ObjectiveMangerPutAndTake
         KeyDownController _keyDownController;
 
-        public SubmissionWorkSpaceController(IPlayer player,IPutAndTake putAndTake,KeyDownController keyDownController)
+        public PutTakeWorkSpaceController(IPlayer player,IPutAndTake putAndTake,KeyDownController keyDownController)
         {
             _player = player;
             _putAndTake = putAndTake;
@@ -36,7 +37,8 @@ namespace GameLogic.WorkSpace
         }
     }
 
-    public class MakerWorkSpaceController : IWorkSpaceController
+    //Put&Take, Work
+    public class PutTakeWorkWorkSpaceController : IWorkSpaceController
     {
         IPlayer _player;
         IPutAndTake _putAndTake;
@@ -44,7 +46,7 @@ namespace GameLogic.WorkSpace
         KeyDownController _e_keyDownController;
         KeyHoldController _q_keyHoldController;
 
-        public MakerWorkSpaceController(
+        public PutTakeWorkWorkSpaceController(
             IPlayer player,
             IPutAndTake putAndTake,
             IWork work,
@@ -71,6 +73,43 @@ namespace GameLogic.WorkSpace
             //_q_keyHoldController.OnKeyHold.RemoveListener(() => _player.Work(_work));
             _e_keyDownController.OnKeyPressed.RemoveAllListeners();
             _q_keyHoldController.OnKeyHold.RemoveAllListeners();
+        }
+    }
+
+    //Put&Take, Automate
+    public class PutTakeAutomateWorkSpaceController : IWorkSpaceController
+    {
+        IPlayer _player;
+        IPutAndTake _putAndTake;
+        IAutomatable _automatable;
+        KeyDownController _e_keyDownController;
+        KeyDownController _f_keyHoldController;
+
+        public PutTakeAutomateWorkSpaceController(
+            IPlayer player,
+            IPutAndTake putAndTake,
+            IAutomatable automatable,
+            KeyDownController e_keyDownController,
+            KeyDownController f_keyDownController
+            )
+        {
+            _player = player;
+            _putAndTake = putAndTake;
+            _automatable = automatable;
+            _e_keyDownController = e_keyDownController;
+            _f_keyHoldController = f_keyDownController;
+        }
+
+        public void Subscribe()
+        {
+            _e_keyDownController.OnKeyPressed.AddListener(() => _player.PutOrTake(_putAndTake));
+            _f_keyHoldController.OnKeyPressed.AddListener(() => _player.StartOperation(_automatable));
+        }
+
+        public void UnSubscribe()
+        {
+            _e_keyDownController.OnKeyPressed.RemoveAllListeners();
+            _f_keyHoldController.OnKeyPressed.RemoveAllListeners();
         }
     }
 }

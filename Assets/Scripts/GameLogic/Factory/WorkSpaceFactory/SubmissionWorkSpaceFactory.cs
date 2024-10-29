@@ -35,7 +35,7 @@ namespace GameLogic.Factory
         public IWorkSpaceController GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
         {
             var objectiveManagerPutAndTake = new ObjectiveMangerPutAndTake(_objectiveManager, _roomParamModifier);
-            return new SubmissionWorkSpaceController(_player, objectiveManagerPutAndTake, _keyDownController);
+            return new PutTakeWorkSpaceController(_player, objectiveManagerPutAndTake, _keyDownController);
         }
     }
 
@@ -71,7 +71,66 @@ namespace GameLogic.Factory
 
             work.OnProgressMade.AddListener((rate) => workSpace.WorkSapceProgressView.ModifyGauge(rate));
 
-            return new MakerWorkSpaceController(_player, onlyTakeWithSettable,work, _e_keyDownController, _q_keyHoldController);
+            return new PutTakeWorkWorkSpaceController(_player, onlyTakeWithSettable,work, _e_keyDownController, _q_keyHoldController);
+        }
+    }
+
+    public class FloorWorkSpaceControllerFactory : IWorkSpaceControllerFactory
+    {
+        IPlayer _player;
+        KeyDownController _keyDownController;
+
+        public FloorWorkSpaceControllerFactory(IPlayer player, KeyDownController keyDownController)
+        {
+            _player = player;
+            _keyDownController = keyDownController;
+        }
+
+        public IWorkSpaceController GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
+        {
+            var basicPutAndTake = new BasicPutAndTake();
+            basicPutAndTake.OnPut.AddListener((item) => workSpace.GrabbableVisualizer.Show(item));
+            basicPutAndTake.OnTake.AddListener(workSpace.GrabbableVisualizer.Delete);
+
+            return new PutTakeWorkSpaceController(_player, basicPutAndTake,_keyDownController);
+        }
+    }
+
+    public class CrafterWorkSpaceControllerFacotry : IWorkSpaceControllerFactory
+    {
+        IPlayer _player;
+        IClock _clock;
+        KeyDownController _e_keyDownController;
+        KeyDownController _f_keyDownController;
+        ItemName _firstItem;
+        ItemName _secondItem;
+
+        public CrafterWorkSpaceControllerFacotry(IPlayer player,IClock clock,ItemName firstItem,ItemName secondItem, KeyDownController e_keyDownController,KeyDownController f_keyDownController)
+        {
+            _player = player;
+            _clock = clock;
+            _e_keyDownController = e_keyDownController;
+            _f_keyDownController = f_keyDownController;
+            _firstItem = firstItem;
+            _secondItem = secondItem;
+        }
+
+        public IWorkSpaceController GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
+        {
+            var crafterPutAndTake = new CrafterPutAndTake(_firstItem, _secondItem);
+            var crafterAutomatable = new CrafterAutomatable(5f, crafterPutAndTake);
+
+            crafterPutAndTake.OnTake.AddListener(() => workSpace.GrabbableVisualizer.Delete());
+            crafterPutAndTake.OnSet.AddListener((item) => workSpace.GrabbableVisualizer.Show(item));
+
+            crafterAutomatable.OnOperationInitiated.AddListener(() => crafterPutAndTake.ResetSetQuantity());
+            crafterAutomatable.OnOperationInitiated.AddListener(() => workSpace.WorkSapceProgressView.Show(true));
+            crafterAutomatable.OnProgressMade.AddListener((rate) => workSpace.WorkSapceProgressView.ModifyGauge(rate));
+            crafterAutomatable.OnOperationFinish.AddListener(() => crafterPutAndTake.Set());
+            crafterAutomatable.OnOperationFinish.AddListener(() => workSpace.WorkSapceProgressView.Show(false));
+
+            _clock.AddTick(crafterAutomatable);
+            return new PutTakeAutomateWorkSpaceController(_player, crafterPutAndTake, crafterAutomatable, _e_keyDownController, _f_keyDownController);
         }
     }
 }

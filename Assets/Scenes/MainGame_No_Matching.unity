@@ -4023,15 +4023,17 @@ MonoBehaviour:
   _oilMaker: {fileID: 6147781925415154470, guid: e5a51db0a05de42bcbc247c0e87c277b, type: 3}
   _waterMaker: {fileID: 3770418677429245320, guid: 72bece93c9faf49489651a595de7ef4b, type: 3}
   _riceMaker: {fileID: 796391102255430237, guid: 3ca0332447a864b24aaf7cb65e13ebcf, type: 3}
-  _stoneWoodWorkCrafter: {fileID: 4499415131491478356, guid: dfc7845c815534214a6e78ab235ea155, type: 3}
-  _stoneIronCrafter: {fileID: 1780063546651886692, guid: 96dfff4ea9b22494f8e337b1d9d32247, type: 3}
-  _stoneOilCrafter: {fileID: 2066851992875294924, guid: 687324dbed1ce4943b640842b241db86, type: 3}
-  _woodIronCrafter: {fileID: 4736021599298278994, guid: dd94f98d4fa14486baed8cadd6c548cc, type: 3}
-  _woodOilCrafter: {fileID: 6018770272979494350, guid: 9576de419a346465d92ab20e2ddeb476, type: 3}
-  _ironOilCrafter: {fileID: 2352373648510846553, guid: 0cb87b7c885fa44d29c9b6e50933a970, type: 3}
+  _stoneWoodCrafter: {fileID: 8607318136318934836, guid: 0af8eb6e316924eb3b7133020d137f2c, type: 3}
+  _stoneIronCrafter: {fileID: 6190148276403974961, guid: d3e015adf1a7248438e2f5862d468d5a, type: 3}
+  _stoneOilCrafter: {fileID: 692975469241255501, guid: 6a074c6c5e8fd478d86f3c93d8ac206c, type: 3}
+  _woodIronCrafter: {fileID: 6046109628486911797, guid: 484876f71b67c4d4889106f8b922e73e, type: 3}
+  _woodOilCrafter: {fileID: 5196191517930294553, guid: 59ad4061a507a452f863089fa7224fc3, type: 3}
+  _ironOilCrafter: {fileID: 2871173392795112722, guid: 34a97a24e15ba4e5aa3914672c87789b, type: 3}
   _submissionWorkSpace: {fileID: 0}
   _e_keyDownController: {fileID: 1270962858}
+  _f_keyDownController: {fileID: 87244453}
   _q_keyHoldController: {fileID: 553725264}
+  _updateClock: {fileID: 1239947917}
 --- !u!4 &649048715
 Transform:
   m_ObjectHideFlags: 0

@@ -21,18 +21,10 @@ namespace GameLogic.GamePlayer
 
         UnityEvent<ItemName> onTake = new(); public UnityEvent<ItemName> OnTake { get { return onTake; } }
 
-        public void InitiateWork()
+        public void InitiateWork(IAutomatable automatable)
         {
-            if (_workSpace == null)
-            {
-                Debug.Log("no operatable");
-                return;
-            }
-            else
-            {
                 Debug.Log("operator handler passed");
-                _workSpace.InitiateOperation();
-            }
+                automatable.InitiateOperation();
         }
 
         public void PutOrTake(IPutAndTake putAndTake)

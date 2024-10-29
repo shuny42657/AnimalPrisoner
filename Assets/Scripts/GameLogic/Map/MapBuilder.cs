@@ -11,10 +11,13 @@ namespace GameLogic.Map
 {
     public class MapBuilder : MonoBehaviour,IMapBuilder
     {
+        IPlayer _player; public void SetPlayer(IPlayer player) { _player = player; }
         [SerializeField] MotherWorkSpaceFactory motherWorkSpaceFactory;
         [SerializeField] List<Vector3> positionCandidates;
         HashSet<int> occupiedPositions = new();
         [SerializeField]UnityEvent<IUpGradable> onWorkSpaceGenerated;
+
+        List<WorkSpace.WorkSpace> floors;
         public List<BaseWorkSpace> BuildWorkSpaces(IJobStatus jobStatus)
         {
             List<BaseWorkSpace> workSpaces = new();

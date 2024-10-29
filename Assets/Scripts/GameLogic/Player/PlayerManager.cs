@@ -43,9 +43,9 @@ namespace GameLogic.GamePlayer
             _operatableHandler.PutOrTake(putAndTake);
         }
 
-        public void StartOperation()
+        public void StartOperation(IAutomatable automatable)
         {
-            _operatableHandler.InitiateWork();
+            _operatableHandler.InitiateWork(automatable);
         }
 
         //Move
