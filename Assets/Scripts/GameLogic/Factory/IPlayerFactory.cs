@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameLogic.GamePlayer;
+using GameLogic.WorkSpace;
 
 namespace GameLogic.GamePlayer
 {
@@ -17,7 +18,7 @@ namespace GameLogic.GamePlayer
         public void MoveLeft();
         public void MoveUp();
         public void MoveDown();
-        public void PutOrTake();
+        public void PutOrTake(IPutAndTake putAndTake);
     }
 }
 namespace GameLogic.Factory

@@ -16,9 +16,5 @@ namespace GameLogic.WorkSpace
             bedAutomatable.OnProgressMade.AddListener((rate) => _progressView.ModifyGauge(rate));
             bedAutomatable.OnOperationInitiated.AddListener(() => _progressView.Show(true));
         }
-        private void Start()
-        {
-            InitializeWorkSpace();
-        }
     }
 }

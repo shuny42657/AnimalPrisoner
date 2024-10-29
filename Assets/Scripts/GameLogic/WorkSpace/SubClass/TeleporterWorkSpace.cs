@@ -16,10 +16,5 @@ namespace GameLogic.WorkSpace
             var teleporterPutAndTake = (TeleporterPutAndTake)_putAndTake;
             teleporterPutAndTake.OnReceiverIDSet.AddListener((playerNum) => _teleporterTextView.ShowText(playerNum));
         }
-
-        private void Start()
-        {
-            InitializeWorkSpace();
-        }
     }
 }

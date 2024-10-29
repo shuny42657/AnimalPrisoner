@@ -15,6 +15,6 @@ public class PlayerControllerPresenter : MonoBehaviour
         //Debug.Log(characterMove.Value != null);
         keyInputController.Value.OnHAxis.AddListener((val) => characterMove.Value.MoveHorizontal(val));
         keyInputController.Value.OnVAxis.AddListener((val) => characterMove.Value.MoveVertical(val));
-        keyInputController.Value.OnEPressed.AddListener(() => handler.PutOrTake());
+        //keyInputController.Value.OnEPressed.AddListener(() => handler.PutOrTake());
     }
 }

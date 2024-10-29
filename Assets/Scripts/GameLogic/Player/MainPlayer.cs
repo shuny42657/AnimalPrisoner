@@ -17,13 +17,13 @@ namespace GameLogic.Factory
     public class MainPlayer : MonoBehaviour,IPlayerFactory
     {
         [SerializeField] GameObject _playerPrefab;
-        [SerializeField] IPlayerStatus _playerStatus;
-        [SerializeField] IJobStatus _jobStatus;
-        [SerializeField] IOperatableHandler _playerOperatableHandler;
-        [SerializeField] IOperatableCallback _operatableCallback;
-        [SerializeField] IUpGradable _playerSpeedUpGradable;
-        [SerializeField] IMovable _move;
-        [SerializeField] IGrabbableVisualizer _visualizer;
+        IPlayerStatus _playerStatus;
+        IJobStatus _jobStatus;
+        IOperatableHandler _playerOperatableHandler;
+        IOperatableCallback _operatableCallback;
+        IUpGradable _playerSpeedUpGradable;
+        IMovable _move;
+        IGrabbableVisualizer _visualizer;
 
         KeyHoldController _rightKeyHoldController;
         KeyHoldController _leftKeyHoldController;
@@ -89,7 +89,7 @@ namespace GameLogic.Factory
             _downKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveDown());
             _upKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveUp());
             _qKeyHoldController.OnKeyHold.AddListener(() => playerManager.Work());
-            _eKeyDownController.OnKeyPressed.AddListener(() => playerManager.PutOrTake());
+            //_eKeyDownController.OnKeyPressed.AddListener(() => playerManager.PutOrTake());
             _fKeyDownController.OnKeyPressed.AddListener(() => playerManager.StartOperation());
 
             _playerCustomPropertyCallback.onComplete.AddListener(() => _jobStatus.SetJobs());
@@ -106,5 +106,4 @@ namespace GameLogic.Factory
             return playerManager;
         }
     }
-
 }

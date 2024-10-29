@@ -9,7 +9,7 @@ namespace GameLogic.GamePlayer
     {
         public IOperatable Operatable { get; set; }
         public IInteractable Interactable { get; set; }
-        public void PutOrTake();
+        public void PutOrTake(IPutAndTake putAndTake);
         public void Work(IPlayerStatus playerStatus);
         public void InitiateWork();
     }

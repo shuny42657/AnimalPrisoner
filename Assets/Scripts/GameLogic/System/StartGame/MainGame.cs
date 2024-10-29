@@ -8,6 +8,8 @@ using Sync;
 using Cysharp.Threading.Tasks;
 using UI;
 using Photon.Realtime;
+using GameLogic.Data;
+using GameLogic.WorkSpace;
 
 namespace GameLogic.GameSystem
 {
@@ -23,12 +25,14 @@ namespace GameLogic.GameSystem
         [SerializeField] IJobAllocator jobAllocator = new MainJobAllocator();
 
         [SerializeField] ObjectiveManager _objectiveManager;
+        [SerializeField] ItemDataBase _itemDataBase;
         RoomParameterUpgrader _roomParamUpGrader;
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
         [SerializeField] RoomIntegerPropertyCallback _decayLevelUpCallback;
 
         [SerializeField] UpdateClock _clock;
         RoomParameter _roomParam;
+        RoomParameterModifier _roomParamModifier;
         Pacer _roomParamPacer;
         Pacer _leveledObjCreatorPacer;
         Pacer _objectiveCreatorPacer;
@@ -41,6 +45,12 @@ namespace GameLogic.GameSystem
         [SerializeField] GaugeView _electricityGauge;
 
         [SerializeField] RoomPredicatePropertyCallback _roomPredicatePropertyCallback;
+
+        [SerializeField] List<BaseWorkSpace> _teleporters;
+        [SerializeField] List<BaseWorkSpace> _receivers;
+        [SerializeField] BaseWorkSpace _submissionSpace;
+        [SerializeField] BaseWorkSpace _bed;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -63,6 +73,8 @@ namespace GameLogic.GameSystem
                 new() { 1f, 2f, 3f, 4f, 5f },
                 new() { 1f, 2f, 3f, 4f, 5f });
             _decayLevelUpCallback.onModified.AddListener((val) => _roomParamUpGrader.UpGrade());
+            //RoomParameterModifierの初期化
+            _roomParamModifier = new(_itemDataBase, _roomParam);
 
             _roomParam.OnFuelModified.AddListener((rate) => _fuelGauge.ModifyGauge(rate));
             _roomParam.OnDurabilityModified.AddListener((rate) => _durabilityGauge.ModifyGauge(rate));
@@ -107,6 +119,15 @@ namespace GameLogic.GameSystem
 
             //GameOverViewのボタンコールバック
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
+
+            //固定配置されているワークスペースの初期化
+            for(int i = 0; i < _teleporters.Count; i++)
+            {
+                _teleporters[i].InitializeWorkSpace();
+                _receivers[i].InitializeWorkSpace();
+            }
+            _submissionSpace.InitializeWorkSpace();
+            _bed.InitializeWorkSpace();
             
         }
 

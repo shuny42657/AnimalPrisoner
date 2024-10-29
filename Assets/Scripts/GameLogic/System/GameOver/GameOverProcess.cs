@@ -25,7 +25,6 @@ namespace GameLogic.GameSystem
             _roomParamPacer.IsActive = false;
             _leveledObjCreatorPacer.IsActive = false;
             _objectiveCreatorPacer.IsActive = false;
-            _roomParamModifier.IsActive = false;
             await _gameOverView.Value.Appear();
         }
     }

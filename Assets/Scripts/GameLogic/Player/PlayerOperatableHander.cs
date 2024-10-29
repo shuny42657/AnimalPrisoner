@@ -8,12 +8,12 @@ namespace GameLogic.GamePlayer
 {
     public class PlayerOperatableHander : MonoBehaviour, IOperatableHandler,IOperatableCallback
     {
-        BaseWorkSpace operatable;
+        BaseWorkSpace _workSpace;
         IInteractable interactable;
 
         ItemName item;
 
-        public IOperatable Operatable { get { return operatable; } set { operatable = (BaseWorkSpace)value; } }
+        public IOperatable Operatable { get { return _workSpace; } set { _workSpace = (BaseWorkSpace)value; } }
 
         public IInteractable Interactable { get { return interactable; } set { interactable = value; } }
 
@@ -23,7 +23,7 @@ namespace GameLogic.GamePlayer
 
         public void InitiateWork()
         {
-            if (operatable == null)
+            if (_workSpace == null)
             {
                 Debug.Log("no operatable");
                 return;
@@ -31,13 +31,13 @@ namespace GameLogic.GamePlayer
             else
             {
                 Debug.Log("operator handler passed");
-                operatable.InitiateOperation();
+                _workSpace.InitiateOperation();
             }
         }
 
-        public void PutOrTake()
+        public void PutOrTake(IPutAndTake putAndTake)
         {
-            if (operatable == null)
+            /*if (_workSpace == null)
                 return;
             else
             {
@@ -45,7 +45,7 @@ namespace GameLogic.GamePlayer
                 if (item == ItemName.None)
                 {
                     Debug.Log("Take called");
-                    item = operatable.Take();
+                    item = _workSpace.Take();
                     if (item != ItemName.None)
                     {
                         Debug.Log("Get Item !!");
@@ -55,29 +55,49 @@ namespace GameLogic.GamePlayer
                 else
                 {
                     Debug.Log("Put Called");
-                    var isPut = operatable.Put(item);
+                    var isPut = _workSpace.Put(item);
                     if (isPut)
                     {
                         item = ItemName.None;
                         onPut.Invoke(item);
                     }
                 }
+            }*/
+
+            if(item == ItemName.None)
+            {
+                Debug.Log("Take called");
+                item = putAndTake.Take();
+                if(item != ItemName.None)
+                {
+                    Debug.Log("GET ITEM !!");
+                    onTake.Invoke(item);
+                }
             }
-        
+            else
+            {
+                Debug.Log("PUT CALLED");
+                var isPut = putAndTake.Put(item);
+                if (isPut)
+                {
+                    item = ItemName.None;
+                    onPut.Invoke(item);
+                }
+            }
         }
 
         public void Work(IPlayerStatus playerStatus)
         {
-            operatable.Work(playerStatus);
+            _workSpace.Work(playerStatus);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
             {
-                if(operatable != null)
-                    operatable.PlayerTrigger.OnPlayerExit.Invoke();
-                operatable = baseWorkSpace;
+                if(_workSpace != null)
+                    _workSpace.PlayerTrigger.OnPlayerExit.Invoke();
+                _workSpace = baseWorkSpace;
                 baseWorkSpace.PlayerTrigger.OnPlayerEnter.Invoke();
             }
         }
@@ -86,9 +106,9 @@ namespace GameLogic.GamePlayer
         {
             if(other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
             {
-                if(operatable == baseWorkSpace)
+                if(_workSpace == baseWorkSpace)
                 {
-                    operatable = null;
+                    _workSpace = null;
                     baseWorkSpace.PlayerTrigger.OnPlayerExit.Invoke();
                 }
             }

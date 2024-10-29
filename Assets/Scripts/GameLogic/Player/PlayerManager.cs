@@ -38,9 +38,9 @@ namespace GameLogic.GamePlayer
             _movable.CanMove = isActive;
         }
 
-        public void PutOrTake()
+        public void PutOrTake(IPutAndTake putAndTake)
         {
-            _operatableHandler.PutOrTake();
+            _operatableHandler.PutOrTake(putAndTake);
         }
 
         public void StartOperation()

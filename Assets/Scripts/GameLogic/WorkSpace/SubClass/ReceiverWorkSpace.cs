@@ -33,10 +33,5 @@ namespace GameLogic.WorkSpace
                 Debug.Log("player trigger not null");
             }*/
         }
-
-        private void Start()
-        {
-            InitializeWorkSpace();
-        }
     }
 }
