@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace GameLogic.WorkSpace
 {
-    public class OnlyTakeWithSettable : MonoBehaviour, IPutAndTake,ISet
+    public class OnlyTakeWithSettable : IPutAndTake,ISet
     {
         ItemName _item;
         ItemName _itemToSet;

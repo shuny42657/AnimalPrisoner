@@ -12,18 +12,19 @@ namespace GameLogic.WorkSpace
     /// </summary>
     public class WorkSpace : MonoBehaviour, IPlayerTrigger
     {
-        IWorkSpaceController _workSpaceControler;
+        IWorkSpaceManager _workSpaceControler;
         [SerializeField] HighlightVisualizer _highlightVisualizer;
         [SerializeField] WorkSpaceProgressView _workSpaceProgressView; public WorkSpaceProgressView WorkSapceProgressView { get { return _workSpaceProgressView; } }
         [SerializeField] GrabbableVisualizer _grabbableVisualizer; public GrabbableVisualizer GrabbableVisualizer { get { return _grabbableVisualizer; } }
 
-        public void SetWorkSpaceController(IWorkSpaceController workSpaceController)
+        public void SetWorkSpaceManager(IWorkSpaceManager workSpaceController)
         {
             _workSpaceControler = workSpaceController;
         }
+
         public void OnPlayerEnter()
         {
-            _workSpaceControler.Subscribe();
+            _workSpaceControler.SubScribe();
             _highlightVisualizer.Hilight(true);
         }
 

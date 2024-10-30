@@ -70,72 +70,72 @@ namespace GameLogic.Factory
                 case JobName.StoneMaker:
                     //return stoneMakerFactory.GenerateItem(position);
                     var newStoneMaker = Instantiate(_stoneMaker, position, Quaternion.identity);
-                    newStoneMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Stone, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newStoneMaker));
+                    newStoneMaker.SetWorkSpaceManager(new MakerWorkSpaceControllerFactory(_player, ItemName.Stone,UpGraderName.StoneMaker, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newStoneMaker));
                     return newStoneMaker;
                 case JobName.WoodMaker:
                     //return woodMakerFactory.GenerateItem(position);
                     var newWoodMaker = Instantiate(_woodMaker, position, Quaternion.identity);
-                    newWoodMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Wood, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newWoodMaker));
+                    newWoodMaker.SetWorkSpaceManager(new MakerWorkSpaceControllerFactory(_player, ItemName.Wood,UpGraderName.WoodMaker, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newWoodMaker));
                     //newWoodMaker.InitializeWorkSpace();
                     return newWoodMaker;
                 case JobName.IronMaker:
                     //return ironMakerFactory.GenerateItem(position);
                     var newIronMaker = Instantiate(_ironMaker, position, Quaternion.identity);
-                    newIronMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Iron, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newIronMaker));
+                    newIronMaker.SetWorkSpaceManager(new MakerWorkSpaceControllerFactory(_player, ItemName.Iron,UpGraderName.IronMaker, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newIronMaker));
                     //newIronMaker.InitializeWorkSpace();
                     return newIronMaker;
                 case JobName.OilMaker:
                     //return oilMakerFactory.GenerateItem(position);
                     var newOilMaker = Instantiate(_oilMaker, position, Quaternion.identity);
-                    newOilMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Oil, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newOilMaker));
+                    newOilMaker.SetWorkSpaceManager(new MakerWorkSpaceControllerFactory(_player, ItemName.Oil,UpGraderName.OilMaker, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newOilMaker));
                     //newOilMaker.InitializeWorkSpace();
                     return newOilMaker;
                 case JobName.WaterMaker:
                     //return waterMakerFactory.GenerateItem(position);
                     var newWaterMaker = Instantiate(_waterMaker, position, Quaternion.identity);
-                    newWaterMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Water, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newWaterMaker));
+                    newWaterMaker.SetWorkSpaceManager(new MakerWorkSpaceControllerFactory(_player, ItemName.Water,UpGraderName.WaterMaker, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newWaterMaker));
                     //newWaterMaker.InitializeWorkSpace();
                     return newWaterMaker;
                 case JobName.RiceMaker:
                     //return riceMakerFactory.GenerateItem(position);
                     var newRiceMaker = Instantiate(_riceMaker, position, Quaternion.identity);
-                    newRiceMaker.SetWorkSpaceController(new MakerWorkSpaceControllerFactory(_player, ItemName.Rice, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newRiceMaker));
+                    newRiceMaker.SetWorkSpaceManager(new MakerWorkSpaceControllerFactory(_player, ItemName.Rice,UpGraderName.RiceMaker, _e_keyDownController, _q_keyHoldController).GenerateWorkSpaceController(newRiceMaker));
                     //newRiceMaker.InitializeWorkSpace();
                     return newRiceMaker;
                 case JobName.StoneIronCrafter:
                     var newStoneIronCrafter = Instantiate(_stoneIronCrafter, position, Quaternion.identity);
-                    newStoneIronCrafter.SetWorkSpaceController(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Stone, ItemName.Iron, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newStoneIronCrafter));
+                    newStoneIronCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Stone, ItemName.Iron,UpGraderName.StoneIronCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newStoneIronCrafter));
                     //return newStoneIronCrafter;
                     return null;
                     //return stoneIronCrafter.GenerateItem(position);
                 case JobName.StoneWoodCrafter:
                     var newStoneWoodCrafter = Instantiate(_stoneWoodCrafter, position, Quaternion.identity);
-                    newStoneWoodCrafter.SetWorkSpaceController(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Stone, ItemName.Wood, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newStoneWoodCrafter));
+                    newStoneWoodCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Stone, ItemName.Wood,UpGraderName.StoneWoodCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newStoneWoodCrafter));
                     //newStoneWoodCrafter.InitializeWorkSpace();
                     //return newStoneWoodCrafter;
                     return null;
                 //return stoneWoodCrafter.GenerateItem(position);
                 case JobName.StoneOilCrafter:
                     var newStoneOilCrafter = Instantiate(_stoneOilCrafter, position, Quaternion.identity);
-                    newStoneOilCrafter.SetWorkSpaceController(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Stone, ItemName.Oil, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newStoneOilCrafter));
+                    newStoneOilCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Stone, ItemName.Oil,UpGraderName.StoneOilCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newStoneOilCrafter));
                     //return newStoneOilCrafter;
                     return null;
                 //return stonOilCrafter.GenerateItem(position);
                 case JobName.WoodIronCrafter:
                     var newWoodIronCrafter = Instantiate(_woodIronCrafter, position, Quaternion.identity);
-                    newWoodIronCrafter.SetWorkSpaceController(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Wood, ItemName.Iron, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newWoodIronCrafter));
+                    newWoodIronCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Wood, ItemName.Iron,UpGraderName.WoodIronCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newWoodIronCrafter));
                     //return newWoodIronCrafter.gameObject;
                     return null;
                 //return woodIronCrafter.GenerateItem(position);
                 case JobName.WoodOilCrafter:
                     var newWoodOilCrafter = Instantiate(_woodOilCrafter, position, Quaternion.identity);
-                    newWoodOilCrafter.SetWorkSpaceController(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Wood, ItemName.Oil, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newWoodOilCrafter));
+                    newWoodOilCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Wood, ItemName.Oil,UpGraderName.WoodOilCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newWoodOilCrafter));
                     //return newWoodOilCrafter.gameObject;
                     return null;
                 //return woodOilCrafter.GenerateItem(position);
                 case JobName.OilIronCrafter:
                     var newOilIronCrafter = Instantiate(_ironOilCrafter, position, Quaternion.identity);
-                    newOilIronCrafter.SetWorkSpaceController(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Oil, ItemName.Iron, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newOilIronCrafter));
+                    newOilIronCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Oil, ItemName.Iron,UpGraderName.IronOilCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newOilIronCrafter));
                     //return newOilIronCrafter.gameObject;
                     return null;
                 //return ironOilCrafter.GenerateItem(position);
