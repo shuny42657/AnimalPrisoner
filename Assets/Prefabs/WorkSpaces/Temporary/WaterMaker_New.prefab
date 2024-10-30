@@ -474,7 +474,6 @@ GameObject:
   - component: {fileID: 946045679164267871}
   - component: {fileID: 1586001280498034616}
   - component: {fileID: 4635389039024128464}
-  - component: {fileID: 7216491706611521085}
   - component: {fileID: 3770418677429245320}
   m_Layer: 0
   m_Name: WaterMaker_New
@@ -551,21 +550,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 7543830018168020626}
---- !u!114 &7216491706611521085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5697736621422588242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45af9a44700434a589b547d661386619, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  work:
-    obj: {fileID: 5697736621422588242}
-  upGraderName: 4
 --- !u!114 &3770418677429245320
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ namespace GameLogic
         Teleporter = 102,
         Receiver = 103,
         Bed = 104,
+        Floor = 105,
     }
 }
 

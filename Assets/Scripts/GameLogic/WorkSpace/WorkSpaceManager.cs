@@ -9,8 +9,9 @@ namespace GameLogic.WorkSpace
         public void SubScribe();
         public void UnSubscribe();
         public void UpGrade();
+        public UpGraderName UpGraderName { get; }
     }
-    public class WorkSpaceManager : IWorkSpaceManager
+    public class WorkSpaceManager : IWorkSpaceController,IUpGradable
     {
         IWorkSpaceController _workSpaceController;
         IUpGradable _upGradable;
@@ -23,7 +24,7 @@ namespace GameLogic.WorkSpace
             _upGradable = upGradable;
         }
 
-        public void SubScribe()
+        public void Subscribe()
         {
             _workSpaceController.Subscribe();
         }
@@ -37,5 +38,7 @@ namespace GameLogic.WorkSpace
         {
             _upGradable.UpGrade();
         }
+
+        public UpGraderName UpGraderName { get { return _upGradable.UpGraderName; } }
     }
 }

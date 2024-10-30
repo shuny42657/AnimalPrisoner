@@ -669,7 +669,6 @@ GameObject:
   - component: {fileID: 6558729196364425532}
   - component: {fileID: 8880616475005509363}
   - component: {fileID: 8932110794267310650}
-  - component: {fileID: 651559485446520752}
   - component: {fileID: 5896672143986134935}
   m_Layer: 0
   m_Name: IronMaker_New
@@ -746,21 +745,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 5407551392876855462}
---- !u!114 &651559485446520752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8928679065080560322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45af9a44700434a589b547d661386619, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  work:
-    obj: {fileID: 8928679065080560322}
-  upGraderName: 2
 --- !u!114 &5896672143986134935
 MonoBehaviour:
   m_ObjectHideFlags: 0

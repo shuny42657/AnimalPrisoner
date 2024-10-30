@@ -211,9 +211,7 @@ GameObject:
   - component: {fileID: 3261307217865580500}
   - component: {fileID: 6629438022395629146}
   - component: {fileID: 765461024697406928}
-  - component: {fileID: 5434550449493207141}
-  - component: {fileID: 2972593713557846199}
-  - component: {fileID: 3110406462023289694}
+  - component: {fileID: 8701914027804890180}
   m_Layer: 0
   m_Name: SimpleFloor_New
   m_TagString: Untagged
@@ -337,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 711726409090814717}
---- !u!114 &5434550449493207141
+--- !u!114 &8701914027804890180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,61 +344,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8550913946788498265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd5b92199717646308c9770d5897571e, type: 3}
+  m_Script: {fileID: 11500000, guid: 174c6e81d06864d11bb9a66789db7e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPlayerEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6629438022395629146}
-        m_TargetAssemblyTypeName: Util.HighlightVisualizer, Util
-        m_MethodName: Hilight
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  onPlayerExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6629438022395629146}
-        m_TargetAssemblyTypeName: Util.HighlightVisualizer, Util
-        m_MethodName: Hilight
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2972593713557846199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8550913946788498265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98d1dcfa67884fe69223e5e0766d95d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _progressView: {fileID: 0}
---- !u!114 &3110406462023289694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8550913946788498265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84c8ebca673854480943a2df9df5fdd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _highlightVisualizer: {fileID: 6629438022395629146}
+  _workSpaceProgressView: {fileID: 0}
+  _grabbableVisualizer: {fileID: 765461024697406928}

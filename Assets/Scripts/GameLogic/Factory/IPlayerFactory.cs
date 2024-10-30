@@ -25,6 +25,6 @@ namespace GameLogic.Factory
 {
     public interface IPlayerFactory
     {
-        public IPlayer GeneratePlayer(Vector3 position);
+        public PlayerManager GeneratePlayer(Vector3 position);
     }
 }

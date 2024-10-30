@@ -10,7 +10,7 @@ namespace GameLogic.Factory
 {
     public interface IWorkSpaceManagerFactory
     {
-        public IWorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace);
+        public WorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace);
     }
 
     public class SubmissionWorkSpaceControllerFactory : IWorkSpaceManagerFactory
@@ -32,7 +32,7 @@ namespace GameLogic.Factory
             _roomParamModifier = roomParamModifier;
             _keyDownController = keyDownController;
         }
-        public IWorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
+        public WorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
         {
             var objectiveManagerPutAndTake = new ObjectiveMangerPutAndTake(_objectiveManager, _roomParamModifier);
             return new WorkSpaceManager(new PutTakeWorkSpaceController(_player, objectiveManagerPutAndTake, _keyDownController), new NullUpGradable());
@@ -56,7 +56,7 @@ namespace GameLogic.Factory
             _q_keyHoldController = q_keyHoldController;
         }
 
-        public IWorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
+        public WorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
         {
             var onlyTakeWithSettable = new OnlyTakeWithSettable(_itemName);
             var work = new MakerWork(5f);
@@ -89,13 +89,13 @@ namespace GameLogic.Factory
             _keyDownController = keyDownController;
         }
 
-        public IWorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
+        public WorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
         {
             var basicPutAndTake = new BasicPutAndTake();
             basicPutAndTake.OnPut.AddListener((item) => workSpace.GrabbableVisualizer.Show(item));
             basicPutAndTake.OnTake.AddListener(workSpace.GrabbableVisualizer.Delete);
 
-            return new WorkSpaceManager(new PutTakeWorkSpaceController(_player, basicPutAndTake,_keyDownController),NullUpGradable());
+            return new WorkSpaceManager(new PutTakeWorkSpaceController(_player, basicPutAndTake,_keyDownController),new NullUpGradable());
         }
     }
 
@@ -120,7 +120,7 @@ namespace GameLogic.Factory
             _upGraderName = upGraderName;
         }
 
-        public IWorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
+        public WorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
         {
             var crafterPutAndTake = new CrafterPutAndTake(_firstItem, _secondItem);
             var crafterAutomatable = new CrafterAutomatable(5f, crafterPutAndTake);

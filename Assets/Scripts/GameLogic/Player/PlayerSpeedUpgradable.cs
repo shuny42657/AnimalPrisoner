@@ -5,20 +5,27 @@ using GameLogic.WorkSpace;
 
 namespace GameLogic.GamePlayer
 {
-    public class PlayerSpeedUpgradable : MonoBehaviour,IUpGradable
+    public class PlayerSpeedUpgradable : IUpGradable
     {
-        [SerializeField] SerializeInterface<IMovable> movable;
+        IMovable _movable;
         int level = 0;
         public int Level { get { return level; } }
 
-        [SerializeField] UpGraderName upgraderName;
+        const UpGraderName upgraderName = UpGraderName.PlayerSpeed;
         public UpGraderName UpGraderName { get { return upgraderName; } }
 
-        [SerializeField] List<float> speeds;
+        List<float> _speeds = new();
+
+        public PlayerSpeedUpgradable(IMovable movable,List<float> speeds)
+        {
+            _movable = movable;
+            _speeds = speeds;
+        }
+
         public void UpGrade()
         {
             level++;
-            movable.Value.Speed = speeds[level];
+            _movable.Speed = _speeds[level];
         }
     }
 }

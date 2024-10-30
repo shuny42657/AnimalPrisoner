@@ -11,6 +11,7 @@ public class P_PlayerManager_ObjectiveCreator : MonoBehaviour
     public void SetPlayerUpgradable(GameObject player)
     {
         var playerManager = player.GetComponent<PlayerManager>();
-        objectiveCreator.Value.AddUpGradable(playerManager.UpGradable);
+        objectiveCreator.Value.AddUpGradable(playerManager);
     }
 }
+   

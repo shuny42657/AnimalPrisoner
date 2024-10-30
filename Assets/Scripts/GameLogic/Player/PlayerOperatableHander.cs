@@ -84,6 +84,7 @@ namespace GameLogic.GamePlayer
             //_workSpace.Work(playerStatus);
         }
 
+        IPlayerTrigger _playerTrigger;
         private void OnTriggerEnter(Collider other)
         {
             /*if (other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
@@ -95,7 +96,10 @@ namespace GameLogic.GamePlayer
             }*/
             if(other.TryGetComponent(out IPlayerTrigger playerTrigger))
             {
+                if(_playerTrigger != null)
+                    _playerTrigger.OnPlayerExit();
                 playerTrigger.OnPlayerEnter();
+                _playerTrigger = playerTrigger;
             }
         }
 

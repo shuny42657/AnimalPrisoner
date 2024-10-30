@@ -738,7 +738,6 @@ GameObject:
   - component: {fileID: 9060070749206293595}
   - component: {fileID: 9022549625207408925}
   - component: {fileID: 4006817871512547055}
-  - component: {fileID: 5816872616918584832}
   - component: {fileID: 6046109628486911797}
   m_Layer: 0
   m_Name: WoodIronCrafter_New
@@ -816,21 +815,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 9158877296875543134}
---- !u!114 &5816872616918584832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4813019257735162968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae0f2e2d0f1a47488e225ede868cd62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  automatable:
-    obj: {fileID: 4813019257735162968}
-  upGraderName: 9
 --- !u!114 &6046109628486911797
 MonoBehaviour:
   m_ObjectHideFlags: 0

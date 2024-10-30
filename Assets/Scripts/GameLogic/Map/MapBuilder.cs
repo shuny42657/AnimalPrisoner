@@ -5,6 +5,7 @@ using UnityEngine;
 using GameLogic.Factory;
 using GameLogic.WorkSpace;
 using UnityEngine.Events;
+using Util;
 
 
 namespace GameLogic.Map
@@ -14,13 +15,21 @@ namespace GameLogic.Map
         IPlayer _player; public void SetPlayer(IPlayer player) { _player = player; }
         [SerializeField] MotherWorkSpaceFactory motherWorkSpaceFactory;
         [SerializeField] List<Vector3> positionCandidates;
+        [SerializeField] KeyDownController _e_KeyDownController;
         HashSet<int> occupiedPositions = new();
-        [SerializeField]UnityEvent<IUpGradable> onWorkSpaceGenerated;
+        public UnityEvent<WorkSpaceManager> OnWorkSpaceGenerated;
+        List<WorkSpaceManager> workSpaceMangers = new();
+        [SerializeField] List<WorkSpace.WorkSpace> floors;
+        FloorWorkSpaceControllerFactory _floorWorkSpaceFactory;
 
-        List<WorkSpace.WorkSpace> floors;
-        public List<BaseWorkSpace> BuildWorkSpaces(IJobStatus jobStatus)
+        public void BuildWorkSpaces(IJobStatus jobStatus)
         {
-            List<BaseWorkSpace> workSpaces = new();
+            _floorWorkSpaceFactory = new(_player, _e_KeyDownController);
+            foreach(var f in floors)
+            {
+                f.SetWorkSpaceManager(_floorWorkSpaceFactory.GenerateWorkSpaceController(f));
+            }
+
             Debug.Log($"Job Count{jobStatus.GetAllJobs().Count}");
             foreach(var j in jobStatus.GetAllJobs())
             {
@@ -31,8 +40,9 @@ namespace GameLogic.Map
                     if (!occupiedPositions.Contains(rand))
                     {
                         var workSpace = motherWorkSpaceFactory.Generate(j, positionCandidates[rand]);
-                        //onWorkSpaceGenerated.Invoke(workSpace.GetComponent<BaseWorkSpace>().UpGradable);
-                        //workSpaces.Add(workSpace.GetComponent<BaseWorkSpace>());
+                        Debug.Log($"WorkSpace : {workSpace != null}");
+                        workSpaceMangers.Add(workSpace.GetWorkSpaceManager());
+                        OnWorkSpaceGenerated.Invoke(workSpace.GetWorkSpaceManager());
                         occupiedPositions.Add(rand);
                         break;
                     }
@@ -42,7 +52,11 @@ namespace GameLogic.Map
                     }
                 }
             }
-            return workSpaces;
+        }
+
+        public List<WorkSpaceManager> GetWorkSpaces()
+        {
+            return workSpaceMangers;
         }
     }
 }

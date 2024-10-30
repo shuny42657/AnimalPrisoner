@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace GameLogic.WorkSpace
 {
     //Put to put an item, Take to take away the item.
-    public class BasicPutAndTake : MonoBehaviour,IPutAndTake
+    public class BasicPutAndTake : IPutAndTake
     {
         ItemName item = ItemName.None;
         public ItemName Item { get { return item; } }
@@ -21,7 +21,7 @@ namespace GameLogic.WorkSpace
         {
             if(this.item == ItemName.None)
             {
-                //Debug.Log("Item Put");
+                Debug.Log("Item Put");
                 this.item = item;
                 onPut.Invoke(item);
                 return true;

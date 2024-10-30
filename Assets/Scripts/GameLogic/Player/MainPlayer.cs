@@ -56,7 +56,7 @@ namespace GameLogic.Factory
             playerManager.PlayerStatus.Energy = playerManager.PlayerStatus.MaxEnergy;
         }
 
-        public IPlayer GeneratePlayer(Vector3 position)
+        public PlayerManager GeneratePlayer(Vector3 position)
         {
             GameObject newPlayer = Instantiate(_playerPrefab, position, Quaternion.identity);
 
@@ -64,8 +64,8 @@ namespace GameLogic.Factory
             _jobStatus = newPlayer.GetComponent<IJobStatus>();
             _playerOperatableHandler = newPlayer.GetComponent<IOperatableHandler>();
             _operatableCallback = newPlayer.GetComponent<IOperatableCallback>();
-            _playerSpeedUpGradable = newPlayer.GetComponent<IUpGradable>();
             _move = newPlayer.GetComponent<IMovable>();
+            _playerSpeedUpGradable = new PlayerSpeedUpgradable(_move, new() { 1f, 1.5f, 2f, 2.5f, 3f });
             _visualizer = newPlayer.GetComponent<IGrabbableVisualizer>();
 
             _upKeyHoldController = newPlayer.transform.GetChild(1).GetComponent<KeyHoldController>();

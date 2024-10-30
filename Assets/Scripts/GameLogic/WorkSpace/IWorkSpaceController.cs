@@ -28,12 +28,15 @@ namespace GameLogic.WorkSpace
 
         public void Subscribe()
         {
+            Debug.Log("Floor SubScribed");
+            _keyDownController.OnKeyPressed.AddListener(() => Debug.Log("Key Pressed"));
             _keyDownController.OnKeyPressed.AddListener(() => _player.PutOrTake(_putAndTake));
         }
 
         public void UnSubscribe()
         {
-            _keyDownController.OnKeyPressed.RemoveListener(() => _player.PutOrTake(_putAndTake));
+            _keyDownController.OnKeyPressed.RemoveAllListeners();
+            //_keyDownController.OnKeyPressed.RemoveListener(() => _player.PutOrTake(_putAndTake));
         }
     }
 

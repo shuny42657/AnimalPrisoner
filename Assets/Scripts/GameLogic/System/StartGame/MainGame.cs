@@ -11,6 +11,7 @@ using Photon.Realtime;
 using GameLogic.Data;
 using GameLogic.WorkSpace;
 using Util;
+using GameLogic.Map;
 
 namespace GameLogic.GameSystem
 {
@@ -19,13 +20,15 @@ namespace GameLogic.GameSystem
     /// </summary>
     public class MainGame : MonoBehaviourPunCallbacks
     {
-        IPlayer _playerManager;
+        PlayerManager _playerManager;
         MainGameInitializer gameInitializer;
-        
+
+        [SerializeField] MapBuilder _mapBuilder;
         [SerializeField] MainPlayer playerFactory;
         [SerializeField] IJobAllocator jobAllocator = new FixedJobAllocater(JobName.StoneMaker,JobName.WoodMaker,JobName.IronMaker,JobName.StoneIronCrafter);
 
-        [SerializeField] ObjectiveManager _objectiveManager;
+        ObjectiveManager _objectiveManager;
+        [SerializeField] ObjectiveCreator _objectiveCreator;
         [SerializeField] ItemDataBase _itemDataBase;
         RoomParameterUpgrader _roomParamUpGrader;
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
@@ -38,6 +41,7 @@ namespace GameLogic.GameSystem
         Pacer _leveledObjCreatorPacer;
         Pacer _objectiveCreatorPacer;
 
+
         [SerializeField] MotherWorkSpaceFactory _motherWorkSpaceFactory;
         SubmissionWorkSpaceControllerFactory _submissionWorkSpaceControllerFactory;
 
@@ -47,6 +51,7 @@ namespace GameLogic.GameSystem
         [SerializeField] GaugeView _fuelGauge;
         [SerializeField] GaugeView _durabilityGauge;
         [SerializeField] GaugeView _electricityGauge;
+        [SerializeField] ObjectiveViewerFactory _objectiveViewerFactory;
 
         [SerializeField] RoomPredicatePropertyCallback _roomPredicatePropertyCallback;
 
@@ -62,8 +67,11 @@ namespace GameLogic.GameSystem
         void Start()
         {
             _playerManager = playerFactory.GeneratePlayer(Vector3.zero);
-            _playerManager.SetCanMove(true);
             _motherWorkSpaceFactory.SetPlayer(_playerManager);
+            _mapBuilder.SetPlayer(_playerManager);
+            _playerManager.SetCanMove(true);
+            _leveledObjectiveCreator.AddUpGradable(_playerManager);
+            //_objectiveCreator.AddUpGradable(_playerManager);
             //プレイヤーの数が揃っていなかった場合は例外処理を飛ばしてマッチングシーンに戻る
             Debug.Log($"Player Count : {PhotonNetwork.PlayerList.Length}");
 
@@ -88,19 +96,28 @@ namespace GameLogic.GameSystem
             _roomParam.OnDurabilityModified.AddListener((rate) => _durabilityGauge.ModifyGauge(rate));
             _roomParam.OnElectricityModified.AddListener((rate) => _electricityGauge.ModifyGauge(rate));
 
+            //ObjectiveManagerの初期化
+            _objectiveManager = new ObjectiveManager(_leveledObjectiveCreator);
+            _objectiveManager.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
+
+            _objectiveManager.OnObjectiveAchieved.AddListener((objectiveData) => _objectiveViewerFactory.DeleteViewer(objectiveData));
+
             //Pacerの初期化
             ///RoomParamPacer
             _roomParamPacer = new(new(){ 10f,10f,10f,10f},true, false);
             _roomParamPacer.OnCheckpointReached.AddListener((val) => _roomParamUpGrader.IncrementLevel(val));
 
             ///LeveledObjCreatorPacer
-            _leveledObjCreatorPacer = new(new(){10f,10f,10f,10},false, false);
+            _leveledObjCreatorPacer = new(new(){10f,10f,10f,10f},false, false);
             _leveledObjCreatorPacer.OnCheckpointReached.AddListener((val) => _leveledObjectiveCreator.UpGrade());
 
             ///ObjectiveCreatorPacer
             _objectiveCreatorPacer = new(new() { 20f},false, true);
             _objectiveCreatorPacer.OnCheckpointReached.AddListener((val) => _objectiveManager.AddNewObjective());
 
+            //MapBuilderのコールバック登録
+            _mapBuilder.OnWorkSpaceGenerated.AddListener((workSpace) => _leveledObjectiveCreator.AddUpGradable(workSpace));
+            //_mapBuilder.OnWorkSpaceGenerated.AddListener((workSpace) => _objectiveCreator.AddUpGradable(workSpace));
 
             //メインの処理
             gameInitializer = new(
@@ -138,8 +155,9 @@ namespace GameLogic.GameSystem
 
             //SubmissionWorkSpace
             _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,e_KeyDownController);
-            _submissionSpace.SetWorkSpaceController(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceController(_submissionSpace));
+            _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceController(_submissionSpace));
             //_bed.InitializeWorkSpace();
+
             
         }
 

@@ -6,7 +6,7 @@ using GameLogic.WorkSpace;
 
 namespace GameLogic.GamePlayer
 {
-    public class PlayerManager : IPlayer
+    public class PlayerManager : IPlayer,IUpGradable
     {
         public PlayerManager(
             IOperatableHandler operatableHandler,
@@ -68,5 +68,12 @@ namespace GameLogic.GamePlayer
         {
             _movable.MoveVertical(_movable.Speed * -1);
         }
+
+        public void UpGrade()
+        {
+            _upgradable.UpGrade();
+        }
+
+        public UpGraderName UpGraderName { get { return _upgradable.UpGraderName; } }
     }
 }

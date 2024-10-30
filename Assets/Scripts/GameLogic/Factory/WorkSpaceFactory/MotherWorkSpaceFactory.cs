@@ -59,9 +59,14 @@ namespace GameLogic.Factory
 
 
         IPlayer _player;
-        public void SetPlayer(IPlayer player) { _player = player; }
+        public void SetPlayer(IPlayer player)
+        {
+            _player = player;
+            _floorWorkSpaceFactory = new(_player, _e_keyDownController);
+        }
 
         [SerializeField] UpdateClock _updateClock;
+        FloorWorkSpaceControllerFactory _floorWorkSpaceFactory;
 
         public WorkSpace.WorkSpace Generate(JobName name, Vector3 position)
         {
@@ -105,39 +110,39 @@ namespace GameLogic.Factory
                 case JobName.StoneIronCrafter:
                     var newStoneIronCrafter = Instantiate(_stoneIronCrafter, position, Quaternion.identity);
                     newStoneIronCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Stone, ItemName.Iron,UpGraderName.StoneIronCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newStoneIronCrafter));
-                    //return newStoneIronCrafter;
-                    return null;
+                    return newStoneIronCrafter;
+                    //return null;
                     //return stoneIronCrafter.GenerateItem(position);
                 case JobName.StoneWoodCrafter:
                     var newStoneWoodCrafter = Instantiate(_stoneWoodCrafter, position, Quaternion.identity);
                     newStoneWoodCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Stone, ItemName.Wood,UpGraderName.StoneWoodCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newStoneWoodCrafter));
                     //newStoneWoodCrafter.InitializeWorkSpace();
-                    //return newStoneWoodCrafter;
-                    return null;
+                    return newStoneWoodCrafter;
+                    //return null;
                 //return stoneWoodCrafter.GenerateItem(position);
                 case JobName.StoneOilCrafter:
                     var newStoneOilCrafter = Instantiate(_stoneOilCrafter, position, Quaternion.identity);
                     newStoneOilCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Stone, ItemName.Oil,UpGraderName.StoneOilCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newStoneOilCrafter));
-                    //return newStoneOilCrafter;
-                    return null;
+                    return newStoneOilCrafter;
+                    //return null;
                 //return stonOilCrafter.GenerateItem(position);
                 case JobName.WoodIronCrafter:
                     var newWoodIronCrafter = Instantiate(_woodIronCrafter, position, Quaternion.identity);
                     newWoodIronCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Wood, ItemName.Iron,UpGraderName.WoodIronCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newWoodIronCrafter));
-                    //return newWoodIronCrafter.gameObject;
-                    return null;
+                    return newWoodIronCrafter;
+                    //return null;
                 //return woodIronCrafter.GenerateItem(position);
                 case JobName.WoodOilCrafter:
                     var newWoodOilCrafter = Instantiate(_woodOilCrafter, position, Quaternion.identity);
                     newWoodOilCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Wood, ItemName.Oil,UpGraderName.WoodOilCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newWoodOilCrafter));
-                    //return newWoodOilCrafter.gameObject;
-                    return null;
+                    return newWoodOilCrafter;
+                    //return null;
                 //return woodOilCrafter.GenerateItem(position);
                 case JobName.OilIronCrafter:
                     var newOilIronCrafter = Instantiate(_ironOilCrafter, position, Quaternion.identity);
                     newOilIronCrafter.SetWorkSpaceManager(new CrafterWorkSpaceControllerFacotry(_player, _updateClock, ItemName.Oil, ItemName.Iron,UpGraderName.IronOilCrafter, _e_keyDownController, _f_keyDownController).GenerateWorkSpaceController(newOilIronCrafter));
-                    //return newOilIronCrafter.gameObject;
-                    return null;
+                    return newOilIronCrafter;
+                //return null;
                 //return ironOilCrafter.GenerateItem(position);
                 default:
                     return null;
