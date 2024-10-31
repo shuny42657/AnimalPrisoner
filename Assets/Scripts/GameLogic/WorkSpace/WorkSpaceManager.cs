@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace GameLogic.WorkSpace
 {
+    //Implements functions for WorkSpace
     public interface IWorkSpaceManager
     {
         public void SubScribe();
@@ -11,6 +12,9 @@ namespace GameLogic.WorkSpace
         public void UpGrade();
         public UpGraderName UpGraderName { get; }
     }
+
+    //This class defines behavior of WorkSpace
+    //(Maker, Crafter, Teleporter, etc)
     public class WorkSpaceManager : IWorkSpaceController,IUpGradable
     {
         IWorkSpaceController _workSpaceController;

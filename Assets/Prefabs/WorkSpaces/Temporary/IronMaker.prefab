@@ -671,7 +671,7 @@ GameObject:
   - component: {fileID: 8932110794267310650}
   - component: {fileID: 5896672143986134935}
   m_Layer: 0
-  m_Name: IronMaker_New
+  m_Name: IronMaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
