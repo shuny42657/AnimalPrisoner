@@ -13,7 +13,7 @@ namespace GameLogic.Map
     public class MapBuilder : MonoBehaviour,IMapBuilder
     {
         IPlayer _player; public void SetPlayer(IPlayer player) { _player = player; }
-        [SerializeField] MotherWorkSpaceFactory motherWorkSpaceFactory;
+        [SerializeField] MakerCrafterFactory motherWorkSpaceFactory;
         [SerializeField] List<Vector3> positionCandidates;
         [SerializeField] KeyDownController _e_KeyDownController;
         HashSet<int> occupiedPositions = new();

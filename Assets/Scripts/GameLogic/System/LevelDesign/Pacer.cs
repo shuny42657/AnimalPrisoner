@@ -6,16 +6,27 @@ using UnityEngine.Events;
 
 namespace GameLogic.GameSystem
 {
+    /// <summary>
+    /// Stores ITick
+    /// </summary>
     public interface IClock
     {
         public void AddTick(ITick tick);
     }
 
+    /// <summary>
+    /// Implements function that is executed repeatedly (e.g. at every Update())
+    /// </summary>
     public interface ITick
     {
         public void Tick();
     }
 
+    /// <summary>
+    /// Basic Class that executes single function repetively.
+    /// Used with a class that implements IClock
+    /// (Does not get fired unless registered to IClock class)
+    /// </summary>
     public class Pacer : ISwitchable,ITick
     {
         [SerializeField] List<float> _phaseDuration;

@@ -936,14 +936,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc7e6c07f52b40d69d88fbabefce3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapBuilder: {fileID: 1966106950}
   playerFactory: {fileID: 507539989}
-  _objectiveCreator: {fileID: 0}
-  _itemDataBase: {fileID: 2118669107}
-  _leveledObjectiveCreator: {fileID: 1082221216}
-  _decayLevelUpCallback: {fileID: 2067434489}
   _clock: {fileID: 1239947917}
+  _mapBuilder: {fileID: 1966106950}
+  _leveledObjectiveCreator: {fileID: 1082221216}
+  _itemDataBase: {fileID: 2118669107}
   _motherWorkSpaceFactory: {fileID: 649048714}
+  _submissionSpace: {fileID: 1116304325}
+  _bed: {fileID: 8814312613289057871}
   _teleporters:
   - {fileID: 1153419123}
   - {fileID: 759709237}
@@ -956,14 +956,13 @@ MonoBehaviour:
   - {fileID: 1011410309}
   - {fileID: 2057579035}
   - {fileID: 508181013}
+  _gameoverPropertyCallback: {fileID: 340825917}
+  _decayLevelUpCallback: {fileID: 2067434489}
   _gameOverView: {fileID: 1131063768}
   _fuelGauge: {fileID: 1559576987}
   _durabilityGauge: {fileID: 201682538}
   _electricityGauge: {fileID: 420837484}
   _objectiveViewerFactory: {fileID: 37313276}
-  _roomPredicatePropertyCallback: {fileID: 340825917}
-  _submissionSpace: {fileID: 1116304325}
-  _bed: {fileID: 8814312613289057871}
   _e_keyDownController: {fileID: 1270962858}
   _f_keyDownController: {fileID: 87244453}
 --- !u!1 &201682534
@@ -1817,10 +1816,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 340825912}
-  - component: {fileID: 340825916}
   - component: {fileID: 340825917}
   m_Layer: 0
-  m_Name: SyncCallbacks
+  m_Name: GameOverCallback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1841,26 +1839,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1605471378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &340825916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340825910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fd3adcb83f064f47b4e285bf800987e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showLog: 0
-  key: 1
-  onComplete:
-    m_PersistentCalls:
-      m_Calls: []
-  onCompleteWithMasterClient:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &340825917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2745,7 +2723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 827715138803065033, guid: b449d4d18fa57405b82bb3f9b7e6da96, type: 3}
-  _playerCustomPropertyCallback: {fileID: 340825916}
+  _playerCustomPropertyCallback: {fileID: 1888700196}
   _mapBuilder: {fileID: 1966106950}
   _jobDisplay: {fileID: 740780232}
   _playerStatusGaugeView: {fileID: 1434457069}
@@ -3272,18 +3250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c879723d0cb496385132e449828ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stoneMakerFactory: {fileID: 0}
-  woodMakerFactory: {fileID: 0}
-  ironMakerFactory: {fileID: 0}
-  oilMakerFactory: {fileID: 0}
-  waterMakerFactory: {fileID: 0}
-  riceMakerFactory: {fileID: 0}
-  stoneWoodCrafter: {fileID: 0}
-  stoneIronCrafter: {fileID: 0}
-  stonOilCrafter: {fileID: 0}
-  woodIronCrafter: {fileID: 0}
-  woodOilCrafter: {fileID: 0}
-  ironOilCrafter: {fileID: 0}
   _stoneMaker: {fileID: 1185689843866070869, guid: fa6e12075fbd24bb9846dc5600f1d2b9, type: 3}
   _woodMaker: {fileID: 361909532695765072, guid: 80c72e369828045ca8f564cc87ac4e9c, type: 3}
   _ironMaker: {fileID: 5896672143986134935, guid: 197ad8250762e4b39996e8dea2a232c4, type: 3}
@@ -8542,6 +8508,7 @@ Transform:
   m_Children:
   - {fileID: 2067434486}
   - {fileID: 340825912}
+  - {fileID: 1888700195}
   m_Father: {fileID: 166820264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1632736783
@@ -10027,6 +9994,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1116304330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1888700194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1888700195}
+  - component: {fileID: 1888700196}
+  m_Layer: 0
+  m_Name: JobDeterminedCallback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1888700195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888700194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1605471378}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1888700196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888700194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd3adcb83f064f47b4e285bf800987e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showLog: 0
+  key: 1
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleteWithMasterClient:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1892279657
 PrefabInstance:
   m_ObjectHideFlags: 0
