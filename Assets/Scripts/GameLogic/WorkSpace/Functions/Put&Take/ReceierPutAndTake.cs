@@ -13,7 +13,6 @@ namespace GameLogic.WorkSpace
         public UnityEvent<int> OnSenderIdSet;
         [SerializeField] int _senderId; public int SenderId { get { return _senderId; } set { _senderId = value;OnSenderIdSet.Invoke(_senderId); } }
         ItemName _itemName;
-        public ItemName Item => throw new System.NotImplementedException();
 
         [SerializeField] UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 

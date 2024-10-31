@@ -12,49 +12,6 @@ using GameLogic.WorkSpace;
 namespace GameLogic.GameSystem
 {
     /// <summary>
-    /// 本番用のゲームシーンで使用するイニシャライザ
-    /// </summary>
-    public class MainGameInitializer : IGameInitializer
-    {
-        IJobAllocator _jobAllocator;
-        RoomParameter _roomParam;
-        Pacer _roomParamPacer;
-        Pacer _leveledObjCreatorPacer;
-        Pacer _objectiveCreatorPacer;
-        public MainGameInitializer(
-            IJobAllocator jobAllocator,
-            RoomParameter roomParam,
-            Pacer roomParamPacer,
-            Pacer leveledObjCreatorPacer,
-            Pacer objectiveCreatorPacer
-            )
-        {
-            _jobAllocator = jobAllocator;
-            _roomParam = roomParam;
-            _roomParamPacer = roomParamPacer;
-            _leveledObjCreatorPacer = leveledObjCreatorPacer;
-            _objectiveCreatorPacer = objectiveCreatorPacer;
-
-        }
-        public void InitializeGame()
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                _jobAllocator.AllocateJob();
-            }
-
-            _roomParam.FuelComsumeSpeed = 5f;
-            _roomParam.DuranilityCosumeSpeed = 5f;
-            _roomParam.ElectricityConsumeSpeed = 5f;
-            _roomParam.IsActive = true;
-
-            _roomParamPacer.IsActive = true;
-            _leveledObjCreatorPacer.IsActive = true;
-            _objectiveCreatorPacer.IsActive = true;
-        }
-    }
-
-    /// <summary>
     /// 転送システムの初期化を行う
     /// </summary>
     public class TeleporterReceiverInitializer : IGameInitializer
@@ -99,8 +56,8 @@ namespace GameLogic.GameSystem
                     }
                     else
                     {
-                        var teleporterPutAndTake = new TeleporterWorkSpaceManagerFactory(_player, _e_keyDownController, _teleporters[increment].TeleportTextView, players[i - 1]).GenerateWorkSpaceController(_teleporters[increment]);
-                        var receiverPutAndTake = new ReceiverWorkSpaceManagerFactory(_player, _e_keyDownController, _receivers[increment].TeleportTextView, _customPropCallbacks[increment], players[i - 1].ActorNumber).GenerateWorkSpaceController(_receivers[increment]);
+                        var teleporterPutAndTake = new TeleporterWorkSpaceManagerFactory(_player, _e_keyDownController, _teleporters[increment].TeleportTextView, players[i - 1]).GenerateWorkSpaceManager(_teleporters[increment]);
+                        var receiverPutAndTake = new ReceiverWorkSpaceManagerFactory(_player, _e_keyDownController, _receivers[increment].TeleportTextView, _customPropCallbacks[increment], players[i - 1].ActorNumber).GenerateWorkSpaceManager(_receivers[increment]);
 
                         _teleporters[increment].SetWorkSpaceManager(teleporterPutAndTake);
                         _receivers[increment].SetWorkSpaceManager(receiverPutAndTake);

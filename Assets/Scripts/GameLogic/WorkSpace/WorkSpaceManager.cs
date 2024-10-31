@@ -15,12 +15,12 @@ namespace GameLogic.WorkSpace
 
     //This class defines behavior of WorkSpace
     //(Maker, Crafter, Teleporter, etc)
-    public class WorkSpaceManager : IWorkSpaceController,IUpGradable
+    public class WorkSpaceManager : IWorkSpaceInteraction,IUpGradable
     {
-        IWorkSpaceController _workSpaceController;
+        IWorkSpaceInteraction _workSpaceController;
         IUpGradable _upGradable;
         public WorkSpaceManager(
-            IWorkSpaceController workSpaceController,
+            IWorkSpaceInteraction workSpaceController,
             IUpGradable upGradable
             )
         {

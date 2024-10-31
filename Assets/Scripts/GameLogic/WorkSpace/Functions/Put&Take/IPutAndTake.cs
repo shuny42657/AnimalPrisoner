@@ -11,8 +11,6 @@ namespace GameLogic.WorkSpace
         public bool Put(ItemName itemName);
         public ItemName Take();
 
-        public ItemName Item { get; }
-
         public UnityEvent<ItemName> OnPut { get; }
         public UnityEvent OnTake { get; }
     }

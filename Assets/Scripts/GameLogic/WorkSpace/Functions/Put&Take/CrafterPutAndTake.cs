@@ -8,8 +8,7 @@ namespace GameLogic.WorkSpace
 {
     public class CrafterPutAndTake :IPutAndTake,ISet,IConditionChecker
     {
-        ItemName  item = ItemName.None;
-        public ItemName Item { get { return item; } }
+        ItemName  _item = ItemName.None;
 
         ItemName itemToCraft;
         [SerializeField] ItemName _firstItem;
@@ -34,7 +33,7 @@ namespace GameLogic.WorkSpace
 
         public bool MeetCondition()
         {
-            return _firstItemCount > 0 && _secondItemCount > 0 && item == ItemName.None;
+            return _firstItemCount > 0 && _secondItemCount > 0 && _item == ItemName.None;
         }
 
         public bool Put(ItemName itemName)
@@ -65,15 +64,15 @@ namespace GameLogic.WorkSpace
 
         public void Set()
         {
-            item = itemToCraft;
+            _item = itemToCraft;
             itemToCraft = ItemName.None;
-            onSet.Invoke(item);
+            onSet.Invoke(_item);
         }
 
         public ItemName Take()
         {
-            var temp = item;
-            item = ItemName.None;
+            var temp = _item;
+            _item = ItemName.None;
             Debug.Log($"Taken Item : {temp}");
             onTake.Invoke();
             return temp;
@@ -88,11 +87,11 @@ namespace GameLogic.WorkSpace
         //Only this method is from ISet
         public void Set(ItemName itemName)
         {
-            if (item == ItemName.None)
+            if (_item == ItemName.None)
             {
-                item = itemName;
+                _item = itemName;
                 Debug.Log($"Set Item : {itemName}");
-                onSet.Invoke(item);
+                onSet.Invoke(_item);
             }
         }
     }

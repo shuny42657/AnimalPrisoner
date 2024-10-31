@@ -29,33 +29,6 @@ namespace GameLogic.GamePlayer
 
         public void PutOrTake(IPutAndTake putAndTake)
         {
-            /*if (_workSpace == null)
-                return;
-            else
-            {
-                Debug.Log("Put or Take");
-                if (item == ItemName.None)
-                {
-                    Debug.Log("Take called");
-                    item = _workSpace.Take();
-                    if (item != ItemName.None)
-                    {
-                        Debug.Log("Get Item !!");
-                        onTake.Invoke(item);
-                    }
-                }
-                else
-                {
-                    Debug.Log("Put Called");
-                    var isPut = _workSpace.Put(item);
-                    if (isPut)
-                    {
-                        item = ItemName.None;
-                        onPut.Invoke(item);
-                    }
-                }
-            }*/
-
             if(item == ItemName.None)
             {
                 Debug.Log("Take called");
@@ -81,19 +54,11 @@ namespace GameLogic.GamePlayer
         public void Work(IWork work,IPlayerStatus playerStatus)
         {
             work.Work(playerStatus);
-            //_workSpace.Work(playerStatus);
         }
 
         IPlayerTrigger _playerTrigger;
         private void OnTriggerEnter(Collider other)
         {
-            /*if (other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
-            {
-                if(_workSpace != null)
-                    _workSpace.PlayerTrigger.OnPlayerExit.Invoke();
-                _workSpace = baseWorkSpace;
-                baseWorkSpace.PlayerTrigger.OnPlayerEnter.Invoke();
-            }*/
             if(other.TryGetComponent(out IPlayerTrigger playerTrigger))
             {
                 if(_playerTrigger != null)
@@ -105,15 +70,6 @@ namespace GameLogic.GamePlayer
 
         private void OnTriggerExit(Collider other)
         {
-            /*if(other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
-            {
-                if(_workSpace == baseWorkSpace)
-                {
-                    _workSpace = null;
-                    baseWorkSpace.PlayerTrigger.OnPlayerExit.Invoke();
-                }
-            }*/
-
             if(other.TryGetComponent(out IPlayerTrigger playerTrigger))
             {
                 playerTrigger.OnPlayerExit();

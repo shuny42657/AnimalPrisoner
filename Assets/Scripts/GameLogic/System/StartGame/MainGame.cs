@@ -97,6 +97,7 @@ namespace GameLogic.GameSystem
                 200f,
                 5f, 5f, 5f
                 );
+            _roomParam.IsActive = true;
 
             //RoomParameterUpgrader
             _roomParamUpGrader = new(
@@ -155,9 +156,9 @@ namespace GameLogic.GameSystem
             _clock.IsActive = true;
 
             //GameOver
-            _gameOverProcess = new(_gameOverView, _roomParam, _leveledObjCreatorPacer, _objectiveCreatorPacer, _roomParamPacer);
+            _gameOverProcess = new(_playerManager,_gameOverView, _roomParam, _leveledObjCreatorPacer, _objectiveCreatorPacer, _roomParamPacer);
             _roomParam.OnParamDead += () => SetGameOver();
-            _gameoverPropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess(_playerManager));
+            _gameoverPropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess());
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
 
             //Teleport System (Teleporters and Receivers)
@@ -166,11 +167,11 @@ namespace GameLogic.GameSystem
 
             //SubmissionSpace
             _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,_e_keyDownController);
-            _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceController(_submissionSpace));
+            _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceManager(_submissionSpace));
 
             //Bed
             _bedWorkSpaceControllerFactory = new(_playerManager, _clock,_f_keyDownController);
-            _bed.SetWorkSpaceManager(_bedWorkSpaceControllerFactory.GenerateWorkSpaceController(_bed));
+            _bed.SetWorkSpaceManager(_bedWorkSpaceControllerFactory.GenerateWorkSpaceManager(_bed));
             
         }
 

@@ -10,7 +10,6 @@ namespace GameLogic.WorkSpace
     {
         ItemName _item;
         ItemName _itemToSet;
-        public ItemName Item { get { return _item; } }
 
         UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 

@@ -10,6 +10,7 @@ namespace GameLogic.GameSystem
 {
     public class GameOverProcess
     {
+        IPlayer _player;
         IViewAppear _gameOverView;
         RoomParameter _roomParam;
         Pacer _roomParamPacer;
@@ -17,6 +18,7 @@ namespace GameLogic.GameSystem
         Pacer _objectiveCreatorPacer;
 
         public GameOverProcess(
+            IPlayer player,
             IViewAppear gameOverView,
             RoomParameter roomParam,
             Pacer leveldObjCreatorPacer,
@@ -30,10 +32,10 @@ namespace GameLogic.GameSystem
             _leveledObjCreatorPacer = leveldObjCreatorPacer;
             _objectiveCreatorPacer = objectiveCreatorPacer;
         }
-        public async UniTask RunGameOverProcess(IPlayer playerManager)
+        public async UniTask RunGameOverProcess()
         {
             Debug.Log("Game Over Processs");
-             playerManager.SetCanMove(false);
+             _player.SetCanMove(false);
             _roomParam.IsActive = false;
             _roomParamPacer.IsActive = false;
             _leveledObjCreatorPacer.IsActive = false;

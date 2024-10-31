@@ -6,20 +6,20 @@ using GameLogic.GamePlayer;
 
 namespace GameLogic.WorkSpace
 {
-    public interface IWorkSpaceController
+    public interface IWorkSpaceInteraction
     {
         public void Subscribe(); //キー入力による処理を登録する。
         public void UnSubscribe(); //処理の登録を解除する。
     }
 
     //Put&Take
-    public class PutTakeWorkSpaceController : IWorkSpaceController
+    public class PutTakeWorkSpaceInteraction : IWorkSpaceInteraction
     {
         IPlayer _player;
         IPutAndTake _putAndTake; //ObjectiveMangerPutAndTake
         KeyDownController _keyDownController;
 
-        public PutTakeWorkSpaceController(IPlayer player,IPutAndTake putAndTake,KeyDownController keyDownController)
+        public PutTakeWorkSpaceInteraction(IPlayer player,IPutAndTake putAndTake,KeyDownController keyDownController)
         {
             _player = player;
             _putAndTake = putAndTake;
@@ -41,7 +41,7 @@ namespace GameLogic.WorkSpace
     }
 
     //Put&Take, Work
-    public class PutTakeWorkWorkSpaceController : IWorkSpaceController
+    public class PutTakeWorkWorkSpaceInteraction : IWorkSpaceInteraction
     {
         IPlayer _player;
         IPutAndTake _putAndTake;
@@ -49,7 +49,7 @@ namespace GameLogic.WorkSpace
         KeyDownController _e_keyDownController;
         KeyHoldController _q_keyHoldController;
 
-        public PutTakeWorkWorkSpaceController(
+        public PutTakeWorkWorkSpaceInteraction(
             IPlayer player,
             IPutAndTake putAndTake,
             IWork work,
@@ -80,13 +80,13 @@ namespace GameLogic.WorkSpace
     }
 
     //Work
-    public class AutomateWorkSpaceController : IWorkSpaceController
+    public class AutomateWorkSpaceInteraction : IWorkSpaceInteraction
     {
         IPlayer _player;
         IAutomatable _automatable;
         KeyDownController _f_keyDownController;
 
-        public AutomateWorkSpaceController(
+        public AutomateWorkSpaceInteraction(
             IPlayer player,
             IAutomatable automatable,
             KeyDownController q_keyHoldContrller
@@ -109,7 +109,7 @@ namespace GameLogic.WorkSpace
     }
 
     //Put&Take, Automate
-    public class PutTakeAutomateWorkSpaceController : IWorkSpaceController
+    public class PutTakeAutomateWorkSpaceInteraction : IWorkSpaceInteraction
     {
         IPlayer _player;
         IPutAndTake _putAndTake;
@@ -117,7 +117,7 @@ namespace GameLogic.WorkSpace
         KeyDownController _e_keyDownController;
         KeyDownController _f_keyHoldController;
 
-        public PutTakeAutomateWorkSpaceController(
+        public PutTakeAutomateWorkSpaceInteraction(
             IPlayer player,
             IPutAndTake putAndTake,
             IAutomatable automatable,

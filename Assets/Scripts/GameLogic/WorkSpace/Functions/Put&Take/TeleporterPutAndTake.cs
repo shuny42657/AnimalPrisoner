@@ -13,8 +13,6 @@ namespace GameLogic.WorkSpace
     {
         Player _receiver;
         int _receiverID;
-        ItemName _itemName = ItemName.None;
-        public ItemName Item { get { return _itemName; } }
 
         UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 

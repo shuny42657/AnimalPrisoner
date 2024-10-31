@@ -4,7 +4,6 @@ using UnityEngine;
 using UI;
 using GameLogic.GamePlayer;
 using GameLogic.Data;
-using UI;
 
 namespace GameLogic.GameSystem
 {

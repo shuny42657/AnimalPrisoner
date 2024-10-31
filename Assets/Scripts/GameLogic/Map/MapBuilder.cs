@@ -27,7 +27,7 @@ namespace GameLogic.Map
             _floorWorkSpaceFactory = new(_player, _e_KeyDownController);
             foreach(var f in floors)
             {
-                f.SetWorkSpaceManager(_floorWorkSpaceFactory.GenerateWorkSpaceController(f));
+                f.SetWorkSpaceManager(_floorWorkSpaceFactory.GenerateWorkSpaceManager(f));
             }
 
             Debug.Log($"Job Count{jobStatus.GetAllJobs().Count}");
