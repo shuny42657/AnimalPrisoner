@@ -668,14 +668,10 @@ GameObject:
   - component: {fileID: 7986822461277445450}
   - component: {fileID: 6558729196364425532}
   - component: {fileID: 8880616475005509363}
-  - component: {fileID: 8642685165355603904}
   - component: {fileID: 8932110794267310650}
-  - component: {fileID: 5746720191172928436}
-  - component: {fileID: 4105609664477688383}
-  - component: {fileID: 651559485446520752}
-  - component: {fileID: 1834977620356424361}
+  - component: {fileID: 5896672143986134935}
   m_Layer: 0
-  m_Name: IronMaker
+  m_Name: IronMaker_New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -736,24 +732,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseObject: {fileID: 1900010123768956088}
   hilightObject: {fileID: 1819010570169325958}
---- !u!114 &8642685165355603904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8928679065080560322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd5b92199717646308c9770d5897571e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onPlayerEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onPlayerExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8932110794267310650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,7 +745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 5407551392876855462}
---- !u!114 &5746720191172928436
+--- !u!114 &5896672143986134935
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -776,63 +754,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8928679065080560322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb7cbef8c9214a39bcfc3894f65466e, type: 3}
+  m_Script: {fileID: 11500000, guid: 174c6e81d06864d11bb9a66789db7e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPut:
-    m_PersistentCalls:
-      m_Calls: []
-  onTake:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &4105609664477688383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8928679065080560322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7929af4cbb9e24036962c08807f9b304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxProgress: 3
-  OnWorkStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWorkFinish:
-    m_PersistentCalls:
-      m_Calls: []
-  OnProgressMade:
-    m_PersistentCalls:
-      m_Calls: []
-  item: 3
---- !u!114 &651559485446520752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8928679065080560322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45af9a44700434a589b547d661386619, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  work:
-    obj: {fileID: 8928679065080560322}
-  upGraderName: 2
---- !u!114 &1834977620356424361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8928679065080560322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fc241184560e42db948b1d0aed00035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _progressView: {fileID: 8835049321623803501}
+  _highlightVisualizer: {fileID: 8880616475005509363}
+  _workSpaceProgressView: {fileID: 8835049321623803501}
+  _grabbableVisualizer: {fileID: 8932110794267310650}

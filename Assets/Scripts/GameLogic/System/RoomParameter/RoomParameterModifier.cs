@@ -12,18 +12,21 @@ namespace GameLogic.GameSystem
     }
 
     //Recover Room Parameters based on Items.
-    public class RoomParameterModifier : MonoBehaviour, IRoomParameterModifier,ISwitchable
+    public class RoomParameterModifier : IRoomParameterModifier
     {
-        [SerializeField] ItemDataBase itemDataBase;
-        [SerializeField] RoomParameter roomParameter;
+        [SerializeField] ItemDataBase _itemDataBase;
+        [SerializeField] RoomParameter _roomParam;
 
-        [SerializeField] bool isActive;
-        public bool IsActive { get { return isActive; } set { isActive = value; } }
+        public RoomParameterModifier(ItemDataBase itemDataBase,RoomParameter roomParam)
+        {
+            _itemDataBase = itemDataBase;
+            _roomParam = roomParam;
+        }
 
         public void ModifyRoomParameter(ItemName item)
         {
-            var modifyParams = itemDataBase.GetData(item).RoomParamsToModify;
-            var modifyValues = itemDataBase.GetData(item).RoomParamModifyValues;
+            var modifyParams = _itemDataBase.GetData(item).RoomParamsToModify;
+            var modifyValues = _itemDataBase.GetData(item).RoomParamModifyValues;
 
             for(int i = 0; i < modifyParams.Count; i++)
             {
@@ -32,17 +35,16 @@ namespace GameLogic.GameSystem
                 switch (modifyParam)
                 {
                     case RoomParameterName.Fuel:
-                        roomParameter.Fuel += modifyValue;
+                        _roomParam.Fuel += modifyValue;
                         break;
                     case RoomParameterName.Durability:
-                        roomParameter.Durability += modifyValue;
+                        _roomParam.Durability += modifyValue;
                         break;
                     case RoomParameterName.Electricity:
-                        roomParameter.Electricity += modifyValue;
+                        _roomParam.Electricity += modifyValue;
                         break;
                 }
             }
-            
         }
     }
 }

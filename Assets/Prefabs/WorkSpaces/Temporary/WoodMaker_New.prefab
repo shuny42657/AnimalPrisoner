@@ -93,15 +93,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7547248139310357225}
   - component: {fileID: 7741278722849198179}
-  - component: {fileID: 3981085171586101442}
   - component: {fileID: 2671770179677216859}
-  - component: {fileID: 5305172995019738400}
   - component: {fileID: 2698293269289687331}
-  - component: {fileID: 1301340491670676067}
-  - component: {fileID: 6563747203744172056}
-  - component: {fileID: 5915434192303749077}
+  - component: {fileID: 361909532695765072}
   m_Layer: 0
-  m_Name: WoodMaker
+  m_Name: WoodMaker_New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,19 +144,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3981085171586101442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457781683024142895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fc241184560e42db948b1d0aed00035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _progressView: {fileID: 2763870277313052215}
 --- !u!114 &2671770179677216859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,24 +158,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseObject: {fileID: 1219170894592319176}
   hilightObject: {fileID: 3126992152131798330}
---- !u!114 &5305172995019738400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457781683024142895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd5b92199717646308c9770d5897571e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onPlayerEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onPlayerExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2698293269289687331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 2912840475304053172}
---- !u!114 &1301340491670676067
+--- !u!114 &361909532695765072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,53 +180,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2457781683024142895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb7cbef8c9214a39bcfc3894f65466e, type: 3}
+  m_Script: {fileID: 11500000, guid: 174c6e81d06864d11bb9a66789db7e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPut:
-    m_PersistentCalls:
-      m_Calls: []
-  onTake:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6563747203744172056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457781683024142895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45af9a44700434a589b547d661386619, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  work:
-    obj: {fileID: 2457781683024142895}
-  upGraderName: 1
---- !u!114 &5915434192303749077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457781683024142895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7929af4cbb9e24036962c08807f9b304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxProgress: 3
-  OnWorkStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWorkFinish:
-    m_PersistentCalls:
-      m_Calls: []
-  OnProgressMade:
-    m_PersistentCalls:
-      m_Calls: []
-  item: 2
+  _highlightVisualizer: {fileID: 2671770179677216859}
+  _workSpaceProgressView: {fileID: 2763870277313052215}
+  _grabbableVisualizer: {fileID: 2698293269289687331}
 --- !u!1 &3126992152131798330
 GameObject:
   m_ObjectHideFlags: 0

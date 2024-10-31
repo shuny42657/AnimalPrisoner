@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace GameLogic.WorkSpace
 {
-    public class MakerWork : BaseWork<ItemName>
+    public class MakerWork : SimpleWork
     {
         //float progress;
         //[SerializeField] float maxProgress;
@@ -26,6 +26,8 @@ namespace GameLogic.WorkSpace
         /// 
         bool isSpaceCleared = true;
         public void ClearSpace(bool isActive) { isSpaceCleared = isActive; }
+
+        public MakerWork(float maxProgress) : base(maxProgress) { }
 
         public override void Work(IPlayerStatus playerStatus)
         {

@@ -8,7 +8,7 @@ using UI;
 
 namespace GameLogic.WorkSpace
 {
-    public class BaseWorkSpace : MonoBehaviour, IOperatable
+    public abstract class BaseWorkSpace : MonoBehaviour, IOperatable
     {
         protected JobName jobName; public JobName JobName { get { return jobName; } }
         protected IPutAndTake _putAndTake;
@@ -35,12 +35,13 @@ namespace GameLogic.WorkSpace
             _playerTrigger.OnPlayerEnter.AddListener(() => _hilightVisualizer.Hilight(true));
             _playerTrigger.OnPlayerExit.AddListener(() => _hilightVisualizer.Hilight(false));
         }
+
         public void InitiateOperation()
         {
             if (_automatable != null)
             {
                 Debug.Log("workspace automatable called");
-                _automatable.InitateOperation();
+                //_automatable.InitateOperation();
             }
             else
             {

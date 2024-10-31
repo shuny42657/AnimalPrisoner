@@ -17,13 +17,13 @@ namespace GameLogic.Factory
     public class MainPlayer : MonoBehaviour,IPlayerFactory
     {
         [SerializeField] GameObject _playerPrefab;
-        [SerializeField] IPlayerStatus _playerStatus;
-        [SerializeField] IJobStatus _jobStatus;
-        [SerializeField] IOperatableHandler _playerOperatableHandler;
-        [SerializeField] IOperatableCallback _operatableCallback;
-        [SerializeField] IUpGradable _playerSpeedUpGradable;
-        [SerializeField] IMovable _move;
-        [SerializeField] IGrabbableVisualizer _visualizer;
+        IPlayerStatus _playerStatus;
+        IJobStatus _jobStatus;
+        IOperatableHandler _playerOperatableHandler;
+        IOperatableCallback _operatableCallback;
+        IUpGradable _playerSpeedUpGradable;
+        IMovable _move;
+        IGrabbableVisualizer _visualizer;
 
         KeyHoldController _rightKeyHoldController;
         KeyHoldController _leftKeyHoldController;
@@ -56,7 +56,7 @@ namespace GameLogic.Factory
             playerManager.PlayerStatus.Energy = playerManager.PlayerStatus.MaxEnergy;
         }
 
-        public IPlayer GeneratePlayer(Vector3 position)
+        public PlayerManager GeneratePlayer(Vector3 position)
         {
             GameObject newPlayer = Instantiate(_playerPrefab, position, Quaternion.identity);
 
@@ -64,8 +64,8 @@ namespace GameLogic.Factory
             _jobStatus = newPlayer.GetComponent<IJobStatus>();
             _playerOperatableHandler = newPlayer.GetComponent<IOperatableHandler>();
             _operatableCallback = newPlayer.GetComponent<IOperatableCallback>();
-            _playerSpeedUpGradable = newPlayer.GetComponent<IUpGradable>();
             _move = newPlayer.GetComponent<IMovable>();
+            _playerSpeedUpGradable = new PlayerSpeedUpgradable(_move, new() { 1f, 1.5f, 2f, 2.5f, 3f });
             _visualizer = newPlayer.GetComponent<IGrabbableVisualizer>();
 
             _upKeyHoldController = newPlayer.transform.GetChild(1).GetComponent<KeyHoldController>();
@@ -88,9 +88,9 @@ namespace GameLogic.Factory
             _leftKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveLeft());
             _downKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveDown());
             _upKeyHoldController.OnKeyHold.AddListener(() => playerManager.MoveUp());
-            _qKeyHoldController.OnKeyHold.AddListener(() => playerManager.Work());
-            _eKeyDownController.OnKeyPressed.AddListener(() => playerManager.PutOrTake());
-            _fKeyDownController.OnKeyPressed.AddListener(() => playerManager.StartOperation());
+            //_qKeyHoldController.OnKeyHold.AddListener(() => playerManager.Work());
+            //_eKeyDownController.OnKeyPressed.AddListener(() => playerManager.PutOrTake());
+            //_fKeyDownController.OnKeyPressed.AddListener(() => playerManager.StartOperation());
 
             _playerCustomPropertyCallback.onComplete.AddListener(() => _jobStatus.SetJobs());
             _jobStatus.OnJobSet.AddListener((i_jobStatus) => _mapBuilder.BuildWorkSpaces(i_jobStatus));
@@ -106,5 +106,4 @@ namespace GameLogic.Factory
             return playerManager;
         }
     }
-
 }

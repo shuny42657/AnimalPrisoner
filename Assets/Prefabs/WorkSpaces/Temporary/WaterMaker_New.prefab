@@ -473,14 +473,10 @@ GameObject:
   - component: {fileID: 4992557777508706465}
   - component: {fileID: 946045679164267871}
   - component: {fileID: 1586001280498034616}
-  - component: {fileID: 526578563001514701}
   - component: {fileID: 4635389039024128464}
-  - component: {fileID: 3922636262860617905}
-  - component: {fileID: 8900894926454613369}
-  - component: {fileID: 7216491706611521085}
-  - component: {fileID: 3479186547950844518}
+  - component: {fileID: 3770418677429245320}
   m_Layer: 0
-  m_Name: WaterMaker
+  m_Name: WaterMaker_New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -541,24 +537,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseObject: {fileID: 8915259610344230089}
   hilightObject: {fileID: 706538604881105035}
---- !u!114 &526578563001514701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5697736621422588242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd5b92199717646308c9770d5897571e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onPlayerEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onPlayerExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &4635389039024128464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,7 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 7543830018168020626}
---- !u!114 &3922636262860617905
+--- !u!114 &3770418677429245320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -581,66 +559,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5697736621422588242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb7cbef8c9214a39bcfc3894f65466e, type: 3}
+  m_Script: {fileID: 11500000, guid: 174c6e81d06864d11bb9a66789db7e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPut:
-    m_PersistentCalls:
-      m_Calls: []
-  onTake:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &8900894926454613369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5697736621422588242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7929af4cbb9e24036962c08807f9b304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxProgress: 3
-  OnWorkStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWorkFinish:
-    m_PersistentCalls:
-      m_Calls: []
-  OnProgressMade:
-    m_PersistentCalls:
-      m_Calls: []
-  item: 5
---- !u!114 &7216491706611521085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5697736621422588242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45af9a44700434a589b547d661386619, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  work:
-    obj: {fileID: 5697736621422588242}
-  upGraderName: 4
---- !u!114 &3479186547950844518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5697736621422588242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fc241184560e42db948b1d0aed00035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _progressView: {fileID: 158993463771229435}
+  _highlightVisualizer: {fileID: 1586001280498034616}
+  _workSpaceProgressView: {fileID: 158993463771229435}
+  _grabbableVisualizer: {fileID: 4635389039024128464}
 --- !u!1 &7505351015203078530
 GameObject:
   m_ObjectHideFlags: 0

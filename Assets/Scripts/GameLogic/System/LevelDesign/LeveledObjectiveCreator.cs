@@ -57,6 +57,7 @@ namespace GameLogic.GameSystem
         }
         public override ObjectiveData CreateObjective()
         {
+            Debug.Log($"UpGradables Count : {upgradables.Count}");
             var random = new System.Random();
             var weights = LoadCategorical();
             var dist = new CategoricalDistribution(weights).Sample(random);

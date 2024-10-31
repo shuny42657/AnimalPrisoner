@@ -1,0 +1,118 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Util;
+using GameLogic.GamePlayer;
+
+namespace GameLogic.WorkSpace
+{
+    public interface IWorkSpaceController
+    {
+        public void Subscribe(); //キー入力による処理を登録する。
+        public void UnSubscribe(); //処理の登録を解除する。
+    }
+
+    //Put&Take
+    public class PutTakeWorkSpaceController : IWorkSpaceController
+    {
+        IPlayer _player;
+        IPutAndTake _putAndTake; //ObjectiveMangerPutAndTake
+        KeyDownController _keyDownController;
+
+        public PutTakeWorkSpaceController(IPlayer player,IPutAndTake putAndTake,KeyDownController keyDownController)
+        {
+            _player = player;
+            _putAndTake = putAndTake;
+            _keyDownController = keyDownController;
+        }
+
+        public void Subscribe()
+        {
+            Debug.Log("Floor SubScribed");
+            _keyDownController.OnKeyPressed.AddListener(() => Debug.Log("Key Pressed"));
+            _keyDownController.OnKeyPressed.AddListener(() => _player.PutOrTake(_putAndTake));
+        }
+
+        public void UnSubscribe()
+        {
+            _keyDownController.OnKeyPressed.RemoveAllListeners();
+            //_keyDownController.OnKeyPressed.RemoveListener(() => _player.PutOrTake(_putAndTake));
+        }
+    }
+
+    //Put&Take, Work
+    public class PutTakeWorkWorkSpaceController : IWorkSpaceController
+    {
+        IPlayer _player;
+        IPutAndTake _putAndTake;
+        IWork _work;
+        KeyDownController _e_keyDownController;
+        KeyHoldController _q_keyHoldController;
+
+        public PutTakeWorkWorkSpaceController(
+            IPlayer player,
+            IPutAndTake putAndTake,
+            IWork work,
+            KeyDownController e_keyDownController,
+            KeyHoldController q_keyHoldController
+            )
+        {
+            _player = player;
+            _putAndTake = putAndTake;
+            _work = work;
+            _e_keyDownController = e_keyDownController;
+            _q_keyHoldController = q_keyHoldController;
+        }
+
+        public void Subscribe()
+        {
+            _e_keyDownController.OnKeyPressed.AddListener(() => _player.PutOrTake(_putAndTake));
+            _q_keyHoldController.OnKeyHold.AddListener(() => _player.Work(_work));
+        }
+
+        public void UnSubscribe()
+        {
+            //_e_keyDownController.OnKeyPressed.RemoveListener(() => _player.PutOrTake(_putAndTake));
+            //_q_keyHoldController.OnKeyHold.RemoveListener(() => _player.Work(_work));
+            _e_keyDownController.OnKeyPressed.RemoveAllListeners();
+            _q_keyHoldController.OnKeyHold.RemoveAllListeners();
+        }
+    }
+
+    //Put&Take, Automate
+    public class PutTakeAutomateWorkSpaceController : IWorkSpaceController
+    {
+        IPlayer _player;
+        IPutAndTake _putAndTake;
+        IAutomatable _automatable;
+        KeyDownController _e_keyDownController;
+        KeyDownController _f_keyHoldController;
+
+        public PutTakeAutomateWorkSpaceController(
+            IPlayer player,
+            IPutAndTake putAndTake,
+            IAutomatable automatable,
+            KeyDownController e_keyDownController,
+            KeyDownController f_keyDownController
+            )
+        {
+            _player = player;
+            _putAndTake = putAndTake;
+            _automatable = automatable;
+            _e_keyDownController = e_keyDownController;
+            _f_keyHoldController = f_keyDownController;
+        }
+
+        public void Subscribe()
+        {
+            _e_keyDownController.OnKeyPressed.AddListener(() => _player.PutOrTake(_putAndTake));
+            _f_keyHoldController.OnKeyPressed.AddListener(() => _player.StartOperation(_automatable));
+        }
+
+        public void UnSubscribe()
+        {
+            _e_keyDownController.OnKeyPressed.RemoveAllListeners();
+            _f_keyHoldController.OnKeyPressed.RemoveAllListeners();
+        }
+    }
+}

@@ -12,6 +12,6 @@ public class P_MakerWork_ISet : MonoBehaviour
 
     private void Awake()
     {
-        work.Value.OnWorkFinish.AddListener((itemName) => putAndTake.Value.Set(itemName));
+        //work.Value.OnWorkFinish.AddListener((itemName) => putAndTake.Value.Set(itemName));
     }
 }

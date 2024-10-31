@@ -7,7 +7,6 @@ namespace GameLogic.WorkSpace
     public interface IUpGradable
     {
         public void UpGrade();
-        public int Level { get; }
         public UpGraderName UpGraderName { get; }
     }
 

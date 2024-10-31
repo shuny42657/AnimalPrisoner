@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace GameLogic.GameSystem
 {
-    public class UpdateClock : MonoBehaviour,ISwitchable
+    
+    public class UpdateClock : MonoBehaviour,ISwitchable,IClock
     {
         List<ITick> ticks = new();
 

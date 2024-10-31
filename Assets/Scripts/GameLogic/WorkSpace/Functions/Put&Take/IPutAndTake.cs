@@ -17,9 +17,14 @@ namespace GameLogic.WorkSpace
         public UnityEvent OnTake { get; }
     }
 
+    public interface IConditionChecker
+    {
+        public bool MeetCondition();
+    }
+
     public interface ISet
     {
-        public void Set(ItemName itemName);
+        public void Set();
         public UnityEvent<ItemName> OnSet { get; }
     }
 
@@ -33,8 +38,10 @@ namespace GameLogic.WorkSpace
 
     public interface IAutomatable
     {
-        public void InitateOperation();
+        public UnityEvent OnOperationFinish { get; }
+        public UnityEvent<float> OnProgressMade { get; }
+        public UnityEvent OnOperationInitiated { get; }
+        public void InitiateOperation();
         public float OperationSpeed { get; set; }
-
     }
 }

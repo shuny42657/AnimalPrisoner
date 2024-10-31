@@ -5,22 +5,26 @@ using UnityEngine.Events;
 
 namespace GameLogic.WorkSpace
 {
-    public class CrafterAutomatable : BaseAutomatable<ItemName>
+    public class CrafterAutomatable : SimpleAutomatable
     {
         //bool working;
         //ItemName itemToCraft;
+        IConditionChecker _conditionChecker;
 
-        public void SetItemToCraft(ItemName itemName)
+        public CrafterAutomatable(
+            float maxProgress,
+            IConditionChecker conditionChecker
+            ) : base(maxProgress)
         {
-            Debug.Log($"Set Item : {itemName}");
-            item = itemName;
+            _conditionChecker = conditionChecker;
         }
+        
 
-        public override void InitateOperation()
+        public override void InitiateOperation()
         {
-            if (!IsActive && item != ItemName.None)
+            if (_conditionChecker.MeetCondition())
             {
-                OnOperationInitiated.Invoke();
+                onOperationInitiated.Invoke();
                 IsActive = true;
             }
             else

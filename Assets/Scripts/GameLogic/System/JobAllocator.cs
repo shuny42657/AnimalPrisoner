@@ -43,16 +43,33 @@ namespace GameLogic.GameSystem
 
     public class FixedJobAllocater : IJobAllocator
     {
+        JobName _firstJob;
+        JobName _secondJob;
+        JobName _thirdJob;
+        JobName _fourthJob;
+
+        public FixedJobAllocater(
+            JobName firstJob,
+        JobName secondJob,
+        JobName thirdJob,
+        JobName fourthJob
+            )
+        {
+            _firstJob = firstJob;
+            _secondJob = secondJob;
+            _thirdJob = thirdJob;
+            _fourthJob = fourthJob;
+        }
         public void AllocateJob()
         {
             var players = PhotonNetwork.CurrentRoom.Players;
 
             foreach(var p in players.Values)
             {
-                p.SetJob(0, (int)JobName.StoneMaker);
-                p.SetJob(1, (int)JobName.WoodMaker);
-                p.SetJob(2, (int)JobName.StoneWoodCrafter);
-                p.SetJob(3, (int)JobName.StoneIronCrafter);
+                p.SetJob(0, (int)_firstJob);
+                p.SetJob(1, (int)_secondJob);
+                p.SetJob(2, (int)_thirdJob);
+                p.SetJob(3, (int)_fourthJob);
             }
 
             foreach (var p in players.Values)

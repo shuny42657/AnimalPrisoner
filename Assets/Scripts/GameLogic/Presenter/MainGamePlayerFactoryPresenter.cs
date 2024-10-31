@@ -141,7 +141,7 @@ public class ObjectiveCreatorPresenter
 
     public void Set()
     {
-        _objectiveCreator.AddUpGradable(_playerManager.UpGradable);
+        _objectiveCreator.AddUpGradable(_playerManager);
     }
 }
 
