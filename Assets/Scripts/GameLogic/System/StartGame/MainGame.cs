@@ -24,29 +24,34 @@ namespace GameLogic.GameSystem
         PlayerManager _playerManager;
         [SerializeField] MainPlayerFactory playerFactory;
 
-        MainGameInitializer gameInitializer;
-
         //Clock
         [SerializeField] UpdateClock _clock;
 
+        //Map Builder
         [SerializeField] MapBuilder _mapBuilder;
+
+        //Job Allocation
         IJobAllocator jobAllocator = new MainJobAllocator();
 
+        //Objective 
         ObjectiveManager _objectiveManager;
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
         [SerializeField] ItemDataBase _itemDataBase;
 
+        //RoomParam
         RoomParameterUpgrader _roomParamUpGrader;
         RoomParameter _roomParam;
         RoomParameterModifier _roomParamModifier;
+
+        //Pacer (ITick)
         Pacer _roomParamPacer;
         Pacer _leveledObjCreatorPacer;
         Pacer _objectiveCreatorPacer;
 
         //WorkSpace Factory
         [SerializeField] MakerCrafterFactory _motherWorkSpaceFactory;
-        SubmissionWorkSpaceControllerFactory _submissionWorkSpaceControllerFactory;
-        BedWorkSpaceControllerFacotry _bedWorkSpaceControllerFactory;
+        SubmissionWorkSpaceManagerFactory _submissionWorkSpaceControllerFactory;
+        BedWorkSpaceManagerFacotry _bedWorkSpaceControllerFactory;
 
         //Submission Space
         [SerializeField] WorkSpace.WorkSpace _submissionSpace;
@@ -60,6 +65,7 @@ namespace GameLogic.GameSystem
         [SerializeField] List<TeleportWorkSpace> _receivers;
         [SerializeField] List<PlayerCustomPropertyCallback> _receiverCustomPropCallbacks;
 
+        //Synchronization
         [SerializeField] RoomPredicatePropertyCallback _gameoverPropertyCallback;
         [SerializeField] RoomIntegerPropertyCallback _decayLevelUpCallback;
 
@@ -83,11 +89,8 @@ namespace GameLogic.GameSystem
             _mapBuilder.SetPlayer(_playerManager);
             _playerManager.SetCanMove(true);
             _leveledObjectiveCreator.AddUpGradable(_playerManager);
-            //_objectiveCreator.AddUpGradable(_playerManager);
-            //プレイヤーの数が揃っていなかった場合は例外処理を飛ばしてマッチングシーンに戻る
-            Debug.Log($"Player Count : {PhotonNetwork.PlayerList.Length}");
 
-            //RoomParameterの初期化
+            //RoomParameter
             _roomParam = new(
                 200f,
                 200f,
@@ -157,7 +160,7 @@ namespace GameLogic.GameSystem
             _gameoverPropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess(_playerManager));
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
 
-            //Initialize Teleport System (Teleporters and Receivers)
+            //Teleport System (Teleporters and Receivers)
             _teleporterReceiverInitializer = new(_playerManager, _teleporters, _receivers, _receiverCustomPropCallbacks, _e_keyDownController);
             _teleporterReceiverInitializer.InitializeGame();
 

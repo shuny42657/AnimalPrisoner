@@ -99,8 +99,8 @@ namespace GameLogic.GameSystem
                     }
                     else
                     {
-                        var teleporterPutAndTake = new TeleporterWorkSpaceControllerFactory(_player, _e_keyDownController, _teleporters[increment].TeleportTextView, players[i - 1]).GenerateWorkSpaceController(_teleporters[increment]);
-                        var receiverPutAndTake = new ReceiverWorkSpaceControllerFactory(_player, _e_keyDownController, _receivers[increment].TeleportTextView, _customPropCallbacks[increment], players[i - 1].ActorNumber).GenerateWorkSpaceController(_receivers[increment]);
+                        var teleporterPutAndTake = new TeleporterWorkSpaceManagerFactory(_player, _e_keyDownController, _teleporters[increment].TeleportTextView, players[i - 1]).GenerateWorkSpaceController(_teleporters[increment]);
+                        var receiverPutAndTake = new ReceiverWorkSpaceManagerFactory(_player, _e_keyDownController, _receivers[increment].TeleportTextView, _customPropCallbacks[increment], players[i - 1].ActorNumber).GenerateWorkSpaceController(_receivers[increment]);
 
                         _teleporters[increment].SetWorkSpaceManager(teleporterPutAndTake);
                         _receivers[increment].SetWorkSpaceManager(receiverPutAndTake);

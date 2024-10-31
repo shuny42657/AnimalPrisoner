@@ -20,7 +20,7 @@ namespace GameLogic.Map
         public UnityEvent<WorkSpaceManager> OnWorkSpaceGenerated;
         List<WorkSpaceManager> workSpaceMangers = new();
         [SerializeField] List<WorkSpace.WorkSpace> floors;
-        FloorWorkSpaceControllerFactory _floorWorkSpaceFactory;
+        FloorWorkSpaceManagerFactory _floorWorkSpaceFactory;
 
         public void BuildWorkSpaces(IJobStatus jobStatus)
         {

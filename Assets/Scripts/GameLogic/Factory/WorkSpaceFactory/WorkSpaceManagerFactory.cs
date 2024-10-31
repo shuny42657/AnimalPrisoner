@@ -17,14 +17,14 @@ namespace GameLogic.Factory
         public WorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace);
     }
 
-    public class SubmissionWorkSpaceControllerFactory : IWorkSpaceManagerFactory
+    public class SubmissionWorkSpaceManagerFactory : IWorkSpaceManagerFactory
     {
         IPlayer _player;
         ObjectiveManager _objectiveManager;
         RoomParameterModifier _roomParamModifier;
         KeyDownController _keyDownController;
 
-        public SubmissionWorkSpaceControllerFactory(
+        public SubmissionWorkSpaceManagerFactory(
             IPlayer player,
             ObjectiveManager objectiveManager,
             RoomParameterModifier roomParamModifier,
@@ -43,7 +43,7 @@ namespace GameLogic.Factory
         }
     }
 
-    public class MakerWorkSpaceControllerFactory : IWorkSpaceManagerFactory
+    public class MakerWorkSpaceManagerFactory : IWorkSpaceManagerFactory
     {
         IPlayer _player;
         ItemName _itemName;
@@ -51,7 +51,7 @@ namespace GameLogic.Factory
         KeyDownController _e_keyDownController;
         KeyHoldController _q_keyHoldController;
 
-        public MakerWorkSpaceControllerFactory(IPlayer player,ItemName itemName,UpGraderName upGraderName, KeyDownController e_keyDownController,KeyHoldController q_keyHoldController)
+        public MakerWorkSpaceManagerFactory(IPlayer player,ItemName itemName,UpGraderName upGraderName, KeyDownController e_keyDownController,KeyHoldController q_keyHoldController)
         {
             _player = player;
             _itemName = itemName;
@@ -82,12 +82,12 @@ namespace GameLogic.Factory
         }
     }
 
-    public class FloorWorkSpaceControllerFactory : IWorkSpaceManagerFactory
+    public class FloorWorkSpaceManagerFactory : IWorkSpaceManagerFactory
     {
         IPlayer _player;
         KeyDownController _keyDownController;
 
-        public FloorWorkSpaceControllerFactory(IPlayer player, KeyDownController keyDownController)
+        public FloorWorkSpaceManagerFactory(IPlayer player, KeyDownController keyDownController)
         {
             _player = player;
             _keyDownController = keyDownController;
@@ -103,7 +103,7 @@ namespace GameLogic.Factory
         }
     }
 
-    public class CrafterWorkSpaceControllerFacotry : IWorkSpaceManagerFactory
+    public class CrafterWorkSpaceManagerFacotry : IWorkSpaceManagerFactory
     {
         IPlayer _player;
         IClock _clock;
@@ -113,7 +113,7 @@ namespace GameLogic.Factory
         ItemName _secondItem;
         UpGraderName _upGraderName;
 
-        public CrafterWorkSpaceControllerFacotry(IPlayer player,IClock clock,ItemName firstItem,ItemName secondItem,UpGraderName upGraderName, KeyDownController e_keyDownController,KeyDownController f_keyDownController)
+        public CrafterWorkSpaceManagerFacotry(IPlayer player,IClock clock,ItemName firstItem,ItemName secondItem,UpGraderName upGraderName, KeyDownController e_keyDownController,KeyDownController f_keyDownController)
         {
             _player = player;
             _clock = clock;
@@ -143,14 +143,14 @@ namespace GameLogic.Factory
         }
     }
 
-    public class TeleporterWorkSpaceControllerFactory : IWorkSpaceManagerFactory
+    public class TeleporterWorkSpaceManagerFactory : IWorkSpaceManagerFactory
     {
         IPlayer _player;
         KeyDownController _e_keyDownController;
         ITextView<int> _teleporterTextView;
         Player _receiver;
 
-        public TeleporterWorkSpaceControllerFactory(
+        public TeleporterWorkSpaceManagerFactory(
             IPlayer player,
             KeyDownController e_keyDownController,
             ITextView<int> teleporterTextView,
@@ -174,7 +174,7 @@ namespace GameLogic.Factory
         }
     }
 
-    public class ReceiverWorkSpaceControllerFactory : IWorkSpaceManagerFactory
+    public class ReceiverWorkSpaceManagerFactory : IWorkSpaceManagerFactory
     {
         IPlayer _player;
         KeyDownController _e_keyDownController;
@@ -182,7 +182,7 @@ namespace GameLogic.Factory
         PlayerCustomPropertyCallback _playerCustomPropCallback;
         int _senderId;
 
-        public ReceiverWorkSpaceControllerFactory(
+        public ReceiverWorkSpaceManagerFactory(
             IPlayer player,
             KeyDownController e_keyDownController,
             ITextView<int> receiverTextView,
@@ -209,13 +209,13 @@ namespace GameLogic.Factory
         }
     }
 
-    public class BedWorkSpaceControllerFacotry : IWorkSpaceManagerFactory
+    public class BedWorkSpaceManagerFacotry : IWorkSpaceManagerFactory
     {
         IPlayer _player;
         IClock _clock;
         KeyDownController _f_keyDownController;
 
-        public BedWorkSpaceControllerFacotry(
+        public BedWorkSpaceManagerFacotry(
             IPlayer player,
             IClock clock,
             KeyDownController f_keyDownController
