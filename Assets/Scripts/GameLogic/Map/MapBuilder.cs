@@ -40,7 +40,7 @@ namespace GameLogic.Map
                     if (!occupiedPositions.Contains(rand))
                     {
                         var workSpace = motherWorkSpaceFactory.Generate(j, positionCandidates[rand]);
-                        Debug.Log($"WorkSpace : {workSpace != null}");
+                        //Debug.Log($"WorkSpace : {workSpace != null}");
                         workSpaceMangers.Add(workSpace.GetWorkSpaceManager());
                         OnWorkSpaceGenerated.Invoke(workSpace.GetWorkSpaceManager());
                         occupiedPositions.Add(rand);

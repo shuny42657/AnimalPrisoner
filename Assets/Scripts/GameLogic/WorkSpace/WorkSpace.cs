@@ -12,10 +12,10 @@ namespace GameLogic.WorkSpace
     /// </summary>
     public class WorkSpace : MonoBehaviour, IPlayerTrigger
     {
-        WorkSpaceManager _workSpaceManager;
-        [SerializeField] HighlightVisualizer _highlightVisualizer;
+        protected WorkSpaceManager _workSpaceManager;
+        [SerializeField] protected HighlightVisualizer _highlightVisualizer;
         [SerializeField] WorkSpaceProgressView _workSpaceProgressView; public WorkSpaceProgressView WorkSapceProgressView { get { return _workSpaceProgressView; } }
-        [SerializeField] GrabbableVisualizer _grabbableVisualizer; public GrabbableVisualizer GrabbableVisualizer { get { return _grabbableVisualizer; } }
+        [SerializeField] protected GrabbableVisualizer _grabbableVisualizer; public GrabbableVisualizer GrabbableVisualizer { get { return _grabbableVisualizer; } }
 
         public void SetWorkSpaceManager(WorkSpaceManager workSpaceController)
         {

@@ -14,7 +14,7 @@ namespace GameLogic.WorkSpace
             _putAndTake.OnPut.AddListener((item) => _putAndTake.Put(item));
 
             var teleporterPutAndTake = (TeleporterPutAndTake)_putAndTake;
-            teleporterPutAndTake.OnReceiverIDSet.AddListener((playerNum) => _teleporterTextView.ShowText(playerNum));
+            //teleporterPutAndTake.OnReceiverIDSet.AddListener((playerNum) => _teleporterTextView.ShowText(playerNum));
         }
     }
 }

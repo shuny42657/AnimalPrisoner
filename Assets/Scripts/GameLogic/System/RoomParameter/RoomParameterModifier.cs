@@ -12,7 +12,7 @@ namespace GameLogic.GameSystem
     }
 
     //Recover Room Parameters based on Items.
-    public class RoomParameterModifier : MonoBehaviour, IRoomParameterModifier
+    public class RoomParameterModifier : IRoomParameterModifier
     {
         [SerializeField] ItemDataBase _itemDataBase;
         [SerializeField] RoomParameter _roomParam;

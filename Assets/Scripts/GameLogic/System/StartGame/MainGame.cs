@@ -25,7 +25,7 @@ namespace GameLogic.GameSystem
 
         [SerializeField] MapBuilder _mapBuilder;
         [SerializeField] MainPlayer playerFactory;
-        [SerializeField] IJobAllocator jobAllocator = new FixedJobAllocater(JobName.StoneMaker,JobName.WoodMaker,JobName.IronMaker,JobName.StoneIronCrafter);
+        [SerializeField] IJobAllocator jobAllocator = new MainJobAllocator();//new FixedJobAllocater(JobName.StoneMaker,JobName.WoodMaker,JobName.IronMaker,JobName.StoneIronCrafter);
 
         ObjectiveManager _objectiveManager;
         [SerializeField] ObjectiveCreator _objectiveCreator;
@@ -45,8 +45,13 @@ namespace GameLogic.GameSystem
         [SerializeField] MotherWorkSpaceFactory _motherWorkSpaceFactory;
         SubmissionWorkSpaceControllerFactory _submissionWorkSpaceControllerFactory;
 
+        TeleporterReceiverInitializer _teleporterReceiverInitializer;
+        [SerializeField] List<TeleportWorkSpace> _teleporters;
+        [SerializeField] List<TeleportWorkSpace> _receivers;
+        [SerializeField] List<PlayerCustomPropertyCallback> _receiverCustomPropCallbacks;
+
         //View
-        [SerializeField] GameOverProcess _gameOverProcess;
+        GameOverProcess _gameOverProcess;
         [SerializeField] GameOverView _gameOverView;
         [SerializeField] GaugeView _fuelGauge;
         [SerializeField] GaugeView _durabilityGauge;
@@ -55,8 +60,6 @@ namespace GameLogic.GameSystem
 
         [SerializeField] RoomPredicatePropertyCallback _roomPredicatePropertyCallback;
 
-        [SerializeField] List<BaseWorkSpace> _teleporters;
-        [SerializeField] List<BaseWorkSpace> _receivers;
         [SerializeField] WorkSpace.WorkSpace _submissionSpace;
         [SerializeField] BaseWorkSpace _bed;
 
@@ -139,6 +142,7 @@ namespace GameLogic.GameSystem
             _clock.IsActive = true;
 
             //ゲームオーバーの関数の登録
+            _gameOverProcess = new(_gameOverView, _roomParam, _leveledObjCreatorPacer, _objectiveCreatorPacer, _roomParamPacer);
             _roomParam.OnParamDead += () => SetGameOver();
             //_roomPredicatePropertyCallback.onModified.AddListener(() => Debug.Log("Predicate Callback"));
             _roomPredicatePropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess(_playerManager));
@@ -146,12 +150,8 @@ namespace GameLogic.GameSystem
             //GameOverViewのボタンコールバック
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
 
-            //固定配置されているワークスペースの初期化
-            for(int i = 0; i < _teleporters.Count; i++)
-            {
-                _teleporters[i].InitializeWorkSpace();
-                _receivers[i].InitializeWorkSpace();
-            }
+            _teleporterReceiverInitializer = new(_playerManager, _teleporters, _receivers, _receiverCustomPropCallbacks, e_KeyDownController);
+            _teleporterReceiverInitializer.InitializeGame();
 
             //SubmissionWorkSpace
             _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,e_KeyDownController);
@@ -163,7 +163,7 @@ namespace GameLogic.GameSystem
 
         public async UniTask SetGameOver()
         {
-            await UniTask.Delay(100);
+            await UniTask.Delay(10);
             PhotonNetwork.CurrentRoom.SetGameOver(true);
         }
 

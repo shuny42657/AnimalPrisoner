@@ -12,13 +12,14 @@ namespace Sync
         [SerializeField] RoomPropertyKey key;
         public UnityEvent onModified = new();
         public UnityEvent onModifiedWithMasterCleient = new();
+        bool old_value = false;
 
         public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
         {
             if (propertiesThatChanged.ContainsKey(key.ToString()))
             {
                 var yes = (bool)(PhotonNetwork.CurrentRoom.CustomProperties[key.ToString()]);
-                if (yes)
+                if (!old_value && yes)
                 {
                     Debug.Log("Predicate Callback Invoked");
                     onModified.Invoke();
@@ -28,6 +29,7 @@ namespace Sync
                         onModifiedWithMasterCleient.Invoke();
                     }
                 }
+                old_value = yes;
             }
         }
     }

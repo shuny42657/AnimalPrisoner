@@ -5,6 +5,10 @@ using GameLogic.GameSystem;
 using GameLogic.WorkSpace;
 using GameLogic.GamePlayer;
 using Util;
+using UI;
+using Photon.Pun;
+using Photon.Realtime;
+using Sync;
 
 namespace GameLogic.Factory
 {
@@ -136,6 +140,72 @@ namespace GameLogic.Factory
 
             _clock.AddTick(crafterAutomatable);
             return new WorkSpaceManager(new PutTakeAutomateWorkSpaceController(_player, crafterPutAndTake, crafterAutomatable, _e_keyDownController, _f_keyDownController), new AutomateSpeedUpGradable(crafterAutomatable, _upGraderName, new() { 1f,1.2f,1.5f,1.8f,2.0f}));
+        }
+    }
+
+    public class TeleporterWorkSpaceControllerFactory : IWorkSpaceManagerFactory
+    {
+        IPlayer _player;
+        KeyDownController _e_keyDownController;
+        ITextView<int> _teleporterTextView;
+        Player _receiver;
+
+        public TeleporterWorkSpaceControllerFactory(
+            IPlayer player,
+            KeyDownController e_keyDownController,
+            ITextView<int> teleporterTextView,
+            Player receiver
+            )
+        {
+            _player = player;
+            _e_keyDownController = e_keyDownController;
+            _teleporterTextView = teleporterTextView;
+            _receiver = receiver;
+        }
+
+        public WorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
+        {
+            var teleporterPutAndTake = new TeleporterPutAndTake(_receiver);
+            _teleporterTextView.ShowText(_receiver.ActorNumber);
+
+            //teleporterPutAndTake.OnPut.AddListener((item) => _player.PutOrTake(teleporterPutAndTake));
+
+            return new WorkSpaceManager(new PutTakeWorkSpaceController(_player, teleporterPutAndTake, _e_keyDownController), new NullUpGradable());
+        }
+    }
+
+    public class ReceiverWorkSpaceControllerFactory : IWorkSpaceManagerFactory
+    {
+        IPlayer _player;
+        KeyDownController _e_keyDownController;
+        ITextView<int> _receiverTextView;
+        PlayerCustomPropertyCallback _playerCustomPropCallback;
+        int _senderId;
+
+        public ReceiverWorkSpaceControllerFactory(
+            IPlayer player,
+            KeyDownController e_keyDownController,
+            ITextView<int> receiverTextView,
+            PlayerCustomPropertyCallback playerCustomPropCallback,
+            int senderId
+            )
+        {
+            _player = player;
+            _e_keyDownController = e_keyDownController;
+            _receiverTextView = receiverTextView;
+            _playerCustomPropCallback = playerCustomPropCallback;
+            _senderId = senderId;
+        }
+
+        public WorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
+        {
+            var receiverPutAndTake = new ReceierPutAndTake(_senderId);
+            _receiverTextView.ShowText(_senderId);
+            _playerCustomPropCallback.onComplete.AddListener(() => receiverPutAndTake.Set());
+            receiverPutAndTake.OnSet.AddListener((item) => workSpace.GrabbableVisualizer.Show(item));
+            receiverPutAndTake.OnTake.AddListener(() => workSpace.GrabbableVisualizer.Delete());
+
+            return new WorkSpaceManager(new PutTakeWorkSpaceController(_player, receiverPutAndTake, _e_keyDownController), new NullUpGradable());
         }
     }
 }

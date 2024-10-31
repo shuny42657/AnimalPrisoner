@@ -23,7 +23,7 @@ namespace UI
         public void ModifyGauge(float rate)
         {
             //Debug.Log($"gauge view : {gaugeView != null}");
-            Debug.Log($" rate : {rate}");
+            //Debug.Log($" rate : {rate}");
             if (!offset)
             {
                 offset = true;
