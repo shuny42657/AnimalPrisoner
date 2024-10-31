@@ -208,4 +208,38 @@ namespace GameLogic.Factory
             return new WorkSpaceManager(new PutTakeWorkSpaceController(_player, receiverPutAndTake, _e_keyDownController), new NullUpGradable());
         }
     }
+
+    public class BedWorkSpaceControllerFacotry : IWorkSpaceManagerFactory
+    {
+        IPlayer _player;
+        IClock _clock;
+        KeyDownController _f_keyDownController;
+
+        public BedWorkSpaceControllerFacotry(
+            IPlayer player,
+            IClock clock,
+            KeyDownController f_keyDownController
+            )
+        {
+            _player = player;
+            _clock = clock;
+            _f_keyDownController = f_keyDownController;
+        }
+
+        public WorkSpaceManager GenerateWorkSpaceController(WorkSpace.WorkSpace workSpace)
+        {
+            var automatable = new SimpleAutomatable(5f);
+
+            automatable.OnOperationInitiated.AddListener(() => workSpace.WorkSapceProgressView.Show(true));
+            automatable.OnOperationInitiated.AddListener(() => _player.SetCanMove(false));
+            automatable.OnProgressMade.AddListener((rate) => workSpace.WorkSapceProgressView.ModifyGauge(rate));
+
+            automatable.OnOperationFinish.AddListener(() => _player.SetCanMove(true));
+            automatable.OnOperationFinish.AddListener(() => _player.HealEnergy());
+            automatable.OnOperationFinish.AddListener(() => workSpace.WorkSapceProgressView.Show(false));
+
+            _clock.AddTick(automatable);
+            return new WorkSpaceManager(new AutomateWorkSpaceController(_player, automatable, _f_keyDownController), new NullUpGradable());
+        }
+    }
 }

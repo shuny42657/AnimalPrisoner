@@ -8,7 +8,7 @@ using GameLogic.GamePlayer;
 
 namespace GameLogic.GameSystem
 {
-    public class GameOverProcess : MonoBehaviour
+    public class GameOverProcess
     {
         IViewAppear _gameOverView;
         RoomParameter _roomParam;

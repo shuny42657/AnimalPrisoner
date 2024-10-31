@@ -74,6 +74,11 @@ namespace GameLogic.GamePlayer
             _upgradable.UpGrade();
         }
 
+        public void HealEnergy()
+        {
+            _playerStatus.Energy = _playerStatus.MaxEnergy;
+        }
+
         public UpGraderName UpGraderName { get { return _upgradable.UpGraderName; } }
     }
 }

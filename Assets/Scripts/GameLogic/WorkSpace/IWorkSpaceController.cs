@@ -79,6 +79,35 @@ namespace GameLogic.WorkSpace
         }
     }
 
+    //Work
+    public class AutomateWorkSpaceController : IWorkSpaceController
+    {
+        IPlayer _player;
+        IAutomatable _automatable;
+        KeyDownController _f_keyDownController;
+
+        public AutomateWorkSpaceController(
+            IPlayer player,
+            IAutomatable automatable,
+            KeyDownController q_keyHoldContrller
+            )
+        {
+            _player = player;
+            _automatable = automatable;
+            _f_keyDownController = q_keyHoldContrller;
+        }
+
+        public void Subscribe()
+        {
+            _f_keyDownController.OnKeyPressed.AddListener(() => _player.StartOperation(_automatable));
+        }
+
+        public void UnSubscribe()
+        {
+            _f_keyDownController.OnKeyPressed.RemoveAllListeners();
+        }
+    }
+
     //Put&Take, Automate
     public class PutTakeAutomateWorkSpaceController : IWorkSpaceController
     {

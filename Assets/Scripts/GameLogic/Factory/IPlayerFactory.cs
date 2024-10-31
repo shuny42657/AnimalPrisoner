@@ -19,6 +19,7 @@ namespace GameLogic.GamePlayer
         public void MoveUp();
         public void MoveDown();
         public void PutOrTake(IPutAndTake putAndTake);
+        public void HealEnergy();
     }
 }
 namespace GameLogic.Factory

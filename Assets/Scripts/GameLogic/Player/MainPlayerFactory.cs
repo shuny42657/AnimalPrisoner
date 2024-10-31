@@ -14,7 +14,7 @@ namespace GameLogic.Factory
     /// <summary>
     /// PlayerPrefabにつけて、ゲームで動くPlayerを生成する
     /// </summary>
-    public class MainPlayer : MonoBehaviour,IPlayerFactory
+    public class MainPlayerFactory : MonoBehaviour,IPlayerFactory
     {
         [SerializeField] GameObject _playerPrefab;
         IPlayerStatus _playerStatus;
@@ -29,19 +29,12 @@ namespace GameLogic.Factory
         KeyHoldController _leftKeyHoldController;
         KeyHoldController _upKeyHoldController;
         KeyHoldController _downKeyHoldController;
-        KeyHoldController _qKeyHoldController;
-        KeyDownController _eKeyDownController;
-        KeyDownController _fKeyDownController;
 
         [SerializeField] PlayerCustomPropertyCallback _playerCustomPropertyCallback;
         [SerializeField] MapBuilder _mapBuilder;
         [SerializeField] JobDisplay _jobDisplay;
 
         [SerializeField] GaugeView _playerStatusGaugeView;
-
-        [SerializeField] ObjectiveCreator _objectiveCreator;
-
-        [SerializeField] BedAutomatable _bedAutomatable;
 
         PlayerManager _playerManager; public PlayerManager PlayerManager { get { return _playerManager; } }
 
@@ -72,9 +65,6 @@ namespace GameLogic.Factory
             _leftKeyHoldController = newPlayer.transform.GetChild(2).GetComponent<KeyHoldController>();
             _downKeyHoldController = newPlayer.transform.GetChild(3).GetComponent<KeyHoldController>();
             _rightKeyHoldController = newPlayer.transform.GetChild(4).GetComponent<KeyHoldController>();
-            _qKeyHoldController = newPlayer.transform.GetChild(5).GetComponent<KeyHoldController>();
-            _eKeyDownController = newPlayer.transform.GetChild(6).GetComponent<KeyDownController>();
-            _fKeyDownController = newPlayer.transform.GetChild(7).GetComponent<KeyDownController>();
 
             var playerManager = new PlayerManager(
                 _playerOperatableHandler,
@@ -97,9 +87,6 @@ namespace GameLogic.Factory
             _jobStatus.OnJobSet.AddListener((i_jobStatus) => _jobDisplay.DisplayJob(i_jobStatus));
 
             _playerStatus.OnEnergyModified.AddListener((rate) => _playerStatusGaugeView.ModifyGauge(rate));
-
-            _bedAutomatable.onOperationFinish.AddListener((val) => FinishOperation(playerManager));
-            _bedAutomatable.OnOperationInitiated.AddListener(() => InitiateOperation(playerManager));
 
             _operatableCallback.OnPut.AddListener((itemName) => _visualizer.Delete());
             _operatableCallback.OnTake.AddListener((itemName) => _visualizer.Show(itemName));

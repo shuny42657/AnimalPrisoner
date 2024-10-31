@@ -16,7 +16,7 @@ using GameLogic.Map;
 namespace GameLogic.GameSystem
 {
     /// <summary>
-    /// インゲームのトップレベルコンポーネント
+    /// Everything for the MainGame is set up here.
     /// </summary>
     public class MainGame : MonoBehaviourPunCallbacks
     {
@@ -24,8 +24,8 @@ namespace GameLogic.GameSystem
         MainGameInitializer gameInitializer;
 
         [SerializeField] MapBuilder _mapBuilder;
-        [SerializeField] MainPlayer playerFactory;
-        [SerializeField] IJobAllocator jobAllocator = new MainJobAllocator();//new FixedJobAllocater(JobName.StoneMaker,JobName.WoodMaker,JobName.IronMaker,JobName.StoneIronCrafter);
+        [SerializeField] MainPlayerFactory playerFactory;
+        [SerializeField] IJobAllocator jobAllocator = new MainJobAllocator();
 
         ObjectiveManager _objectiveManager;
         [SerializeField] ObjectiveCreator _objectiveCreator;
@@ -44,6 +44,7 @@ namespace GameLogic.GameSystem
 
         [SerializeField] MotherWorkSpaceFactory _motherWorkSpaceFactory;
         SubmissionWorkSpaceControllerFactory _submissionWorkSpaceControllerFactory;
+        BedWorkSpaceControllerFacotry _bedWorkSpaceControllerFactory;
 
         TeleporterReceiverInitializer _teleporterReceiverInitializer;
         [SerializeField] List<TeleportWorkSpace> _teleporters;
@@ -61,10 +62,11 @@ namespace GameLogic.GameSystem
         [SerializeField] RoomPredicatePropertyCallback _roomPredicatePropertyCallback;
 
         [SerializeField] WorkSpace.WorkSpace _submissionSpace;
-        [SerializeField] BaseWorkSpace _bed;
+        [SerializeField] WorkSpace.WorkSpace _bed;
 
         //Controller
-        [SerializeField] KeyDownController e_KeyDownController;
+        [SerializeField] KeyDownController _e_keyDownController;
+        [SerializeField] KeyDownController _f_keyDownController;
 
         // Start is called before the first frame update
         void Start()
@@ -150,14 +152,16 @@ namespace GameLogic.GameSystem
             //GameOverViewのボタンコールバック
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
 
-            _teleporterReceiverInitializer = new(_playerManager, _teleporters, _receivers, _receiverCustomPropCallbacks, e_KeyDownController);
+            _teleporterReceiverInitializer = new(_playerManager, _teleporters, _receivers, _receiverCustomPropCallbacks, _e_keyDownController);
             _teleporterReceiverInitializer.InitializeGame();
 
-            //SubmissionWorkSpace
-            _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,e_KeyDownController);
+            //SubmissionSpaceの初期化
+            _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,_e_keyDownController);
             _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceController(_submissionSpace));
-            //_bed.InitializeWorkSpace();
 
+            //Bedの初期化
+            _bedWorkSpaceControllerFactory = new(_playerManager, _clock,_f_keyDownController);
+            _bed.SetWorkSpaceManager(_bedWorkSpaceControllerFactory.GenerateWorkSpaceController(_bed));
             
         }
 
