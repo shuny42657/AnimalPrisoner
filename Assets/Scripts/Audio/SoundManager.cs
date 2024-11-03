@@ -31,15 +31,19 @@ public class SoundManager : MonoBehaviour
         {
             Decide,
             Cancel,
+            Hover,
         }
         public SE se;
     }
+    [System.NonSerialized][Range(0f, 1f)] public float bgmVolume = 0.5f;
+    [System.NonSerialized][Range(0f, 1f)] public float seVolume = 0.5f;
     public BGMSoundData[] bgmSoundDatas;
     public SESoundData[] seSoundDatas;
     private Dictionary<BGMSoundData.BGM, BGMSoundData> bgmSoundDictionary = new Dictionary<BGMSoundData.BGM, BGMSoundData>();
     private Dictionary<SESoundData.SE, SESoundData> seSoundDictionary = new Dictionary<SESoundData.SE, SESoundData>();
     private AudioSource[] seAudioSources = new AudioSource[10]; // Multiple SEs are played simultaneously.
     private AudioSource bgmAudioSource; // One BGM is played at a time.
+    private SoundData currentBGMSoundData;
     public static SoundManager Instance { private set; get; }
     private void Awake()
     {
@@ -60,16 +64,16 @@ public class SoundManager : MonoBehaviour
     [EnumAction(typeof(BGMSoundData.BGM))]
     public void PlayBGM(int bgm)
     {
-        BGMSoundData.BGM enumBGM = (BGMSoundData.BGM)bgm;
-        if (bgmSoundDictionary.TryGetValue(enumBGM, out var soundData))
+        if (bgmSoundDictionary.TryGetValue((BGMSoundData.BGM)bgm, out var soundData))
         {
+            currentBGMSoundData = soundData;
             if (bgmAudioSource.isPlaying)
             {
                 bgmAudioSource.Stop();
             }
             bgmAudioSource.clip = soundData.audioClip;
-            bgmAudioSource.volume = soundData.volume;
-            bgmAudioSource.PlayOneShot(soundData.audioClip);
+            bgmAudioSource.volume = soundData.volume * bgmVolume;
+            bgmAudioSource.Play();
         }
         else
         {
@@ -79,14 +83,13 @@ public class SoundManager : MonoBehaviour
     [EnumAction(typeof(SESoundData.SE))]
     public void PlaySE(int se)
     {
-        SESoundData.SE enumSE = (SESoundData.SE)se;
-        if (seSoundDictionary.TryGetValue(enumSE, out var soundData))
+        if (seSoundDictionary.TryGetValue((SESoundData.SE)se, out var soundData))
         {
             var seAudioSource = GetSEAudioSource();
             if (seAudioSource == null) return;
             seAudioSource.clip = soundData.audioClip;
-            seAudioSource.volume = soundData.volume;
-            seAudioSource.Play();
+            seAudioSource.volume = soundData.volume * seVolume;
+            seAudioSource.PlayOneShot(soundData.audioClip);
         }
         else
         {
@@ -104,8 +107,13 @@ public class SoundManager : MonoBehaviour
         }
         return null;
     }
-    public void AAAAAAAA()
+    public void SetBGMVolume(float volume)
     {
-        Debug.Log("AAAAAAAA");
+        bgmVolume = volume;
+        bgmAudioSource.volume = currentBGMSoundData.volume * bgmVolume;
+    }
+    public void SetSEVolume(float volume)
+    {
+        seVolume = volume;
     }
 }
