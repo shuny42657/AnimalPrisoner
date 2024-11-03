@@ -5,19 +5,23 @@ using GameLogic.WorkSpace;
 using GameLogic.GameSystem;
 using UnityEngine.Events;
 
-public class ObjectiveMangerPutAndTake : MonoBehaviour,IPutAndTake
+public class ObjectiveMangerPutAndTake : IPutAndTake
 {
-    public ItemName Item => throw new System.NotImplementedException();
-
     UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 
     UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
-    [SerializeField] ObjectiveManager objectiveManager;
-    [SerializeField] SerializeInterface<RoomParameterModifier> roomParamModifier;
+    ObjectiveManager _objectiveManager;
+    RoomParameterModifier _roomParamModifier;
 
+    public ObjectiveMangerPutAndTake(ObjectiveManager objectiveManager,RoomParameterModifier roomParamModifier)
+    {
+        _objectiveManager = objectiveManager;
+        _roomParamModifier = roomParamModifier;
+    }
+    
     public bool Put(ItemName itemName)
     {
-        var objectiveAchieved = objectiveManager.ObjectiveAchieved(itemName);
+        var objectiveAchieved = _objectiveManager.ObjectiveAchieved(itemName);
         if (objectiveAchieved)
         {
             Debug.Log("Achieved");
@@ -25,7 +29,7 @@ public class ObjectiveMangerPutAndTake : MonoBehaviour,IPutAndTake
         else
         {
             Debug.Log("Simply Used As Fuel");
-            roomParamModifier.Value.ModifyRoomParameter(itemName);
+            _roomParamModifier.ModifyRoomParameter(itemName);
         }
         return true;
     }

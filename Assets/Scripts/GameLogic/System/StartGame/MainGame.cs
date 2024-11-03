@@ -8,62 +8,176 @@ using Sync;
 using Cysharp.Threading.Tasks;
 using UI;
 using Photon.Realtime;
+using GameLogic.Data;
+using GameLogic.WorkSpace;
+using Util;
+using GameLogic.Map;
 
 namespace GameLogic.GameSystem
 {
     /// <summary>
-    /// インゲームのトップレベルコンポーネント
+    /// Everything for the MainGame is set up here.
     /// </summary>
     public class MainGame : MonoBehaviourPunCallbacks
     {
+        //Player
         PlayerManager _playerManager;
-        public void SetPlayerManager(GameObject obj)
-        {
-            _playerManager = obj.GetComponent<PlayerManager>();
-            _roomPredicatePropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess(_playerManager));
-        }
-        MainGameInitializer gameInitializer;
-        
-        [SerializeField] PlayerFactory playerFactory;
-        [SerializeField] IJobAllocator jobAllocator = new MainJobAllocator();
-        [SerializeField] RoomParameter roomParam;
-        [SerializeField] Pacer roomParamPacer;
-        [SerializeField] Pacer leveledObjCreatorPacer;
-        [SerializeField] Pacer objectiveCreatorPacer;
+        [SerializeField] MainPlayerFactory playerFactory;
 
-        [SerializeField] GameOverProcess _gameOverProcess;
+        //Clock
+        [SerializeField] UpdateClock _clock;
+
+        //Map Builder
+        [SerializeField] MapBuilder _mapBuilder;
+
+        //Job Allocation
+        IJobAllocator jobAllocator = new MainJobAllocator();
+
+        //Objective 
+        ObjectiveManager _objectiveManager;
+        [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
+        [SerializeField] ItemDataBase _itemDataBase;
+
+        //RoomParam
+        RoomParameterUpgrader _roomParamUpGrader;
+        RoomParameter _roomParam;
+        RoomParameterModifier _roomParamModifier;
+
+        //Pacer (ITick)
+        Pacer _roomParamPacer;
+        Pacer _leveledObjCreatorPacer;
+        Pacer _objectiveCreatorPacer;
+
+        //WorkSpace Factory
+        [SerializeField] MakerCrafterFactory _motherWorkSpaceFactory;
+        SubmissionWorkSpaceManagerFactory _submissionWorkSpaceControllerFactory;
+        BedWorkSpaceManagerFacotry _bedWorkSpaceControllerFactory;
+
+        //Submission Space
+        [SerializeField] WorkSpace.WorkSpace _submissionSpace;
+
+        //Bed
+        [SerializeField] WorkSpace.WorkSpace _bed;
+
+        //Teleport System
+        TeleporterReceiverInitializer _teleporterReceiverInitializer;
+        [SerializeField] List<TeleportWorkSpace> _teleporters;
+        [SerializeField] List<TeleportWorkSpace> _receivers;
+        [SerializeField] List<PlayerCustomPropertyCallback> _receiverCustomPropCallbacks;
+
+        //Synchronization
+        [SerializeField] RoomPredicatePropertyCallback _gameoverPropertyCallback;
+        [SerializeField] RoomIntegerPropertyCallback _decayLevelUpCallback;
+
+        //View
+        GameOverProcess _gameOverProcess;
         [SerializeField] GameOverView _gameOverView;
+        [SerializeField] GaugeView _fuelGauge;
+        [SerializeField] GaugeView _durabilityGauge;
+        [SerializeField] GaugeView _electricityGauge;
+        [SerializeField] ObjectiveViewerFactory _objectiveViewerFactory;
 
-        [SerializeField] RoomPredicatePropertyCallback _roomPredicatePropertyCallback;
+        //Controller
+        [SerializeField] KeyDownController _e_keyDownController;
+        [SerializeField] KeyDownController _f_keyDownController;
+
         // Start is called before the first frame update
         void Start()
         {
-            //プレイヤーの数が揃っていなかった場合は例外処理を飛ばしてマッチングシーンに戻る
-            Debug.Log($"Player Count : {PhotonNetwork.PlayerList.Length}");
-            //メインの処理
-            gameInitializer = new(
-                playerFactory,
-                jobAllocator,
-                roomParam,
-                roomParamPacer,
-                leveledObjCreatorPacer,
-                objectiveCreatorPacer
+            _playerManager = playerFactory.GeneratePlayer(Vector3.zero);
+            _motherWorkSpaceFactory.SetPlayer(_playerManager);
+            _mapBuilder.SetPlayer(_playerManager);
+            _playerManager.SetCanMove(true);
+            _leveledObjectiveCreator.AddUpGradable(_playerManager);
+
+            //RoomParameter
+            _roomParam = new(
+                200f,
+                200f,
+                200f,
+                5f, 5f, 5f
                 );
+            _roomParam.IsActive = true;
 
-            gameInitializer.InitializeGame();
+            //RoomParameterUpgrader
+            _roomParamUpGrader = new(
+                _roomParam,
+                new() { 1f, 2f, 3f, 4f, 5f },
+                new() { 1f, 2f, 3f, 4f, 5f },
+                new() { 1f, 2f, 3f, 4f, 5f });
+            _decayLevelUpCallback.onModified.AddListener((val) => _roomParamUpGrader.UpGrade());
 
-            //ゲームオーバーの関数の登録
-            roomParam.OnParamDead += () => SetGameOver();
-            //_roomPredicatePropertyCallback.onModified.AddListener(() => Debug.Log("Predicate Callback"));
+            //RoomParameterModifier
+            _roomParamModifier = new(_itemDataBase, _roomParam);
 
-            //GameOverViewのボタンコールバック
+            //Initialize RoomParameter Speed
+            _roomParam.OnFuelModified.AddListener((rate) => _fuelGauge.ModifyGauge(rate));
+            _roomParam.OnDurabilityModified.AddListener((rate) => _durabilityGauge.ModifyGauge(rate));
+            _roomParam.OnElectricityModified.AddListener((rate) => _electricityGauge.ModifyGauge(rate));
+            _roomParam.FuelComsumeSpeed = 5f;
+            _roomParam.DuranilityCosumeSpeed = 5f;
+            _roomParam.ElectricityConsumeSpeed = 5f;
+
+            //ObjectiveManager
+            _objectiveManager = new ObjectiveManager(_leveledObjectiveCreator);
+            _objectiveManager.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
+            _objectiveManager.OnObjectiveAchieved.AddListener((objectiveData) => _objectiveViewerFactory.DeleteViewer(objectiveData));
+
+            //Pacer
+            ///RoomParamPacer
+            _roomParamPacer = new(new(){ 10f,10f,10f,10f},true, false);
+            _roomParamPacer.OnCheckpointReached.AddListener((val) => _roomParamUpGrader.IncrementLevel(val));
+            _roomParamPacer.IsActive = true;
+
+            ///LeveledObjCreatorPacer
+            _leveledObjCreatorPacer = new(new(){10f,10f,10f,10f},false, false);
+            _leveledObjCreatorPacer.OnCheckpointReached.AddListener((val) => _leveledObjectiveCreator.UpGrade());
+            _leveledObjCreatorPacer.IsActive = true;
+
+            ///ObjectiveCreatorPacer
+            _objectiveCreatorPacer = new(new() { 20f},false, true);
+            _objectiveCreatorPacer.OnCheckpointReached.AddListener((val) => _objectiveManager.AddNewObjective());
+            _objectiveCreatorPacer.IsActive = true;
+
+            //MapBuilder
+            _mapBuilder.OnWorkSpaceGenerated.AddListener((workSpace) => _leveledObjectiveCreator.AddUpGradable(workSpace));
+
+            //Allocate Jobs
+            if (PhotonNetwork.IsMasterClient)
+            {
+                jobAllocator.AllocateJob();
+            }
+
+            //Register ITicks to IClock
+            _clock.AddTick(_roomParamPacer);
+            _clock.AddTick(_leveledObjCreatorPacer);
+            _clock.AddTick(_objectiveCreatorPacer);
+            _clock.AddTick(_roomParam);
+            _clock.IsActive = true;
+
+            //GameOver
+            _gameOverProcess = new(_playerManager,_gameOverView, _roomParam, _leveledObjCreatorPacer, _objectiveCreatorPacer, _roomParamPacer);
+            _roomParam.OnParamDead += () => SetGameOver();
+            _gameoverPropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess());
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
+
+            //Teleport System (Teleporters and Receivers)
+            _teleporterReceiverInitializer = new(_playerManager, _teleporters, _receivers, _receiverCustomPropCallbacks, _e_keyDownController);
+            _teleporterReceiverInitializer.InitializeGame();
+
+            //SubmissionSpace
+            _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,_e_keyDownController);
+            _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceManager(_submissionSpace));
+
+            //Bed
+            _bedWorkSpaceControllerFactory = new(_playerManager, _clock,_f_keyDownController);
+            _bed.SetWorkSpaceManager(_bedWorkSpaceControllerFactory.GenerateWorkSpaceManager(_bed));
             
         }
 
         public async UniTask SetGameOver()
         {
-            await UniTask.Delay(100);
+            await UniTask.Delay(10);
             PhotonNetwork.CurrentRoom.SetGameOver(true);
         }
 

@@ -8,6 +8,7 @@ namespace GameLogic.Map
 {
     public interface IMapBuilder
     {
-        public List<BaseWorkSpace> BuildWorkSpaces(IJobStatus jobStatus);
+        public void BuildWorkSpaces(IJobStatus jobStatus);
+        public List<WorkSpaceManager> GetWorkSpaces();
     }
 }

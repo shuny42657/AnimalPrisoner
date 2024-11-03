@@ -11,7 +11,7 @@ using GameLogic.WorkSpace;
 
 namespace GameLogic.Factory
 {
-    public class PlayerFactory : MonoBehaviour,IPlayerFactory
+    public class PlayerFactory : MonoBehaviour
     {
         [SerializeField] GameObject player;
 

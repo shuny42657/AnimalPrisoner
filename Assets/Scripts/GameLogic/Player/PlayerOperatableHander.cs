@@ -8,12 +8,12 @@ namespace GameLogic.GamePlayer
 {
     public class PlayerOperatableHander : MonoBehaviour, IOperatableHandler,IOperatableCallback
     {
-        BaseWorkSpace operatable;
+        BaseWorkSpace _workSpace;
         IInteractable interactable;
 
         ItemName item;
 
-        public IOperatable Operatable { get { return operatable; } set { operatable = (BaseWorkSpace)value; } }
+        public IOperatable Operatable { get { return _workSpace; } set { _workSpace = (BaseWorkSpace)value; } }
 
         public IInteractable Interactable { get { return interactable; } set { interactable = value; } }
 
@@ -21,76 +21,58 @@ namespace GameLogic.GamePlayer
 
         UnityEvent<ItemName> onTake = new(); public UnityEvent<ItemName> OnTake { get { return onTake; } }
 
-        public void InitiateWork()
+        public void InitiateWork(IAutomatable automatable)
         {
-            if (operatable == null)
-            {
-                Debug.Log("no operatable");
-                return;
-            }
-            else
-            {
                 Debug.Log("operator handler passed");
-                operatable.InitiateOperation();
-            }
+                automatable.InitiateOperation();
         }
 
-        public void PutOrTake()
+        public void PutOrTake(IPutAndTake putAndTake)
         {
-            if (operatable == null)
-                return;
+            if(item == ItemName.None)
+            {
+                Debug.Log("Take called");
+                item = putAndTake.Take();
+                if(item != ItemName.None)
+                {
+                    Debug.Log("GET ITEM !!");
+                    onTake.Invoke(item);
+                }
+            }
             else
             {
-                Debug.Log("Put or Take");
-                if (item == ItemName.None)
+                Debug.Log("PUT CALLED");
+                var isPut = putAndTake.Put(item);
+                if (isPut)
                 {
-                    Debug.Log("Take called");
-                    item = operatable.Take();
-                    if (item != ItemName.None)
-                    {
-                        Debug.Log("Get Item !!");
-                        onTake.Invoke(item);
-                    }
-                }
-                else
-                {
-                    Debug.Log("Put Called");
-                    var isPut = operatable.Put(item);
-                    if (isPut)
-                    {
-                        item = ItemName.None;
-                        onPut.Invoke(item);
-                    }
+                    item = ItemName.None;
+                    onPut.Invoke(item);
                 }
             }
-        
         }
 
-        public void Work(IPlayerStatus playerStatus)
+        public void Work(IWork work,IPlayerStatus playerStatus)
         {
-            operatable.Work(playerStatus);
+            work.Work(playerStatus);
         }
 
+        IPlayerTrigger _playerTrigger;
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
+            if(other.TryGetComponent(out IPlayerTrigger playerTrigger))
             {
-                if(operatable != null)
-                    operatable.PlayerTrigger.OnPlayerExit.Invoke();
-                operatable = baseWorkSpace;
-                baseWorkSpace.PlayerTrigger.OnPlayerEnter.Invoke();
+                if(_playerTrigger != null)
+                    _playerTrigger.OnPlayerExit();
+                playerTrigger.OnPlayerEnter();
+                _playerTrigger = playerTrigger;
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if(other.TryGetComponent(out BaseWorkSpace baseWorkSpace))
+            if(other.TryGetComponent(out IPlayerTrigger playerTrigger))
             {
-                if(operatable == baseWorkSpace)
-                {
-                    operatable = null;
-                    baseWorkSpace.PlayerTrigger.OnPlayerExit.Invoke();
-                }
+                playerTrigger.OnPlayerExit();
             }
         }
     }

@@ -8,25 +8,39 @@ using GameLogic.GamePlayer;
 
 namespace GameLogic.GameSystem
 {
-    public class GameOverProcess : MonoBehaviour
+    public class GameOverProcess
     {
-        [SerializeField] SerializeInterface<IViewAppear> _gameOverView;
-        [SerializeField] RoomParameter _roomParam;
-        [SerializeField] Pacer _roomParamPacer;
-        [SerializeField] Pacer _leveledObjCreatorPacer;
-        [SerializeField] Pacer _objectiveCreatorPacer;
-        [SerializeField] RoomParameterModifier _roomParamModifier;
+        IPlayer _player;
+        IViewAppear _gameOverView;
+        RoomParameter _roomParam;
+        Pacer _roomParamPacer;
+        Pacer _leveledObjCreatorPacer;
+        Pacer _objectiveCreatorPacer;
 
-        public async UniTask RunGameOverProcess(PlayerManager playerManager)
+        public GameOverProcess(
+            IPlayer player,
+            IViewAppear gameOverView,
+            RoomParameter roomParam,
+            Pacer leveldObjCreatorPacer,
+            Pacer objectiveCreatorPacer,
+            Pacer roomParamPacer
+            )
+        {
+            _gameOverView = gameOverView;
+            _roomParam = roomParam;
+            _roomParamPacer = roomParamPacer;
+            _leveledObjCreatorPacer = leveldObjCreatorPacer;
+            _objectiveCreatorPacer = objectiveCreatorPacer;
+        }
+        public async UniTask RunGameOverProcess()
         {
             Debug.Log("Game Over Processs");
-             playerManager.SetCanMove(false);
+             _player.SetCanMove(false);
             _roomParam.IsActive = false;
             _roomParamPacer.IsActive = false;
             _leveledObjCreatorPacer.IsActive = false;
             _objectiveCreatorPacer.IsActive = false;
-            _roomParamModifier.IsActive = false;
-            await _gameOverView.Value.Appear();
+            await _gameOverView.Appear();
         }
     }
 }

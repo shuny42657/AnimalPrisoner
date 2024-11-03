@@ -4,24 +4,44 @@ using UnityEngine;
 using UnityEngine.Events;
 using Util;
 using GameLogic.GamePlayer;
+using UI;
 
 namespace GameLogic.WorkSpace
 {
-    public class BaseWorkSpace : MonoBehaviour, IOperatable
+    public abstract class BaseWorkSpace : MonoBehaviour, IOperatable
     {
-        [SerializeField] JobName jobName; public JobName JobName { get { return jobName; } }
-        [SerializeField] SerializeInterface<IPutAndTake> putAndTake;
-        [SerializeField] SerializeInterface<IAutomatable> automatable;
-        [SerializeField] SerializeInterface<IWork> work;
-        [SerializeField] SerializeInterface<IPlayerTriggerable> playerTrigger; public IPlayerTriggerable PlayerTrigger { get { return playerTrigger.Value; } }
-        [SerializeField] SerializeInterface<IUpGradable> upGradable; public IUpGradable UpGradable { get { return upGradable.Value; } }
+        protected JobName jobName; public JobName JobName { get { return jobName; } }
+        protected IPutAndTake _putAndTake;
+        protected IAutomatable _automatable;
+        protected IWork _work;
+        protected ISet _set;
+        protected IPlayerTriggerable _playerTrigger; public IPlayerTriggerable PlayerTrigger { get { return _playerTrigger; } }
+        protected IUpGradable upGradable; public IUpGradable UpGradable { get { return upGradable; } }
+        protected IGrabbableVisualizer _grabbableVisualizer;
+        protected IHilightVisualizer _hilightVisualizer;
+        [SerializeField] protected WorkSpaceProgressView _progressView;
+
+        public virtual void InitializeWorkSpace()
+        {
+            TryGetComponent(out _putAndTake);
+            TryGetComponent(out _automatable);
+            TryGetComponent(out _work);
+            TryGetComponent(out _playerTrigger);
+            TryGetComponent(out upGradable);
+            TryGetComponent(out _set);
+            TryGetComponent(out _grabbableVisualizer);
+            _hilightVisualizer = GetComponent<IHilightVisualizer>();
+
+            _playerTrigger.OnPlayerEnter.AddListener(() => _hilightVisualizer.Hilight(true));
+            _playerTrigger.OnPlayerExit.AddListener(() => _hilightVisualizer.Hilight(false));
+        }
 
         public void InitiateOperation()
         {
-            if (automatable.Value != null)
+            if (_automatable != null)
             {
                 Debug.Log("workspace automatable called");
-                automatable.Value.InitateOperation();
+                //_automatable.InitateOperation();
             }
             else
             {
@@ -32,10 +52,10 @@ namespace GameLogic.WorkSpace
 
         public bool Put(ItemName itemName)
         {
-            if (putAndTake.Value != null)
+            if (_putAndTake != null)
             {
                 Debug.Log("Item Put");
-                return putAndTake.Value.Put(itemName);
+                return _putAndTake.Put(itemName);
             }
             else
             {
@@ -46,9 +66,9 @@ namespace GameLogic.WorkSpace
 
         public ItemName Take()
         {
-            if (putAndTake.Value != null)
+            if (_putAndTake != null)
             {
-                return putAndTake.Value.Take();
+                return _putAndTake.Take();
             }
             else
             {
@@ -58,15 +78,15 @@ namespace GameLogic.WorkSpace
 
         public void Work(IPlayerStatus playerStatus)
         {
-            if (work.Value != null)
+            if (_work != null)
             {
-                work.Value.Work(playerStatus);
+                _work.Work(playerStatus);
             }
         }
 
         public void UpGrade()
         {
-            upGradable.Value.UpGrade();
+            upGradable.UpGrade();
         }
     }
 }

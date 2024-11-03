@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace GameLogic.GameSystem
 {
-
-    //Attach to a component that does some operation inside Update(),
-    //Control its activity (ON / OFF)
+    /// <summary>
+    /// Inplements Turning ON and OFF
+    /// Classes with this interface should function only when they are ON.
+    /// </summary>
     public interface ISwitchable
     {
         public bool IsActive { get; set; }

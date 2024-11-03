@@ -6,20 +6,32 @@ using UnityEngine.Events;
 
 namespace GameLogic.GameSystem
 {
-    public class ObjectiveManager : MonoBehaviour
+    public interface IObjectiveManager
     {
-        [SerializeField]SerializeInterface<IObjectiveCreator> objectiveCreator;
+        public void AddNewObjective();
+        public bool ObjectiveAchieved(ItemName receivedItem);
+    }
+
+
+    public class ObjectiveManager : IObjectiveManager
+    {
+        IObjectiveCreator _objectiveCreator;
 
         List<ObjectiveData> objectives = new();
-        [SerializeField] UnityEvent<ObjectiveData> OnNewObjectiveGenerated;
-        [SerializeField] UnityEvent<ObjectiveData> OnObjectiveAchieved;
+        public UnityEvent<ObjectiveData> OnNewObjectiveGenerated = new();
+        public UnityEvent<ObjectiveData> OnObjectiveAchieved = new();
+
+        public ObjectiveManager(IObjectiveCreator objectiveCreator)
+        {
+            _objectiveCreator = objectiveCreator;
+        }
 
         public void AddNewObjective()
         {
             Debug.Log("objective added");
             if(objectives.Count < 2)
             {
-                var newObjective = objectiveCreator.Value.CreateObjective();
+                var newObjective = _objectiveCreator.CreateObjective();
                 objectives.Add(newObjective);
                 OnNewObjectiveGenerated.Invoke(newObjective);
             }

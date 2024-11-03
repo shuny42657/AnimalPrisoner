@@ -11,7 +11,8 @@ namespace GameLogic.GamePlayer
     {
         List<JobName> jobs  = new();
 
-        public UnityEvent<IJobStatus> OnJobSet = new();
+        UnityEvent<IJobStatus> onJobSet = new();
+        public UnityEvent<IJobStatus> OnJobSet { get { return onJobSet; } }
         public List<JobName> GetAllJobs()
         {
             return jobs;
@@ -37,7 +38,7 @@ namespace GameLogic.GamePlayer
                     jobs.Add((JobName)localPlayer.GetJob(i));
                 }
                 Debug.Log($" {jobs.Count} Jobs Set");
-                OnJobSet.Invoke(this);
+                onJobSet.Invoke(this);
             }
         }
     }

@@ -7,7 +7,7 @@ namespace Util
     public class KeyDownController : MonoBehaviour
     {
         [SerializeField] KeyCode key;
-        [SerializeField] UnityEvent OnKeyPressed;
+        public UnityEvent OnKeyPressed;
 
         private void Update()
         {

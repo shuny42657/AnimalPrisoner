@@ -7,46 +7,65 @@ using Sync;
 
 namespace GameLogic.GameSystem
 {
+    /// <summary>
+    /// Assign 4 jobs to each player. 
+    /// </summary>
     public interface IJobAllocator
     {
         public void AllocateJob();
     }
 
-    public class JobAllocator : IJobAllocator
+    /// <summary>
+    /// Assign 4 jobs that are passed to the contructor
+    /// This class is for Debug (See the commented line at 
+    /// </summary>
+    public class FixedJobAllocater : IJobAllocator
     {
+        JobName _firstJob;
+        JobName _secondJob;
+        JobName _thirdJob;
+        JobName _fourthJob;
+
+        public FixedJobAllocater(
+            JobName firstJob,
+        JobName secondJob,
+        JobName thirdJob,
+        JobName fourthJob
+            )
+        {
+            _firstJob = firstJob;
+            _secondJob = secondJob;
+            _thirdJob = thirdJob;
+            _fourthJob = fourthJob;
+        }
         public void AllocateJob()
         {
             var players = PhotonNetwork.CurrentRoom.Players;
-            var jobCount = System.Enum.GetValues(typeof(JobName)).Length;
+
             foreach(var p in players.Values)
             {
-                List<int> jobs = new();
-                Debug.Log($"Player : {p.ActorNumber}");
-                while(jobs.Count < 4)
-                { 
-                    var newJob = Random.Range(0, jobCount);
-                    if (!jobs.Contains(newJob))
-                    {
-                        Debug.Log($"new job set{newJob}");
-                        jobs.Add(newJob);
-                        p.SetJob(jobs.Count - 1, newJob);
-                    }
-                }
+                p.SetJob(0, (int)_firstJob);
+                p.SetJob(1, (int)_secondJob);
+                p.SetJob(2, (int)_thirdJob);
+                p.SetJob(3, (int)_fourthJob);
             }
-            foreach(var p in players.Values)
+
+            foreach (var p in players.Values)
             {
                 p.SetJobDetermined(true);
             }
-            Debug.Log("Job Set");
         }
     }
 
+    /// <summary>
+    /// Assign Jobs to each player.
+    /// For each player, randomly pick 4 jobs out of 12 candidates.
+    /// </summary>
     public class MainJobAllocator : IJobAllocator
     {
         public void AllocateJob()
         {
             var players = PhotonNetwork.CurrentRoom.Players;
-            var jobCount = System.Enum.GetValues(typeof(JobName)).Length;
             List<JobName> jobNamePool = new();
             for(int i = 0;i < 16; i++)
             {
@@ -75,26 +94,6 @@ namespace GameLogic.GameSystem
                 }
             }
             foreach(var p in players.Values)
-            {
-                p.SetJobDetermined(true);
-            }
-            Debug.Log("Job Set");
-        }
-    }
-
-    public class SimpleJobAllocator : IJobAllocator
-    {
-        public void AllocateJob()
-        {
-            var players = PhotonNetwork.CurrentRoom.Players;
-            foreach(var p in players.Values)
-            {
-                p.SetJob(0, (int)JobName.StoneMaker);
-                p.SetJob(1, (int)JobName.WoodMaker);
-                p.SetJob(2, (int)JobName.StoneWoodCrafter);
-                p.SetJob(3, (int)JobName.StoneIronCrafter);
-            }
-            foreach (var p in players.Values)
             {
                 p.SetJobDetermined(true);
             }

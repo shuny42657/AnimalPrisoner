@@ -9,34 +9,29 @@ using Sync;
 namespace GameLogic.WorkSpace
 {
     // Item Dissappear after put. Could be resued for sumbmission space ?
-    public class TeleporterPutAndTake : MonoBehaviour,IPutAndTake
+    public class TeleporterPutAndTake : IPutAndTake
     {
-        Player receiver;
-        int receiverID;
-        ItemName itemName = ItemName.None;
-        public ItemName Item { get { return itemName; } }
+        Player _receiver;
+        int _receiverID;
 
-        public UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
+        UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 
-        public UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
+        UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
 
-        public void SetReceiver(Player player)
+        public TeleporterPutAndTake(Player receiver)
         {
-            receiver = player;
-            receiverID = player.ActorNumber;
-            OnReceiverIDSet.Invoke(receiverID);
+            _receiver = receiver;
+            _receiverID = receiver.ActorNumber;
         }
-        public UnityEvent<int> OnReceiverIDSet;
-        
+
         public bool Put(ItemName itemName)
         {
-            Debug.Log(receiver.GetSentItem(PhotonNetwork.LocalPlayer.ActorNumber));
-            if(receiver.GetSentItem(PhotonNetwork.LocalPlayer.ActorNumber) == (int)ItemName.None)
+            Debug.Log(_receiver.GetSentItem(PhotonNetwork.LocalPlayer.ActorNumber));
+            if(_receiver.GetSentItem(PhotonNetwork.LocalPlayer.ActorNumber) == (int)ItemName.None)
             {
-                Debug.Log($"Put on Teleporter to {receiver.ActorNumber}");
-                receiver.SetSendItem(PhotonNetwork.LocalPlayer.ActorNumber, (int)itemName);
-                //Debug.Log($"Receiver : {receiver.ActorNumber}");
-                Debug.Log($"receiver.GetSentItem() : {receiver.GetSentItem(PhotonNetwork.LocalPlayer.ActorNumber)}");
+                Debug.Log($"Put {itemName} on Teleporter to {_receiverID}");
+                _receiver.SetSendItem(PhotonNetwork.LocalPlayer.ActorNumber, (int)itemName);
+                Debug.Log($"receiver.GetSentItem() : {_receiver.GetSentItem(PhotonNetwork.LocalPlayer.ActorNumber)}");
                 onPut.Invoke(itemName);
                 return true;
             }

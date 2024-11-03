@@ -30,7 +30,7 @@ namespace GameLogic.WorkSpace
                 {
                     //Debug.Log($"target actor  number {i + 1} in {PhotonNetwork.LocalPlayer.ActorNumber}");
                     //Debug.Log($"referenced actor number : {players[i].ActorNumber}");
-                    teleporterPutAndTakes[increment].SetReceiver(players[i]);
+                    //teleporterPutAndTakes[increment].SetReceiver(players[i]);
                     receiverPutAndTakes[increment].SenderId = players[i].ActorNumber;
                     customPropCallbacks[increment].key = sendItemKeys[i];
                     increment++;

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace GameLogic.GameSystem
 {
-    public class RoomParameter : MonoBehaviour,IRoomStatus,ISwitchable
+    public class RoomParameter :IRoomStatus,ISwitchable,ITick
     {
         [SerializeField] UnityEvent<float> onFuelModiied = new(); public UnityEvent<float> OnFuelModified { get { return onFuelModiied; } }
 
@@ -13,68 +13,84 @@ namespace GameLogic.GameSystem
 
         [SerializeField] UnityEvent<float> onElectricityModified = new(); public UnityEvent<float> OnElectricityModified { get { return onElectricityModified; } }
 
-        float fuel; public float Fuel
+        public RoomParameter(
+            float maxFuel,
+            float maxDurability,
+            float maxElectricity,
+            float fuelComsumSpeed,
+            float durabilityComsumSpeed,
+            float electricityComsumSpeed
+            )
         {
-            get { return fuel; }
+            _maxFuel = maxFuel;
+            _maxDurability = maxDurability;
+            _maxElecticity = maxElectricity;
+            _fuel = _maxFuel;
+            _durability = _maxDurability;
+            _electricity = _maxElecticity;
+            _fuelComsumeSpeed = fuelComsumSpeed;
+            _durabilityComsumeSpeed = durabilityComsumSpeed;
+            _electriticyComsumeSpeed = electricityComsumSpeed;
+            _dead = false;
+            _isActive = false;
+
+        }    
+        float _fuel; public float Fuel
+        {
+            get { return _fuel; }
             set
             {
-                fuel = value; onFuelModiied.Invoke(fuel);
-                if(fuel < 0 && !dead) { OnParamDead.Invoke(); dead = true; Debug.Log("Dead"); }
+                _fuel = value; onFuelModiied.Invoke(_fuel);
+                if(_fuel < 0 && !_dead) { OnParamDead.Invoke(); _dead = true; Debug.Log("Dead"); }
             }
         }
 
-        float durability; public float Durability
+        float _durability; public float Durability
         {
-            get { return durability; }
+            get { return _durability; }
             set
             {
-                durability = value; onDurabilityModified.Invoke(durability);
-                if(durability < 0 && !dead)
+                _durability = value; onDurabilityModified.Invoke(_durability);
+                if(_durability < 0 && !_dead)
                 {
                     OnParamDead.Invoke();
-                    dead = true;
+                    _dead = true;
                     Debug.Log("Dead");
                 }
             }
         }
 
-        float electricity; public float Electricity
+        float _electricity; public float Electricity
         {
-            get { return electricity; }
+            get { return _electricity; }
             set
             {
-                electricity = value; onElectricityModified.Invoke(electricity);
-                if(electricity < 0 && !dead) { OnParamDead.Invoke(); dead = true; Debug.Log("Dead"); }
+                _electricity = value; onElectricityModified.Invoke(_electricity);
+                if(_electricity < 0 && !_dead) { OnParamDead.Invoke(); _dead = true; Debug.Log("Dead"); }
             }
         }
 
-        [SerializeField] float maxFuel;
-        [SerializeField] float maxDurability;
-        [SerializeField] float maxElecticity;
+        [SerializeField] float _maxFuel;
+        [SerializeField] float _maxDurability;
+        [SerializeField] float _maxElecticity;
 
-        [SerializeField] float fuelComsumeSpeed; public float FuelComsumeSpeed { get { return fuelComsumeSpeed; } set { fuelComsumeSpeed = value; } }
-        [SerializeField] float durabilityComsumeSpeed; public float DuranilityCosumeSpeed { get { return durabilityComsumeSpeed; } set { durabilityComsumeSpeed = value; } }
-        [SerializeField] float electriticyComsumeSpeed; public float ElectricityConsumeSpeed { get { return electriticyComsumeSpeed; } set { electriticyComsumeSpeed = value; } }
+        [SerializeField] float _fuelComsumeSpeed; public float FuelComsumeSpeed { get { return _fuelComsumeSpeed; } set { _fuelComsumeSpeed = value; } }
+        [SerializeField] float _durabilityComsumeSpeed; public float DuranilityCosumeSpeed { get { return _durabilityComsumeSpeed; } set { _durabilityComsumeSpeed = value; } }
+        [SerializeField] float _electriticyComsumeSpeed; public float ElectricityConsumeSpeed { get { return _electriticyComsumeSpeed; } set { _electriticyComsumeSpeed = value; } }
 
         //[SerializeField] bool working; public bool Working { get { return working; } set { working = value; } }
 
-        bool isActive = false;
+        bool _isActive = false;
         public bool IsActive
         {
-            get { return isActive;}
-            set { isActive = value; }
+            get { return _isActive;}
+            set { _isActive = value; }
         }
 
-        bool dead;
+        bool _dead;
         public NoArgUnitaskDelegate OnParamDead;
 
-        private void Awake()
-        {
-            fuel = maxFuel;
-            durability = maxDurability;
-            electricity = maxElecticity;
-        }
-        private void Update()
+        public void Tick()
         {
             if (IsActive)
             {
@@ -82,9 +98,9 @@ namespace GameLogic.GameSystem
                 Fuel -= FuelComsumeSpeed * Time.deltaTime;
                 Durability -= DuranilityCosumeSpeed * Time.deltaTime;
                 Electricity -= ElectricityConsumeSpeed * Time.deltaTime;
-                onFuelModiied.Invoke(fuel / maxFuel);
-                onDurabilityModified.Invoke(durability / maxDurability);
-                onElectricityModified.Invoke(electricity / maxElecticity);
+                onFuelModiied.Invoke(_fuel / _maxFuel);
+                onDurabilityModified.Invoke(_durability / _maxDurability);
+                onElectricityModified.Invoke(_electricity / _maxElecticity);
             }
         }
     }

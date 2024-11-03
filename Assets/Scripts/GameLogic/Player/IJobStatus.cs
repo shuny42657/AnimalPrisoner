@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameLogic
 {
@@ -18,6 +19,11 @@ namespace GameLogic
         WoodIronCrafter = 9,
         WoodOilCrafter = 10,
         OilIronCrafter = 11,
+        SubmissionWorkSpace = 101,
+        Teleporter = 102,
+        Receiver = 103,
+        Bed = 104,
+        Floor = 105,
     }
 }
 
@@ -25,8 +31,10 @@ namespace GameLogic.GamePlayer
 {
     public interface IJobStatus
     {
+        public UnityEvent<IJobStatus> OnJobSet { get; }
         public List<JobName> GetAllJobs();
         public void SetJob(JobName job);
+        public void SetJobs();
         public void ClearJob();
     }
 }

@@ -6,26 +6,39 @@ using Photon.Pun;
 using Sync;
 using GameLogic.GameSystem;
 
-public class RoomParameterUpgrader : MonoBehaviourPunCallbacks,IUpGradable
+public class RoomParameterUpgrader : IUpGradable
 {
-    [SerializeField] RoomParameter roomParam;
+    [SerializeField] RoomParameter _roomParam;
     int level;
     public int Level { get { return level; } }
 
     [SerializeField] UpGraderName upgraderName;
     public UpGraderName UpGraderName { get { return upgraderName; } }
 
-    [SerializeField] List<float> fuelDecaySpeeds;
-    [SerializeField] List<float> durabilityDecaySpeeds;
-    [SerializeField] List<float> electricityDecaySpeeds;
+    [SerializeField] List<float> _fuelDecaySpeeds;
+    [SerializeField] List<float> _durabilityDecaySpeeds;
+    [SerializeField] List<float> _electricityDecaySpeeds;
+
+    public RoomParameterUpgrader(
+        RoomParameter roomParam,
+        List<float> fuelDecaySpeeds,
+        List<float> durabilityDecaySpeeds,
+        List<float> electricityDecaySpeeds
+        )
+    {
+        _roomParam = roomParam;
+        _fuelDecaySpeeds = fuelDecaySpeeds;
+        _durabilityDecaySpeeds = durabilityDecaySpeeds;
+        _electricityDecaySpeeds = electricityDecaySpeeds;
+    }
 
     public void UpGrade()
     {
         level = PhotonNetwork.CurrentRoom.GetDecayLevelUp();
         Debug.Log($"Decay Level {level}");
-        roomParam.FuelComsumeSpeed = fuelDecaySpeeds[level];
-        roomParam.DuranilityCosumeSpeed = durabilityDecaySpeeds[level];
-        roomParam.ElectricityConsumeSpeed = electricityDecaySpeeds[level];
+        _roomParam.FuelComsumeSpeed = _fuelDecaySpeeds[level];
+        _roomParam.DuranilityCosumeSpeed = _durabilityDecaySpeeds[level];
+        _roomParam.ElectricityConsumeSpeed = _electricityDecaySpeeds[level];
     }
 
     public void IncrementLevel(int level)

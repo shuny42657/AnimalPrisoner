@@ -77,6 +77,14 @@ namespace Sync
 
         public static void SetGameOver(this Room room, bool gameover)
         {
+            /*if (!(bool)room.CustomProperties[RoomPropertyKey.gameover.ToString()])
+            {
+                propsToSet[RoomPropertyKey.gameover.ToString()] = gameover;
+                Debug.Log("Game Over Set");
+                room.SetCustomProperties(propsToSet);
+                propsToSet.Clear();
+            }*/
+
             propsToSet[RoomPropertyKey.gameover.ToString()] = gameover;
             Debug.Log("Game Over Set");
             room.SetCustomProperties(propsToSet);

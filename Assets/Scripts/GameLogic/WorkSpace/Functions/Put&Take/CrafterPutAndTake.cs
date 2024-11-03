@@ -6,16 +6,15 @@ using GameLogic.Data;
 
 namespace GameLogic.WorkSpace
 {
-    public class CrafterPutAndTake : MonoBehaviour,IPutAndTake,ISet
+    public class CrafterPutAndTake :IPutAndTake,ISet,IConditionChecker
     {
-        ItemName  item = ItemName.None;
-        public ItemName Item { get { return item; } }
+        ItemName  _item = ItemName.None;
 
         ItemName itemToCraft;
-        [SerializeField] ItemName firstItem;
-        [SerializeField] ItemName secondItem;
-        int firstItemCount = 0;
-        int secondItemCount = 0;
+        [SerializeField] ItemName _firstItem;
+        [SerializeField] ItemName _secondItem;
+        int _firstItemCount = 0;
+        int _secondItemCount = 0;
 
         [SerializeField]UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 
@@ -23,25 +22,37 @@ namespace GameLogic.WorkSpace
         [SerializeField] UnityEvent<ItemName> onSet = new(); public UnityEvent<ItemName> OnSet { get { return onSet; } }
 
         //Todo : Reference something like "CraftItemDatabase" ??
-        ICraftRecipe craftRecipe;
+        ICraftRecipe _craftRecipe;
+
+        public CrafterPutAndTake(ItemName firstItem,ItemName secondItem)
+        {
+            _firstItem = firstItem;
+            _secondItem = secondItem;
+            _craftRecipe = CraftRecipeClassifier.GetCraftRecipe(_firstItem, _secondItem);
+        }
+
+        public bool MeetCondition()
+        {
+            return _firstItemCount > 0 && _secondItemCount > 0 && _item == ItemName.None;
+        }
 
         public bool Put(ItemName itemName)
         {
-            if(craftRecipe == null)
+            if(_craftRecipe == null)
             {
-                craftRecipe = CraftRecipeClassifier.GetCraftRecipe(firstItem, secondItem);
+                _craftRecipe = CraftRecipeClassifier.GetCraftRecipe(_firstItem, _secondItem);
             }
-            if(firstItem == itemName)
+            if(_firstItem == itemName)
             {
-                firstItemCount++;
-                itemToCraft = craftRecipe.GetCraftItem(firstItemCount, secondItemCount);
+                _firstItemCount++;
+                itemToCraft = _craftRecipe.GetCraftItem(_firstItemCount, _secondItemCount);
                 onPut.Invoke(itemToCraft);
                 return true;
             }
-            else if(secondItem == itemName)
+            else if(_secondItem == itemName)
             {
-                secondItemCount++;
-                itemToCraft = craftRecipe.GetCraftItem(firstItemCount, secondItemCount);
+                _secondItemCount++;
+                itemToCraft = _craftRecipe.GetCraftItem(_firstItemCount, _secondItemCount);
                 onPut.Invoke(itemToCraft);
                 return true;
             }
@@ -51,10 +62,17 @@ namespace GameLogic.WorkSpace
             }
         }
 
+        public void Set()
+        {
+            _item = itemToCraft;
+            itemToCraft = ItemName.None;
+            onSet.Invoke(_item);
+        }
+
         public ItemName Take()
         {
-            var temp = item;
-            item = ItemName.None;
+            var temp = _item;
+            _item = ItemName.None;
             Debug.Log($"Taken Item : {temp}");
             onTake.Invoke();
             return temp;
@@ -62,18 +80,18 @@ namespace GameLogic.WorkSpace
 
         public void ResetSetQuantity()
         {
-            firstItemCount = 0;
-            secondItemCount = 0;
+            _firstItemCount = 0;
+            _secondItemCount = 0;
         }
 
         //Only this method is from ISet
         public void Set(ItemName itemName)
         {
-            if (item == ItemName.None)
+            if (_item == ItemName.None)
             {
-                item = itemName;
+                _item = itemName;
                 Debug.Log($"Set Item : {itemName}");
-                onSet.Invoke(item);
+                onSet.Invoke(_item);
             }
         }
     }

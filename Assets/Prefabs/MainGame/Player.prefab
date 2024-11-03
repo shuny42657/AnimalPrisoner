@@ -184,7 +184,6 @@ GameObject:
   - component: {fileID: 1072461307409182594}
   - component: {fileID: 7373486352436178136}
   - component: {fileID: 8535668441577909706}
-  - component: {fileID: 4431518247357469126}
   - component: {fileID: 7379836151642222022}
   m_Layer: 0
   m_Name: Player
@@ -275,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05811a704350f4c319a2620ccb8fa198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transform: {fileID: 0}
   speed: 2
 --- !u!114 &8430098422412460143
 MonoBehaviour:
@@ -300,7 +300,7 @@ MonoBehaviour:
   onQ:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4431518247357469126}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameLogic.GamePlayer.PlayerManager, GameLogic
         m_MethodName: Work
         m_Mode: 1
@@ -373,28 +373,6 @@ MonoBehaviour:
     obj: {fileID: 775085378039439911}
   visualizer:
     obj: {fileID: 827715138803065033}
---- !u!114 &4431518247357469126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 827715138803065033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de68536d8b54b4717a75a8159d88df30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opertableHandler:
-    obj: {fileID: 775085378039439911}
-  playerStatus:
-    obj: {fileID: 1281054151876981277}
-  jobStatus:
-    obj: {fileID: 2545810842804910917}
-  characterMove:
-    obj: {fileID: 827715138803065033}
-  upGradable:
-    obj: {fileID: 105165548949797533}
 --- !u!114 &7379836151642222022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,9 +385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0f107949f3e44e989d974b65b0d4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnJobSet:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1281054151876981277
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,9 +481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0f107949f3e44e989d974b65b0d4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnJobSet:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &3821991834720728836
 GameObject:
   m_ObjectHideFlags: 0
