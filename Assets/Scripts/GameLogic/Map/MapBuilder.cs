@@ -30,10 +30,10 @@ namespace GameLogic.Map
                 f.SetWorkSpaceManager(_floorWorkSpaceFactory.GenerateWorkSpaceManager(f));
             }
 
-            Debug.Log($"Job Count{jobStatus.GetAllJobs().Count}");
+            //Debug.Log($"Job Count{jobStatus.GetAllJobs().Count}");
             foreach(var j in jobStatus.GetAllJobs())
             {
-                Debug.Log($"Job : {j}");
+                //Debug.Log($"Job : {j}");
                 for(int i = 0;i < 100; i++)
                 {
                     var rand = Random.Range(0, positionCandidates.Count);
