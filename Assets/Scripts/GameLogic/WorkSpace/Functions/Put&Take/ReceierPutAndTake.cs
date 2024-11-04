@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using Photon.Realtime;
 using Photon.Pun;
 using Sync;
+using Cysharp.Threading.Tasks;
 
 namespace GameLogic.WorkSpace
 {
@@ -12,6 +13,7 @@ namespace GameLogic.WorkSpace
     {
         public UnityEvent<int> OnSenderIdSet;
         [SerializeField] int _senderId; public int SenderId { get { return _senderId; } set { _senderId = value;OnSenderIdSet.Invoke(_senderId); } }
+
         ItemName _itemName;
 
         [SerializeField] UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
@@ -29,37 +31,43 @@ namespace GameLogic.WorkSpace
         {
             return false;
         }
+
         public void Set()
         {
             var _itemName = (ItemName)PhotonNetwork.LocalPlayer.GetSentItem(_senderId);
             Debug.Log($"Receiver Set Called : {_itemName}");
             onSet.Invoke(_itemName);
+            Debug.Log($"Receiver Set Called : {_itemName}");
         }
 
-        public void Set(ItemName itemName)
+        public async void Set(ItemName itemName)
         {
             if(_itemName == ItemName.None)
             {
                 _itemName = itemName;
                 Debug.Log($"Item Name : {itemName}");
                 onPut.Invoke(itemName);
+                await UniTask.WaitForSeconds(5000);
+                Debug.Log($"Item Name : {itemName}");
             }
         }
 
         public ItemName Take()
         {
+            /*Debug.Log($"Taken _itemName : {_itemName}");
+            Debug.Log($"Item at Custom Property {(ItemName)PhotonNetwork.LocalPlayer.GetSentItem(_senderId)}");
             var temp = _itemName;
-            //Debug.Log($"temp : {temp}");
+            Debug.Log($"temp : {temp}");
+            PhotonNetwork.LocalPlayer.SetSendItem(_senderId, (int)ItemName.None);
+            _itemName = ItemName.None;
+            onTake.Invoke();
+            return temp;*/
+
+            var temp = (ItemName)PhotonNetwork.LocalPlayer.GetSentItem(_senderId);
             _itemName = ItemName.None;
             PhotonNetwork.LocalPlayer.SetSendItem(_senderId, (int)ItemName.None);
             onTake.Invoke();
             return temp;
-        }
-
-        public void SetReceivedItem()
-        {
-            Debug.Log("Set");
-            Set((ItemName)PhotonNetwork.LocalPlayer.GetSentItem(_senderId));
         }
     }
 }

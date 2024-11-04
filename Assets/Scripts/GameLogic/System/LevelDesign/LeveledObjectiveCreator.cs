@@ -74,7 +74,7 @@ namespace GameLogic.GameSystem
 
         public void UpGrade()
         {
-            Debug.Log("Objective Level Up");
+            //Debug.Log("Objective Level Up");
             level++;
         }
     }

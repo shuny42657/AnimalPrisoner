@@ -61,7 +61,7 @@ namespace GameLogic.GameSystem
 
                         _teleporters[increment].SetWorkSpaceManager(teleporterPutAndTake);
                         _receivers[increment].SetWorkSpaceManager(receiverPutAndTake);
-                        _customPropCallbacks[increment].key = sendItemKeys[increment];
+                        _customPropCallbacks[increment].key = sendItemKeys[i-1];
                         increment++;
                     }
                 }

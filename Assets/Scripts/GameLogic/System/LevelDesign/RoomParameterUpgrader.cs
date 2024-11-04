@@ -35,7 +35,7 @@ public class RoomParameterUpgrader : IUpGradable
     public void UpGrade()
     {
         level = PhotonNetwork.CurrentRoom.GetDecayLevelUp();
-        Debug.Log($"Decay Level {level}");
+        //Debug.Log($"Decay Level {level}");
         _roomParam.FuelComsumeSpeed = _fuelDecaySpeeds[level];
         _roomParam.DuranilityCosumeSpeed = _durabilityDecaySpeeds[level];
         _roomParam.ElectricityConsumeSpeed = _electricityDecaySpeeds[level];
@@ -43,7 +43,7 @@ public class RoomParameterUpgrader : IUpGradable
 
     public void IncrementLevel(int level)
     {
-        Debug.Log("Decay Level Up");
+        //Debug.Log("Decay Level Up");
         PhotonNetwork.CurrentRoom.SetDecayLevelUp(level);
     }
 }

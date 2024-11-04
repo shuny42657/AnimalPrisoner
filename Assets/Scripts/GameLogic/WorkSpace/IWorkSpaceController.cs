@@ -28,7 +28,7 @@ namespace GameLogic.WorkSpace
 
         public void Subscribe()
         {
-            Debug.Log("Floor SubScribed");
+            //Debug.Log("Floor SubScribed");
             _keyDownController.OnKeyPressed.AddListener(() => Debug.Log("Key Pressed"));
             _keyDownController.OnKeyPressed.AddListener(() => _player.PutOrTake(_putAndTake));
         }

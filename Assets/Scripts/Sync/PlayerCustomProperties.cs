@@ -124,6 +124,8 @@ namespace Sync
 
         public static int GetSentItem(this Player player,int index)
         {
+            if (index == 0)
+                Debug.Log("Item Set to None");
             return (player.CustomProperties[sendItemKeys[index - 1]] is int itemId) ? itemId : 0;
         }
 
