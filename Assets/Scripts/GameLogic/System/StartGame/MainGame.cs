@@ -65,6 +65,17 @@ namespace GameLogic.GameSystem
         [SerializeField] List<TeleportWorkSpace> _receivers;
         [SerializeField] List<PlayerCustomPropertyCallback> _receiverCustomPropCallbacks;
 
+        //Signal System
+        SignalInitializer _signalInitializer;
+        [SerializeField] List<PlayerCustomPropertyCallback> _signalCustomPropCallbacks;
+        [SerializeField] List<SignalViewerFactory> _signalReceivers;
+        // Added by Shinnosuke (2024/12/13)
+
+        //Player Information View
+        PlayerInfoInitializer _playerInfoInitializer;
+        [SerializeField] List<PlayerInfoViewer> _viewers;
+        // Added by Shinnosuke (2024/12/17)
+
         //Synchronization
         [SerializeField] RoomPredicatePropertyCallback _gameoverPropertyCallback;
         [SerializeField] RoomIntegerPropertyCallback _decayLevelUpCallback;
@@ -80,6 +91,7 @@ namespace GameLogic.GameSystem
         //Controller
         [SerializeField] KeyDownController _e_keyDownController;
         [SerializeField] KeyDownController _f_keyDownController;
+        [SerializeField] KeyDownController _mouse2_keyDownController;
 
         // Start is called before the first frame update
         void Start()
@@ -164,6 +176,16 @@ namespace GameLogic.GameSystem
             //Teleport System (Teleporters and Receivers)
             _teleporterReceiverInitializer = new(_playerManager, _teleporters, _receivers, _receiverCustomPropCallbacks, _e_keyDownController);
             _teleporterReceiverInitializer.InitializeGame();
+
+            //Signal System
+            _signalInitializer = new(_playerManager, _signalReceivers, _signalCustomPropCallbacks, _mouse2_keyDownController);
+            _signalInitializer.InitializeGame();
+            // Added by Shinnosuke (2024/12/13)
+
+            //Player Information View
+            _playerInfoInitializer = new(_playerManager, _viewers, _e_keyDownController);
+            _playerInfoInitializer.InitializeGame();
+            // Added by Shinnosuke (2024/12/17)
 
             //SubmissionSpace
             _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,_e_keyDownController);

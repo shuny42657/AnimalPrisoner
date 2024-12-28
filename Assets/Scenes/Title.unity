@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -998,6 +998,8 @@ GameObject:
   - component: {fileID: 251030726}
   - component: {fileID: 251030729}
   - component: {fileID: 251030730}
+  - component: {fileID: 251030732}
+  - component: {fileID: 251030731}
   m_Layer: 0
   m_Name: MatchingManager
   m_TagString: Untagged
@@ -1110,7 +1112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c688ce765c1974049b9b6165445cd7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MainGame_No_Matching
+  sceneName: SignalTest_MainGame_No_Matching
 --- !u!114 &251030730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,7 +1125,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730c4c276a6a71843b04b9f49ce039dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: Guest 9999
+  playerName: Guest 000
+--- !u!114 &251030731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251030720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a18fe5595e2021499b9e41b2c11ad05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCount: 2
+  matchingCallback: {fileID: 251030726}
+--- !u!114 &251030732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251030720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7795d5bebd528c4e9540226971f7212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomName: SignalTestRoom
+  playerCount: 1
+  matchingCallback: {fileID: 251030726}
 --- !u!1 &264042373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,7 +2121,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1868951317}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: DisconnectMatching
         m_Mode: 1
@@ -2102,7 +2133,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1198362311}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: DisconnectMatching
         m_Mode: 1
@@ -3367,7 +3398,7 @@ MonoBehaviour:
   unityEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1868951317}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Matching.RandomMatching, Assembly-CSharp
         m_MethodName: ConnectToMasterServer
         m_Mode: 1
@@ -3379,7 +3410,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1868951317}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Matching.RandomMatching, Assembly-CSharp
         m_MethodName: RegisterCallback
         m_Mode: 1
@@ -4123,7 +4154,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1198362310}
-  - component: {fileID: 1198362311}
   - component: {fileID: 1198362314}
   - component: {fileID: 1198362313}
   m_Layer: 5
@@ -4154,20 +4184,6 @@ RectTransform:
   m_AnchoredPosition: {x: 600, y: 0}
   m_SizeDelta: {x: 1010, y: 840.00037}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1198362311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198362309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a18fe5595e2021499b9e41b2c11ad05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCount: 2
-  matchingCallback: {fileID: 251030726}
 --- !u!114 &1198362313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4195,7 +4211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 1611572741}
   buttonInteract: {fileID: 1198362313}
-  customMatching: {fileID: 1198362311}
+  customMatching: {fileID: 0}
 --- !u!1 &1264616984
 GameObject:
   m_ObjectHideFlags: 0
@@ -5273,11 +5289,11 @@ PrefabInstance:
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1198362311}
+      objectReference: {fileID: 251030731}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1198362311}
+      objectReference: {fileID: 251030731}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -7529,7 +7545,7 @@ MonoBehaviour:
   unityEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1198362311}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Matching.CustomMatching, Assembly-CSharp
         m_MethodName: ConnectToMasterServer
         m_Mode: 1
@@ -7541,7 +7557,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1198362311}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Matching.CustomMatching, Assembly-CSharp
         m_MethodName: RegisterCallback
         m_Mode: 1
@@ -8184,7 +8200,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1868951316}
-  - component: {fileID: 1868951317}
   - component: {fileID: 1868951319}
   m_Layer: 5
   m_Name: RandomMatching
@@ -8213,21 +8228,6 @@ RectTransform:
   m_AnchoredPosition: {x: 300, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1868951317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1868951315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7795d5bebd528c4e9540226971f7212, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomName: Room
-  playerCount: 2
-  matchingCallback: {fileID: 251030726}
 --- !u!114 &1868951319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8801,11 +8801,11 @@ PrefabInstance:
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1868951317}
+      objectReference: {fileID: 0}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1198362311}
+      objectReference: {fileID: 0}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
@@ -9274,11 +9274,11 @@ PrefabInstance:
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1868951317}
+      objectReference: {fileID: 251030732}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1868951317}
+      objectReference: {fileID: 251030732}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
