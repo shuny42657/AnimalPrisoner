@@ -9,6 +9,8 @@ using GameLogic.GameSystem;
 using Photon.Pun;
 using Photon.Realtime;
 using Sync;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class SignalViewerFactory : MonoBehaviour
 {
@@ -19,16 +21,15 @@ public class SignalViewerFactory : MonoBehaviour
     [SerializeField] public ItemDataBase itemDataBase;
     Dictionary<ItemName, SignalViewer> signalViewerDictionary = new();
     [SerializeField] Transform parentTransform;
+    [SerializeField] int deleteTime;
     public void Generate(ItemName itemName)
     {
-        var newSignal = Instantiate(signalViewerPrefab, parentTransform);
-        var signalName = itemName;
-        newSignal.ItemImage.SetImage(itemDataBase.GetData(signalName).SourceImage);
-        //if (!signalViewerDictionary.ContainsKey(signalName))
-        //{
-        //    signalViewerDictionary.Add(signalName, newSignal);
-        //}
-        signalViewerDictionary.Add(signalName, newSignal);  // シグナルが重複するとエラーが出る（ゲーム上は正常作動）ため要検討
+        if (!signalViewerDictionary.ContainsKey(itemName))
+        {
+            var newSignal = Instantiate(signalViewerPrefab, parentTransform);
+            newSignal.ItemImage.SetImage(itemDataBase.GetData(itemName).SourceImage);
+            signalViewerDictionary.Add(itemName, newSignal);
+        }
     }
     public void DeleteViewer(ItemName itemName)
     {
@@ -37,5 +38,11 @@ public class SignalViewerFactory : MonoBehaviour
             Destroy(signalViewerDictionary[itemName].gameObject);
             signalViewerDictionary.Remove(itemName);
         }
+    }
+
+    public async UniTask RunDeleteViewerProcess(ItemName itemName)
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(deleteTime));
+        DeleteViewer(itemName);
     }
 }

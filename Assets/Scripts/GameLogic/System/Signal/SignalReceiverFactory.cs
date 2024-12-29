@@ -10,6 +10,9 @@ using Sync;
 
 public class SignalReceiverFactory
 {
+    /// <summary>
+    /// Written by Shinnosuke (2024/12)
+    /// </summary>
     PlayerCustomPropertyCallback _playerCustomPropCallback;
     int _senderId;
 
@@ -27,6 +30,7 @@ public class SignalReceiverFactory
         var signalReceiver = new SignalReceiver(_senderId);
         _playerCustomPropCallback.onComplete.AddListener(() => signalReceiver.Set());
         signalReceiver.OnSet.AddListener((itemName) => signalViewerFactory.Generate(itemName));
+        signalReceiver.OnSet.AddListener((itemName) => signalViewerFactory.RunDeleteViewerProcess(itemName));
         return signalReceiver;
     }
 }
