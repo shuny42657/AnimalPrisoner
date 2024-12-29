@@ -8,7 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 5fb74416a870e9049a2e5d5fd32a67b7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGame_No_Matching.unity
     guid: 2564d2951d0c646c982c9a9b3c3ea0dd
+  - enabled: 0
+    path: Assets/Scenes/SignalTest.unity
+    guid: 84784217ea71b0f4f97b72c3568adc60
+  - enabled: 1
+    path: Assets/Scenes/SignalTest_MainGame_No_Matching.unity
+    guid: 656aac7551cfa0f4987429d052a92082
   m_configObjects: {}
