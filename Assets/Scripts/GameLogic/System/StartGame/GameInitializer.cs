@@ -76,24 +76,20 @@ namespace GameLogic.GameSystem
     public class SignalInitializer : IGameInitializer
     {
         IPlayer _player;
-        List<TeleportWorkSpace> _teleporters;
         List<SignalViewerFactory> _receivers;
         List<PlayerCustomPropertyCallback> _customPropCallbacks;
-        KeyDownController _e_keyDownController;
 
         List<PlayerPropertyKey> sendSignalKeys = new() { PlayerPropertyKey.sig_from_player_1, PlayerPropertyKey.sig_from_player_2, PlayerPropertyKey.sig_from_player_3, PlayerPropertyKey.sig_from_player_4 };
 
         public SignalInitializer(
             IPlayer player,
             List<SignalViewerFactory> receivers,
-            List<PlayerCustomPropertyCallback> customPropCallbacks,
-            KeyDownController e_keyDownController
+            List<PlayerCustomPropertyCallback> customPropCallbacks
             )
         {
             _player = player;
             _receivers = receivers;
             _customPropCallbacks = customPropCallbacks;
-            _e_keyDownController = e_keyDownController;
         }
         public void InitializeGame()
         {
@@ -129,17 +125,14 @@ namespace GameLogic.GameSystem
     {
         IPlayer _player;
         List<PlayerInfoViewer> _viewers;
-        KeyDownController _e_keyDownController;
 
         public PlayerInfoInitializer(
             IPlayer player,
-            List<PlayerInfoViewer> viewers,
-            KeyDownController e_keyDownController
+            List<PlayerInfoViewer> viewers
             )
         {
             _player = player;
             _viewers = viewers;
-            _e_keyDownController = e_keyDownController;
         }
         public void InitializeGame()
         {
