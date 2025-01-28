@@ -16,36 +16,36 @@ namespace GameLogic.GameSystem
         public bool ObjectiveAchieved(ItemName receivedItem);
     }
 
-
     public class ObjectiveManager : IObjectiveManager, IEnumerableRead<ItemName>
     {
         ObjectiveInitializer _objectiveInitializer;
         int _objectiveInitCount = 0;
-        Team _team;
+        TeamName _team;
 
-        //List<ItemName> objectives = new();
         public UnityEvent<ItemName> OnNewObjectiveGenerated = new();
         public UnityEvent<ItemName> OnObjectiveAchieved = new();
 
+        List<ItemName> _objectives = new();
+
         public int InitCount { get { return _objectiveInitCount; } }
 
-        /// <summary>
-        /// Added by Shinnosuke (2025/1/2)
-        /// </summary>
-        public ObjectiveManager(ObjectiveInitializer objectiveInitializer, int objectiveInitCount, Team team)
+        public void Init(ObjectiveInitializer objectiveInitializer, int objectiveInitCount, TeamName team)
         {
             _objectiveInitializer = objectiveInitializer;
             _objectiveInitCount = objectiveInitCount;
             _team = team;
         }
+
         public void InitObjectives()
         {
             var room = PhotonNetwork.CurrentRoom;
             for (int i = 0; i < _objectiveInitCount; i++)
             {
+                Debug.Log("Objective Created");
                 var newObjective = _objectiveInitializer.CreateObjective();
                 //objectives.Add(newObjective);
                 OnNewObjectiveGenerated.Invoke(newObjective);
+                _objectives.Add(newObjective);
                 room.SetObjective(i, (int)_team, (int)newObjective);
             }
         }
@@ -100,15 +100,15 @@ namespace GameLogic.GameSystem
         /// </summary>
         public IEnumerable<ItemName> GetAllItems()
         {
-            return null;
+            return _objectives;
         }
         public ItemName GetItemByIndex(int index)
         {
-            return 0;
+            return _objectives[index];
         }
-        public int Count { get { return _objectiveInitCount; } }
+        public int Count { get { return _objectives.Count; } }
     }
-    public enum Team
+    public enum TeamName
     {
         None,
         Alpha,

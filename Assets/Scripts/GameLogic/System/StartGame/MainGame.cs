@@ -41,6 +41,9 @@ namespace GameLogic.GameSystem
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
         [SerializeField] ItemDataBase _itemDataBase;
 
+        IObjectiveIconView _objectiveIconViewA;
+        IObjectiveIconView _objectiveIconViewB;
+
         //RoomParam
         RoomParameterUpgrader _roomParamUpGrader;
         RoomParameter _roomParam;
@@ -142,8 +145,12 @@ namespace GameLogic.GameSystem
             _roomParam.ElectricityConsumeSpeed = 5f;
 
             //ObjectiveManager
-            _objectiveManagerA = new ObjectiveManager(_objectiveInitializer, 10, Team.Alpha);
-            _objectiveManagerB = new ObjectiveManager(_objectiveInitializer, 10, Team.Beta);
+            _objectiveManagerA = new(); //new ObjectiveManager(_objectiveInitializer, 3, TeamName.Alpha);
+            _objectiveManagerB = new(); //ObjectiveManager(_objectiveInitializer, 3, Team.Alpha);
+            _objectiveIconViewA = new LogObjectiveIconView(_objectiveManagerA, TeamName.Alpha);
+            _objectiveIconViewB = new LogObjectiveIconView(_objectiveManagerB, TeamName.Beta);
+            _objectiveManagerA.Init(_objectiveInitializer, 3, TeamName.Alpha);
+            _objectiveManagerB.Init(_objectiveInitializer, 3, TeamName.Beta);
             //_objectiveManagerI = new ObjectiveManager(_leveledObjectiveCreator, 2);
             //_objectiveManagerA.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
             //_objectiveManagerB.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
@@ -157,8 +164,8 @@ namespace GameLogic.GameSystem
             //_objectiveManagerI.InitObjectives();
 
             //ObjectiveProgressViewer
-            _objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _objectiveManagerA, Team.Alpha);
-            _objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _objectiveManagerB, Team.Beta);
+            _objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _objectiveManagerA, TeamName.Alpha);
+            _objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _objectiveManagerB, TeamName.Beta);
             //_objectiveProgressViewerI = new ObjectiveProgressViewer(_objectiveGaugeI, _objectiveManagerI);
             _objectivePropertyCallback.onModified.AddListener(val => {
                 _objectiveProgressViewerA.UpdateViewer();
@@ -226,13 +233,22 @@ namespace GameLogic.GameSystem
             //Bed
             _bedWorkSpaceControllerFactory = new(_playerManager, _clock,_f_keyDownController);
             _bed.SetWorkSpaceManager(_bedWorkSpaceControllerFactory.GenerateWorkSpaceManager(_bed));
-            
+
         }
 
         public async UniTask SetGameOver()
         {
             await UniTask.Delay(10);
             PhotonNetwork.CurrentRoom.SetGameOver(true);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                _objectiveIconViewA.ShowObjectiveIcon();
+                _objectiveIconViewB.ShowObjectiveIcon();
+            }
         }
 
         public override void OnDisconnected(DisconnectCause cause)

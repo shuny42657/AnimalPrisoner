@@ -16,11 +16,11 @@ namespace GameLogic.GameSystem
     {
         IGaugeView _gaugeView;
         IEnumerableRead<ItemName> _objectiveManager;
-        Team _team;
+        TeamName _team;
         public ObjectiveProgressViewer(
             IGaugeView gaugeView,
             IEnumerableRead<ItemName> objectiveManager,
-            Team team
+            TeamName team
             )
         {
             _gaugeView = gaugeView;
