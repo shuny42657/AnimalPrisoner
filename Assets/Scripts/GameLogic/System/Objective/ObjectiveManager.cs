@@ -12,8 +12,10 @@ namespace GameLogic.GameSystem
 {
     public interface IObjectiveManager
     {
-        public void AddNewObjective();
+        public void InitObjectives();
         public bool ObjectiveAchieved(ItemName receivedItem);
+        public UnityEvent<ItemName> OnNewObjectiveGenerated { get; }
+        public UnityEvent<ItemName> OnObjectiveAchieved { get; }
     }
 
     public class ObjectiveManager : IObjectiveManager, IEnumerableRead<ItemName>
@@ -22,8 +24,10 @@ namespace GameLogic.GameSystem
         int _objectiveInitCount = 0;
         TeamName _team;
 
-        public UnityEvent<ItemName> OnNewObjectiveGenerated = new();
-        public UnityEvent<ItemName> OnObjectiveAchieved = new();
+        UnityEvent<ItemName> _onNewObjectiveGenerated = new();
+        UnityEvent<ItemName> _onObjectiveAchieved = new();
+        public UnityEvent<ItemName> OnNewObjectiveGenerated { get { return _onNewObjectiveGenerated; } }
+        public UnityEvent<ItemName> OnObjectiveAchieved { get { return _onObjectiveAchieved; } }
 
         List<ItemName> _objectives = new();
 
@@ -44,26 +48,10 @@ namespace GameLogic.GameSystem
                 Debug.Log("Objective Created");
                 var newObjective = _objectiveInitializer.CreateObjective();
                 //objectives.Add(newObjective);
-                OnNewObjectiveGenerated.Invoke(newObjective);
+                _onNewObjectiveGenerated.Invoke(newObjective);
                 _objectives.Add(newObjective);
                 room.SetObjective(i, (int)_team, (int)newObjective);
             }
-        }
-        ///
-
-        ///iranai kamo
-        public void AddNewObjective()
-        {
-            /*
-            Debug.Log("objective added");
-            var room = PhotonNetwork.CurrentRoom;
-            if (objectives.Count < 2)
-            {
-                var newObjective = _objectiveInitializer.CreateObjective();
-                objectives.Add(newObjective);
-                OnNewObjectiveGenerated.Invoke(newObjective);
-            }
-            */
         }
 
         public bool ObjectiveAchieved(ItemName receivedItem)
@@ -75,7 +63,7 @@ namespace GameLogic.GameSystem
                 if (o == (int)receivedItem)
                 {
                     room.SetObjective(i, (int)_team, (int)ItemName.None);
-                    OnObjectiveAchieved.Invoke((ItemName)o);
+                    _onObjectiveAchieved.Invoke((ItemName)o);
                     return true;
                 }
             }
@@ -108,6 +96,55 @@ namespace GameLogic.GameSystem
         }
         public int Count { get { return _objectives.Count; } }
     }
+
+    public class SimpleObjectiveManager : IObjectiveManager, IEnumerableRead<ItemName>
+    {
+        List<ItemName> _objectives = new();
+        TeamName _team;
+        public int Count { get { return _objectives.Count; } }
+
+        UnityEvent<ItemName> _onNewObjectiveGenerated = new();
+        UnityEvent<ItemName> _onObjectiveAchieved = new();
+        public UnityEvent<ItemName> OnNewObjectiveGenerated { get { return _onNewObjectiveGenerated; } }
+        public UnityEvent<ItemName> OnObjectiveAchieved { get { return _onObjectiveAchieved; } }
+
+        public SimpleObjectiveManager(TeamName team)
+        {
+            _team = team;
+        }
+
+        public IEnumerable<ItemName> GetAllItems()
+        {
+            return _objectives;
+        }
+
+        public ItemName GetItemByIndex(int index)
+        {
+            return _objectives[index];
+        }
+
+        public void InitObjectives()
+        {
+            var room = PhotonNetwork.CurrentRoom;
+            _onNewObjectiveGenerated.Invoke(ItemName.Stone);
+            _objectives.Add(ItemName.Stone);
+            room.SetObjective(0, (int)_team, (int)ItemName.Stone);
+
+            _onNewObjectiveGenerated.Invoke(ItemName.Wood);
+            _objectives.Add(ItemName.Wood);
+            room.SetObjective(1, (int)_team, (int)ItemName.Wood);
+
+            OnNewObjectiveGenerated.Invoke(ItemName.Iron);
+            _objectives.Add(ItemName.Iron);
+            room.SetObjective(2, (int)_team, (int)ItemName.Iron);
+        }
+
+        public bool ObjectiveAchieved(ItemName receivedItem)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
     public enum TeamName
     {
         None,

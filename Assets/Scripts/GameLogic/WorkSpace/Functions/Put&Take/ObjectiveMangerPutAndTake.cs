@@ -13,10 +13,10 @@ public class ObjectiveMangerPutAndTake : IPutAndTake
     UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 
     UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
-    List<ObjectiveManager> _objectiveManagers;
+    List<IObjectiveManager> _objectiveManagers;
     RoomParameterModifier _roomParamModifier;
 
-    public ObjectiveMangerPutAndTake(List<ObjectiveManager> objectiveManagers,RoomParameterModifier roomParamModifier)
+    public ObjectiveMangerPutAndTake(List<IObjectiveManager> objectiveManagers,RoomParameterModifier roomParamModifier)
     {
         _objectiveManagers = objectiveManagers;
         _roomParamModifier = roomParamModifier;

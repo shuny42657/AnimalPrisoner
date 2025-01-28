@@ -36,6 +36,8 @@ namespace GameLogic.GameSystem
         //Objective 
         ObjectiveManager _objectiveManagerA;
         ObjectiveManager _objectiveManagerB;
+        SimpleObjectiveManager _simpleObjManagerA;
+        SimpleObjectiveManager _simpleObjManagerB;
         ObjectiveManager _objectiveManagerI;
         [SerializeField] ObjectiveInitializer _objectiveInitializer;
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
@@ -145,12 +147,18 @@ namespace GameLogic.GameSystem
             _roomParam.ElectricityConsumeSpeed = 5f;
 
             //ObjectiveManager
-            _objectiveManagerA = new(); //new ObjectiveManager(_objectiveInitializer, 3, TeamName.Alpha);
+            _objectiveManagerA = new (); //new ObjectiveManager(_objectiveInitializer, 3, TeamName.Alpha);
             _objectiveManagerB = new(); //ObjectiveManager(_objectiveInitializer, 3, Team.Alpha);
-            _objectiveIconViewA = new LogObjectiveIconView(_objectiveManagerA, TeamName.Alpha);
-            _objectiveIconViewB = new LogObjectiveIconView(_objectiveManagerB, TeamName.Beta);
             _objectiveManagerA.Init(_objectiveInitializer, 3, TeamName.Alpha);
             _objectiveManagerB.Init(_objectiveInitializer, 3, TeamName.Beta);
+
+            //_objectiveIconViewA = new LogObjectiveIconView(_objectiveManagerA, TeamName.Alpha);
+            //_objectiveIconViewB = new LogObjectiveIconView(_objectiveManagerB, TeamName.Beta);
+
+            _simpleObjManagerA = new(TeamName.Alpha);
+            _simpleObjManagerB = new(TeamName.Beta);
+            _objectiveIconViewA = new LogObjectiveIconView(_simpleObjManagerA, TeamName.Alpha);
+            _objectiveIconViewB = new LogObjectiveIconView(_simpleObjManagerB, TeamName.Beta);
             //_objectiveManagerI = new ObjectiveManager(_leveledObjectiveCreator, 2);
             //_objectiveManagerA.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
             //_objectiveManagerB.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
@@ -158,8 +166,10 @@ namespace GameLogic.GameSystem
             //_objectiveManagerB.OnObjectiveAchieved.AddListener((objectiveData) => _objectiveViewerFactory.DeleteViewer(objectiveData));
             if (PhotonNetwork.IsMasterClient)
             {
-                _objectiveManagerA.InitObjectives();
-                _objectiveManagerB.InitObjectives();
+                //_objectiveManagerA.InitObjectives();
+                //_objectiveManagerB.InitObjectives();
+                _simpleObjManagerA.InitObjectives();
+                _simpleObjManagerB.InitObjectives();
             }
             //_objectiveManagerI.InitObjectives();
 
@@ -226,7 +236,8 @@ namespace GameLogic.GameSystem
             // Added by Shinnosuke (2024/12/17)
 
             //SubmissionSpace
-            List<ObjectiveManager> objManagers = new List<ObjectiveManager> { _objectiveManagerA, _objectiveManagerB };
+            //List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _objectiveManagerA, _objectiveManagerB };
+            List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _simpleObjManagerA, _simpleObjManagerB };
             _submissionWorkSpaceControllerFactory = new(_playerManager, objManagers, _roomParamModifier,_e_keyDownController);
             _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceManager(_submissionSpace));
 
