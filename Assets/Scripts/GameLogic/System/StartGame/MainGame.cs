@@ -34,7 +34,10 @@ namespace GameLogic.GameSystem
         IJobAllocator jobAllocator = new MainJobAllocator();
 
         //Objective 
-        ObjectiveManager _objectiveManager;
+        ObjectiveManager _objectiveManagerA;
+        ObjectiveManager _objectiveManagerB;
+        ObjectiveManager _objectiveManagerI;
+        [SerializeField] ObjectiveInitializer _objectiveInitializer;
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
         [SerializeField] ItemDataBase _itemDataBase;
 
@@ -79,6 +82,7 @@ namespace GameLogic.GameSystem
         //Synchronization
         [SerializeField] RoomPredicatePropertyCallback _gameoverPropertyCallback;
         [SerializeField] RoomIntegerPropertyCallback _decayLevelUpCallback;
+        [SerializeField] RoomObjectivePropertyCallback _objectivePropertyCallback;
 
         //View
         GameOverProcess _gameOverProcess;
@@ -88,10 +92,17 @@ namespace GameLogic.GameSystem
         [SerializeField] GaugeView _electricityGauge;
         [SerializeField] ObjectiveViewerFactory _objectiveViewerFactory;
 
+        // Added by Shinnosuke (2025/1/3)
+        [SerializeField] GaugeView _objectiveGaugeA;
+        [SerializeField] GaugeView _objectiveGaugeB;
+        [SerializeField] GaugeView _objectiveGaugeI;
+        ObjectiveProgressViewer _objectiveProgressViewerA;
+        ObjectiveProgressViewer _objectiveProgressViewerB;
+        ObjectiveProgressViewer _objectiveProgressViewerI;
+
         //Controller
         [SerializeField] KeyDownController _e_keyDownController;
         [SerializeField] KeyDownController _f_keyDownController;
-        [SerializeField] KeyDownController _mouse2_keyDownController;
 
         // Start is called before the first frame update
         void Start()
@@ -131,9 +142,29 @@ namespace GameLogic.GameSystem
             _roomParam.ElectricityConsumeSpeed = 5f;
 
             //ObjectiveManager
-            _objectiveManager = new ObjectiveManager(_leveledObjectiveCreator);
-            _objectiveManager.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
-            _objectiveManager.OnObjectiveAchieved.AddListener((objectiveData) => _objectiveViewerFactory.DeleteViewer(objectiveData));
+            _objectiveManagerA = new ObjectiveManager(_objectiveInitializer, 10, Team.Alpha);
+            _objectiveManagerB = new ObjectiveManager(_objectiveInitializer, 10, Team.Beta);
+            //_objectiveManagerI = new ObjectiveManager(_leveledObjectiveCreator, 2);
+            //_objectiveManagerA.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
+            //_objectiveManagerB.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
+            //_objectiveManagerA.OnObjectiveAchieved.AddListener((objectiveData) => _objectiveViewerFactory.DeleteViewer(objectiveData));
+            //_objectiveManagerB.OnObjectiveAchieved.AddListener((objectiveData) => _objectiveViewerFactory.DeleteViewer(objectiveData));
+            if (PhotonNetwork.IsMasterClient)
+            {
+                _objectiveManagerA.InitObjectives();
+                _objectiveManagerB.InitObjectives();
+            }
+            //_objectiveManagerI.InitObjectives();
+
+            //ObjectiveProgressViewer
+            _objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _objectiveManagerA, Team.Alpha);
+            _objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _objectiveManagerB, Team.Beta);
+            //_objectiveProgressViewerI = new ObjectiveProgressViewer(_objectiveGaugeI, _objectiveManagerI);
+            _objectivePropertyCallback.onModified.AddListener(val => {
+                _objectiveProgressViewerA.UpdateViewer();
+                _objectiveProgressViewerB.UpdateViewer();
+            });
+            /// Added by Shinnosuke (2025/1/3)
 
             //Pacer
             ///RoomParamPacer
@@ -147,9 +178,9 @@ namespace GameLogic.GameSystem
             _leveledObjCreatorPacer.IsActive = true;
 
             ///ObjectiveCreatorPacer
-            _objectiveCreatorPacer = new(new() { 20f},false, true);
-            _objectiveCreatorPacer.OnCheckpointReached.AddListener((val) => _objectiveManager.AddNewObjective());
-            _objectiveCreatorPacer.IsActive = true;
+            //_objectiveCreatorPacer = new(new() { 20f }, false, true);
+            //_objectiveCreatorPacer.OnCheckpointReached.AddListener((val) => _objectiveManager.AddNewObjective());
+            //_objectiveCreatorPacer.IsActive = true;
 
             //MapBuilder
             _mapBuilder.OnWorkSpaceGenerated.AddListener((workSpace) => _leveledObjectiveCreator.AddUpGradable(workSpace));
@@ -163,7 +194,7 @@ namespace GameLogic.GameSystem
             //Register ITicks to IClock
             _clock.AddTick(_roomParamPacer);
             _clock.AddTick(_leveledObjCreatorPacer);
-            _clock.AddTick(_objectiveCreatorPacer);
+            //_clock.AddTick(_objectiveCreatorPacer);
             _clock.AddTick(_roomParam);
             _clock.IsActive = true;
 
@@ -178,17 +209,18 @@ namespace GameLogic.GameSystem
             _teleporterReceiverInitializer.InitializeGame();
 
             //Signal System
-            _signalInitializer = new(_playerManager, _signalReceivers, _signalCustomPropCallbacks, _mouse2_keyDownController);
+            _signalInitializer = new(_playerManager, _signalReceivers, _signalCustomPropCallbacks);
             _signalInitializer.InitializeGame();
             // Added by Shinnosuke (2024/12/13)
 
             //Player Information View
-            _playerInfoInitializer = new(_playerManager, _viewers, _e_keyDownController);
+            _playerInfoInitializer = new(_playerManager, _viewers);
             _playerInfoInitializer.InitializeGame();
             // Added by Shinnosuke (2024/12/17)
 
             //SubmissionSpace
-            _submissionWorkSpaceControllerFactory = new(_playerManager, _objectiveManager, _roomParamModifier,_e_keyDownController);
+            List<ObjectiveManager> objManagers = new List<ObjectiveManager> { _objectiveManagerA, _objectiveManagerB };
+            _submissionWorkSpaceControllerFactory = new(_playerManager, objManagers, _roomParamModifier,_e_keyDownController);
             _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceManager(_submissionSpace));
 
             //Bed

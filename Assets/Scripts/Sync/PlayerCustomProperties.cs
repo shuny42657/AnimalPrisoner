@@ -94,6 +94,19 @@ namespace Sync
             room.SetCustomProperties(propsToSet);
             propsToSet.Clear();
         }
+        /// <summary>
+        /// Added by Shinnosuke (2025/1/13)
+        /// </summary>
+        public static int GetObjective(this Room room, int index, int team)
+        {
+            return (room.CustomProperties["obj_" + index + "_" + team] is int obj) ? obj : 0;
+        }
+        public static void SetObjective(this Room room, int index, int team, int obj)
+        {
+            propsToSet["obj_" + index + "_" + team] = obj;
+            room.SetCustomProperties(propsToSet);
+            propsToSet.Clear();
+        }
     }
 
     public static class PlayerCustomProperties
@@ -148,14 +161,12 @@ namespace Sync
         {
             if (index == 0)
                 Debug.Log("Item Set to None");
-            Debug.Log($"key: {sendSignalKeys[index - 1]}, : {player.CustomProperties[sendSignalKeys[index - 1]]}");
             return (player.CustomProperties[sendSignalKeys[index - 1]] is int itemId) ? itemId : 0;
         }
 
         public static void SetSendSignal(this Player player, int index, int item)
         {
             propsToSet[sendSignalKeys[index - 1]] = item;
-            Debug.Log($"item: {item}, prop: {propsToSet[sendSignalKeys[index - 1]]}");
             player.SetCustomProperties(propsToSet);
             propsToSet.Clear();
         }

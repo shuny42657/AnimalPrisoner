@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Util;
 using UnityEngine.Events;
+using Photon;
+using Photon.Pun;
+using Sync;
+
 
 namespace GameLogic.GameSystem
 {
@@ -13,32 +17,69 @@ namespace GameLogic.GameSystem
     }
 
 
-    public class ObjectiveManager : IObjectiveManager
+    public class ObjectiveManager : IObjectiveManager, IEnumerableRead<ItemName>
     {
-        IObjectiveCreator _objectiveCreator;
+        ObjectiveInitializer _objectiveInitializer;
+        int _objectiveInitCount = 0;
+        Team _team;
 
-        List<ObjectiveData> objectives = new();
-        public UnityEvent<ObjectiveData> OnNewObjectiveGenerated = new();
-        public UnityEvent<ObjectiveData> OnObjectiveAchieved = new();
+        //List<ItemName> objectives = new();
+        public UnityEvent<ItemName> OnNewObjectiveGenerated = new();
+        public UnityEvent<ItemName> OnObjectiveAchieved = new();
 
-        public ObjectiveManager(IObjectiveCreator objectiveCreator)
+        public int InitCount { get { return _objectiveInitCount; } }
+
+        /// <summary>
+        /// Added by Shinnosuke (2025/1/2)
+        /// </summary>
+        public ObjectiveManager(ObjectiveInitializer objectiveInitializer, int objectiveInitCount, Team team)
         {
-            _objectiveCreator = objectiveCreator;
+            _objectiveInitializer = objectiveInitializer;
+            _objectiveInitCount = objectiveInitCount;
+            _team = team;
         }
+        public void InitObjectives()
+        {
+            var room = PhotonNetwork.CurrentRoom;
+            for (int i = 0; i < _objectiveInitCount; i++)
+            {
+                var newObjective = _objectiveInitializer.CreateObjective();
+                //objectives.Add(newObjective);
+                OnNewObjectiveGenerated.Invoke(newObjective);
+                room.SetObjective(i, (int)_team, (int)newObjective);
+            }
+        }
+        ///
 
+        ///iranai kamo
         public void AddNewObjective()
         {
+            /*
             Debug.Log("objective added");
-            if(objectives.Count < 2)
+            var room = PhotonNetwork.CurrentRoom;
+            if (objectives.Count < 2)
             {
-                var newObjective = _objectiveCreator.CreateObjective();
+                var newObjective = _objectiveInitializer.CreateObjective();
                 objectives.Add(newObjective);
                 OnNewObjectiveGenerated.Invoke(newObjective);
             }
+            */
         }
 
         public bool ObjectiveAchieved(ItemName receivedItem)
         {
+            var room = PhotonNetwork.CurrentRoom;
+            for (int i = 0; i < _objectiveInitCount; i++)
+            {
+                var o = room.GetObjective(i, (int)_team);
+                if (o == (int)receivedItem)
+                {
+                    room.SetObjective(i, (int)_team, (int)ItemName.None);
+                    OnObjectiveAchieved.Invoke((ItemName)o);
+                    return true;
+                }
+            }
+            /*
             foreach(var o in objectives)
             {
                 if(o.CraftItem == receivedItem)
@@ -49,8 +90,28 @@ namespace GameLogic.GameSystem
                     return true;
                 }
             }
+            */
             return false;
 
         }
+
+        /// <summary>
+        /// Added by Shinnosuke (2025/1/2)
+        /// </summary>
+        public IEnumerable<ItemName> GetAllItems()
+        {
+            return null;
+        }
+        public ItemName GetItemByIndex(int index)
+        {
+            return 0;
+        }
+        public int Count { get { return _objectiveInitCount; } }
+    }
+    public enum Team
+    {
+        None,
+        Alpha,
+        Beta,
     }
 }
