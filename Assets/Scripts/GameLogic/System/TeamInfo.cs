@@ -5,8 +5,9 @@ using Photon.Pun;
 using ExitGames.Client.Photon;
 using System.Linq;
 using System;
+using GameLogic.GameSystem;
 
-public class TeamInfo : ITeamable
+public class TeamSetter : ITeamable
 {
     private Hashtable _propsToSet = new();
     string _teamKey = "team";
@@ -28,9 +29,9 @@ public class TeamInitializer : ITeamInitlaizer
 {
     ITeamable _teamable;
 
-    List<Team> oneToThree = new() { Team.Alice, Team.Bob, Team.Bob, Team.Bob };
-    List<Team> twoToTwo = new() { Team.Alice, Team.Alice, Team.Bob, Team.Bob };
-    List<Team> threeToOne = new() { Team.Alice, Team.Alice, Team.Alice, Team.Bob };
+    List<TeamName> oneToThree = new() { TeamName.Alpha, TeamName.Beta, TeamName.Alpha, TeamName.Beta };
+    List<TeamName> twoToTwo = new() { TeamName.Alpha, TeamName.Alpha, TeamName.Beta, TeamName.Beta};
+    List<TeamName> threeToOne = new() { TeamName.Alpha, TeamName.Alpha, TeamName.Alpha, TeamName.Beta };
 
     public TeamInitializer(ITeamable teamable)
     {
@@ -40,7 +41,7 @@ public class TeamInitializer : ITeamInitlaizer
     public void InitializeTeam()
     {
         var rand = UnityEngine.Random.Range(0, 3);
-        List<Team> list = new();
+        List<TeamName> list = new();
         switch (rand)
         {
             case 0:

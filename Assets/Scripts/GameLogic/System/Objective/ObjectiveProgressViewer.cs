@@ -27,6 +27,7 @@ namespace GameLogic.GameSystem
             _objectiveManager = objectiveManager;
             _team = team;
         }
+
         public void UpdateViewer()
         {
             var room = PhotonNetwork.CurrentRoom;

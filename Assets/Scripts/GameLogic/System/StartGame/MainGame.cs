@@ -33,6 +33,10 @@ namespace GameLogic.GameSystem
         //Job Allocation
         IJobAllocator jobAllocator = new MainJobAllocator();
 
+        //Team Initialization
+        ITeamInitlaizer _teamInitializer;
+        ITeamable _teamSetter = new TeamSetter();
+
         //Objective 
         ObjectiveManager _objectiveManagerA;
         ObjectiveManager _objectiveManagerB;
@@ -116,7 +120,9 @@ namespace GameLogic.GameSystem
             _motherWorkSpaceFactory.SetPlayer(_playerManager);
             _mapBuilder.SetPlayer(_playerManager);
             _playerManager.SetCanMove(true);
-            _leveledObjectiveCreator.AddUpGradable(_playerManager);
+            _teamInitializer = new TeamInitializer(_teamSetter);
+            _teamInitializer.InitializeTeam();
+            //_leveledObjectiveCreator.AddUpGradable(_playerManager);
 
             //RoomParameter
             _roomParam = new(
@@ -267,6 +273,11 @@ namespace GameLogic.GameSystem
             if (Input.GetKeyDown(KeyCode.G))
             {
                 SetGameOver();
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Debug.Log($"Team : {_teamSetter.GetTeam(PhotonNetwork.LocalPlayer)}");
             }
         }
 
