@@ -141,7 +141,18 @@ namespace GameLogic.GameSystem
 
         public bool ObjectiveAchieved(ItemName receivedItem)
         {
-            throw new System.NotImplementedException();
+            var room = PhotonNetwork.CurrentRoom;
+            for (int i = 0; i < _objectives.Count; i++)
+            {
+                var o = room.GetObjective(i, (int)_team);
+                if (o == (int)receivedItem)
+                {
+                    room.SetObjective(i, (int)_team, (int)ItemName.None);
+                    _onObjectiveAchieved.Invoke((ItemName)o);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 

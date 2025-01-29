@@ -174,8 +174,11 @@ namespace GameLogic.GameSystem
             //_objectiveManagerI.InitObjectives();
 
             //ObjectiveProgressViewer
-            _objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _objectiveManagerA, TeamName.Alpha);
-            _objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _objectiveManagerB, TeamName.Beta);
+            //_objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _objectiveManagerA, TeamName.Alpha);
+            //_objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _objectiveManagerB, TeamName.Beta);
+            _objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _simpleObjManagerA, TeamName.Alpha);
+            _objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _simpleObjManagerB, TeamName.Beta);
+
             //_objectiveProgressViewerI = new ObjectiveProgressViewer(_objectiveGaugeI, _objectiveManagerI);
             _objectivePropertyCallback.onModified.AddListener(val => {
                 _objectiveProgressViewerA.UpdateViewer();
@@ -216,7 +219,7 @@ namespace GameLogic.GameSystem
             _clock.IsActive = true;
 
             //GameOver
-            _gameOverProcess = new(_playerManager,_gameOverView, _roomParam, _leveledObjCreatorPacer, _objectiveCreatorPacer, _roomParamPacer);
+            _gameOverProcess = new(_playerManager,_gameOverView);
             _roomParam.OnParamDead += () => SetGameOver();
             _gameoverPropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess());
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
@@ -259,6 +262,11 @@ namespace GameLogic.GameSystem
             {
                 _objectiveIconViewA.ShowObjectiveIcon();
                 _objectiveIconViewB.ShowObjectiveIcon();
+            }
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                SetGameOver();
             }
         }
 
