@@ -15,22 +15,20 @@ namespace GameLogic.GameSystem
     public class ObjectiveProgressViewer
     {
         IGaugeView _gaugeView;
-        IEnumerableRead<ItemName> _objectiveManager;
-        TeamName _team;
+        int _maxProgress;
+
         public ObjectiveProgressViewer(
             IGaugeView gaugeView,
-            IEnumerableRead<ItemName> objectiveManager,
-            TeamName team
+            int maxProgress
             )
         {
             _gaugeView = gaugeView;
-            _objectiveManager = objectiveManager;
-            _team = team;
+            _maxProgress = maxProgress;
         }
 
-        public void UpdateViewer()
+        public void UpdateViewer(int val)
         {
-            var room = PhotonNetwork.CurrentRoom;
+            /*var room = PhotonNetwork.CurrentRoom;
             int init = _objectiveManager.Count;
             int count = 0;
             for (int i = 0; i < init; i++)
@@ -39,8 +37,8 @@ namespace GameLogic.GameSystem
                 {
                     count += 1;
                 }
-            }
-            _gaugeView.ModifyGauge((float)count / init);
+            }*/
+            _gaugeView.ModifyGauge((float)val / _maxProgress);
         }
     }
 }

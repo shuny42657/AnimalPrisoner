@@ -62,7 +62,7 @@ namespace GameLogic.GameSystem
                 var o = room.GetObjective(i, (int)_team);
                 if (o == (int)receivedItem)
                 {
-                    room.SetObjective(i, (int)_team, (int)ItemName.None);
+                    //room.SetObjective(i, (int)_team, (int)ItemName.None);
                     _onObjectiveAchieved.Invoke((ItemName)o);
                     return true;
                 }
@@ -147,7 +147,7 @@ namespace GameLogic.GameSystem
                 var o = room.GetObjective(i, (int)_team);
                 if (o == (int)receivedItem)
                 {
-                    room.SetObjective(i, (int)_team, (int)ItemName.None);
+                    //room.SetObjective(i, (int)_team, (int)ItemName.None);
                     _onObjectiveAchieved.Invoke((ItemName)o);
                     return true;
                 }
@@ -158,8 +158,8 @@ namespace GameLogic.GameSystem
 
     public enum TeamName
     {
-        None,
-        Alpha,
-        Beta,
+        None = 0,
+        Alpha = 1,
+        Beta = 2,
     }
 }

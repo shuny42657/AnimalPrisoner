@@ -4,7 +4,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Globalization;
 using ExitGames.Client.Photon;
-
 namespace Sync
 {
     public enum RoomPropertyKey
@@ -13,6 +12,8 @@ namespace Sync
         score,
         decaylevelup,
         gameover,
+        prgs_a,
+        prgs_b
     }
 
     public enum PlayerPropertyKey
@@ -105,6 +106,35 @@ namespace Sync
         {
             propsToSet["obj_" + index + "_" + team] = obj;
             room.SetCustomProperties(propsToSet);
+            propsToSet.Clear();
+        }
+
+        public static int GetProgress(this Room room, int team)
+        {
+            if(team == 1)
+            {
+                return (room.CustomProperties[RoomPropertyKey.prgs_a] is int obj) ? obj : 0;
+            }
+            else if (team == 2)
+            {
+                return (room.CustomProperties[RoomPropertyKey.prgs_b] is int obj) ? obj : 0;
+            }
+            return 0;
+            
+        }
+
+        public static void SetProgress(this Room room, int team, int newPrgs)
+        {
+            if(team == 1)
+            {
+                propsToSet[RoomPropertyKey.prgs_a] = newPrgs;
+                room.SetCustomProperties(propsToSet);
+            }
+            else if(team == 2)
+            {
+                propsToSet[RoomPropertyKey.prgs_b] = newPrgs;
+                room.SetCustomProperties(propsToSet);
+            }
             propsToSet.Clear();
         }
     }

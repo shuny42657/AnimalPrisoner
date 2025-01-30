@@ -47,6 +47,8 @@ namespace GameLogic.GameSystem
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
         [SerializeField] ItemDataBase _itemDataBase;
 
+        IProgressController _progressController;
+
         IObjectiveIconView _objectiveIconViewA;
         IObjectiveIconView _objectiveIconViewB;
 
@@ -91,6 +93,8 @@ namespace GameLogic.GameSystem
         //Synchronization
         [SerializeField] RoomPredicatePropertyCallback _gameoverPropertyCallback;
         [SerializeField] RoomIntegerPropertyCallback _decayLevelUpCallback;
+        [SerializeField] RoomIntegerPropertyCallback _teamAlphaProgressCallback;
+        [SerializeField] RoomIntegerPropertyCallback _teamBetaProgressCallback;
         [SerializeField] RoomObjectivePropertyCallback _objectivePropertyCallback;
 
         //View
@@ -158,6 +162,7 @@ namespace GameLogic.GameSystem
             _objectiveManagerA.Init(_objectiveInitializer, 3, TeamName.Alpha);
             _objectiveManagerB.Init(_objectiveInitializer, 3, TeamName.Beta);
 
+            _progressController = new SimpleProgressController(10, 100);
             //_objectiveIconViewA = new LogObjectiveIconView(_objectiveManagerA, TeamName.Alpha);
             //_objectiveIconViewB = new LogObjectiveIconView(_objectiveManagerB, TeamName.Beta);
 
@@ -165,6 +170,9 @@ namespace GameLogic.GameSystem
             _simpleObjManagerB = new(TeamName.Beta);
             _objectiveIconViewA = new LogObjectiveIconView(_simpleObjManagerA, TeamName.Alpha);
             _objectiveIconViewB = new LogObjectiveIconView(_simpleObjManagerB, TeamName.Beta);
+
+            _simpleObjManagerA.OnObjectiveAchieved.AddListener((item) => _progressController.AddProgress(item));
+            _objectiveManagerB.OnObjectiveAchieved.AddListener((item) => _progressController.AddProgress(item));
             //_objectiveManagerI = new ObjectiveManager(_leveledObjectiveCreator, 2);
             //_objectiveManagerA.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
             //_objectiveManagerB.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
@@ -173,23 +181,26 @@ namespace GameLogic.GameSystem
             if (PhotonNetwork.IsMasterClient)
             {
                 //_objectiveManagerA.InitObjectives();
-                //_objectiveManagerB.InitObjectives();
+                _objectiveManagerB.InitObjectives();
                 _simpleObjManagerA.InitObjectives();
-                _simpleObjManagerB.InitObjectives();
+                //_simpleObjManagerB.InitObjectives();
             }
             //_objectiveManagerI.InitObjectives();
 
             //ObjectiveProgressViewer
             //_objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _objectiveManagerA, TeamName.Alpha);
             //_objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _objectiveManagerB, TeamName.Beta);
-            _objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _simpleObjManagerA, TeamName.Alpha);
-            _objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _simpleObjManagerB, TeamName.Beta);
+            _objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _progressController.MaxProgress);
+            _objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _progressController.MaxProgress);
 
             //_objectiveProgressViewerI = new ObjectiveProgressViewer(_objectiveGaugeI, _objectiveManagerI);
-            _objectivePropertyCallback.onModified.AddListener(val => {
+
+            _teamAlphaProgressCallback.onModified.AddListener((val) => _objectiveProgressViewerA.UpdateViewer(val));
+            _teamBetaProgressCallback.onModified.AddListener((val) => _objectiveProgressViewerB.UpdateViewer(val));
+            /*_objectivePropertyCallback.onModified.AddListener(val => {
                 _objectiveProgressViewerA.UpdateViewer();
                 _objectiveProgressViewerB.UpdateViewer();
-            });
+            });*/
             /// Added by Shinnosuke (2025/1/3)
 
             //Pacer
@@ -246,7 +257,7 @@ namespace GameLogic.GameSystem
 
             //SubmissionSpace
             //List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _objectiveManagerA, _objectiveManagerB };
-            List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _simpleObjManagerA, _simpleObjManagerB };
+            List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _simpleObjManagerA, _objectiveManagerB };
             _submissionWorkSpaceControllerFactory = new(_playerManager, objManagers, _roomParamModifier,_e_keyDownController);
             _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceManager(_submissionSpace));
 
