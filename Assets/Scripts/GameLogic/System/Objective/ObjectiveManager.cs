@@ -101,21 +101,29 @@ namespace GameLogic.GameSystem
     {
         List<ItemName> _objectives = new();
         TeamName _team;
-        public int Count { get { return _objectives.Count; } }
+        public int Count { get { return _objectiveCount; } }
+        int _objectiveCount;
 
         UnityEvent<ItemName> _onNewObjectiveGenerated = new();
         UnityEvent<ItemName> _onObjectiveAchieved = new();
         public UnityEvent<ItemName> OnNewObjectiveGenerated { get { return _onNewObjectiveGenerated; } }
         public UnityEvent<ItemName> OnObjectiveAchieved { get { return _onObjectiveAchieved; } }
 
-        public SimpleObjectiveManager(TeamName team)
+        public SimpleObjectiveManager(TeamName team, int objectiveCount)
         {
             _team = team;
+            _objectiveCount = objectiveCount;
         }
 
         public IEnumerable<ItemName> GetAllItems()
         {
-            return _objectives;
+            List<ItemName> objectives = new();
+            var currentRoom = PhotonNetwork.CurrentRoom;
+            for(int i = 0; i < _objectiveCount; i++)
+            {
+                objectives.Add((ItemName)currentRoom.GetObjective(i, (int)_team));
+            }
+            return objectives;
         }
 
         public ItemName GetItemByIndex(int index)
@@ -127,15 +135,12 @@ namespace GameLogic.GameSystem
         {
             var room = PhotonNetwork.CurrentRoom;
             _onNewObjectiveGenerated.Invoke(ItemName.Stone);
-            _objectives.Add(ItemName.Stone);
             room.SetObjective(0, (int)_team, (int)ItemName.Stone);
 
             _onNewObjectiveGenerated.Invoke(ItemName.Wood);
-            _objectives.Add(ItemName.Wood);
             room.SetObjective(1, (int)_team, (int)ItemName.Wood);
 
             OnNewObjectiveGenerated.Invoke(ItemName.Iron);
-            _objectives.Add(ItemName.Iron);
             room.SetObjective(2, (int)_team, (int)ItemName.Iron);
         }
 
@@ -143,7 +148,7 @@ namespace GameLogic.GameSystem
         {
             Debug.Log($"Received Item : {receivedItem}");
             var room = PhotonNetwork.CurrentRoom;
-            for (int i = 0; i < _objectives.Count; i++)
+            for (int i = 0; i < _objectiveCount; i++)
             {
                 var o = room.GetObjective(i, (int)_team);
                 if (o == (int)receivedItem)

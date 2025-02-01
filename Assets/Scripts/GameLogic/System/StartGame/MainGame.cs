@@ -177,8 +177,8 @@ namespace GameLogic.GameSystem
             //_objectiveIconViewA = new LogObjectiveIconView(_objectiveManagerA, TeamName.Alpha);
             //_objectiveIconViewB = new LogObjectiveIconView(_objectiveManagerB, TeamName.Beta);
 
-            _simpleObjManagerA = new(TeamName.Alpha);
-            _simpleObjManagerB = new(TeamName.Beta);
+            _simpleObjManagerA = new(TeamName.Alpha,3);
+            _simpleObjManagerB = new(TeamName.Beta,3);
             _objectiveIconViewA = new LogObjectiveIconView(_simpleObjManagerA, TeamName.Alpha);
             _objectiveIconViewB = new LogObjectiveIconView(_simpleObjManagerB, TeamName.Beta);
 
