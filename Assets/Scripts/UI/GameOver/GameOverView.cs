@@ -6,6 +6,8 @@ using System;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 namespace UI
 {
     public interface IViewAppear
@@ -23,6 +25,14 @@ namespace UI
         [SerializeField] GameObject background;
 
         [SerializeField] Button backToTitleButton;
+        [SerializeField] TextMeshProUGUI _gameResultText;
+
+        IGetter<bool> _playerWin;
+
+        public void Init(IGetter<bool> playerWin)
+        {
+            _playerWin = playerWin;
+        }
 
         UnityEvent onButtonClick = new();
         public UnityEvent OnButtonClick {
@@ -39,6 +49,14 @@ namespace UI
         {
             Debug.Log("Show Game Over");
             background.SetActive(true);
+            if (_playerWin.Value)
+            {
+                _gameResultText.text = "Player Team Win !";
+            }
+            else
+            {
+                _gameResultText.text = "Player Team Lose";
+            }
             await UniTask.Delay(500);
         }
     }

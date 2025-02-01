@@ -12,6 +12,8 @@ using GameLogic.Data;
 using GameLogic.WorkSpace;
 using Util;
 using GameLogic.Map;
+using TMPro;
+using Cysharp.Threading.Tasks;
 
 namespace GameLogic.GameSystem
 {
@@ -33,13 +35,26 @@ namespace GameLogic.GameSystem
         //Job Allocation
         IJobAllocator jobAllocator = new MainJobAllocator();
 
+        //Team Initialization
+        ITeamInitlaizer _teamInitializer;
+        ITeamable _teamSetter = new TeamSetter();
+        TeamDisplay _teamDisplay;
+        [SerializeField] TextMeshProUGUI _teamText;
+
         //Objective 
         ObjectiveManager _objectiveManagerA;
         ObjectiveManager _objectiveManagerB;
+        SimpleObjectiveManager _simpleObjManagerA;
+        SimpleObjectiveManager _simpleObjManagerB;
         ObjectiveManager _objectiveManagerI;
         [SerializeField] ObjectiveInitializer _objectiveInitializer;
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
         [SerializeField] ItemDataBase _itemDataBase;
+
+        IProgressController _progressController;
+
+        IObjectiveIconView _objectiveIconViewA;
+        IObjectiveIconView _objectiveIconViewB;
 
         //RoomParam
         RoomParameterUpgrader _roomParamUpGrader;
@@ -47,9 +62,9 @@ namespace GameLogic.GameSystem
         RoomParameterModifier _roomParamModifier;
 
         //Pacer (ITick)
-        Pacer _roomParamPacer;
-        Pacer _leveledObjCreatorPacer;
-        Pacer _objectiveCreatorPacer;
+        //Pacer _roomParamPacer;
+        //Pacer _leveledObjCreatorPacer;
+        //Pacer _objectiveCreatorPacer;
 
         //WorkSpace Factory
         [SerializeField] MakerCrafterFactory _motherWorkSpaceFactory;
@@ -82,6 +97,8 @@ namespace GameLogic.GameSystem
         //Synchronization
         [SerializeField] RoomPredicatePropertyCallback _gameoverPropertyCallback;
         [SerializeField] RoomIntegerPropertyCallback _decayLevelUpCallback;
+        [SerializeField] RoomIntegerPropertyCallback _teamAlphaProgressCallback;
+        [SerializeField] RoomIntegerPropertyCallback _teamBetaProgressCallback;
         [SerializeField] RoomObjectivePropertyCallback _objectivePropertyCallback;
 
         //View
@@ -91,6 +108,7 @@ namespace GameLogic.GameSystem
         [SerializeField] GaugeView _durabilityGauge;
         [SerializeField] GaugeView _electricityGauge;
         [SerializeField] ObjectiveViewerFactory _objectiveViewerFactory;
+        IGetter<bool> _playerWin;
 
         // Added by Shinnosuke (2025/1/3)
         [SerializeField] GaugeView _objectiveGaugeA;
@@ -104,14 +122,22 @@ namespace GameLogic.GameSystem
         [SerializeField] KeyDownController _e_keyDownController;
         [SerializeField] KeyDownController _f_keyDownController;
 
+        Player _localPlayer;
+
         // Start is called before the first frame update
-        void Start()
+        async void Start()
         {
+            _localPlayer = PhotonNetwork.LocalPlayer;
             _playerManager = playerFactory.GeneratePlayer(Vector3.zero);
             _motherWorkSpaceFactory.SetPlayer(_playerManager);
             _mapBuilder.SetPlayer(_playerManager);
             _playerManager.SetCanMove(true);
-            _leveledObjectiveCreator.AddUpGradable(_playerManager);
+            _teamInitializer = new TeamInitializer(_teamSetter);
+            _teamInitializer.InitializeTeam();
+            await UniTask.WaitUntil(() => _teamSetter.GetTeam(_localPlayer) != (int)TeamName.None);
+            _teamDisplay = new(_teamText, PhotonNetwork.LocalPlayer, _teamSetter);
+            _teamDisplay.SetTeamText();
+            //_leveledObjectiveCreator.AddUpGradable(_playerManager);
 
             //RoomParameter
             _roomParam = new(
@@ -142,8 +168,22 @@ namespace GameLogic.GameSystem
             _roomParam.ElectricityConsumeSpeed = 5f;
 
             //ObjectiveManager
-            _objectiveManagerA = new ObjectiveManager(_objectiveInitializer, 10, Team.Alpha);
-            _objectiveManagerB = new ObjectiveManager(_objectiveInitializer, 10, Team.Beta);
+            _objectiveManagerA = new (); //new ObjectiveManager(_objectiveInitializer, 3, TeamName.Alpha);
+            _objectiveManagerB = new(); //ObjectiveManager(_objectiveInitializer, 3, Team.Alpha);
+            _objectiveManagerA.Init(_objectiveInitializer, 3, TeamName.Alpha);
+            _objectiveManagerB.Init(_objectiveInitializer, 3, TeamName.Beta);
+
+            _progressController = new SimpleProgressController(10, 100);
+            //_objectiveIconViewA = new LogObjectiveIconView(_objectiveManagerA, TeamName.Alpha);
+            //_objectiveIconViewB = new LogObjectiveIconView(_objectiveManagerB, TeamName.Beta);
+
+            _simpleObjManagerA = new(TeamName.Alpha);
+            _simpleObjManagerB = new(TeamName.Beta);
+            _objectiveIconViewA = new LogObjectiveIconView(_simpleObjManagerA, TeamName.Alpha);
+            _objectiveIconViewB = new LogObjectiveIconView(_simpleObjManagerB, TeamName.Beta);
+
+            _simpleObjManagerA.OnObjectiveAchieved.AddListener((item) => _progressController.AddProgress(item));
+            _objectiveManagerB.OnObjectiveAchieved.AddListener((item) => _progressController.AddProgress(item));
             //_objectiveManagerI = new ObjectiveManager(_leveledObjectiveCreator, 2);
             //_objectiveManagerA.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
             //_objectiveManagerB.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
@@ -151,31 +191,39 @@ namespace GameLogic.GameSystem
             //_objectiveManagerB.OnObjectiveAchieved.AddListener((objectiveData) => _objectiveViewerFactory.DeleteViewer(objectiveData));
             if (PhotonNetwork.IsMasterClient)
             {
-                _objectiveManagerA.InitObjectives();
+                //_objectiveManagerA.InitObjectives();
                 _objectiveManagerB.InitObjectives();
+                _simpleObjManagerA.InitObjectives();
+                //_simpleObjManagerB.InitObjectives();
             }
             //_objectiveManagerI.InitObjectives();
 
             //ObjectiveProgressViewer
-            _objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _objectiveManagerA, Team.Alpha);
-            _objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _objectiveManagerB, Team.Beta);
+            //_objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _objectiveManagerA, TeamName.Alpha);
+            //_objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _objectiveManagerB, TeamName.Beta);
+            _objectiveProgressViewerA = new ObjectiveProgressViewer(_objectiveGaugeA, _progressController.MaxProgress);
+            _objectiveProgressViewerB = new ObjectiveProgressViewer(_objectiveGaugeB, _progressController.MaxProgress);
+
             //_objectiveProgressViewerI = new ObjectiveProgressViewer(_objectiveGaugeI, _objectiveManagerI);
-            _objectivePropertyCallback.onModified.AddListener(val => {
+
+            _teamAlphaProgressCallback.onModified.AddListener((val) => _objectiveProgressViewerA.UpdateViewer(val));
+            _teamBetaProgressCallback.onModified.AddListener((val) => _objectiveProgressViewerB.UpdateViewer(val));
+            /*_objectivePropertyCallback.onModified.AddListener(val => {
                 _objectiveProgressViewerA.UpdateViewer();
                 _objectiveProgressViewerB.UpdateViewer();
-            });
+            });*/
             /// Added by Shinnosuke (2025/1/3)
 
             //Pacer
             ///RoomParamPacer
-            _roomParamPacer = new(new(){ 10f,10f,10f,10f},true, false);
-            _roomParamPacer.OnCheckpointReached.AddListener((val) => _roomParamUpGrader.IncrementLevel(val));
-            _roomParamPacer.IsActive = true;
+            //_roomParamPacer = new(new(){ 10f,10f,10f,10f},true, false);
+            //_roomParamPacer.OnCheckpointReached.AddListener((val) => _roomParamUpGrader.IncrementLevel(val));
+            //_roomParamPacer.IsActive = true;
 
             ///LeveledObjCreatorPacer
-            _leveledObjCreatorPacer = new(new(){10f,10f,10f,10f},false, false);
-            _leveledObjCreatorPacer.OnCheckpointReached.AddListener((val) => _leveledObjectiveCreator.UpGrade());
-            _leveledObjCreatorPacer.IsActive = true;
+            //_leveledObjCreatorPacer = new(new(){10f,10f,10f,10f},false, false);
+            //_leveledObjCreatorPacer.OnCheckpointReached.AddListener((val) => _leveledObjectiveCreator.UpGrade());
+            //_leveledObjCreatorPacer.IsActive = true;
 
             ///ObjectiveCreatorPacer
             //_objectiveCreatorPacer = new(new() { 20f }, false, true);
@@ -192,17 +240,19 @@ namespace GameLogic.GameSystem
             }
 
             //Register ITicks to IClock
-            _clock.AddTick(_roomParamPacer);
-            _clock.AddTick(_leveledObjCreatorPacer);
+            //_clock.AddTick(_roomParamPacer);
+            //_clock.AddTick(_leveledObjCreatorPacer);
             //_clock.AddTick(_objectiveCreatorPacer);
-            _clock.AddTick(_roomParam);
-            _clock.IsActive = true;
+            //_clock.AddTick(_roomParam);
+            //_clock.IsActive = true;
 
             //GameOver
-            _gameOverProcess = new(_playerManager,_gameOverView, _roomParam, _leveledObjCreatorPacer, _objectiveCreatorPacer, _roomParamPacer);
+            _gameOverProcess = new(_playerManager,_gameOverView);
             _roomParam.OnParamDead += () => SetGameOver();
             _gameoverPropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess());
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
+            _playerWin = new PlayerWin(100, PhotonNetwork.LocalPlayer, _teamSetter);
+            _gameOverView.Init(_playerWin);
 
             //Teleport System (Teleporters and Receivers)
             _teleporterReceiverInitializer = new(_playerManager, _teleporters, _receivers, _receiverCustomPropCallbacks, _e_keyDownController);
@@ -219,20 +269,40 @@ namespace GameLogic.GameSystem
             // Added by Shinnosuke (2024/12/17)
 
             //SubmissionSpace
-            List<ObjectiveManager> objManagers = new List<ObjectiveManager> { _objectiveManagerA, _objectiveManagerB };
+            //List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _objectiveManagerA, _objectiveManagerB };
+            List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _simpleObjManagerA, _objectiveManagerB };
             _submissionWorkSpaceControllerFactory = new(_playerManager, objManagers, _roomParamModifier,_e_keyDownController);
             _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceManager(_submissionSpace));
 
             //Bed
             _bedWorkSpaceControllerFactory = new(_playerManager, _clock,_f_keyDownController);
             _bed.SetWorkSpaceManager(_bedWorkSpaceControllerFactory.GenerateWorkSpaceManager(_bed));
-            
+
         }
 
         public async UniTask SetGameOver()
         {
             await UniTask.Delay(10);
             PhotonNetwork.CurrentRoom.SetGameOver(true);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                _objectiveIconViewA.ShowObjectiveIcon();
+                _objectiveIconViewB.ShowObjectiveIcon();
+            }
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                SetGameOver();
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Debug.Log($"Team : {_teamSetter.GetTeam(PhotonNetwork.LocalPlayer)}");
+            }
         }
 
         public override void OnDisconnected(DisconnectCause cause)

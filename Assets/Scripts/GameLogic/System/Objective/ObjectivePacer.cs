@@ -12,7 +12,7 @@ namespace GameLogic.GameSystem
 
         public void FillObjective()
         {
-            objectiveManager.AddNewObjective();
+            //objectiveManager.AddNewObjective();
         }
     }
 }

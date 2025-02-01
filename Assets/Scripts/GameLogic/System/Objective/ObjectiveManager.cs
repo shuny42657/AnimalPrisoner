@@ -12,58 +12,46 @@ namespace GameLogic.GameSystem
 {
     public interface IObjectiveManager
     {
-        public void AddNewObjective();
+        public void InitObjectives();
         public bool ObjectiveAchieved(ItemName receivedItem);
+        public UnityEvent<ItemName> OnNewObjectiveGenerated { get; }
+        public UnityEvent<ItemName> OnObjectiveAchieved { get; }
     }
-
 
     public class ObjectiveManager : IObjectiveManager, IEnumerableRead<ItemName>
     {
         ObjectiveInitializer _objectiveInitializer;
         int _objectiveInitCount = 0;
-        Team _team;
+        TeamName _team;
 
-        //List<ItemName> objectives = new();
-        public UnityEvent<ItemName> OnNewObjectiveGenerated = new();
-        public UnityEvent<ItemName> OnObjectiveAchieved = new();
+        UnityEvent<ItemName> _onNewObjectiveGenerated = new();
+        UnityEvent<ItemName> _onObjectiveAchieved = new();
+        public UnityEvent<ItemName> OnNewObjectiveGenerated { get { return _onNewObjectiveGenerated; } }
+        public UnityEvent<ItemName> OnObjectiveAchieved { get { return _onObjectiveAchieved; } }
+
+        List<ItemName> _objectives = new();
 
         public int InitCount { get { return _objectiveInitCount; } }
 
-        /// <summary>
-        /// Added by Shinnosuke (2025/1/2)
-        /// </summary>
-        public ObjectiveManager(ObjectiveInitializer objectiveInitializer, int objectiveInitCount, Team team)
+        public void Init(ObjectiveInitializer objectiveInitializer, int objectiveInitCount, TeamName team)
         {
             _objectiveInitializer = objectiveInitializer;
             _objectiveInitCount = objectiveInitCount;
             _team = team;
         }
+
         public void InitObjectives()
         {
             var room = PhotonNetwork.CurrentRoom;
             for (int i = 0; i < _objectiveInitCount; i++)
             {
+                Debug.Log("Objective Created");
                 var newObjective = _objectiveInitializer.CreateObjective();
                 //objectives.Add(newObjective);
-                OnNewObjectiveGenerated.Invoke(newObjective);
+                _onNewObjectiveGenerated.Invoke(newObjective);
+                _objectives.Add(newObjective);
                 room.SetObjective(i, (int)_team, (int)newObjective);
             }
-        }
-        ///
-
-        ///iranai kamo
-        public void AddNewObjective()
-        {
-            /*
-            Debug.Log("objective added");
-            var room = PhotonNetwork.CurrentRoom;
-            if (objectives.Count < 2)
-            {
-                var newObjective = _objectiveInitializer.CreateObjective();
-                objectives.Add(newObjective);
-                OnNewObjectiveGenerated.Invoke(newObjective);
-            }
-            */
         }
 
         public bool ObjectiveAchieved(ItemName receivedItem)
@@ -74,8 +62,8 @@ namespace GameLogic.GameSystem
                 var o = room.GetObjective(i, (int)_team);
                 if (o == (int)receivedItem)
                 {
-                    room.SetObjective(i, (int)_team, (int)ItemName.None);
-                    OnObjectiveAchieved.Invoke((ItemName)o);
+                    //room.SetObjective(i, (int)_team, (int)ItemName.None);
+                    _onObjectiveAchieved.Invoke((ItemName)o);
                     return true;
                 }
             }
@@ -100,18 +88,80 @@ namespace GameLogic.GameSystem
         /// </summary>
         public IEnumerable<ItemName> GetAllItems()
         {
-            return null;
+            return _objectives;
         }
         public ItemName GetItemByIndex(int index)
         {
-            return 0;
+            return _objectives[index];
         }
-        public int Count { get { return _objectiveInitCount; } }
+        public int Count { get { return _objectives.Count; } }
     }
-    public enum Team
+
+    public class SimpleObjectiveManager : IObjectiveManager, IEnumerableRead<ItemName>
     {
-        None,
-        Alpha,
-        Beta,
+        List<ItemName> _objectives = new();
+        TeamName _team;
+        public int Count { get { return _objectives.Count; } }
+
+        UnityEvent<ItemName> _onNewObjectiveGenerated = new();
+        UnityEvent<ItemName> _onObjectiveAchieved = new();
+        public UnityEvent<ItemName> OnNewObjectiveGenerated { get { return _onNewObjectiveGenerated; } }
+        public UnityEvent<ItemName> OnObjectiveAchieved { get { return _onObjectiveAchieved; } }
+
+        public SimpleObjectiveManager(TeamName team)
+        {
+            _team = team;
+        }
+
+        public IEnumerable<ItemName> GetAllItems()
+        {
+            return _objectives;
+        }
+
+        public ItemName GetItemByIndex(int index)
+        {
+            return _objectives[index];
+        }
+
+        public void InitObjectives()
+        {
+            var room = PhotonNetwork.CurrentRoom;
+            _onNewObjectiveGenerated.Invoke(ItemName.Stone);
+            _objectives.Add(ItemName.Stone);
+            room.SetObjective(0, (int)_team, (int)ItemName.Stone);
+
+            _onNewObjectiveGenerated.Invoke(ItemName.Wood);
+            _objectives.Add(ItemName.Wood);
+            room.SetObjective(1, (int)_team, (int)ItemName.Wood);
+
+            OnNewObjectiveGenerated.Invoke(ItemName.Iron);
+            _objectives.Add(ItemName.Iron);
+            room.SetObjective(2, (int)_team, (int)ItemName.Iron);
+        }
+
+        public bool ObjectiveAchieved(ItemName receivedItem)
+        {
+            Debug.Log($"Received Item : {receivedItem}");
+            var room = PhotonNetwork.CurrentRoom;
+            for (int i = 0; i < _objectives.Count; i++)
+            {
+                var o = room.GetObjective(i, (int)_team);
+                if (o == (int)receivedItem)
+                {
+                    //room.SetObjective(i, (int)_team, (int)ItemName.None);
+                    Debug.Log($"Objective is {o}");
+                    _onObjectiveAchieved.Invoke((ItemName)o);
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    public enum TeamName
+    {
+        None = 0,
+        Alpha = 1,
+        Beta = 2,
     }
 }
