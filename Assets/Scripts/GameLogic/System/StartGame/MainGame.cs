@@ -12,6 +12,8 @@ using GameLogic.Data;
 using GameLogic.WorkSpace;
 using Util;
 using GameLogic.Map;
+using TMPro;
+using Cysharp.Threading.Tasks;
 
 namespace GameLogic.GameSystem
 {
@@ -36,6 +38,8 @@ namespace GameLogic.GameSystem
         //Team Initialization
         ITeamInitlaizer _teamInitializer;
         ITeamable _teamSetter = new TeamSetter();
+        TeamDisplay _teamDisplay;
+        [SerializeField] TextMeshProUGUI _teamText;
 
         //Objective 
         ObjectiveManager _objectiveManagerA;
@@ -118,15 +122,21 @@ namespace GameLogic.GameSystem
         [SerializeField] KeyDownController _e_keyDownController;
         [SerializeField] KeyDownController _f_keyDownController;
 
+        Player _localPlayer;
+
         // Start is called before the first frame update
-        void Start()
+        async void Start()
         {
+            _localPlayer = PhotonNetwork.LocalPlayer;
             _playerManager = playerFactory.GeneratePlayer(Vector3.zero);
             _motherWorkSpaceFactory.SetPlayer(_playerManager);
             _mapBuilder.SetPlayer(_playerManager);
             _playerManager.SetCanMove(true);
             _teamInitializer = new TeamInitializer(_teamSetter);
             _teamInitializer.InitializeTeam();
+            await UniTask.WaitUntil(() => _teamSetter.GetTeam(_localPlayer) != (int)TeamName.None);
+            _teamDisplay = new(_teamText, PhotonNetwork.LocalPlayer, _teamSetter);
+            _teamDisplay.SetTeamText();
             //_leveledObjectiveCreator.AddUpGradable(_playerManager);
 
             //RoomParameter

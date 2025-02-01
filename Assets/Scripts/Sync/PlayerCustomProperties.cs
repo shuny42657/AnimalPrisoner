@@ -32,6 +32,7 @@ namespace Sync
         sig_from_player_2,
         sig_from_player_3,
         sig_from_player_4,
+        team,
     }
 
     public static class RoomCustomProperties
