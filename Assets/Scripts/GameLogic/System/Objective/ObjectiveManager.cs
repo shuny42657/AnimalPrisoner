@@ -141,6 +141,7 @@ namespace GameLogic.GameSystem
 
         public bool ObjectiveAchieved(ItemName receivedItem)
         {
+            Debug.Log($"Received Item : {receivedItem}");
             var room = PhotonNetwork.CurrentRoom;
             for (int i = 0; i < _objectives.Count; i++)
             {
@@ -148,6 +149,7 @@ namespace GameLogic.GameSystem
                 if (o == (int)receivedItem)
                 {
                     //room.SetObjective(i, (int)_team, (int)ItemName.None);
+                    Debug.Log($"Objective is {o}");
                     _onObjectiveAchieved.Invoke((ItemName)o);
                     return true;
                 }

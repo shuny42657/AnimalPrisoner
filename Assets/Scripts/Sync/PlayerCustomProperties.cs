@@ -113,11 +113,11 @@ namespace Sync
         {
             if(team == 1)
             {
-                return (room.CustomProperties[RoomPropertyKey.prgs_a] is int obj) ? obj : 0;
+                return (room.CustomProperties[RoomPropertyKey.prgs_a.ToString()] is int obj) ? obj : 0;
             }
             else if (team == 2)
             {
-                return (room.CustomProperties[RoomPropertyKey.prgs_b] is int obj) ? obj : 0;
+                return (room.CustomProperties[RoomPropertyKey.prgs_b.ToString()] is int obj) ? obj : 0;
             }
             return 0;
             
@@ -127,12 +127,12 @@ namespace Sync
         {
             if(team == 1)
             {
-                propsToSet[RoomPropertyKey.prgs_a] = newPrgs;
+                propsToSet[RoomPropertyKey.prgs_a.ToString()] = newPrgs;
                 room.SetCustomProperties(propsToSet);
             }
             else if(team == 2)
             {
-                propsToSet[RoomPropertyKey.prgs_b] = newPrgs;
+                propsToSet[RoomPropertyKey.prgs_b.ToString()] = newPrgs;
                 room.SetCustomProperties(propsToSet);
             }
             propsToSet.Clear();

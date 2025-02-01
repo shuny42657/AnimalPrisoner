@@ -28,6 +28,7 @@ namespace GameLogic.GameSystem
 
         public void UpdateViewer(int val)
         {
+            Debug.Log("Viewer Updated");
             /*var room = PhotonNetwork.CurrentRoom;
             int init = _objectiveManager.Count;
             int count = 0;

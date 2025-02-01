@@ -58,9 +58,9 @@ namespace GameLogic.GameSystem
         RoomParameterModifier _roomParamModifier;
 
         //Pacer (ITick)
-        Pacer _roomParamPacer;
-        Pacer _leveledObjCreatorPacer;
-        Pacer _objectiveCreatorPacer;
+        //Pacer _roomParamPacer;
+        //Pacer _leveledObjCreatorPacer;
+        //Pacer _objectiveCreatorPacer;
 
         //WorkSpace Factory
         [SerializeField] MakerCrafterFactory _motherWorkSpaceFactory;
@@ -104,6 +104,7 @@ namespace GameLogic.GameSystem
         [SerializeField] GaugeView _durabilityGauge;
         [SerializeField] GaugeView _electricityGauge;
         [SerializeField] ObjectiveViewerFactory _objectiveViewerFactory;
+        IGetter<bool> _playerWin;
 
         // Added by Shinnosuke (2025/1/3)
         [SerializeField] GaugeView _objectiveGaugeA;
@@ -205,14 +206,14 @@ namespace GameLogic.GameSystem
 
             //Pacer
             ///RoomParamPacer
-            _roomParamPacer = new(new(){ 10f,10f,10f,10f},true, false);
-            _roomParamPacer.OnCheckpointReached.AddListener((val) => _roomParamUpGrader.IncrementLevel(val));
-            _roomParamPacer.IsActive = true;
+            //_roomParamPacer = new(new(){ 10f,10f,10f,10f},true, false);
+            //_roomParamPacer.OnCheckpointReached.AddListener((val) => _roomParamUpGrader.IncrementLevel(val));
+            //_roomParamPacer.IsActive = true;
 
             ///LeveledObjCreatorPacer
-            _leveledObjCreatorPacer = new(new(){10f,10f,10f,10f},false, false);
-            _leveledObjCreatorPacer.OnCheckpointReached.AddListener((val) => _leveledObjectiveCreator.UpGrade());
-            _leveledObjCreatorPacer.IsActive = true;
+            //_leveledObjCreatorPacer = new(new(){10f,10f,10f,10f},false, false);
+            //_leveledObjCreatorPacer.OnCheckpointReached.AddListener((val) => _leveledObjectiveCreator.UpGrade());
+            //_leveledObjCreatorPacer.IsActive = true;
 
             ///ObjectiveCreatorPacer
             //_objectiveCreatorPacer = new(new() { 20f }, false, true);
@@ -229,17 +230,19 @@ namespace GameLogic.GameSystem
             }
 
             //Register ITicks to IClock
-            _clock.AddTick(_roomParamPacer);
-            _clock.AddTick(_leveledObjCreatorPacer);
+            //_clock.AddTick(_roomParamPacer);
+            //_clock.AddTick(_leveledObjCreatorPacer);
             //_clock.AddTick(_objectiveCreatorPacer);
-            _clock.AddTick(_roomParam);
-            _clock.IsActive = true;
+            //_clock.AddTick(_roomParam);
+            //_clock.IsActive = true;
 
             //GameOver
             _gameOverProcess = new(_playerManager,_gameOverView);
             _roomParam.OnParamDead += () => SetGameOver();
             _gameoverPropertyCallback.onModified.AddListener(() => _gameOverProcess.RunGameOverProcess());
             _gameOverView.OnButtonClick.AddListener(() => PhotonNetwork.Disconnect());
+            _playerWin = new PlayerWin(100, PhotonNetwork.LocalPlayer, _teamSetter);
+            _gameOverView.Init(_playerWin);
 
             //Teleport System (Teleporters and Receivers)
             _teleporterReceiverInitializer = new(_playerManager, _teleporters, _receivers, _receiverCustomPropCallbacks, _e_keyDownController);

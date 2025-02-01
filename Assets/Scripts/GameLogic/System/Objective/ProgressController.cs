@@ -39,7 +39,13 @@ public sealed class SimpleProgressController : IProgressController
     {
         TeamName team = AlphaOrBeta(item);
         int currentProgress = _currentRoom.GetProgress((int)team);
+
+        int setValue = currentProgress + _addedValue >= MaxProgress ? MaxProgress : currentProgress + _addedValue;
         _currentRoom.SetProgress((int)team, currentProgress + _addedValue);
+        if(setValue == MaxProgress)
+        {
+            _currentRoom.SetGameOver(true);
+        }
     }
 
     public void Reset()

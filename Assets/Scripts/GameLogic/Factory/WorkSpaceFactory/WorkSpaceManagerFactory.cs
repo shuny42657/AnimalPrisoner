@@ -38,7 +38,7 @@ namespace GameLogic.Factory
         }
         public WorkSpaceManager GenerateWorkSpaceManager(WorkSpace.WorkSpace workSpace)
         {
-            var objectiveManagerPutAndTake = new ObjectiveMangerPutAndTake(_objectiveManagers, _roomParamModifier);
+            var objectiveManagerPutAndTake = new ObjectiveMangerPutAndTake(_objectiveManagers);
             return new WorkSpaceManager(new PutTakeWorkSpaceInteraction(_player, objectiveManagerPutAndTake, _keyDownController), new NullUpGradable());
         }
     }

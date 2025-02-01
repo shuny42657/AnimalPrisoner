@@ -12,9 +12,9 @@ public class TeamSetter : ITeamable
     private Hashtable _propsToSet = new();
     string _teamKey = "team";
 
-    public Team GetTeam(Player player)
+    public int GetTeam(Player player)
     {
-        return (player.CustomProperties[_teamKey] is int id) ? (Team)id : Team.Alice;
+        return (player.CustomProperties[_teamKey] is int id) ? id : (int)TeamName.Alpha;
     }
 
     public void SetTeam(Player player,int team)
