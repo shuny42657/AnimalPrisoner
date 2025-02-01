@@ -7,7 +7,7 @@ using Photon.Realtime;
 public interface ITeamable
 {
     public void SetTeam(Player player, int team);
-    public Team GetTeam(Player player);
+    public int GetTeam(Player player);
 }
 
 public interface ITeamInitlaizer

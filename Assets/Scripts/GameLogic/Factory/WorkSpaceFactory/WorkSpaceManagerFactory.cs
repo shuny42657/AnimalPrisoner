@@ -20,13 +20,13 @@ namespace GameLogic.Factory
     public class SubmissionWorkSpaceManagerFactory : IWorkSpaceManagerFactory
     {
         IPlayer _player;
-        List<ObjectiveManager> _objectiveManagers;
+        List<IObjectiveManager> _objectiveManagers;
         RoomParameterModifier _roomParamModifier;
         KeyDownController _keyDownController;
 
         public SubmissionWorkSpaceManagerFactory(
             IPlayer player,
-            List<ObjectiveManager> objectiveManagers,
+            List<IObjectiveManager> objectiveManagers,
             RoomParameterModifier roomParamModifier,
             KeyDownController keyDownController
             )
@@ -38,7 +38,7 @@ namespace GameLogic.Factory
         }
         public WorkSpaceManager GenerateWorkSpaceManager(WorkSpace.WorkSpace workSpace)
         {
-            var objectiveManagerPutAndTake = new ObjectiveMangerPutAndTake(_objectiveManagers, _roomParamModifier);
+            var objectiveManagerPutAndTake = new ObjectiveMangerPutAndTake(_objectiveManagers);
             return new WorkSpaceManager(new PutTakeWorkSpaceInteraction(_player, objectiveManagerPutAndTake, _keyDownController), new NullUpGradable());
         }
     }

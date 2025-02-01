@@ -7,9 +7,17 @@ namespace GameLogic.GameSystem
     public class ObjectiveInitializer : MonoBehaviour
     {
         [SerializeField] protected List<ItemName> objectiveItems;
+        List<int> _selectedIndex = new();
+
         public ItemName CreateObjective()
         {
-            var rand = UnityEngine.Random.Range(0, objectiveItems.Count);
+            int rand = 0;
+            while (true)
+            {
+                rand = UnityEngine.Random.Range(0, objectiveItems.Count);
+                if (!_selectedIndex.Contains(rand))
+                    break;
+            }
             return objectiveItems[rand];
         }
     }

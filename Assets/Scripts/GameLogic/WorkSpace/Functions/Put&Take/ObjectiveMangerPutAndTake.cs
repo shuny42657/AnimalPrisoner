@@ -13,13 +13,11 @@ public class ObjectiveMangerPutAndTake : IPutAndTake
     UnityEvent<ItemName> onPut = new(); public UnityEvent<ItemName> OnPut { get { return onPut; } }
 
     UnityEvent onTake = new(); public UnityEvent OnTake { get { return onTake; } }
-    List<ObjectiveManager> _objectiveManagers;
-    RoomParameterModifier _roomParamModifier;
+    List<IObjectiveManager> _objectiveManagers;
 
-    public ObjectiveMangerPutAndTake(List<ObjectiveManager> objectiveManagers,RoomParameterModifier roomParamModifier)
+    public ObjectiveMangerPutAndTake(List<IObjectiveManager> objectiveManagers)
     {
         _objectiveManagers = objectiveManagers;
-        _roomParamModifier = roomParamModifier;
     }
     
     public bool Put(ItemName itemName)
@@ -33,8 +31,7 @@ public class ObjectiveMangerPutAndTake : IPutAndTake
             }
             else
             {
-                Debug.Log("Simply Used As Fuel");
-                _roomParamModifier.ModifyRoomParameter(itemName);
+                Debug.Log("Nothing Happend");
             }
         }
         return true;
