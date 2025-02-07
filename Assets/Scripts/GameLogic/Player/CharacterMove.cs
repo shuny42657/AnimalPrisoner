@@ -7,12 +7,14 @@ public class CharacterMove : MonoBehaviour, IMovable
     [SerializeField] Transform _transform;
     public bool CanMove { get; set; }
     [SerializeField] float speed;
+
+    [SerializeField] Animator _animator;
+
     public float Speed
     {
         get { return speed; }
         set { speed = value; }
     }
-
 
     public void MoveHorizontal(float speed)
     {
