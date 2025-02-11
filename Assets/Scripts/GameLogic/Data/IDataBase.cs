@@ -8,5 +8,6 @@ namespace GameLogic.Data
     {
         public IEnumerable<T> GetAllData();
         public T GetData(S name);
+        public T GetDataByIndex(int index);
     }
 }

@@ -17,16 +17,22 @@ public class SignalViewerFactory : MonoBehaviour
     /// <summary>
     /// Written by Shinnosuke (2024/11/7)
     /// </summary>
-    [SerializeField] SignalViewer signalViewerPrefab;
+    [SerializeField] SignalViewer _signalViewerPrefab;
     [SerializeField] public ItemDataBase itemDataBase;
     Dictionary<ItemName, SignalViewer> signalViewerDictionary = new();
     [SerializeField] Transform parentTransform;
     [SerializeField] int deleteTime;
+
+    public void SetSignalViwer(SignalViewer signalViewerPrefab)
+    {
+        _signalViewerPrefab = signalViewerPrefab;
+    }
+
     public void Generate(ItemName itemName)
     {
         if (!signalViewerDictionary.ContainsKey(itemName))
         {
-            var newSignal = Instantiate(signalViewerPrefab, parentTransform);
+            var newSignal = Instantiate(_signalViewerPrefab, parentTransform);
             newSignal.ItemImage.SetImage(itemDataBase.GetData(itemName).SourceImage);
             signalViewerDictionary.Add(itemName, newSignal);
         }

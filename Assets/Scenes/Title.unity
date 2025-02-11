@@ -1153,7 +1153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: SignalTestRoom
-  playerCount: 4
+  playerCount: 2
   matchingCallback: {fileID: 251030726}
 --- !u!1 &264042373
 GameObject:

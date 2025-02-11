@@ -78,17 +78,19 @@ namespace GameLogic.GameSystem
         IPlayer _player;
         List<SignalViewerFactory> _receivers;
         List<PlayerCustomPropertyCallback> _customPropCallbacks;
-
+        List<SignalViewer> _viewerPrefabs;
         List<PlayerPropertyKey> sendSignalKeys = new() { PlayerPropertyKey.sig_from_player_1, PlayerPropertyKey.sig_from_player_2, PlayerPropertyKey.sig_from_player_3, PlayerPropertyKey.sig_from_player_4 };
 
         public SignalInitializer(
             IPlayer player,
             List<SignalViewerFactory> receivers,
+            List<SignalViewer> viewerPrefabs,
             List<PlayerCustomPropertyCallback> customPropCallbacks
             )
         {
             _player = player;
             _receivers = receivers;
+            _viewerPrefabs = viewerPrefabs;
             _customPropCallbacks = customPropCallbacks;
         }
         public void InitializeGame()
@@ -109,6 +111,7 @@ namespace GameLogic.GameSystem
                     }
                     else
                     {
+                        _receivers[increment].SetSignalViwer(_viewerPrefabs[i-1]);
                         var signalReceiver = new SignalReceiverFactory(_customPropCallbacks[increment], players[i - 1].ActorNumber).GenerateSignalReceiver(_receivers[increment]);
 
                         _customPropCallbacks[increment].key = sendSignalKeys[i - 1];
@@ -123,15 +126,13 @@ namespace GameLogic.GameSystem
     /// </summary>
     public class PlayerInfoInitializer : IGameInitializer
     {
-        IPlayer _player;
         List<PlayerInfoViewer> _viewers;
+        List<SignalViewerFactory> _receiverFactories;
 
         public PlayerInfoInitializer(
-            IPlayer player,
             List<PlayerInfoViewer> viewers
             )
         {
-            _player = player;
             _viewers = viewers;
         }
         public void InitializeGame()

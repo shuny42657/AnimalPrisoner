@@ -13,7 +13,7 @@ using GameLogic.WorkSpace;
 using Util;
 using GameLogic.Map;
 using TMPro;
-using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
 
 namespace GameLogic.GameSystem
 {
@@ -35,11 +35,22 @@ namespace GameLogic.GameSystem
         //Job Allocation
         IJobAllocator jobAllocator = new MainJobAllocator();
 
+        PlayerInfoSetter _playerInfoSetter;
         //Team Initialization
         ITeamInitlaizer _teamInitializer;
         ITeamable _teamSetter = new TeamSetter();
         TeamDisplay _teamDisplay;
+        TeamIconDisPlay _teamIconDisplay;
+        [SerializeField] Sprite _alphaIcon;
+        [SerializeField] Sprite _betaIcon;
+        [SerializeField] Image _teamIcon;
         [SerializeField] TextMeshProUGUI _teamText;
+
+        //Player Icon Initialization
+        PlayerColorIconSetter _playerColorIconSetter;
+        [SerializeField] List<GameObject> _playerColorIcons;
+        [SerializeField] Transform _playerIconTransform;
+
 
         //Objective 
         ObjectiveManager _objectiveManagerA;
@@ -48,13 +59,17 @@ namespace GameLogic.GameSystem
         SimpleObjectiveManager _simpleObjManagerB;
         ObjectiveManager _objectiveManagerI;
         [SerializeField] ObjectiveInitializer _objectiveInitializer;
+        ItemDataBaseObjectiveInitializer _itemDataObjectiveInitializer;
         [SerializeField] LeveledObjectiveCreator _leveledObjectiveCreator;
         [SerializeField] ItemDataBase _itemDataBase;
 
         IProgressController _progressController;
 
-        IObjectiveIconView _objectiveIconViewA;
-        IObjectiveIconView _objectiveIconViewB;
+        IObjectiveIconView _logObjectiveIconViewA;
+        IObjectiveIconView _logObjectiveIconViewB;
+
+        [SerializeField] ObjectiveIconView _objectiveIconViewA;
+        [SerializeField] ObjectiveIconView _objectiveIconViewB;
 
         //RoomParam
         RoomParameterUpgrader _roomParamUpGrader;
@@ -87,6 +102,7 @@ namespace GameLogic.GameSystem
         SignalInitializer _signalInitializer;
         [SerializeField] List<PlayerCustomPropertyCallback> _signalCustomPropCallbacks;
         [SerializeField] List<SignalViewerFactory> _signalReceivers;
+        [SerializeField] List<SignalViewer> _signalIcons;
         // Added by Shinnosuke (2024/12/13)
 
         //Player Information View
@@ -135,10 +151,10 @@ namespace GameLogic.GameSystem
             _teamInitializer = new TeamInitializer(_teamSetter);
             _teamInitializer.InitializeTeam();
             await UniTask.WaitUntil(() => _teamSetter.GetTeam(_localPlayer) != (int)TeamName.None);
-            _teamDisplay = new(_teamText, PhotonNetwork.LocalPlayer, _teamSetter);
-            _teamDisplay.SetTeamText();
-            //_leveledObjectiveCreator.AddUpGradable(_playerManager);
-
+            _teamIconDisplay = new(_teamIcon, _alphaIcon, _betaIcon, PhotonNetwork.LocalPlayer, _teamSetter);
+            _playerColorIconSetter = new(PhotonNetwork.LocalPlayer, _playerColorIcons, _playerIconTransform);
+            _playerInfoSetter = new(_teamIconDisplay, _playerColorIconSetter);
+            _playerInfoSetter.SetPlayerInfo();
             //RoomParameter
             _roomParam = new(
                 200f,
@@ -167,11 +183,13 @@ namespace GameLogic.GameSystem
             _roomParam.DuranilityCosumeSpeed = 5f;
             _roomParam.ElectricityConsumeSpeed = 5f;
 
+            _itemDataObjectiveInitializer = new ItemDataBaseObjectiveInitializer(_itemDataBase);
+
             //ObjectiveManager
             _objectiveManagerA = new (); //new ObjectiveManager(_objectiveInitializer, 3, TeamName.Alpha);
             _objectiveManagerB = new(); //ObjectiveManager(_objectiveInitializer, 3, Team.Alpha);
-            _objectiveManagerA.Init(_objectiveInitializer, 3, TeamName.Alpha);
-            _objectiveManagerB.Init(_objectiveInitializer, 3, TeamName.Beta);
+            _objectiveManagerA.Init(_itemDataObjectiveInitializer, 3, TeamName.Alpha);
+            _objectiveManagerB.Init(_itemDataObjectiveInitializer, 3, TeamName.Beta);
 
             _progressController = new SimpleProgressController(10, 100);
             //_objectiveIconViewA = new LogObjectiveIconView(_objectiveManagerA, TeamName.Alpha);
@@ -179,10 +197,12 @@ namespace GameLogic.GameSystem
 
             _simpleObjManagerA = new(TeamName.Alpha,3);
             _simpleObjManagerB = new(TeamName.Beta,3);
-            _objectiveIconViewA = new LogObjectiveIconView(_simpleObjManagerA, TeamName.Alpha);
-            _objectiveIconViewB = new LogObjectiveIconView(_simpleObjManagerB, TeamName.Beta);
+            _logObjectiveIconViewA = new LogObjectiveIconView(_simpleObjManagerA, TeamName.Alpha);
+            _logObjectiveIconViewB = new LogObjectiveIconView(_simpleObjManagerB, TeamName.Beta);
+            _objectiveIconViewA.Init(TeamName.Alpha, _itemDataBase);
+            _objectiveIconViewB.Init(TeamName.Beta, _itemDataBase);
 
-            _simpleObjManagerA.OnObjectiveAchieved.AddListener((item) => _progressController.AddProgress(item));
+            _objectiveManagerA.OnObjectiveAchieved.AddListener((item) => _progressController.AddProgress(item));
             _objectiveManagerB.OnObjectiveAchieved.AddListener((item) => _progressController.AddProgress(item));
             //_objectiveManagerI = new ObjectiveManager(_leveledObjectiveCreator, 2);
             //_objectiveManagerA.OnNewObjectiveGenerated.AddListener((objectiveData) => _objectiveViewerFactory.Generate(objectiveData));
@@ -191,11 +211,17 @@ namespace GameLogic.GameSystem
             //_objectiveManagerB.OnObjectiveAchieved.AddListener((objectiveData) => _objectiveViewerFactory.DeleteViewer(objectiveData));
             if (PhotonNetwork.IsMasterClient)
             {
-                //_objectiveManagerA.InitObjectives();
+                _objectiveManagerA.InitObjectives();
                 _objectiveManagerB.InitObjectives();
-                _simpleObjManagerA.InitObjectives();
+                //_simpleObjManagerA.InitObjectives();
                 //_simpleObjManagerB.InitObjectives();
             }
+
+            await UniTask.WaitUntil(() => PhotonNetwork.CurrentRoom.GetObjective(2, (int)TeamName.Alpha) != (int)ItemName.None);
+            await UniTask.WaitUntil(() => PhotonNetwork.CurrentRoom.GetObjective(2, (int)TeamName.Beta) != (int)ItemName.None);
+            _objectiveIconViewA.ShowObjectiveIcon();
+            _objectiveIconViewB.ShowObjectiveIcon();
+
             //_objectiveManagerI.InitObjectives();
 
             //ObjectiveProgressViewer
@@ -259,18 +285,18 @@ namespace GameLogic.GameSystem
             _teleporterReceiverInitializer.InitializeGame();
 
             //Signal System
-            _signalInitializer = new(_playerManager, _signalReceivers, _signalCustomPropCallbacks);
+            _signalInitializer = new(_playerManager, _signalReceivers,_signalIcons,_signalCustomPropCallbacks);
             _signalInitializer.InitializeGame();
             // Added by Shinnosuke (2024/12/13)
 
             //Player Information View
-            _playerInfoInitializer = new(_playerManager, _viewers);
+            _playerInfoInitializer = new(_viewers);
             _playerInfoInitializer.InitializeGame();
             // Added by Shinnosuke (2024/12/17)
 
             //SubmissionSpace
             //List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _objectiveManagerA, _objectiveManagerB };
-            List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _simpleObjManagerA, _objectiveManagerB };
+            List<IObjectiveManager> objManagers = new List<IObjectiveManager> { _objectiveManagerA, _objectiveManagerB };
             _submissionWorkSpaceControllerFactory = new(_playerManager, objManagers, _roomParamModifier,_e_keyDownController);
             _submissionSpace.SetWorkSpaceManager(_submissionWorkSpaceControllerFactory.GenerateWorkSpaceManager(_submissionSpace));
 
@@ -290,8 +316,8 @@ namespace GameLogic.GameSystem
         {
             if (Input.GetKeyDown(KeyCode.O))
             {
-                _objectiveIconViewA.ShowObjectiveIcon();
-                _objectiveIconViewB.ShowObjectiveIcon();
+                _logObjectiveIconViewA.ShowObjectiveIcon();
+                _logObjectiveIconViewB.ShowObjectiveIcon();
             }
 
             if (Input.GetKeyDown(KeyCode.G))

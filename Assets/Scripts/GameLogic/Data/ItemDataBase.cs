@@ -25,6 +25,12 @@ namespace GameLogic.Data
         {
             return itemDict[name];
         }
+
+        public ItemData GetDataByIndex(int index)
+        {
+            return itemData[index];
+        }
+
     }
 }
 
