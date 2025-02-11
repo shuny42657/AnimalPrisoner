@@ -25,5 +25,10 @@ namespace GameLogic.Data
         {
             return jobDict[name];
         }
+
+        public JobData GetDataByIndex(int index)
+        {
+            return jobData[index];
+        }
     }
 }

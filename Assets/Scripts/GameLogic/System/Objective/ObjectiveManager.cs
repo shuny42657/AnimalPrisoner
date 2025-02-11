@@ -20,7 +20,7 @@ namespace GameLogic.GameSystem
 
     public class ObjectiveManager : IObjectiveManager, IEnumerableRead<ItemName>
     {
-        ObjectiveInitializer _objectiveInitializer;
+        IObjectiveInitializer _objectiveInitializer;
         int _objectiveInitCount = 0;
         TeamName _team;
 
@@ -33,7 +33,7 @@ namespace GameLogic.GameSystem
 
         public int InitCount { get { return _objectiveInitCount; } }
 
-        public void Init(ObjectiveInitializer objectiveInitializer, int objectiveInitCount, TeamName team)
+        public void Init(IObjectiveInitializer objectiveInitializer, int objectiveInitCount, TeamName team)
         {
             _objectiveInitializer = objectiveInitializer;
             _objectiveInitCount = objectiveInitCount;

@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace UI
 {
+    public interface IPlayerInfoViewer
+    {
+
+    }
+
     public class PlayerInfoViewer : MonoBehaviour
     {
         /// <summary>
