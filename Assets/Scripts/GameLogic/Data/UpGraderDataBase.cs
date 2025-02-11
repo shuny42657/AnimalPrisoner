@@ -28,5 +28,10 @@ namespace GameLogic.Data
         {
             return upgraderDict[name];
         }
+
+        public UpGraderData GetDataByIndex(int index)
+        {
+            return upgraderData[index];
+        }
     }
 }

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Util;
 using GameLogic.GameSystem;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.UI;
+using GameLogic.Data;
+using Sync;
 
 /// <summary>
 /// Show icon of an object(s) that are set as objectives.
@@ -31,3 +36,4 @@ public class LogObjectiveIconView : IObjectiveIconView
         }
     }
 }
+

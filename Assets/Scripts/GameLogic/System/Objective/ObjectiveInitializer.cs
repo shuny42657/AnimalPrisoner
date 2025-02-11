@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLogic.GameSystem
 {
-    public class ObjectiveInitializer : MonoBehaviour
+    public class ObjectiveInitializer : MonoBehaviour, IObjectiveInitializer
     {
         [SerializeField] protected List<ItemName> objectiveItems;
         List<int> _selectedIndex = new();
@@ -20,5 +20,12 @@ namespace GameLogic.GameSystem
             }
             return objectiveItems[rand];
         }
+
+
+        public void Clear()
+        {
+            objectiveItems.Clear();
+        }
     }
+
 }
