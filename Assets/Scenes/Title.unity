@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 8e035481c3996bb44933b117d710bc1e, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 8e35cb42b8f202d40acf5175657b7d3a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 713002100}
-  m_IndirectSpecularColor: {r: 0.6093745, g: 0.87646586, b: 0.86181724, a: 1}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.6625973, g: 0.9526369, b: 0.9370108, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2257,7 +2257,7 @@ Transform:
   m_GameObject: {fileID: 713002099}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 2.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2931,12 +2931,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmSoundDatas:
-  - audioClip: {fileID: 8300000, guid: c3527d0075adcc1418b560358503937d, type: 3}
+  - audioClip: {fileID: 8300000, guid: 2c4db36ad453d9f488a714018c23f656, type: 3}
     volume: 0.02
     bgm: 0
-  - audioClip: {fileID: 8300000, guid: 14af96b05b502e34e9f3cbbe0f43005f, type: 3}
-    volume: 0.02
-    bgm: 2
   seSoundDatas:
   - audioClip: {fileID: 8300000, guid: 6d86b14fe23fafc46a1fd253ddee43db, type: 3}
     volume: 0.2
@@ -2971,7 +2968,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 941117763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6167a4bef7bdee74da170009092db4ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bc14a014c7e05f4a84cc44516db9c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   soundManager: {fileID: 941117764}
