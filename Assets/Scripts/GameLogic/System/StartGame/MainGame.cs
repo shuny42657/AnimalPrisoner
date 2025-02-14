@@ -191,7 +191,7 @@ namespace GameLogic.GameSystem
             _objectiveManagerA.Init(_itemDataObjectiveInitializer, 3, TeamName.Alpha);
             _objectiveManagerB.Init(_itemDataObjectiveInitializer, 3, TeamName.Beta);
 
-            _progressController = new SimpleProgressController(10, 100);
+            _progressController = new SimpleProgressController(30, 90);
             //_objectiveIconViewA = new LogObjectiveIconView(_objectiveManagerA, TeamName.Alpha);
             //_objectiveIconViewB = new LogObjectiveIconView(_objectiveManagerB, TeamName.Beta);
 
