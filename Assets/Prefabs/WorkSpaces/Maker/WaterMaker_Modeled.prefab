@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rect: {fileID: 4727994552717763975}
-  targetTransform: {fileID: 0}
+  targetTransform: {fileID: 5612092544084905803}
   offset: {x: 0, y: 100}
 --- !u!114 &2721338026731983761
 MonoBehaviour:
