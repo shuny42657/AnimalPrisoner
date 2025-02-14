@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 8e35cb42b8f202d40acf5175657b7d3a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.6625973, g: 0.9526369, b: 0.9370108, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1153,7 +1153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: SignalTestRoom
-  playerCount: 2
+  playerCount: 4
   matchingCallback: {fileID: 251030726}
 --- !u!1 &264042373
 GameObject:
@@ -2256,13 +2256,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713002099}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
+  m_LocalPosition: {x: 0, y: 2.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
 --- !u!1 &743855234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,6 +2910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941117765}
   - component: {fileID: 941117764}
+  - component: {fileID: 941117766}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -2930,8 +2931,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmSoundDatas:
-  - audioClip: {fileID: 8300000, guid: 2d300285afd9f724b84f6332a657f57d, type: 3}
-    volume: 0.01
+  - audioClip: {fileID: 8300000, guid: 2c4db36ad453d9f488a714018c23f656, type: 3}
+    volume: 0.02
     bgm: 0
   seSoundDatas:
   - audioClip: {fileID: 8300000, guid: 6d86b14fe23fafc46a1fd253ddee43db, type: 3}
@@ -2958,6 +2959,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &941117766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941117763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc14a014c7e05f4a84cc44516db9c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundManager: {fileID: 941117764}
 --- !u!1 &961946416
 GameObject:
   m_ObjectHideFlags: 0
@@ -4745,6 +4759,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1965101596}
     m_Modifications:
+    - target: {fileID: 237715116484988404, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 237715116484988404, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7eec8e80a9e474ec0bfb396646768e06, type: 3}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.size
       value: 5
@@ -5080,6 +5102,22 @@ PrefabInstance:
     - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: m_text
       value: Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8319,6 +8357,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1965101596}
     m_Modifications:
+    - target: {fileID: 237715116484988404, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 237715116484988404, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7eec8e80a9e474ec0bfb396646768e06, type: 3}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -8646,6 +8692,22 @@ PrefabInstance:
     - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: m_text
       value: Quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

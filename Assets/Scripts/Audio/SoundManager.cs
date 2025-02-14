@@ -73,6 +73,7 @@ public class SoundManager : MonoBehaviour
             }
             bgmAudioSource.clip = soundData.audioClip;
             bgmAudioSource.volume = soundData.volume * bgmVolume;
+            bgmAudioSource.loop = true;
             bgmAudioSource.Play();
         }
         else

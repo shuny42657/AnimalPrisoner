@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 856166091594273824}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.15, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc68dec27146d42e4bd20885a6e470ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseObject: {fileID: 8552897858971674516}
+  baseObject: {fileID: 0}
   hilightObject: {fileID: 3919402728924951823}
 --- !u!114 &3470502713671363567
 MonoBehaviour:
@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rect: {fileID: 3323372774555621566}
-  targetTransform: {fileID: 0}
+  targetTransform: {fileID: 7610518318838812190}
   offset: {x: 0, y: 100}
 --- !u!114 &7269852685421239543
 MonoBehaviour:
@@ -365,8 +365,8 @@ Transform:
   m_GameObject: {fileID: 3919402728924951823}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.49, z: 0}
+  m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7610518318838812190}
@@ -399,7 +399,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 641a7ee457d5e5c4e80d329bb6b0cac3, type: 2}
+  - {fileID: 2100000, guid: 4180a23396e4b4adcab4ad37b08c19d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -546,11 +546,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e65b697e205ca748966da89cc224a3d, type: 3}
---- !u!1 &8552897858971674516 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e65b697e205ca748966da89cc224a3d, type: 3}
-  m_PrefabInstance: {fileID: 8822717251615038149}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9077620659622051118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2e65b697e205ca748966da89cc224a3d, type: 3}
