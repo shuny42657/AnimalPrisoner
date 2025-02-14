@@ -33,6 +33,7 @@ namespace GameLogic.WorkSpace
 
         public bool MeetCondition()
         {
+            Debug.Log($"First Item Count : {_firstItemCount}, Second Item Count : {_secondItem}");
             return _firstItemCount > 0 && _secondItemCount > 0 && _item == ItemName.None;
         }
 
