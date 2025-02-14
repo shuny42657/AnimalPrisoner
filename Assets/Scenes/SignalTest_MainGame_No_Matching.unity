@@ -21691,12 +21691,12 @@ RectTransform:
   - {fileID: 1559576984}
   - {fileID: 201682535}
   - {fileID: 420837481}
-  - {fileID: 1131063767}
   - {fileID: 740780228}
   - {fileID: 2015998912}
   - {fileID: 1440403336}
   - {fileID: 1913982998}
   - {fileID: 707951136}
+  - {fileID: 1131063767}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -23960,7 +23960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1316770278926850718, guid: c5515cc3f1c714ec0b416f0643de10d8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4641702521361504249, guid: c5515cc3f1c714ec0b416f0643de10d8, type: 3}
       propertyPath: m_Pivot.x
