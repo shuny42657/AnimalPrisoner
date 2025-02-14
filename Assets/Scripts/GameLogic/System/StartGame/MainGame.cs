@@ -270,7 +270,8 @@ namespace GameLogic.GameSystem
             //_clock.AddTick(_leveledObjCreatorPacer);
             //_clock.AddTick(_objectiveCreatorPacer);
             //_clock.AddTick(_roomParam);
-            //_clock.IsActive = true;
+
+            _clock.IsActive = true;
 
             //GameOver
             _gameOverProcess = new(_playerManager,_gameOverView);
