@@ -4759,6 +4759,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1965101596}
     m_Modifications:
+    - target: {fileID: 237715116484988404, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 237715116484988404, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7eec8e80a9e474ec0bfb396646768e06, type: 3}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.size
       value: 5
@@ -5094,6 +5102,22 @@ PrefabInstance:
     - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: m_text
       value: Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8333,6 +8357,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1965101596}
     m_Modifications:
+    - target: {fileID: 237715116484988404, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 237715116484988404, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7eec8e80a9e474ec0bfb396646768e06, type: 3}
     - target: {fileID: 1853378602066589178, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -8660,6 +8692,22 @@ PrefabInstance:
     - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
       propertyPath: m_text
       value: Quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265234679432917113, guid: 93f371ce4d5285a4baa634752068f73a, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

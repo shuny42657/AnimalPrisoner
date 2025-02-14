@@ -11,7 +11,8 @@ namespace Util
         public void Hilight(bool isActive)
         {
             hilightObject.SetActive(isActive);
-            //baseObject.SetActive(!isActive);
+            if(baseObject != null)
+                baseObject.SetActive(!isActive);
         }
     }
 }
